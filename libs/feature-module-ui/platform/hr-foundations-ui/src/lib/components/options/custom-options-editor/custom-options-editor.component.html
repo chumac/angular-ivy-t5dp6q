@@ -1,0 +1,39 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+ <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Custom Option'" [subTitle]="'Edit Custom Option'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <span>{{description}}</span>
+            <!-- <textarea type="text" formControlName="description" class="md-textarea md-textarea-auto form-control" mdbInput></textarea> -->
+          </div>
+        </div>
+      <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Current Value:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="option_value" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Help Text:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+             <span>{{helpText}}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>

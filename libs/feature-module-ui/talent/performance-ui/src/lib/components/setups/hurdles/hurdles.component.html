@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onAddButtonClicked()">Add</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onRefreshButtonClicked()">Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="null " [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l">
+                        </div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-6 md-form">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-4 md-form">
+                                    <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1" placeholder="Enter your search text." class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="tab-a">
+                        <igx-grid #grid [data]="hurdleData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                            <igx-column field="code" header="Code" width="20%"></igx-column>
+                            <igx-column field="description" header="Description" width="30%"></igx-column>
+                            <igx-column field="range_lower" header="Lower Range" width="20%"></igx-column>
+                            <igx-column field="range_higher" header="Higher Range" width="20%"></igx-column>
+                            <igx-column field="id" header="..." class="text-center" width="10%">
+                                <ng-template igxCell let-val>
+                                    <div class="hover-menu-container"><span class="text-center"></span>
+                                        <div class="hover-menu">
+                                            <div class="hover-icons">
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </igx-column>
+                        </igx-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-hurdles-editor #editor [width]="28" [show]="showEditor$ | async" [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-talent-hurdles-editor>
+<x365-fm-talent-hurdles-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null" [dataDoc]="null" (cancelClick)="onCancelViewer()"></x365-fm-talent-hurdles-viewer>

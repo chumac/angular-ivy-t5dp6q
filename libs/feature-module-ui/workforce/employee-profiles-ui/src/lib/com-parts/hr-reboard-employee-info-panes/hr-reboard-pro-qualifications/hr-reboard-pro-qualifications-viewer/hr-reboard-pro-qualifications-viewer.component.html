@@ -1,0 +1,91 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Professional Qualification'" [subTitle]="'Details of your professional qualification (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Tag:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.requirement_type_text | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Institution:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.institution | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Qualification:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.qualification | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Member ID:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.membershipID | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Professional Award">Prof. Award:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.award | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Award Year:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.year_of_award | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Requires renewal">Req. renewal:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.req_renewal | booleanDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Next Renewal Date">Renewal Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{data?.next_renewal_date | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,146 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Payment Schedule'" [subTitle]="'Add/Edit Payment Schedule'"
+      [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Pay Desk:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="payDeskSelectOption" formControlName="paydesk" valueExpr="code"
+            displayExpr='description' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+            closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Description:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="description" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>Source Information</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Account Number:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="account_no" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Account Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="accountTypeSelectOption" formControlName="account_type" valueExpr="code"
+            displayExpr='description' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+            closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Currency:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="currencySelectOption" formControlName="currency_code" valueExpr="code"
+            displayExpr='currency_name' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+            closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Is Single Debit?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="is_single_debit" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label" title="Value Date">Value Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="value_date" [placeholder]="''"></dx-date-box>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label" title="Expirey Date">Expiry Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="expiry_date" [placeholder]="''"></dx-date-box>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Payment Source:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup #paymentSource [dataSource]="paymentSourceSelectOption" formControlName="source" valueExpr="id"
+            displayExpr='description' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+            closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="sub-heading row mt-4 mb-1" *ngIf="paymentSource.value===0">
+        <div class="col-12 md-form mt-2">
+          <h5>Payroll Information</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="paymentSource.value===0">
+        <div class="col-4">
+          <label class="">Profile:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup #profile [dataSource]="payrollProfileSelectOption" formControlName="payroll_profile_id"
+            valueExpr="payroll_profile_id" displayExpr='description' searchEnabled="true" showPopupTitle="false"
+            paginate=true placeholder="" closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="paymentSource.value===0">
+        <div class="col-4">
+          <label class="">Source:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup #payrollSource [dataSource]="payrollSourceSelectOption" formControlName="payroll_source"
+            valueExpr="id" displayExpr='description' searchEnabled="true" showPopupTitle="false" paginate=true
+            placeholder="" closeOnOutsideClick="true" popupHeight="auto" class="form-font"
+            (onItemClick)="onPayrollSourceSelected($event)">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="paymentSource.value===0">
+        <div class="col-4">
+          <label class="required center-label" title="Period">Period:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" [disabled]="isSourceTemporary()" formControlName="payroll_period" [placeholder]="''"
+            displayFormat="shortdate"></dx-date-box>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

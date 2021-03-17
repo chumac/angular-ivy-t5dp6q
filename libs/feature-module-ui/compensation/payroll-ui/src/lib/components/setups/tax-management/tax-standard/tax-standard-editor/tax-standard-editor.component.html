@@ -1,0 +1,74 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Tax Standard'" [subTitle]="''" [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Step:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="step" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Tax Value:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="tax_value" type="text" class="form-control form-font" (change)="valueChange()">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">% of tax value:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="percentage_of_tv" type="text" class="form-control form-font" (change)="valueChange()">
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Cumulative:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <div *ngIf="data != null">
+            {{data?.cumulative | stringDisplay}}
+          </div>
+          <div *ngIf="data == null">
+            {{cumulativeValue}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Ignore Remainder </label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-control custom-switch">
+          No <label class="switch">
+            <input #isIgonreRM formControlName="ignore_rm" type="checkbox" [(ngModel)]="showhideRemainderPercent" (ngModelChange)="onIgnoreReminder($event)">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1"  *ngIf="!showhideRemainderPercent">
+        <div class="col-4">
+          <label class="required center-label">% of remainder:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="percentage_of_rm" type="text" class="form-control form-font">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

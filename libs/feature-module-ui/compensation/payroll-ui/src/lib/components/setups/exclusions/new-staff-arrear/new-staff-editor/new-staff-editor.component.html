@@ -1,0 +1,80 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'EXCLUDE EMPLOYEE'" [subTitle]="''"
+      [loading]='inEditMode() && !activeEmployee'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f">
+
+      <div class="row mb-1">
+        <div class="col-2">
+          <label class="required center-label">Employee:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select #payrollGroup formControlName="employee_id" [options]="activeEmployee"
+            placeholder="select employee" [filterEnabled]="true" [notFoundMsg]="'No Record Found'"
+            [filterPlaceholder]="'search...'" (selected)="onEmployeeGroupSelected($event)"></mdb-select>
+        </div>
+      </div>
+      <div>
+        <div class="list-container" *ngIf="showList">
+          <div class="list-sample">
+            <igx-list>
+              <igx-list-item [isHeader]="true">Profile </igx-list-item>
+              <igx-checkbox *ngFor="let item of activePayrollProfiles$ | async" formControlName="checked"
+                (change)="storeSelectedProfile(item, $event)">
+                {{ item.description }}
+              </igx-checkbox>
+            </igx-list>
+          </div>
+          <article class="sample-column">
+            <button igxButton [igxRipple]="'grey'" (click)="excludedAllProfile()">
+              <igx-icon>fast_forward</igx-icon>
+              <!-- >> -->
+            </button>
+            <br />
+            <br />
+            <button igxButton [igxRipple]="'grey'" (click)="excludedSelectedProfile()">
+              <igx-icon>keyboard_arrow_right</igx-icon>
+              <!-- > -->
+            </button>
+            <br />
+            <br />
+            <button igxButton [igxRipple]="'grey'" (click)="activeSelectedProfile()">
+              <igx-icon>keyboard_arrow_left</igx-icon>
+              <!-- < -->
+            </button>
+            <br />
+            <br />
+            <button igxButton (click)="activedAllProfile()">
+              <igx-icon>fast_rewind</igx-icon>
+              <!-- << -->
+            </button>
+            <br />
+            <br />
+
+          </article>
+
+          <div class="list-sample">
+            <igx-list>
+              <igx-list-item [isHeader]="true">Profile </igx-list-item>
+              <igx-checkbox *ngFor="let item of excludedProfile$" formControlName="checked"
+                (change)="storeActiveProfile(item, $event)">
+                {{ item.description }}
+              </igx-checkbox>
+            </igx-list>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <!-- <div class="footer">
+      <x365-shared-ui-form-footer (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div> -->
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

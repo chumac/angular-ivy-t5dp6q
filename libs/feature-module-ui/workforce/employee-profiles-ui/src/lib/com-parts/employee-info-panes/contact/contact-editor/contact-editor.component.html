@@ -1,0 +1,338 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Contact Information'" [subTitle]="'This is contact information about staff'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Residential Address</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Street I:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="street1_r" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Street II:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="street2_r" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Country:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="country_r" [options]="countries$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onResidentialCountrySelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">State:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="state_r" [options]="residentialStateList$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onResidentialStateSelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">City:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="area_r" [options]="residentialCityList$ | async" [allowClear] ="true" [filterEnabled]="true" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Zip Code:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="zip_r" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-12 md-form mt-0">
+                    <mdb-checkbox #sameAddressCheckBox (change)="onSameAddressCheckBoxClicked($event)" formControlName="same_address">Permanent address same as your residential address:</mdb-checkbox>
+                </div>
+            </div>
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Permanent Address</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Street I:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="street1_p" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Street II:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="street2_p" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Country:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="country_p" [options]="countries$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onPermanentCountrySelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">State:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="state_p" [options]="permanentStateList$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onPermanentStateSelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">City:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="area_p" [options]="permanentCityList$ | async" [allowClear] ="true" [filterEnabled]="true" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Zip Code:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="zip_p" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Digital Contact Information</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Email (Office):</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="email" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Email (Personal):</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="email_personal" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Preferred Email:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input [disableControl]="(this.allowPreferredEmailChange$ | async) == 'NO'" formControlName="preferred_email" type="text" class="form-control pt-0">
+                    <span class="text-info"><small><u><i class="text-danger fa fa-exclamation-triangle"></i>Note:</u><br> Changing or setting this value will redirect all system notifications sent to you to this address. DO NOT set or modify if you receive emails and notifications with your username.</small></span>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Home Phone:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="phone" type="text" class="form-control pt-0" NumbersOnly [allowDecimals]="false">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Mobile Phone:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="mobile_phone" type="text" class="form-control pt-0" NumbersOnly [allowDecimals]="false">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Office Extension:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="office_ext" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Pager:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="pager" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Fax:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="fax" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <x365-shared-ui-file-picker #filePicker (fileSelected)="onDigitalContactFileSelected($event)" (fileRemoved)="onDigitalContactFileRemoved($event)"></x365-shared-ui-file-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Next-of-Kin</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Title:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="kin_title" [options]="selectOptionData?.Titles" [allowClear] ="true" (selected)="onNokTitleSelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Relationship:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="kin_relationship" [options]="selectOptionData?.RelationshipType" [allowClear] ="true" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Surname:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="kin_Surname" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>First Name:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="kin_firstname" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Other Names:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="kin_otherNames" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Gender:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="kin_gender" [options]="selectOptionData?.Gender" [allowClear] ="true" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Email:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="email_kin" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Home Phone:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="tel1_kin" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Mobile Phone:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="tel2_kin" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Street I:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="street1_kin" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Street II:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="street2_kin" type="text" class="form-control pt-0">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Country:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="country_kin" [options]="countries$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onNextOfKinCountrySelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">State:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="state_kin" [options]="nextOfKinStateList$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onNextOfKinStateSelected($event)" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">City:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="area_kin" [options]="nextOfKinCityList$ | async" [allowClear] ="true" [filterEnabled]="true" placeholder=""></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Zip Code:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="zip_kin" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" #imagePicker [caption]="'Select Photo'" [captionSubText]="'Select a photo from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Next-of-Kin Photo'" [cropperHeaderMessage]="'Upload Photo'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,26 @@
+$track_bg_color: rgb(250, 250, 250);
+$thumb_bg_color: rgb(177, 177, 177);
+
+* {
+  &::-webkit-scrollbar {
+    width: 7px;
+    visibility: hidden;
+  }
+
+  &::-webkit-scrollbar-track {
+    opacity: 0;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);
+    background-color: $track_bg_color;
+    padding-right: 2px;
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: $thumb_bg_color;
+    opacity: 0;
+    transition: all 0.2s;
+  }
+}

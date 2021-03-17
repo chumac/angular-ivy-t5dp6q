@@ -1,0 +1,38 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Enterprise Structure View'" [subTitle]="'Select Enterprise Structure'"
+      [loading]='false'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="row mb-3">
+      <div class="col-6 bg-light" [class.bg-light]="currentItem">
+        <div id="structure-lineage" *ngIf="currentItem">
+          <p class="font-weight-bold m-2">{{currentItem.lineage}}</p>
+        </div>
+      </div>
+      <div class="col-2 mt-2 px-0 text-right">
+        <label class="required center-label font-weight-bold" title="Search Mode">Search mode:</label>
+      </div>
+      <div class="col-4 md-form mt-0">
+        <dx-select-box #searchMode [items]="['contains', 'startsWith']" [(value)]="treeView.searchMode">
+        </dx-select-box>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <dx-tree-view #treeView id="simple-treeview" [createChildren]="this.fs.createChildren" dataStructure="plain"
+          [rootValue]="0" displayExpr="description" keyExpr="structure_id" [searchEnabled]="true"
+          activeStateEnabled="true" parentIdExpr="sourced_from_id" [searchMode]="'contains'"
+          [searchExpr]="['description']" [height]="500" (onItemClick)="selectItem($event)">
+        </dx-tree-view>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <x365-shared-ui-form-footer [busy]="isProcessing$ | async" (cancelClick)="onCancel()" (doneClick)="onSubmit()">
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

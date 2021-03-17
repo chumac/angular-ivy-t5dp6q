@@ -1,0 +1,279 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Loan Definition'" [subTitle]="'Details of your Loan Definition'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Shortname:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="shortname" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Sort Order:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="ordering_rank" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Amortization Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select [disableControl]="true" formControlName="calculation_rule" [options]="amortizationRules$ | async" placeholder=""></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+              <label class="required center-label">Tenor<em>(Months)</em>:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="tenor_months" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Moratorium:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="moratorium" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Principal</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payroll_profile_id" [options]="payrollProfileSelect$ | async" placeholder="" (selected)="onPayrollProfileSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Deduction Period:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+          <mdb-select #deductionPeriod formControlName="principal_deduction_period" [options]="deductionRules$ | async" placeholder="" [disableControl]="true"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Deduct from allowance?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="deduct_from_allowance" type="checkbox" (change)=onDeductFormAllowanceChecked($event)>
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="deductFromAllowance">
+          <div class="col-4">
+            <label class="required center-label">Allowance:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="deduct_from_allowance_id" [options]="deductionAllowances$ | async" placeholder=""></mdb-select>
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Interest</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Charge interest?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="charge_interest" type="checkbox" (change)=onChargeInterestChecked($event)>
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showInterestSettings">
+          <div class="col-4">
+            <label class="required center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="int_payroll_profile_id" [options]="payrollProfileSelect$ | async" placeholder="" (selected)="onInterestPayrollProfileSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showInterestSettings">
+          <div class="col-4">
+            <label class="required center-label">Deduction Period:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select #deductionPeriod formControlName="interest_deduction_period" [options]="deductionRules$ | async" placeholder=""></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showInterestSettings">
+          <div class="col-4">
+            <label class="required center-label">Default Interest Rate:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="interest_rate" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showInterestSettings">
+          <div class="col-6">
+            <label class="required center-label">Separate interest?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="separate_interest" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showInterestSettings">
+          <div class="col-4">
+            <label class="center-label">Interest Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="interest_code" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+            <div class="col-12 md-form mt-2">
+              <h5>Grouping</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-6">
+              <label class="required center-label">Group this loan?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="groupitem" type="checkbox" (change)=onGroupItemChecked($event)>
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+
+        <div class="row mb-1" *ngIf="groupItem">
+          <div class="col-4">
+            <label class="required center-label">Group Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="groupname_id" [options]="groupNames$ | async" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Is active?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="is_active" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Can exclude this loan?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="can_exclude" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Allow rule variation by transaction?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="allow_rules_variation" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Allow multiple transactions?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="allow_multiple" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Use high priority?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input  formControlName="use_high_priority" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-6">
+              <label class="required center-label">Use system deduction?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="use_system_deduction" type="checkbox">
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="">System Rule:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <textarea rows="4" formControlName="sys_rule" type="text" class="md-textarea md-textarea-auto form-control"
+                ></textarea>
+            </div>
+          </div>
+
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,24 @@
+<a [matMenuTriggerFor]="reportNotification">
+  <i class="fa fa-list-alt analytics" (click)="loadReport()"></i>
+</a>
+
+<mat-menu #reportNotification="matMenu" class="report-notification">
+  <ng-template matMenuContent>
+    <div class="items">
+      <div class="items-head">
+        <p>REPORTS</p>
+        <hr>
+      </div>
+      <div class="search-area" (click)="$event.stopPropagation();">
+        <input matInput type="text" [(ngModel)]="term" placeholder="Search" class="form-control">
+      </div>
+      <div class="items-body">
+          <div class="mt-2 loader" *ngIf="(reportData$ | async)?.length === 0"></div>
+          <div *ngFor="let report of reportData$ | async | filter:term" class="items-body-content" title="{{ report?.description }}" (click)="goToReport(report?.report_key)">
+            <span>{{ report?.report_title }}</span>
+            <i class="fa fa-angle-right"></i>
+          </div>
+      </div>
+    </div>
+  </ng-template>
+</mat-menu>

@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="card-content font-size">
+    <div class="item-container bottom">
+      <div class="row py-2">
+        <div class="col-12">
+          <div class="middle1">
+            <h2></h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="middle1">
+            <igx-grid #approvedDataGrid [data]="emailData$ | async" [paging]="false" [height]="null" class="text-center"  [autoGenerate]="false" width="100%"
+            [emptyGridMessage]="'No data available'"  [showToolbar]="true">
+              <igx-column field="title" header="Title"  class="text-center"></igx-column>
+              <igx-column field="title_id" header=" Customize" class="text-center" >
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <span class="hover-ellipse-menu"></span>
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="Customize Mail"
+                          ></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

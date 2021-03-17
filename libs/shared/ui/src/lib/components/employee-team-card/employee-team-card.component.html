@@ -1,0 +1,23 @@
+<div class="profile" [ngStyle]="getStyles()">
+  <div class="profile-image mb-1">
+    <x365-shared-ui-avatar class="avatar avatar-size" [width]="'5em'" [height]="'5em'" [src]="profilePicture" [showBorder]="true"
+      [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''"
+      [altText]="''"></x365-shared-ui-avatar>
+  </div>
+  <div class="profile-name font-weight-bold mb-2">
+    <span>{{ (data?.employee_firstname | titlecase) + ' ' + (data?.employee_surname | titlecase) }}</span>
+  </div>
+  <div class="profile-position">
+    <span>{{ (data?.position !== null ? data?.position : '(no specified position)') }}</span>
+  </div>
+  <div class="team-role">
+    <span>{{ teamRole }}</span>
+  </div>
+  <div class="profile-team-link" *ngIf="modeDrillDown">
+    <a (click)="onTeamMemberClicked(data?.employee_id)">
+      <i class="fa fa-user-o"></i>
+      <br>
+      Team Members
+    </a>
+  </div>
+</div>

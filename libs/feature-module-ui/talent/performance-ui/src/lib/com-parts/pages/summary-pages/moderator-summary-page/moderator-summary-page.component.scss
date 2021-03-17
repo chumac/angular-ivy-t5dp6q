@@ -1,0 +1,101 @@
+
+.base {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.top {
+  flex-basis: 4.5em;
+  background-color: rgb(233, 233, 233);
+  padding: 18px 15px 0 15px;
+}
+
+h5 {
+  font-size: 1.3em;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  width: 100%;
+  height: 50em;
+  padding: 2em 15px 15px 15px;
+  overflow-y: auto;
+  text-align: left;
+  font-size: 0.8em;
+  margin-top: 10px;
+
+  .content-l {
+    flex-basis: 38em;
+    background-color: rgb(250, 250, 250);
+    padding-top: 2em;
+    border-right: 1px dashed rgb(230, 230, 230);
+
+    h5 {
+      font-size: 1.3em;
+    }
+  }
+
+  .content-r {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(252, 252, 252);
+
+    .content-r-b {
+      flex-grow: 1;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding-bottom: 10px;
+    }
+
+    li {
+      padding-right: 8px;
+    }
+
+    .col-pad {
+      padding-top: 5px;
+    }
+
+    .score {
+      display: block;
+      font-size: 1.1em;
+    }
+
+    .score-label {
+      // padding-top: 0.3em;
+
+      a {
+        color: black;
+      }
+    }
+
+    .score-desc {
+      display: block;
+      font-size: 0.8em;
+    }
+
+    .next-reviewer-note {
+      display: block;
+      font-size: 0.8em;
+      margin-top: 4px;
+    }
+  }
+}
+
+.bottom {
+  flex-basis: 4.7em;
+  padding: 12px 10px 0 15px;
+  font-size: 0.8em;
+  margin-top: 10px;
+  border-top: 1px solid rgb(236, 236, 236);
+}
+
+.md-form .label {
+  font-size: 0.5rem;
+}
+
+.form-checked {
+  font-size: 0.5rem;
+}

@@ -1,0 +1,58 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+      [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+      <div class="header">
+        <x365-shared-ui-form-header [title]="'Feedback Forms'" [subTitle]="'Creates new Feedback Forms'"
+          [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Form:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <input formControlName="event_id" type="hidden" class="form-control form-font">
+              <dx-lookup formControlName="form_id" [dataSource]="CustomFormData" valueExpr="id"
+                displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+                closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Availability:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="form_availability" [dataSource]="FeedbackFormsAvailableData" valueExpr="id"
+                displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+                closeOnOutsideClick=false (onValueChanged)="onSelectAvailability($event)" popupHeight="400px" class="form-font"></dx-lookup>
+            </div>
+          </div>
+          <div *ngIf="isShow" class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">No of months after: </label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <input formControlName="no_of_months_after" type="text" class="form-control form-font">
+          </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Role:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="feedback_role" [dataSource]="FeedbackFormsRoleData" valueExpr="id"
+                displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+                closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+          (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+    </div>
+  </div>
+  

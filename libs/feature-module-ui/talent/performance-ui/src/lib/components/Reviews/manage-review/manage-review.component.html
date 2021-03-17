@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="top">
+                <x365-fm-talent-omi-panel [data]="objectiveMaster$ | async" [reportsToEmployeePhoto]="reportsToEmployeePhoto$ | async"></x365-fm-talent-omi-panel>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4"> </div>
+        <div class="col-8">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect *ngIf="(initiateOrContinueStatus$ | async)" [disabled]="!(isCurrentPlanReady$ | async)" (click)="onInitiateReview()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Initiate Review</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect *ngIf="!(initiateOrContinueStatus$ | async)" [disabled]="!(isCurrentPlanReady$ | async)" (click)="onContinueReview()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Continue Review</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="item-container bottom">
+                <div class="card-content-top mb-2">
+                    <x365-shared-ui-switch #switch [checkedText]="'Pre-Scored'" [unCheckedText]="'Standard'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                </div>
+                <ng-container *ngIf="!switch.value">
+                    <igx-grid #dataGrid [data]="objectives$ | async" [paging]="false" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [height]="null" [showToolbar]="false">
+                        <igx-column field="PerspectivesInfo" header="Perspective" width="10%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text">{{val.description | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="description" header="Description" width="25%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text obj_description">{{val | stringDisplay | ellipsis:100}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="metric" header="Metric" width="27%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text obj_description">{{val | stringDisplay | ellipsis:100}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="target" header="Target" width="11%">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="weight" header="Weight" width="8%" dataType="number">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text">{{val | number: '1.1-5'}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="due_date" header="Due Date" width="12%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="id" header="..." class="text-center" width="7%">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-center"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" (click)="onViewIconClicked(val)">
+                                            </x365-shared-ui-hover-icon>
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="Progress" (click)="onProgressIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </ng-container>
+                <ng-container *ngIf="switch.value">
+                    <igx-grid #dataGridTwo [data]="preScoredObjectives$ | async" [paging]="false" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [height]="null" [showToolbar]="false">
+                        <igx-column field="PerspectivesInfo" header="Perspective" width="10%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text">{{val.description | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="description" header="Description" width="25%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text obj_description">{{val | stringDisplay | ellipsis:100}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="metric" header="Metric" width="27%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text obj_description">{{val | stringDisplay | ellipsis:100}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="target" header="Target" width="11%">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="weight" header="Weight" width="8%" dataType="number">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text">{{val | number: '1.1-5'}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="due_date" header="Due Date" width="10%">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="id" header="..." class="text-center" width="9%">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-center"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" (click)="onViewPreScoredIconClicked(val)">
+                                            </x365-shared-ui-hover-icon>
+                                            <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="Progress" (click)="onProgressIconClicked(val)"></x365-shared-ui-hover-icon> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-objective-master-viewer #viewer [width]="45" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()" [componentName]="'manage-review'"></x365-fm-talent-objective-master-viewer>

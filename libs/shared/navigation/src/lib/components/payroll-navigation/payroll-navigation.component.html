@@ -1,0 +1,149 @@
+<li>
+  <ul class="collapsible collapsible-accordion">
+    <mdb-accordion [multiple]="false" aria-multiselectable="false">
+      <!-- <mdb-accordion-item class="no-collase">
+        <mdb-accordion-item-head mdbWavesEffect routerLink="/d/analytics/dashboard" routerLinkActive="active">
+          <svg><use xlink:href="/assets/images/sprite.svg#home"/></svg> <span>Dashboard</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body></mdb-accordion-item-body>
+      </mdb-accordion-item> -->
+    <mdb-accordion-item>
+      <mdb-accordion-item-head mdbWavesEffect>
+        <svg>
+          <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Payroll Profiles</span>
+      </mdb-accordion-item-head>
+      <mdb-accordion-item-body>
+        <ul>
+          <li><a routerLink="/d/compensation/payroll/admin/profiles" routerLinkActive="active">Profiles</a></li>
+        </ul>
+      </mdb-accordion-item-body>
+    </mdb-accordion-item>
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Payroll Execute</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/execution/payroll-run" routerLinkActive="active">Run</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Dependencies</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/dependencies/formula" routerLinkActive="active">Formula Management</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/dependencies/payment-groups" routerLinkActive="active">Payment Groups</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/dependencies/financial-institutions" routerLinkActive="active">Financial Institutions</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/dependencies/pension-funds" routerLinkActive="active">Pension Funds</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Multi-currencies</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/multi-currencies/default-currency" routerLinkActive="active">Default Currency</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/multi-currencies/payment-currencies" routerLinkActive="active">Payment Currencies</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+      <!-- <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Calendars</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/calendars/payroll-profiles" routerLinkActive="active">Payroll Profiles</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/calendars/global-work" routerLinkActive="active">Golbal Work</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/calendars/group" routerLinkActive="active">Group</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/calendars/personal" routerLinkActive="active">Personal</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item> -->
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Allowances</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/allowances/fixed" routerLinkActive="active">Fixed</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/allowances/variable" routerLinkActive="active">Variable</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/allowances/transactions" routerLinkActive="active">Transactions</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Deductions</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/deductions/fixed" routerLinkActive="active">Fixed</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/deductions/variable" routerLinkActive="active">Variable</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/deductions/transactions" routerLinkActive="active">Transactions</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Exclusions</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/exclusions/new-staff-arrear" routerLinkActive="active">New Staff Arrear</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/transaction/exclusion-transaction" routerLinkActive="active">Transaction</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Regulation</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/regulations/reliefs-and-exemptions" routerLinkActive="active">Reliefs And Exemptions</a></li>
+            <li><a routerLink="/d/compensation/payroll/admin/tax-management/profiles" routerLinkActive="active">Tax Management</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Salary Review</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/salary/review-groups" routerLinkActive="active">Review Groups</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <!-- <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Setup</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/tax-management/profiles" routerLinkActive="active">Tax Management</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item> -->
+    </mdb-accordion>
+  </ul>
+</li>

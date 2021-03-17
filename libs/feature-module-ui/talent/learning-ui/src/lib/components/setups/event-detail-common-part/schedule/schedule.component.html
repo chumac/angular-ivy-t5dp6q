@@ -1,0 +1,76 @@
+<div class="card card-container container-fluid">
+
+  <div class="d-flex flex-column doc-container-t font-size">
+    <div class="doc-container-t-ct">
+      <div class="doc-container-t-ct-l">
+      </div>
+      <div class="doc-container-t-ct-r">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-6 md-form">
+          </div>
+          <div class="col-1"></div>
+          <div class="col-4 md-form">
+            <mdb-select #filterBy [options]="service.filterList" (selected)="search()" [filterEnabled]="true"
+              [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-container-s">
+    <div class="row">
+      <div class="col-12 md-form mb-1">
+        <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+          placeholder="Enter your search string i.e. Event Text, Title, Start Date, End Date, Hall Text."
+          class="form-control font-size">
+      </div>
+    </div>
+  </div>
+
+  <div class="card-content font-size">
+    <div class="card-content-bottom">
+      <igx-grid #grid #eventScheduleDataGrid [data]="eventScheduleData$ | async" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true"
+        [perPage]="15" [height]="null" [paginationTemplate]="">
+        <igx-column field="event_text" header="Event Text" width="20%">
+        </igx-column>
+        <igx-column field="title" header="Title" width="15%">
+        </igx-column>
+        <igx-column field="start_date" header="Start date" width="15%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="end_date" header="End Date" width="15%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="hall_text" header="Hall Text" width="20%">
+        </igx-column>
+        <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="15%">
+          <ng-template igxCell let-cell="cell" let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon *ngIf='isReview' [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                    (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View Report"
+                    (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon *ngIf='isReview' [iconClass]="'fa fa-trash'" title="Remove"
+                    (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>
+<x365-fm-talent-schedule-editor #eventSchedulerEditor [width]="35" [showCreate]="showEventScheduleEditor$ | async"
+  [data]="null" [eventHallData]="eventHallData$ | async" [eventId]="eventDetailId"></x365-fm-talent-schedule-editor>
+<x365-fm-talent-schedule-view #eventSchedulerView [width]="35" [showView]="showEventScheduleView$ | async" [data]="null"
+  [eventId]="eventDetailId"></x365-fm-talent-schedule-view>

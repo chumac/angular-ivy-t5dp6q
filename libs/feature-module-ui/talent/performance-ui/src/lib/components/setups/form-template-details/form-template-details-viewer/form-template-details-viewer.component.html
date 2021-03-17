@@ -1,0 +1,95 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'View Form Template Details'" [subTitle]="'Form Template Details'" [loading]='!data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <div class="mx-3">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Review Form:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.ReviewFormInfo?.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Weight:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.weight | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Page Rank:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.page_rank | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Is Active:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.is_active | boolDisplay | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Employee Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_emp | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Line Manager Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_lm | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Reviewer Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_reviewer | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Moderator Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_moderator | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">HR Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_hr | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Reviewer Assessing Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_reviewer_assessing | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

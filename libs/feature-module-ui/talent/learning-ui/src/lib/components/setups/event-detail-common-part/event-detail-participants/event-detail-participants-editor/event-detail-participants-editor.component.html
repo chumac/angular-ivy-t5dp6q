@@ -1,0 +1,74 @@
+<x365-shared-ui-form-container [show]="showCreate" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="showCreate?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Event Schedule'" [subTitle]="''" [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Employee:</label>
+        </div>
+        <div class="col-8 md-form mt-0" *ngIf="!inEditMode()">
+          <dx-lookup [dataSource]="eventParticipantEmployee" formControlName="employee_id" valueExpr="employee_id"
+            displayExpr='emp_fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="400px" class="form-font">
+          </dx-lookup>
+        </div>
+        <div class="col-8 md-form mt-0" *ngIf="inEditMode()">
+          {{data?.employee_name | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Schedule:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="eventParticipantSchedule" formControlName="schedule_id" valueExpr="id"
+            displayExpr='title' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="400px" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Source:</label>
+        </div>
+        <div class="col-8 md-form mt-0" *ngIf="!inEditMode()">
+          <dx-lookup [dataSource]="eventParticipantSource" formControlName="source" valueExpr="id"
+            displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="400px" class="form-font" [disabled]="true">
+          </dx-lookup>
+        </div>
+        <div class="col-8 md-form mt-0" *ngIf="inEditMode()">
+          {{data?.source_text | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">This is Recommendation </label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="is_recommendation" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>
+
+<x365-fm-talent-event-detail-participants-criteria #eventParticipantCriteria [width] = "40"
+  [showCriteria]="showEventParticipantCriteria$ | async" [eventParticiantCriteriaKey] = "eventParticiantCriteriaKey$ | async" [data]="null" [eventId]="eventId">
+</x365-fm-talent-event-detail-participants-criteria>

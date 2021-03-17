@@ -1,0 +1,119 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Work History'" [subTitle]="'Details of your previous employment'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Tag:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="requirement_type" [options]="selectOptionData?.RequirementTypeEmployerLevels" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Employer:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="employer" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Address:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea formControlName="company_address" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label" title="Employment Date">Emp. Entry Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="employment_date" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Position on Entry:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="postheld_at_employment" type="text" class="form-control form-font" >
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class=" center-label">Entry Salary:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="starting_salary" type="text" class="form-control form-font" (keyup)="fs.transformEntrySalaryInput($event.target.value)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Reason for Exit:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="reason_4_exit" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label" title="Position Before Exit">Position at Exit:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="position_before_exit" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label" title="Department on Exit">Dept. at Exit:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="department" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class=" center-label">Exit Salary:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="salary_before_exit" type="text" class="form-control form-font" (keyup)="fs.transformExitSalaryInput($event.target.value)">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Exit Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="exit_date" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+        <!-- <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+              <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" [caption]="'Select Photo'" [captionSubText]="'Select a photo from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Photo'" [cropperHeaderMessage]="'Upload Photo'"
+                  (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+          </div>
+          <div class="col-1"></div>
+      </div> -->
+      <div class="row mb-1">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-file-picker>
+        </div>
+        <div class="col-1"></div>
+      </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

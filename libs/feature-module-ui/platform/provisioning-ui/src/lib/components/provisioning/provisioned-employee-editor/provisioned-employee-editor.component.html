@@ -1,0 +1,102 @@
+<x365-shared-ui-form-container
+  [show]="show"
+  [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show ? '0' : utilService.convertToNegativePercent(width)"
+>
+  <div class="header">
+    <x365-shared-ui-form-header
+      [title]="'Provisioned Employee'"
+      [subTitle]="'Edit Employee Details'"
+      [loading]="isProcessing$ | async"
+    ></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form
+      class="mx-3"
+      novalidate
+      [formGroup]="this.fs.f"
+      (ngSubmit)="onSubmit()"
+    >
+
+    <div class="row mb-1">
+        <div class="col-4">
+          <label>Employee:</label>
+        </div>
+        <div class="col-8 text-value text-left md-form mt-0">
+          {{data?.employee_firstname | stringDisplay}}
+          {{data?.employee_midname | stringDisplay}}
+          {{data?.employee_surname | stringDisplay}},
+          {{data?.employee_number | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Change Record Category?</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No
+          <label class="switch">
+            <input
+              formControlName="cat_changed"
+              type="checkbox"
+              (change)="onRecordCategoryChecked($event)"
+            />
+            <span class="slider round"></span>
+          </label>
+          Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Record Category:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select
+            [disableControl]="this.fs.disableRecCategoryInput"
+            formControlName="new_record_category"
+            [options]="recordCategoriesSelect$ | async"
+            placeholder=""
+          ></mdb-select>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Change Username?</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No
+          <label class="switch">
+            <input
+              formControlName="un_changed"
+              type="checkbox"
+              (change)="onUsernameChecked($event)"
+            />
+            <span class="slider round"></span>
+          </label>
+          Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">User Name:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input
+            [disableControl]="this.fs.disableUsernameInput"
+            formControlName="new_username"
+            type="text"
+            class="form-control pt-0"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer
+      [doneText]="'Submit'"
+      [busy]="isProcessing$ | async"
+      (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"
+    ></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,36 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Last Run Status'" [subTitle]="'Details of status in Current Run Item'" [loading]='!(statusData$ | async)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="d-flex align-items-center justify-content-end middle">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+              (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+          </div>
+        </div>
+      </div>
+      <igx-grid #statusGrid [data]="statusData$ | async" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [showToolbar]="false" width="'100%'" [rowSelectable]="false" *ngIf="show" [height]="null">
+        <igx-column field="run_rank" header="Rank" width="10%">
+        </igx-column>
+        <igx-column field="proc_description" header="Description" width="40%">
+        </igx-column>
+        <igx-column field="run_status_type" header="Status" width="10%">
+        </igx-column>
+        <igx-column field="start_time" header="Start Time" width="20%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateTimeDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="completion_time" header="Completion Time" width="20%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateTimeDisplay }}</div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </x365-shared-ui-form-container>

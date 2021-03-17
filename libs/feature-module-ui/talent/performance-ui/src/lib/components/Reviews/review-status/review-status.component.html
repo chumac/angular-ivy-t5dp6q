@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="top">
+        <x365-fm-talent-omi-panel [data]="objectiveMaster" [reportsToEmployeePhoto]="reportsToEmployeePhoto$ | async"></x365-fm-talent-omi-panel>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="item-container bottom">
+        <igx-grid #dataGrid [data]="objectiveMaster" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+          <igx-column field="PerspectivesInfo" header="Perspective">
+            <ng-template igxCell let-val>
+              <div class="left-align-text">{{val.description | stringDisplay}}</div>
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="description" header="Description">
+            <ng-template igxCell let-val>
+              <div class="left-align-text">{{val | stringDisplay}}</div>
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="metric" header="Metric">
+            <ng-template igxCell let-val>
+              <div class="left-align-text">{{val | stringDisplay}}</div>
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="target" header="Target">
+            <ng-template igxCell let-val>
+              <div class="right-align-text">{{val | stringDisplay}}</div>
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="weight" header="Weight">
+            <ng-template igxCell let-val>
+              <div class="right-align-text">{{val | stringDisplay}}</div>
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="due_date" header="Due Date">
+            <ng-template igxCell let-val>
+              <div class="left-align-text">{{val | dateDisplay}}</div>
+            </ng-template>
+          </igx-column>
+
+          <igx-column field="id" header="..." class="text-center">
+            <ng-template igxCell let-val>
+              <div class="hover-menu-container"><span class="text-center"></span>
+                <div class="hover-menu">
+                  <div class="hover-icons">
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-laptop'" (click)="onStartContinueIconClicked(val)"></x365-shared-ui-hover-icon>
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-inr'" (click)="onReviewIconClicked(val)"></x365-shared-ui-hover-icon>
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-gg'" (click)="onSubmitIconClicked(val)"></x365-shared-ui-hover-icon>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+      </div>
+    </div>
+  </div>
+</div>

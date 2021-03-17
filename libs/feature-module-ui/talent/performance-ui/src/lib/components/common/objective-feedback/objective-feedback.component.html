@@ -1,0 +1,372 @@
+<div class="container-fluid">
+  <div class="row mb-3" *ngIf="!(feedbackMetaData$ | async)">
+    <div class="col-12">
+        <div class="item-container not-found">
+          <div class="row">
+            <div class="col-5">
+              <svg width="380px" height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <path d="M353,9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z" id="Polygon-1" stroke="#007FB2" stroke-width="6" sketch:type="MSShapeGroup"></path>
+                    <path d="M78.5,529 L147,569.186414 L147,648.311216 L78.5,687 L10,648.311216 L10,569.186414 L78.5,529 Z" id="Polygon-2" stroke="#EF4A5B" stroke-width="6" sketch:type="MSShapeGroup"></path>
+                    <path d="M773,186 L827,217.538705 L827,279.636651 L773,310 L719,279.636651 L719,217.538705 L773,186 Z" id="Polygon-3" stroke="#795D9C" stroke-width="6" sketch:type="MSShapeGroup"></path>
+                    <path d="M639,529 L773,607.846761 L773,763.091627 L639,839 L505,763.091627 L505,607.846761 L639,529 Z" id="Polygon-4" stroke="#F2773F" stroke-width="6" sketch:type="MSShapeGroup"></path>
+                    <path d="M281,801 L383,861.025276 L383,979.21169 L281,1037 L179,979.21169 L179,861.025276 L281,801 Z" id="Polygon-5" stroke="#36B455" stroke-width="6" sketch:type="MSShapeGroup"></path>
+                </g>
+              </svg>
+            </div>
+            <div class="col-7">
+              <div class="message-box">
+                <h1>OOPS !</h1>
+                <h5>You tried to access this page wrongly</h5>
+                <div class="buttons-con mt-5">
+                  <button (click)="gotoManageObjective()"mdbBtn type="button" color="warning" rounded="true" size="lg" outline="true" mdbWavesEffect>Go Back to Manage Objective</button>
+                  <button (click)="gotoLandingPage()"mdbBtn type="button" color="warning" rounded="true" size="lg" outline="true" mdbWavesEffect>Go to Home Page</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row mb-3" *ngIf="(feedbackMetaData$ | async)">
+    <div class="col-12">
+        <button (click)="goBack()" class="float-left" mdbBtn type="button" color="warning" rounded="true" size="sm" outline="true" mdbWavesEffect>
+          <i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back
+        </button>
+        <button (click)="refresh()" class="float-right" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+          <i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh
+        </button>
+
+        <div class="float-right" *ngIf="(objectiveMaster$ | async)"><!-- Test for Objective Masters -->
+
+          <div class="" *ngIf="(feedbackMetaData$ | async).isEmp"> <!-- Employee Edit Btns - Visible Only Employee -->
+            <div class="" *ngIf="(objectiveMaster$ | async)[0]?.status === statusMode.EMP_EDIT">
+              <div class="">           
+                <button (click)="onSubmitEmployeeOBjective()" [disabled]="submittingObjectives$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                  <i *ngIf="submittingObjectives$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Final Submit
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="" *ngIf="(feedbackMetaData$ | async).isLm"> <!-- Line Manager Edit Btns Visible Only LM -->
+            <div class="" *ngIf="(objectiveMaster$ | async)[0]?.status === statusMode.LMGR_EDIT">
+              <div class="">           
+                <button (click)="onSubmitLMOBjective()" [disabled]="submittingObjectives$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                  <i *ngIf="submittingObjectives$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Final Submit
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+  </div>
+  <div class="row mb-3" *ngIf="(feedbackMetaData$ | async)">
+    <div class="col-12" *ngIf="(feedbackMetaData$ | async)?.isEmp || (feedbackMetaData$ | async)?.isLm || (feedbackMetaData$ | async)?.isHr">
+      <div class="item-container bottom">
+        <div class="row">
+          <div class="col-9">
+
+            <div class="container command-header">
+              <div class="row">
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-12 mb-2">
+                      <h6>Staff Name(s)</h6>
+                      <p>
+                        {{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.masterInfo?.employeeInfo?.employee_firstname:null | stringDisplay }}  
+                        {{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.masterInfo?.employeeInfo?.employee_midname:null | stringDisplay }} 
+                        {{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.masterInfo?.employeeInfo?.employee_surname:null | stringDisplay }}
+                      </p>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                      <h6>Staff Number</h6>
+                      <p>{{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.masterInfo?.employeeInfo?.employee_number:null | stringDisplay }}</p>
+                    </div>
+
+                    <!-- <div class="col-12 mb-2">
+                      <h6>Appraisal Period</h6>
+                      <p>{{ ((objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.planInfo?.period_start_date:null) | dateDisplay }} - {{ ((objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.planInfo?.period_end_date:null) | dateDisplay }}</p>
+                    </div> -->
+
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-12 mb-2">
+                      <h6>Supervisor Name(s)</h6>
+                      <p>
+                        {{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.LineManagerInfo?.employee_firstname:null | stringDisplay }}  
+                        {{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.LineManagerInfo?.employee_midname:null | stringDisplay }} 
+                        {{ (objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.LineManagerInfo?.employee_surname:null | stringDisplay }}
+                      </p>
+                    </div>
+                    <div class="col-12 mb-2">
+                      <h6>Appraisal Period</h6>
+                      <p>{{ ((objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.planInfo?.period_start_date:null) | dateDisplay }} - {{ ((objectiveMaster$ | async)?(objectiveMaster$ | async)[0]?.planInfo?.period_end_date:null) | dateDisplay }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div [style.display]="isObjective ? 'block' : 'none'" class="feedback">
+              <div class="container mb-3" *ngFor="let data of objectiveMaster$ | async">
+                <div class="row objectives">
+                  <div class="col-sm-12">
+                    <h6 class="text-muted">Objectives 
+                      <!-- <i  *ngIf="data?.editMode" (click)="data.description = data.description_backup" class="fa fa-refresh" title="Refresh"></i> 
+                      <i  *ngIf="data?.editMode" (click)="data.editMode = false" class="fa fa-check-square-o" title="Save"></i> 
+                      <i  *ngIf="!data?.editMode" (click)="data.editMode = true" class="fa fa-pencil-square-o" title="Edit"></i>  -->
+                      <!-- <i  (click)="onEditButtonClicked(data)" class="fa fa-pencil-square-o" title="Edit"></i> -->
+                    </h6>
+                    <p *ngIf="!data?.editMode" >{{ data?.description | stringDisplay }}</p>
+                    <!-- <textarea (blur)="data.editMode = false" *ngIf="data?.editMode" [(ngModel)]="data.description" rows="3" class="form-control"></textarea> -->
+                  </div>
+                </div>
+                <div class="row measure-target">
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Measure</h6>
+                    <p>{{ data?.metric | stringDisplay }}</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Target</h6>
+                    <p>{{ data?.target | stringDisplay }}</p>
+                  </div>
+                </div>
+                <div class="row weight-date-trend">
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Weight</h6>
+                    <p>{{ data?.weight | stringDisplay }}</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Due Date</h6>
+                    <p>{{ data?.due_date | dateDisplay }}</p>
+                  </div>
+                </div>
+
+                <div class="row employee-comment pd-3" *ngIf="(feedbackMetaData$ | async).isLm || (feedbackMetaData$ | async).isHr">
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Employee Comment</h6>
+                    <p>{{ data?.emp_comment | stringDisplay }}</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Employee Rating</h6>
+                    <p>
+                      <select class="rating-text-select" disabled="true">
+                        <option [value]="options.value" [selected]="data?.usr_feedback === options.value" *ngFor="let options of feedbackRatings$ | async">{{ options.label }}</option>
+                      </select>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row line-manager-comment pd-3" *ngIf="(feedbackMetaData$ | async).isHr">
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Line Manager Comment</h6>
+                    <p>{{ data?.lm_comment | stringDisplay }}</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <h6 class="text-muted">Line Manager Rating</h6>
+                    <p>
+                      <select class="rating-text-select" disabled="true">
+                        <option [value]="options.value" [selected]="data?.lm_feedback === options.value" *ngFor="let options of feedbackRatings$ | async">{{ options.label }}</option>
+                      </select>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="row fm-controls" *ngIf="(feedbackMetaData$ | async).isEmp"><!-- Edit Objective Masters for Employee Only -->
+                  <div class="col-sm-12">
+                    <div class="md-form">
+                      <mdb-select [disabled]="(data?.status !== statusMode.EMP_EDIT)" [(ngModel)]="data.usr_feedback" [options]="feedbackRatings$ | async" [filterEnabled]="true" placeholder="Select rating"></mdb-select>
+                      <span class="text-danger">{{ data?.emp_feedback_err }}</span>
+                      <textarea [disabled]="(data?.status !== statusMode.EMP_EDIT)" [(ngModel)]="data.emp_comment" type="text" class="md-textarea form-control" placeholder="Type comment" mdbInput></textarea>
+                      <span class="text-danger">{{ data?.emp_comment_err }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row fm-controls" *ngIf="(feedbackMetaData$ | async).isLm"><!-- Edit Objective Masters for LM Only -->
+                  <div class="col-sm-12">
+                    <div class="md-form">
+                      <mdb-select [disabled]="(data?.status !== statusMode.LMGR_EDIT)" [(ngModel)]="data.lm_feedback" [options]="feedbackRatings$ | async" [filterEnabled]="true" placeholder="Select rating"></mdb-select>
+                      <span class="text-danger">{{ data?.lm_feedback_err }}</span>
+                      <textarea [disabled]="(data?.status !== statusMode.LMGR_EDIT)" [(ngModel)]="data.lm_comment" type="text" class="md-textarea form-control" placeholder="Type comment" mdbInput></textarea>
+                      <span class="text-danger">{{ data?.lm_comment_err }}</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div [style.display]="!isObjective ? 'block' : 'none'" class="feedback">
+              <div class="container mb-3" *ngFor="let data of objectiveDetails$ | async">
+                <div class="row objectives">
+                  <div class="col-sm-12">
+                    <h6 class="text-muted">Title </h6>
+                    <p>{{ data?.comment_title | stringDisplay }}</p>
+                  </div>
+                </div>
+    
+                <div class="row line-manager-comment" *ngIf="(feedbackMetaData$ | async).isHr">
+                  <div class="col-sm-12">
+                    <h6 class="text-muted">Line Manager Comment</h6>
+                    <p>{{ data?.lm_comment_value | stringDisplay }}</p>
+                  </div>
+                </div>
+
+                <div class="row fm-controls" *ngIf="(feedbackMetaData$ | async).isEmp"> <!-- Edit Objective Details for Employee Only -->
+                  <div class="col-sm-12">
+                    <div class="md-form">
+                      <textarea [disabled]="((objectiveMaster$ | async)[0]?.status !== statusMode.EMP_EDIT)" [(ngModel)]="data.comment_value" type="text" class="md-textarea form-control" placeholder="Type comment" mdbInput></textarea>
+                      <span class="text-danger">{{ data?.emp_comment_err }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row fm-controls" *ngIf="(feedbackMetaData$ | async).isLm"> <!-- Edit Objective Details for LM Only -->
+                  <div class="col-sm-12">
+                    <div class="md-form">
+                      <textarea [disabled]="((objectiveMaster$ | async)[0]?.status !== statusMode.LMGR_EDIT)" [(ngModel)]="data.lm_comment_value" type="text" class="md-textarea form-control" placeholder="Type comment" mdbInput></textarea>
+                      <span class="text-danger">{{ data?.emp_comment_err }}</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="emp-comment-container mt-5" *ngIf="(feedbackMetaData$ | async).isLm">
+                <h6><strong>Employee Comments Section</strong></h6>
+                <div class="emp-table-container">
+                  <table>
+                    <tr>
+                      <th>Questions</th>
+                      <th>Comments</th>
+                    </tr>
+                    <tr *ngFor="let data of objectiveDetailsAlt$ | async">
+                      <td>{{ data?.comment_title | stringDisplay }}</td>
+                      <td>{{ data?.comment_value | stringDisplay }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="emp-comment-container mt-3" *ngIf="(feedbackMetaData$ | async).isHr">
+                <h6><strong>Employee Comments Section</strong></h6>
+                <div class="emp-table-container">
+                  <table>
+                    <tr>
+                      <th>Questions</th>
+                      <th>Comments</th>
+                    </tr>
+                    <tr *ngFor="let data of hrEmpObjectiveDetails$ | async">
+                      <td>{{ data?.comment_title | stringDisplay }}</td>
+                      <td>{{ data?.comment_value | stringDisplay }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="lm-comment-container mt-3" *ngIf="(feedbackMetaData$ | async).isHr">
+                <h6><strong>Line Manager Comments Section</strong></h6>
+                <div class="lm-table-container">
+                  <table>
+                    <tr>
+                      <th>Questions</th>
+                      <th>Comments</th>
+                    </tr>
+                    <tr *ngFor="let data of hrLMObjectiveDetails$ | async">
+                      <td>{{ data?.comment_title | stringDisplay }}</td>
+                      <td>{{ data?.lm_comment_value  | stringDisplay }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Command buttons -->
+            <div class="container command-footer" *ngIf="(objectiveMaster$ | async)"><!-- Test for Objective Masters -->
+
+              <div class="row" *ngIf="(feedbackMetaData$ | async).isEmp"> <!-- Employee Edit Btns - Visible Only Employee -->
+                <div class="col-12" *ngIf="(objectiveMaster$ | async)[0]?.status === statusMode.EMP_EDIT">
+                  <div class="right">
+                    <button *ngIf="!isObjective" (click)="isObjective = true" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>Back</button>
+                    <button *ngIf="isObjective" (click)="isObjective = false" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>Next</button>
+
+                    <button *ngIf="isObjective" (click)="onPreSaveEmployeeOBjectiveMasters()" [disabled]="processingMasters$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect> 
+                      <i *ngIf="processingMasters$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Save
+                    </button>
+
+                    <button *ngIf="isObjective" (click)="onSaveEmployeeOBjectiveMasters()" [disabled]="completingMasters$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect> 
+                      <i *ngIf="completingMasters$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Complete Section
+                    </button>
+
+                    <button *ngIf="!isObjective" (click)="onPreSaveEmployeeOBjectiveDetails()" [disabled]="processingDetails$ | async"  mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                      <i *ngIf="processingDetails$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Save Details
+                    </button>
+
+                    <button *ngIf="!isObjective" (click)="onSaveEmployeeOBjectiveDetails()" [disabled]="completingDetails$ | async"  mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                      <i *ngIf="completingDetails$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Complete Section
+                    </button>
+
+                  </div>
+                  <!-- <div class="right">           
+                    <button (click)="onSubmitEmployeeOBjective()" [disabled]="submittingObjectives$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                      <i *ngIf="submittingObjectives$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Submit
+                    </button>
+                  </div> -->
+                </div>
+              </div>
+
+              <div class="row" *ngIf="(feedbackMetaData$ | async).isLm"> <!-- Line Manager Edit Btns Visible Only LM -->
+                <div class="col-12" *ngIf="(objectiveMaster$ | async)[0]?.status === statusMode.LMGR_EDIT">
+                  <div class="right">
+                    <button *ngIf="!isObjective" (click)="isObjective = true" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>Back</button>
+                    <button *ngIf="isObjective" (click)="isObjective = false" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>Next</button>
+
+                    <button *ngIf="isObjective" (click)="onPreSaveLMOBjectiveMasters()" [disabled]="processingMasters$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect> 
+                      <i *ngIf="processingMasters$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Save 
+                    </button>
+
+                    <button *ngIf="isObjective" (click)="onSaveLMOBjectiveMasters()" [disabled]="completingMasters$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect> 
+                      <i *ngIf="completingMasters$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Complete Section 
+                    </button>
+
+                    <button *ngIf="!isObjective" (click)="onPreSaveLMOBjectiveDetails()" [disabled]="processingDetails$ | async"  mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                      <i *ngIf="processingDetails$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Save Details 
+                    </button>
+
+                    <button *ngIf="!isObjective" (click)="onSaveLMOBjectiveDetails()" [disabled]="completingDetails$ | async"  mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                      <i *ngIf="completingDetails$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Complete Section 
+                    </button>
+
+                  </div>
+                  <!-- <div class="right">           
+                    <button (click)="onSubmitLMOBjective()" [disabled]="submittingObjectives$ | async" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>
+                      <i *ngIf="submittingObjectives$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Submit
+                    </button>
+                  </div> -->
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="col-3">
+            <div class="feedback-menu list-group">
+              <a (click)="isObjective = true" href="javascript:void(0);" class="list-group-item waves-light" [class.active]="isObjective?true:null"  mdbWavesEffect>OBJECTIVE INFORMATION</a>
+              <a (click)="isObjective = false" href="javascript:void(0);" class="list-group-item waves-light" [class.active]="!isObjective?true:null" mdbWavesEffect>OBJECTIVE DETAILS</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-objective-feedback-editor-objective-feedback-editor #editor [width]="32" [show]="showEditor" [data]="null" (formSubmit)="processEditObjectiveMasters($event)" (cancelClick)="onCancelEditor()"></x365-objective-feedback-editor-objective-feedback-editor>

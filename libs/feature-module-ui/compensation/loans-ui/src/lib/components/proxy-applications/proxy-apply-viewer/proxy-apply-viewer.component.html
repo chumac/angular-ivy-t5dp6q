@@ -1,0 +1,176 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Proxy Application Viewer'" [subTitle]="isAwaiting?'Details of proxy loan awaiting approval': 'Details of approved proxy loan'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Employee:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employeeInfo | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Loan Type:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.loanDefInfo.description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="!isAwaiting">
+        <div class="col-4">
+          <label>Amount:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.initial_loan_amount | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="isAwaiting">
+        <div class="col-4">
+          <label>Amount:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.loan_amount | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Monthly Deduction:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.monthly_deduction | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Interest Rate:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.interest_rate | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Book Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.book_date | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Currency:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.CurrencyInfo.currency_name | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Effective Period:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.effective_period | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Tenor (Months):</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.tenor_months | number}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>First Deduction Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.first_deduction_date | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Employment Date">Prior Effective Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.prior_effective_date | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="!isAwaiting">
+        <div class="col-4">
+          <label>Uncleared Loan Balance:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.uncleared_loan_balance | number: '2.2-5'}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Disburse Transaction Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.disburse_transaction_date | dateDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Disburse Actual Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.disburse_actual_date | dateDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="!isAwaiting">
+        <div class="col-4">
+          <label>System Note:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.sys_note | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="isAwaiting">
+        <div class="col-4">
+          <label>Narration:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.narration | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="!isAwaiting">
+        <div class="col-4">
+          <label title="Department on Exit">Balance:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.loan_balance | number: '2.2-5'}}
+        </div>
+      </div>
+      <div class="row mt-4 mb-1">
+        <div class="col-1"></div>
+        <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+        </div>
+        <div class="col-1"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

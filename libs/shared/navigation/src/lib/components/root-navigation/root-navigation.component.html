@@ -1,0 +1,26 @@
+<div [ngSwitch]="selectedModuleId">
+  <x365-shared-nav-absence-navigation *ngSwitchCase="moduleIdConstants.WORKFORCE_MODULES.ABSENCE"></x365-shared-nav-absence-navigation>
+  <x365-shared-nav-competency-navigation *ngSwitchCase="moduleIdConstants.TALENT_MODULES.COMPETENCY"></x365-shared-nav-competency-navigation>
+  <x365-shared-nav-employee-profile-navigation *ngSwitchCase="moduleIdConstants.WORKFORCE_MODULES.EMPLOYEE_PROFILES"></x365-shared-nav-employee-profile-navigation>
+  <x365-shared-nav-learning-navigation *ngSwitchCase="moduleIdConstants.TALENT_MODULES.LEARNING"></x365-shared-nav-learning-navigation>
+  <x365-shared-nav-payments-navigation *ngSwitchCase="moduleIdConstants.COMPENSATION_MODULES.PAYMENTS"></x365-shared-nav-payments-navigation>
+  <x365-shared-nav-payroll-navigation *ngSwitchCase="moduleIdConstants.COMPENSATION_MODULES.PAYROLL"></x365-shared-nav-payroll-navigation>
+  <x365-shared-nav-performance-navigation *ngSwitchCase="moduleIdConstants.TALENT_MODULES.PERFORMANCE"></x365-shared-nav-performance-navigation>
+  <x365-shared-nav-recruit-navigation *ngSwitchCase="moduleIdConstants.TALENT_MODULES.RECRUIT"></x365-shared-nav-recruit-navigation>
+  <x365-shared-nav-separation-navigation *ngSwitchCase="moduleIdConstants.WORKFORCE_MODULES.SEPARATION"></x365-shared-nav-separation-navigation>
+  <x365-shared-nav-custom-process-navigation *ngSwitchCase="moduleIdConstants.WORKFORCE_MODULES.PROCESSES"></x365-shared-nav-custom-process-navigation>
+
+  <x365-shared-nav-loan-navigation *ngSwitchCase="moduleIdConstants.COMPENSATION_MODULES.LOANS"></x365-shared-nav-loan-navigation>
+  <x365-shared-nav-enterprise-structure-navigation *ngSwitchCase="moduleIdConstants.ENTERPRISE_PLANNING_MODULES.ENTERPRISE_STRUCTURE"></x365-shared-nav-enterprise-structure-navigation>
+  <x365-shared-nav-hr-foundations-navigation *ngSwitchCase="moduleIdConstants.PLATFORM_MODULES.HR_FOUNDATIONS"></x365-shared-nav-hr-foundations-navigation>
+  <x365-shared-nav-lookup-navigation *ngSwitchCase="moduleIdConstants.PLATFORM_MODULES.LOOKUPS"></x365-shared-nav-lookup-navigation>
+  <x365-shared-nav-medical-navigation *ngSwitchCase="moduleIdConstants.WORKFORCE_MODULES.MEDICALS"></x365-shared-nav-medical-navigation>
+  <x365-shared-nav-provisioning-navigation *ngSwitchCase="moduleIdConstants.PLATFORM_MODULES.PROVISIONING"></x365-shared-nav-provisioning-navigation>
+  <x365-shared-nav-subscription-navigation *ngSwitchCase="moduleIdConstants.WORKFORCE_MODULES.SUBSCRIPTION"></x365-shared-nav-subscription-navigation>
+  <x365-shared-nav-lookup-navigation *ngSwitchCase="moduleIdConstants.PLATFORM_MODULES.DATA_ADMINISTRATION"></x365-shared-nav-lookup-navigation>
+
+  <x365-shared-nav-exit-navigation *ngSwitchCase="moduleIdConstants.PLATFORM_MODULES.EXIT_MANAGEMENT"></x365-shared-nav-exit-navigation>
+  <x365-shared-nav-wip-navigation *ngSwitchCase="moduleIdConstants.PLATFORM_MODULES.WIP"></x365-shared-nav-wip-navigation>
+
+  <x365-shared-nav-self-service-navigation *ngSwitchDefault></x365-shared-nav-self-service-navigation>
+</div>

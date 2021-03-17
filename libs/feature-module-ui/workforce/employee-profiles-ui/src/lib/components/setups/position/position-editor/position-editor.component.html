@@ -1,0 +1,170 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+ <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Position'" [subTitle]="'Edit Position'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="position_code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-8">
+              <label class="center-label">Is this position scoped to a particular structure?</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input #temp type="checkbox" formControlName="org_level_scope" (change)="onScope()" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1" *ngIf="onScope()">
+            <div class="col-12 md-form mt-2">
+              <h5>Enterprise Structure</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+        <div class="row mb-1" *ngIf="onScope()">
+          <div class="col-4">
+            <label class="center-label">Enterprise Structure Type Scoped to:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <!-- <dx-lookup formControlName="analysis_id" [dataSource]="structureType$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true  (onSelectionChanged)="onStructureType($event)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup> -->
+             <div *ngIf="this.inEditMode()">
+              <mdb-select formControlName="analysis_id" [options]="structureType$ | async" [filterEnabled]="true" (selected)="onStructureTypeChanged($event.value)" class="form-font"></mdb-select>
+            </div>
+            <div *ngIf="!this.inEditMode()">
+            <mdb-select formControlName="analysis_id" [options]="structureType$ | async" [filterEnabled]="true" (selected)="onStructureType($event)" class="form-font"></mdb-select>
+          </div>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="onScope()">
+          <div class="col-4">
+            <label class="center-label">Enterprise Structure Details Scoped To:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+        <mdb-select formControlName="analysis_details_id"  [options]="structureTypeDetails$ | async"  [filterEnabled]="true"
+        (selected)="onStructureDetail($event)" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="onScope()">
+          <div class="col-4">
+            <label class="center-label">Cost Center:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="analysis_det_id" [options]="costCenter$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1" *ngIf="onScope()">
+            <div class="col-12 md-form mt-2">
+              <hr class="mt-1">
+            </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Position Category:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_category_id" [options]="positionCategory$ | async" [filterEnabled]="true"  class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">This position reports to:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="pos_reports_to" [options]="positionList$ | async" [filterEnabled]="true"  class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">This position reports indirectly to:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="pos_indirect_reports_to" [options]="positionList$ | async" [filterEnabled]="true"  class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Position grades From:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="from_grade_id" [options]="gradeList$ | async" (selected)="onFromGrade()"  [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Position grades To:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="to_grade_id" [disabled]="this.fs.status" [options]="gradeList$ | async" [filterEnabled]="true"  class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">MIS code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="mis_code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Know How Score:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="score_knowhow" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Problem Solving Score:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="score_probsolve" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Accountability Score:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="score_accountability" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Working Conditions Score:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="score_workconditions" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)"></x365-shared-ui-file-picker>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>

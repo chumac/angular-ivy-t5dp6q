@@ -1,0 +1,206 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+          <div class="d-flex align-items-center justify-content-end middle">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onApprove()" *ngIf="!this.service.msgToShow"><i class="fa fa-check-square-o"></i>&nbsp;&nbsp;Approve</button>
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onDecline()" *ngIf="!this.service.msgToShow"><i class="fa fa-window-close-o"></i>&nbsp;&nbsp;Decline</button>
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRemove()" *ngIf="this.service.msgToShow"><i class="fa fa-window-close-o"></i>&nbsp;&nbsp;Remove</button>
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRedirectAwaiting()" *ngIf="!this.service.msgToShow"><i class="fa fa-share-square-o"></i>&nbsp;&nbsp;Redirect</button>
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRedirectSubmissions()" *ngIf="this.service.msgToShow"><i class="fa fa-share-square-o"></i>&nbsp;&nbsp;Redirect</button>
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+          </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="(!(workflowMessages$ | async)) || (isProcessingPerfObjective$ | async)" [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <!-- <div class="row">
+                            <div class="col-5 md-form">
+                             <mdb-select #workflowEntity [options]="(selectOptionData$ | async)?.WorkflowEntitySourceNameMapList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by process"></mdb-select>
+                            </div>
+                            <div class="col-7 md-form">
+                              <mdb-select #workflowEntity [options]="(selectOptionData$ | async)?.WorkflowEntitySourceNameMapList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by process"></mdb-select>
+                            </div>
+                        </div> -->
+                        <div class="doc-container-t-ct-l">
+                            <mdb-select [options]="(queueLists$ | async)" [filterEnabled]="true" [allowClear]="true" [mdbTooltip]="this.service.toolTips"
+                            (selected)="onQueueSelect($event)" [(ngModel)]="this.service.queueId" placeholder="Filter by Authorization"></mdb-select>
+                        </div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-5"></div>
+                                <div class="col-7 md-form">
+                                  <mdb-select #workflowEntity [options]="(selectOptionData$ | async)?.WorkflowEntitySourceNameMapList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by process"></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective #searchInput type="text" (keyup)="search()" placeholder="Enter your search string i.e. Name, Staff Number, User name etc." class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="tab-a" >
+                        <!-- <div class="row">
+                            <div class="col-5"></div>
+                            <div class="col-3 md-form1">
+                              <mdb-select #filterBySentTo [options]="service.filterBySentToList" (selected)="search()" placeholder="Filter by: Sent To"></mdb-select>
+                            </div>
+                            <div class="col-1"></div>
+                            <div class="col-3 md-form1">
+                              <mdb-select #filterByCanFinalize [options]="service.filterByCanFinalizeList" (selected)="search()" placeholder="Filter by: Can Finalize"></mdb-select>
+                            </div>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="grid-table-container">
+                                    <igx-grid #itemsAwaitingMyActionGrid id="itemsAwaitingMyActionGrid" [data]="workflowMessages$ | async" [paging]="true" [perPage]="15" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [rowSelectable]="true" [showToolbar]="false" [height]="null">
+                                        <igx-column field="msg_description" header="Description" width="22%">
+                                            <ng-template igxCell let-val>
+                                                <div class="text-left">{{val | stringDisplay}}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="msg_details" header="Message" width="10%">
+                                            <ng-template igxCell igxCell let-cell="cell">
+                                                <!-- <div class="text-left">{{val | stringDisplay}}</div> -->
+                                                <ng-template #messagePopover>
+                                                    <div class="popover-view">
+                                                        <!-- <p><b>From: </b> {{ cell.cellID.rowID.msg_from_name | stringDisplay }} </p>
+                                                        <p><b>To: </b> {{ cell.cellID.rowID.msg_to_name | stringDisplay }} </p>
+                                                        <p><b>Subject: </b> {{ cell.cellID.rowID.employee_number | stringDisplay }} </p>
+                                                        <p><b>Entry Date: </b> {{ cell.cellID.rowID.msg_entry_date | stringDisplay }} </p>
+                                                        <p><b>Summary: </b> {{ cell.cellID.rowID.msg_details | stringDisplay }} </p> -->
+
+                                                        <table>
+                                                            <!-- <tr>
+                                                                <th>Field(s)</th>
+                                                                <th>Value(s)</th>
+                                                            </tr> -->
+                                                            <tr>
+                                                                <td><b>From: </b></td>
+                                                                <td>{{ cell.cellID.rowID.msg_from_name | stringDisplay }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>To: </b></td>
+                                                                <td>{{ cell.cellID.rowID.msg_to_name | stringDisplay }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Subject: </b></td>
+                                                                <td>{{ cell.cellID.rowID.msg_description | stringDisplay }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Entry Date: </b></td>
+                                                                <td>{{ cell.cellID.rowID.msg_entry_date | dateDisplay }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><b>Summary: </b></td>
+                                                                <td><div>{{ cell.cellID.rowID.msg_details | stringDisplay }}</div></td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </ng-template>
+                                                <div class="pointer" container="body" placement="right" [mdbPopover]="messagePopover" mdbWavesEffect triggers="hover"><mdb-badge class="popover-badge" default="true">View Message</mdb-badge></div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="msg_from_name" header="From" width="23%">
+                                            <ng-template igxCell let-val>
+                                                <div class="text-left">{{val | stringDisplay}}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="msg_to_name" header="To" width="20%">
+                                            <ng-template igxCell let-val>
+                                                <div class="text-left">{{val | stringDisplay}}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="msg_id" header="..." width="20%" headerClasses="headerAlignSyle">
+                                            <ng-template igxCell let-val>
+                                                <div class="hover-menu-container"><span class="text-center"></span>
+                                                    <div class="hover-menu">
+                                                        <div class="hover-icons">
+                                                            <!--Strictly for other queues-->
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-check-square-o'" title="Approve" *ngIf="!this.service.msgToShow" (click)="onApproveClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-window-close-o'" title="Decline" *ngIf="!this.service.msgToShow" (click)="onDeclineClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-share-square-o'" title="Redirect" *ngIf="!this.service.msgToShow" (click)="onRedirectAwaitingClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" *ngIf="!this.service.msgToShow" (click)="onViewerAwaitingClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit Request" *ngIf="!this.service.msgToShow" (click)="onEditRequestClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="View Report" *ngIf="!this.service.msgToShow" (click)="onViewReportClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="View/Download Attachment" *ngIf="!this.service.msgToShow" (click)="onViewDownloadAttachmentAwaitingClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-rotate-180'" title="View Approval Path" *ngIf="!this.service.msgToShow" (click)="onViewApprovalPathClicked(val)"></x365-shared-ui-hover-icon>
+
+                                                            <!---strictly to hand submission queue-->
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-window-close-o'"  title="Remove" *ngIf="this.service.msgToShow" (click)="onRemoveClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-share-square-o'" title="Redirect" *ngIf="this.service.msgToShow" (click)="onRedirectSubmissionsClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" *ngIf="this.service.msgToShow" (click)="onViewerSubmissionsClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="View Report" *ngIf="this.service.msgToShow" (click)="onViewReportClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="View/Download Attachment" *ngIf="this.service.msgToShow" (click)="onViewDownloadAttachmentSubmissionsClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-rotate-180'" title="View Approval Path" *ngIf="this.service.msgToShow" (click)="onViewApprovalPathClicked(val)"></x365-shared-ui-hover-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                    </igx-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="tab-b" *ngIf="false">
+                        <div class="grid-table-container">
+                            <igx-grid #mySubmissionsGrid id="mySubmissionsGrid" [data]="workflowMessages$ | async" [paging]="true" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [rowSelectable]="true" [fixedHeaders]="true" [showToolbar]="false" height="100%">
+                                <igx-column field="msg_details" header="Message" width="22%">
+                                    <ng-template igxCell let-val>
+                                        <div class="right-align-text1">{{val | stringDisplay}}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="msg_from" header="Last Action By" width="19%"></igx-column>
+                                <igx-column field="msg_to" header="Current Desk" width="19%"></igx-column>
+                                <igx-column field="msg_entry_date" header="Date Sent" dataType="date" width="19%">
+                                    <ng-template igxCell let-val>
+                                        <div class="right-align-text1">{{val | dateTimeDisplay}}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="msg_id" header="..." width="16%" headerClasses="headerAlignSyle">
+                                    <ng-template igxCell let-val>
+                                        <div class="hover-menu-container"><span class="text-center"></span>
+                                            <div class="hover-menu">
+                                                <div class="hover-icons">
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-window-close-o'" title="Remove" (click)="onRemoveClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-share-square-o'" title="Redirect" (click)="onRedirectSubmissionsClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewerSubmissionsClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="View Report" (click)="onViewReportClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="View/Download Attachment" (click)="onViewDownloadAttachmentSubmissionsClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-rotate-180'" title="View Approval Path" (click)="onViewApprovalPathClicked(val)"></x365-shared-ui-hover-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                            </igx-grid>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <x365-shared-ui-switch #switch [checkedText]="'Submissions'" [unCheckedText]="'Awaiting'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch> -->
+
+<x365-fm-approvals-approve-editor #approveEditor [width]="28" [show]="showApproveEditor$ | async" [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelApproveEditor()" (workCompleted)="onWorkCompleted()"></x365-fm-approvals-approve-editor>
+<x365-fm-approvals-decline-editor #declineEditor [width]="28" [show]="showDeclineEditor$ | async" (cancelClick)="onCancelDeclineEditor()" (workCompleted)="onWorkCompleted()"></x365-fm-approvals-decline-editor>
+<x365-fm-approvals-redirect-editor #redirectEditor [width]="30" [show]="showRedirectEditor$ | async" [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelRedirectEditor()" (workCompleted)="onWorkCompleted()"></x365-fm-approvals-redirect-editor>
+<x365-fm-approvals-remove-editor #removeEditor [width]="28" [show]="showRemoveEditor$ | async" (cancelClick)="onCancelRemoveEditor()" (workCompleted)="onWorkCompleted()"></x365-fm-approvals-remove-editor>
+<x365-fm-approvals-approval-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()"></x365-fm-approvals-approval-viewer>
+<x365-fm-approvals-request-editor #requestEditor [width]="28" [show]="showRequestEditor$ | async" [data]="null" [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelRequestEditor()" (workCompleted)="onWorkCompleted()"></x365-fm-approvals-request-editor>
+
+<x365-fm-approvals-approval-path-viewer #approvalPathviewer [width]="28" [show]="showApprovalPathViewer$ | async" (cancelClick)="onCancelApprovalPathViewer()"></x365-fm-approvals-approval-path-viewer>

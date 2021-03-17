@@ -1,0 +1,105 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Benefit'" [subTitle]="'Benefit request'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Benefit Type:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-lookup #subscriptionTypeLookup formControlName="subscription_type_id" [dataSource]="subscriptionType" valueExpr="id" displayExpr='description' (onValueChanged)="onValueChangedSubscriptionTypes($event)" searchEnabled=true showPopupTitle=false paginate=true
+                        placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">My Grade:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="grade" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Scheduled Grade Amount:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="scheduled_grade_amount" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Membership List:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-lookup #membershipListLookup formControlName="subscription_type_list_id" [dataSource]="membershipList$ | async" valueExpr="id" displayExpr='description' (onValueChanged)="onValueChangedMembershipList($event)" searchEnabled=true showPopupTitle=false
+                        paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">Membership Fee:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="membership_fee" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">Membership Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="membership_number" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">This is a Refund:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <div class="form-check">
+                        <input formControlName="is_refund" type="checkbox" class="form-check-input" id="is_refund">
+                        <label class="form-check-label" for="is_refund"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Currency:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="currency" [options]="currencyList"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Request/Refund Amount:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="request_refund_amount" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Details:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea rows="5" formControlName="details" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved($event)"></x365-shared-ui-file-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

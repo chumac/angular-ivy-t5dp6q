@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <x365-shared-ui-hrz-command-bar [showRefreshButton]="true" [showAddButton]="true" (buttonClicked)="onButtonClicked($event)"></x365-shared-ui-hrz-command-bar>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l"></div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-7"></div>
+                                <div class="col-5 md-form">
+                                    <mdb-select [options]="definitionService.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1" placeholder="Enter your search string i.e. Code, Description." class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="grid-table-container">
+                                <igx-grid #definitionGrid [data]="definitionData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" width="100%" [emptyGridMessage]="'No data available'" [showToolbar]="true">
+                                    <igx-column field="description" header="Description" width="52%"></igx-column>
+                                    <igx-column field="is_annual" header="Is annual" width="20%">
+                                        <ng-template igxCell let-val>
+                                            <div class="text-center">
+                                                <i class="fa fa-check text-success" *ngIf="val;else alternative"></i>
+                                                <ng-template #alternative>
+                                                    <i class="fa fa-close text-danger"></i>
+                                                </ng-template>
+                                            </div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="take_from_annual" header="Take From Annual" width="20%">
+                                        <ng-template igxCell let-val>
+                                            <div class="text-center">
+                                                <i class="fa fa-check text-success" *ngIf="val;else alternative"></i>
+                                                <ng-template #alternative>
+                                                    <i class="fa fa-close text-danger"></i>
+                                                </ng-template>
+                                            </div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="leave_id" header="..." width="7%">
+                                        <ng-template igxCell let-val>
+                                            <div class="hover-menu-container"><span class="text-center"></span>
+                                                <div class="hover-menu">
+                                                    <span class="hover-ellipse-menu"></span>
+                                                    <div class="hover-icons">
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit Leave Definition" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View Leave Definition" (click)="onApprovedViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o'" title="Remove Leave Definition" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </igx-column>
+                                </igx-grid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<x365-fm-workforce-absence-leave-definition-editor #editor [width]="30" [show]="showEditor$ | async" [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-workforce-absence-leave-definition-editor>
+<x365-fm-workforce-absence-leave-definition-viewer #viewer [width]="30" [show]="showViewer$ | async" [data]="null"></x365-fm-workforce-absence-leave-definition-viewer>

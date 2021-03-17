@@ -1,0 +1,97 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'View Workflow Definitions'" [subTitle]="'Workflow Definitions'" [loading]='!data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <div class="mx-3">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.code | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">System Rule:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.sys_rule | stringDisplay}}
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Eligibility Rule:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.eligibility_rule | eligibilityRuleOpt | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Structure Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.AnalysisInfo.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Specific Structure:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.AnalysisDetailsInfo.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Position:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.PositionInfo.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Designation:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.DesignationInfo.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Grade:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.GradeInfo.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Employee:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.EmployeeInfo.employee_surname | stringDisplay}} {{data?.EmployeeInfo.employee_firstname | stringDisplay}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

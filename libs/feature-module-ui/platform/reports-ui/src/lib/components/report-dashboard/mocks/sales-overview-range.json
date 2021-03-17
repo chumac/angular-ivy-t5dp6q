@@ -1,0 +1,843 @@
+{
+  "MapAttributesNames": null,
+  "ClustersContent": null,
+  "FullViewport": null,
+  "Name": "range",
+  "Type": "RANGEFILTER",
+  "ParentContainer": null,
+  "ContentType": "FullContent",
+  "DataSource": null,
+  "ItemData": {
+    "MetaData": {
+      "DimensionDescriptors": {
+        "Series": [
+          {
+            "Level": 0,
+            "DateTimeGroupInterval": "Year",
+            "TextGroupInterval": "None",
+            "ID": "DataItem2",
+            "Name": "Category",
+            "DataMember": "Category",
+            "Format": {
+              "DataType": "String",
+              "NumericFormat": null,
+              "DateTimeFormat": null
+            },
+            "FinalDataType": "Text"
+          }
+        ],
+        "Argument": [
+          {
+            "Level": 0,
+            "DateTimeGroupInterval": "MonthYear",
+            "TextGroupInterval": "None",
+            "ID": "DataItem1",
+            "Name": "Date",
+            "DataMember": "CurrentDate",
+            "Format": {
+              "DataType": "DateTime",
+              "NumericFormat": null,
+              "DateTimeFormat": {
+                "GroupInterval": "MonthYear",
+                "ExactDateFormat": "Day",
+                "YearFormat": "Full",
+                "QuarterFormat": "Full",
+                "MonthFormat": "Full",
+                "DayOfWeekFormat": "Full",
+                "DateFormat": "Short",
+                "DateHourFormat": "Short",
+                "DateHourMinuteFormat": "Short",
+                "DateTimeFormat": "Short",
+                "HourFormat": "Long",
+                "FirstDayOfWeek": 0,
+                "CalendarWeekRule": "FirstDay"
+              }
+            },
+            "FinalDataType": "DateTime"
+          }
+        ]
+      },
+      "MeasureDescriptors": [
+        {
+          "SummaryType": "Sum",
+          "FilterString": null,
+          "Calculation": null,
+          "WindowDefinition": null,
+          "Expression": null,
+          "DataItemId": null,
+          "ID": "DataItem0",
+          "Name": "Sales (Sum)",
+          "DataMember": "Sales",
+          "Format": {
+            "DataType": "Numeric",
+            "NumericFormat": {
+              "FormatType": "Currency",
+              "Precision": 0,
+              "Unit": "Auto",
+              "IncludeGroupSeparator": false,
+              "ForcePlusSign": false,
+              "SignificantDigits": 3,
+              "CurrencyCulture": "en-US",
+              "CustomFormatString": null,
+              "Currency": "USD"
+            },
+            "DateTimeFormat": null
+          },
+          "FinalDataType": "Decimal"
+        }
+      ],
+      "ColorMeasureDescriptors": [
+        {
+          "SummaryType": "Count",
+          "FilterString": null,
+          "Calculation": null,
+          "WindowDefinition": null,
+          "Expression": null,
+          "DataItemId": null,
+          "ID": "ColorMeasure",
+          "Name": null,
+          "DataMember": null,
+          "Format": {
+            "DataType": "String",
+            "NumericFormat": null,
+            "DateTimeFormat": null
+          },
+          "FinalDataType": "Text"
+        }
+      ],
+      "FormatConditionMeasureDescriptors": [],
+      "NormalizedValueMeasureDescriptors": [],
+      "ZeroPositionMeasureDescriptors": [],
+      "DeltaDescriptors": [],
+      "DataSourceColumns": [
+        "Category",
+        "CurrentDate",
+        "Sales"
+      ],
+      "ColumnHierarchy": "Argument",
+      "RowHierarchy": "Series"
+    },
+    "DataStorageDTO": {
+      "EncodeMaps": {
+        "DataItem1": [
+          "2018-01-01T00:00:00.0000000",
+          "2018-02-01T00:00:00.0000000",
+          "2018-03-01T00:00:00.0000000",
+          "2018-04-01T00:00:00.0000000",
+          "2018-05-01T00:00:00.0000000",
+          "2018-06-01T00:00:00.0000000",
+          "2018-07-01T00:00:00.0000000",
+          "2018-08-01T00:00:00.0000000",
+          "2018-09-01T00:00:00.0000000",
+          "2018-10-01T00:00:00.0000000",
+          "2018-11-01T00:00:00.0000000",
+          "2018-12-01T00:00:00.0000000",
+          "2019-01-01T00:00:00.0000000",
+          "2019-02-01T00:00:00.0000000",
+          "2019-03-01T00:00:00.0000000",
+          "2019-04-01T00:00:00.0000000",
+          "2019-05-01T00:00:00.0000000",
+          "2019-06-01T00:00:00.0000000",
+          "2019-07-01T00:00:00.0000000",
+          "2019-08-01T00:00:00.0000000",
+          "2019-09-01T00:00:00.0000000",
+          "2019-10-01T00:00:00.0000000",
+          "2019-11-01T00:00:00.0000000",
+          "2019-12-01T00:00:00.0000000",
+          "2020-01-01T00:00:00.0000000",
+          "2020-02-01T00:00:00.0000000",
+          "2020-03-01T00:00:00.0000000",
+          "2020-04-01T00:00:00.0000000",
+          "2020-05-01T00:00:00.0000000",
+          "2020-06-01T00:00:00.0000000",
+          "2020-07-01T00:00:00.0000000",
+          "2020-08-01T00:00:00.0000000",
+          "2020-09-01T00:00:00.0000000",
+          "2020-10-01T00:00:00.0000000",
+          "2020-11-01T00:00:00.0000000",
+          "2020-12-01T00:00:00.0000000",
+          "2021-01-01T00:00:00.0000000"
+        ],
+        "DataItem2": [
+          "Accessories",
+          "Clothing",
+          "Bikes",
+          "Components"
+        ],
+        "DataItem0": [],
+        "ColorMeasure": []
+      },
+      "Slices": [
+        {
+          "KeyIds": [
+            "DataItem1",
+            "DataItem2"
+          ],
+          "ValueIds": {
+            "DataItem0": 0
+          },
+          "Data": {
+            "[0,0]": {
+              "0": 230814.5400
+            },
+            "[1,0]": {
+              "0": 1043675.9200
+            },
+            "[2,0]": {
+              "0": 1210419.8900
+            },
+            "[3,0]": {
+              "0": 1651941.0500
+            },
+            "[4,0]": {
+              "0": 1461993.9100
+            },
+            "[5,0]": {
+              "0": 1592067.6800
+            },
+            "[6,0]": {
+              "0": 2261798.2500
+            },
+            "[7,0]": {
+              "0": 2067142.1300
+            },
+            "[8,0]": {
+              "0": 2293886.0300
+            },
+            "[9,0]": {
+              "0": 2918624.4700
+            },
+            "[10,0]": {
+              "0": 2400916.0100
+            },
+            "[11,0]": {
+              "0": 3118220.2600
+            },
+            "[12,0]": {
+              "0": 2574650.2700
+            },
+            "[13,0]": {
+              "0": 2584209.1200
+            },
+            "[14,0]": {
+              "0": 2515183.9200
+            },
+            "[15,0]": {
+              "0": 3323284.3800
+            },
+            "[16,0]": {
+              "0": 2994122.0200
+            },
+            "[17,0]": {
+              "0": 2957572.2800
+            },
+            "[18,0]": {
+              "0": 3528817.8900
+            },
+            "[19,0]": {
+              "0": 2838549.9900
+            },
+            "[20,0]": {
+              "0": 4046847.5600
+            },
+            "[21,0]": {
+              "0": 3669677.7300
+            },
+            "[22,0]": {
+              "0": 3550175.4300
+            },
+            "[23,0]": {
+              "0": 5448907.2100
+            },
+            "[24,0]": {
+              "0": 4177824.4200
+            },
+            "[25,0]": {
+              "0": 4283298.3000
+            },
+            "[26,0]": {
+              "0": 5640742.4700
+            },
+            "[27,0]": {
+              "0": 3884638.7400
+            },
+            "[28,0]": {
+              "0": 3752539.6300
+            },
+            "[29,0]": {
+              "0": 4827541.8400
+            },
+            "[30,0]": {
+              "0": 3857373.2300
+            },
+            "[31,0]": {
+              "0": 6990095.5100
+            },
+            "[32,0]": {
+              "0": 5839065.9400
+            },
+            "[33,0]": {
+              "0": 4524266.2800
+            },
+            "[34,0]": {
+              "0": 5494529.1300
+            },
+            "[35,0]": {
+              "0": 4158405.5500
+            },
+            "[36,0]": {
+              "0": 4278523.8600
+            },
+            "[0,1]": {
+              "0": 144176.4000
+            },
+            "[1,1]": {
+              "0": 668110.9900
+            },
+            "[2,1]": {
+              "0": 789494.0000
+            },
+            "[3,1]": {
+              "0": 1143359.8300
+            },
+            "[4,1]": {
+              "0": 962363.3300
+            },
+            "[5,1]": {
+              "0": 1047683.3900
+            },
+            "[6,1]": {
+              "0": 1436804.6000
+            },
+            "[7,1]": {
+              "0": 1246591.6100
+            },
+            "[8,1]": {
+              "0": 1184780.8000
+            },
+            "[9,1]": {
+              "0": 1517874.9900
+            },
+            "[10,1]": {
+              "0": 1276717.9100
+            },
+            "[11,1]": {
+              "0": 1649258.8600
+            },
+            "[12,1]": {
+              "0": 1484897.9400
+            },
+            "[13,1]": {
+              "0": 1542008.3400
+            },
+            "[14,1]": {
+              "0": 1488500.4200
+            },
+            "[15,1]": {
+              "0": 2077398.4600
+            },
+            "[16,1]": {
+              "0": 1968775.2700
+            },
+            "[17,1]": {
+              "0": 2515458.0800
+            },
+            "[18,1]": {
+              "0": 3245936.5100
+            },
+            "[19,1]": {
+              "0": 2349211.1100
+            },
+            "[20,1]": {
+              "0": 3227202.2100
+            },
+            "[21,1]": {
+              "0": 3522248.6500
+            },
+            "[22,1]": {
+              "0": 4677998.4300
+            },
+            "[23,1]": {
+              "0": 7262293.8200
+            },
+            "[24,1]": {
+              "0": 7181223.7800
+            },
+            "[25,1]": {
+              "0": 4494165.9200
+            },
+            "[26,1]": {
+              "0": 4512714.2900
+            },
+            "[27,1]": {
+              "0": 3214695.5600
+            },
+            "[28,1]": {
+              "0": 2775942.5100
+            },
+            "[29,1]": {
+              "0": 3929567.6700
+            },
+            "[30,1]": {
+              "0": 2665923.4400
+            },
+            "[31,1]": {
+              "0": 3594587.7500
+            },
+            "[32,1]": {
+              "0": 2580350.5600
+            },
+            "[33,1]": {
+              "0": 2317099.3800
+            },
+            "[34,1]": {
+              "0": 2766789.8200
+            },
+            "[35,1]": {
+              "0": 2362112.5400
+            },
+            "[36,1]": {
+              "0": 2558641.8800
+            },
+            "[0,2]": {
+              "0": 6017232.9600
+            },
+            "[1,2]": {
+              "0": 28866148.5400
+            },
+            "[2,2]": {
+              "0": 34544558.4400
+            },
+            "[3,2]": {
+              "0": 49836817.8700
+            },
+            "[4,2]": {
+              "0": 46529823.1300
+            },
+            "[5,2]": {
+              "0": 51409475.1400
+            },
+            "[6,2]": {
+              "0": 67114216.7200
+            },
+            "[7,2]": {
+              "0": 59449620.8600
+            },
+            "[8,2]": {
+              "0": 61240455.4900
+            },
+            "[9,2]": {
+              "0": 80953149.9400
+            },
+            "[10,2]": {
+              "0": 71337012.8600
+            },
+            "[11,2]": {
+              "0": 98448349.0400
+            },
+            "[12,2]": {
+              "0": 77581664.5800
+            },
+            "[13,2]": {
+              "0": 78902724.7800
+            },
+            "[14,2]": {
+              "0": 81086901.2000
+            },
+            "[15,2]": {
+              "0": 111146284.6400
+            },
+            "[16,2]": {
+              "0": 101617113.9100
+            },
+            "[17,2]": {
+              "0": 106785123.5400
+            },
+            "[18,2]": {
+              "0": 143643915.2300
+            },
+            "[19,2]": {
+              "0": 127959179.5800
+            },
+            "[20,2]": {
+              "0": 179597675.5100
+            },
+            "[21,2]": {
+              "0": 148806989.5800
+            },
+            "[22,2]": {
+              "0": 144917875.1000
+            },
+            "[23,2]": {
+              "0": 177170946.7700
+            },
+            "[24,2]": {
+              "0": 156502815.9900
+            },
+            "[25,2]": {
+              "0": 155278920.7200
+            },
+            "[26,2]": {
+              "0": 179902052.2800
+            },
+            "[27,2]": {
+              "0": 157994186.1500
+            },
+            "[28,2]": {
+              "0": 187267528.1400
+            },
+            "[29,2]": {
+              "0": 293492988.9800
+            },
+            "[30,2]": {
+              "0": 188673095.6800
+            },
+            "[31,2]": {
+              "0": 230334783.2900
+            },
+            "[32,2]": {
+              "0": 193191674.5000
+            },
+            "[33,2]": {
+              "0": 163065975.4700
+            },
+            "[34,2]": {
+              "0": 198505334.2800
+            },
+            "[35,2]": {
+              "0": 175529893.0500
+            },
+            "[36,2]": {
+              "0": 155926381.3800
+            },
+            "[0,3]": {
+              "0": 3518405.3350
+            },
+            "[1,3]": {
+              "0": 16284605.8750
+            },
+            "[2,3]": {
+              "0": 18941284.5400
+            },
+            "[3,3]": {
+              "0": 26111064.8200
+            },
+            "[4,3]": {
+              "0": 22122787.1300
+            },
+            "[5,3]": {
+              "0": 23833550.7350
+            },
+            "[6,3]": {
+              "0": 32569702.0000
+            },
+            "[7,3]": {
+              "0": 28083195.0450
+            },
+            "[8,3]": {
+              "0": 30108850.3850
+            },
+            "[9,3]": {
+              "0": 41695428.5650
+            },
+            "[10,3]": {
+              "0": 35820261.1550
+            },
+            "[11,3]": {
+              "0": 46494334.6600
+            },
+            "[12,3]": {
+              "0": 38062007.5750
+            },
+            "[13,3]": {
+              "0": 38959311.5950
+            },
+            "[14,3]": {
+              "0": 42059789.1500
+            },
+            "[15,3]": {
+              "0": 53135873.0700
+            },
+            "[16,3]": {
+              "0": 45734555.3450
+            },
+            "[17,3]": {
+              "0": 44170385.9650
+            },
+            "[18,3]": {
+              "0": 56671096.5150
+            },
+            "[19,3]": {
+              "0": 47014901.1400
+            },
+            "[20,3]": {
+              "0": 60417501.7700
+            },
+            "[21,3]": {
+              "0": 47810012.6650
+            },
+            "[22,3]": {
+              "0": 46641696.5150
+            },
+            "[23,3]": {
+              "0": 55658618.1700
+            },
+            "[24,3]": {
+              "0": 44499194.5300
+            },
+            "[25,3]": {
+              "0": 47028237.3100
+            },
+            "[26,3]": {
+              "0": 57135606.3700
+            },
+            "[27,3]": {
+              "0": 43753294.5800
+            },
+            "[28,3]": {
+              "0": 43451299.4850
+            },
+            "[29,3]": {
+              "0": 56797091.0000
+            },
+            "[30,3]": {
+              "0": 44996219.4600
+            },
+            "[31,3]": {
+              "0": 59818008.4450
+            },
+            "[32,3]": {
+              "0": 49150329.6700
+            },
+            "[33,3]": {
+              "0": 50671651.2600
+            },
+            "[34,3]": {
+              "0": 64735073.7200
+            },
+            "[35,3]": {
+              "0": 52099774.8300
+            },
+            "[36,3]": {
+              "0": 50436359.4850
+            }
+          }
+        },
+        {
+          "KeyIds": [
+            "DataItem1"
+          ],
+          "ValueIds": {},
+          "Data": {
+            "[0]": {},
+            "[1]": {},
+            "[2]": {},
+            "[3]": {},
+            "[4]": {},
+            "[5]": {},
+            "[6]": {},
+            "[7]": {},
+            "[8]": {},
+            "[9]": {},
+            "[10]": {},
+            "[11]": {},
+            "[12]": {},
+            "[13]": {},
+            "[14]": {},
+            "[15]": {},
+            "[16]": {},
+            "[17]": {},
+            "[18]": {},
+            "[19]": {},
+            "[20]": {},
+            "[21]": {},
+            "[22]": {},
+            "[23]": {},
+            "[24]": {},
+            "[25]": {},
+            "[26]": {},
+            "[27]": {},
+            "[28]": {},
+            "[29]": {},
+            "[30]": {},
+            "[31]": {},
+            "[32]": {},
+            "[33]": {},
+            "[34]": {},
+            "[35]": {},
+            "[36]": {}
+          }
+        },
+        {
+          "KeyIds": [
+            "DataItem2"
+          ],
+          "ValueIds": {
+            "ColorMeasure": 0
+          },
+          "Data": {
+            "[0]": {
+              "0": -10515563
+            },
+            "[2]": {
+              "0": -4567727
+            },
+            "[1]": {
+              "0": -5273005
+            },
+            "[3]": {
+              "0": -6987919
+            }
+          }
+        }
+      ]
+    },
+    "SortOrderSlices": [
+      [
+        "DataItem1"
+      ],
+      [
+        "DataItem2"
+      ]
+    ],
+    "Reduced": false
+  },
+  "DataSourceMembers": null,
+  "SelectedValues": null,
+  "AxisNames": [
+    "Default"
+  ],
+  "DimensionIds": [],
+  "ViewModel": {
+    "SeriesTemplates": [
+      {
+        "DataId": "DataItem0",
+        "OnlyPercentValues": false,
+        "OnlyScientificValues": false,
+        "SeriesType": "StackedLine",
+        "Name": "Sales (Sum)",
+        "DataMembers": [
+          "DataItem0"
+        ],
+        "ColorMeasureID": "ColorMeasure",
+        "MeasureCaptions": [
+          "Sales (Sum)"
+        ],
+        "ShowPointMarkers": false,
+        "ForceShowPointMarkers": false,
+        "PlotOnSecondaryAxis": false,
+        "IgnoreEmptyPoints": false,
+        "PointLabel": {
+          "ShowForZeroValues": false,
+          "Position": "Outside",
+          "Orientation": "Default",
+          "ContentType": "None",
+          "OverlappingMode": "Hide",
+          "ScatterContent": "Argument",
+          "ShowPointLabels": false
+        }
+      }
+    ],
+    "DateTimePeriods": [
+      {
+        "Name": "6 Months",
+        "Start": {
+          "Interval": "Month",
+          "Offset": -5,
+          "Date": null,
+          "Relative": true
+        },
+        "End": null
+      },
+      {
+        "Name": "12 Months",
+        "Start": {
+          "Interval": "Month",
+          "Offset": -11,
+          "Date": null,
+          "Relative": true
+        },
+        "End": null
+      },
+      {
+        "Name": "Quarter to date",
+        "Start": {
+          "Interval": "Quarter",
+          "Offset": 0,
+          "Date": null,
+          "Relative": true
+        },
+        "End": {
+          "Interval": "Day",
+          "Offset": 0,
+          "Date": null,
+          "Relative": true
+        }
+      },
+      {
+        "Name": "Year to date",
+        "Start": {
+          "Interval": "Year",
+          "Offset": 0,
+          "Date": null,
+          "Relative": true
+        },
+        "End": {
+          "Interval": "Day",
+          "Offset": 0,
+          "Date": null,
+          "Relative": true
+        }
+      }
+    ],
+    "Argument": {
+      "DateTimeGroupInterval": "MonthYear",
+      "AxisXDateTimeFormatSupported": true,
+      "AxisXNumericFormatSupported": false,
+      "Type": "DateTime",
+      "SummaryArgumentMember": "DataItem1",
+      "AxisXLabelFormat": {
+        "DataType": "DateTime",
+        "NumericFormat": null,
+        "DateTimeFormat": {
+          "GroupInterval": "MonthYear",
+          "ExactDateFormat": "Day",
+          "YearFormat": "Full",
+          "QuarterFormat": "Full",
+          "MonthFormat": "Full",
+          "DayOfWeekFormat": "Full",
+          "DateFormat": "Short",
+          "DateHourFormat": "Short",
+          "DateHourMinuteFormat": "Short",
+          "DateTimeFormat": "Short",
+          "HourFormat": "Long",
+          "FirstDayOfWeek": 0,
+          "CalendarWeekRule": "FirstDay"
+        }
+      },
+      "DateTimePresentationUnit": "Month",
+      "IsOrderedDiscrete": false,
+      "HasArguments": true,
+      "IsContinuousDateTimeScale": false
+    },
+    "SummarySeriesMember": "DataItem2",
+    "SeriesColorDimension": "DataItem2",
+    "IsReady": true,
+    "DefaultDateTimePeriodIndex": -1,
+    "SupportDateTimePeriods": true,
+    "SupportDataAwareExport": true,
+    "ShowCaption": false,
+    "Caption": "Filter by Date",
+    "ShouldIgnoreUpdate": false,
+    "ContentDescription": null
+  },
+  "ConditionalFormattingModel": null,
+  "CaptionViewModel": {
+    "ShowCaption": false,
+    "Caption": "Filter by Date",
+    "Text": "Filter by Date"
+  },
+  "Parameters": null,
+  "DrillDownValues": null,
+  "DrillDownUniqueValues": null
+}

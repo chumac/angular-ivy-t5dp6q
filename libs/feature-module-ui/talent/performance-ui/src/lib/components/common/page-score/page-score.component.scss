@@ -1,0 +1,52 @@
+.content {
+
+    .content-header {
+      background: #f8f8f8;
+      text-align: center;
+  
+      .content-name {
+        color: rgb(71, 71, 71);
+        padding: 1.5em 0 1em 0;
+        font-size: .9em;
+        font-weight: 600;
+      }
+    }
+  
+    .content-body {
+      background: #fff;
+      padding: 1em 2em;
+      margin-bottom: 2em;
+  
+      .content-body-item {
+          margin: 1em 0;
+          border-bottom: 1px solid #e6e6e6;
+  
+          .table.no-border tr td, .table.no-border tr th {
+            border-width: 0;
+          }
+
+          .table tr {
+            padding: 1em !important;
+            border-bottom: 1px solid rgb(236, 236, 236);
+          }
+
+          .title {
+              font-size: .7em
+          }
+  
+          .info {
+              font-size: .8em;
+              font-weight: 600;
+          }
+      }
+  
+      .content-body-item:last-child {
+          border: 0
+      }
+    }
+  
+    .modal-footer {
+      margin: 0 0.5em;
+    }
+  }
+  

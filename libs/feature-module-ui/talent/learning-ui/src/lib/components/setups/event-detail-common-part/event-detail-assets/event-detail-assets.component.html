@@ -1,0 +1,65 @@
+<div class="card card-container container-fluid">
+
+  <div class="d-flex flex-column doc-container-t font-size">
+    <div class="doc-container-t-ct">
+      <div class="doc-container-t-ct-l">
+      </div>
+      <div class="doc-container-t-ct-r">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-6 md-form">
+          </div>
+          <div class="col-1"></div>
+          <div class="col-4 md-form">
+            <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)"
+            [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-container-s">
+    <div class="row">
+      <div class="col-12 md-form mb-1">
+        <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1"
+          placeholder="Enter your search string i.e. Event Title, Availability, Type, Filename" class="form-control font-size">
+      </div>
+    </div>
+  </div>
+
+  <div class="card-content font-size">
+
+    <div class="card-content-bottom">
+      <igx-grid #grid [data]="AssetsData$ | async" [paging]="true" [perPage]="15" [height]="null" [paginationTemplate]="" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+
+        <igx-column field="event_text" header="Event title" width="20%"></igx-column>
+        <igx-column field="asset_availability_text" header="Availability" width="20%"></igx-column>
+        <igx-column field="asset_type_text" header="Type" width="20%"></igx-column>
+        <igx-column field="asset_filename" header="Filename" width="20%"></igx-column>
+        <igx-column field="id" header="..." width="20%">
+          <ng-template igxCell let-val let-cell="cell">
+            <div class="hover-menu-container"><span></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon *ngIf='isReview && !isOpen' [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                    (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                    (click)="onViewIconClicked(val, cell.row.rowData.asset_guid, cell.row.rowData.asset_ext)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon *ngIf='isReview && !isOpen' [iconClass]="'fa fa-trash-o fa-icon'" title="Delete"
+                    (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>
+<x365-fm-talent-event-detail-assets-editor #editor [width]="35" [AssetsDataAvailable]="AssetsDataAvailable$ | async"
+  [AssetsDataType]="AssetsDataType$ | async" [eventDetailId]="eventDetailId" [show]="showEditor$ | async" [data]="null"
+  (cancelClick)="onCancelEditor()"></x365-fm-talent-event-detail-assets-editor>
+<x365-fm-talent-event-detail-assets-viewer #viewer [width]="35" [AssetsDocument]="AssetsDocument$ | async" [show]="showViewer$ | async" [data]="null">
+</x365-fm-talent-event-detail-assets-viewer>

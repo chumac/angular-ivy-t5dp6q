@@ -1,0 +1,149 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onApplyBtnClicked()">&nbsp;&nbsp;Apply</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onHistoricalBtnClicked()">&nbsp;&nbsp;Historical Leave</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefreshBtnClicked()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isProcessing$ | async" [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l">
+                            <div class="row grid-select">
+                                <div class="col-12">
+                                    <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-6">
+                                    <dx-lookup #employeeLook [dataSource]="activePersonnel$ | async" (onValueChanged)="loadLeaveData($event)" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Employee" closeOnOutsideClick=false popupHeight="400px" showClearButton=true
+                                        class="form-font"></dx-lookup>
+                                        <div class="float-right" *ngIf="employeeLook.value">
+                                          <a mdbBtn floating="true" size="sm" color="warning" class="waves-light btn-sm mr-2" mdbWavesEffect (click)="onResetLeavePlan()" title="Reset Leave for this employee">
+                                            <i class="fa fa-repeat"></i>
+                                          </a>
+
+                                          <!-- <a mdbBtn *ngIf="!isSelfService" floating="true" size="sm" color="warning" class="waves-light btn-sm"
+                                            [ngClass]="{'disabled': (data?.is_validated && data?.is_validated.trim().toLowerCase() == 'yes') || isMyData }"
+                                            title="Redirect this checklist item" mdbWavesEffect (click)="onRedirectSingle()">
+                                            <i class="fa fa fa-mail-forward"></i>
+                                          </a> -->
+                                        </div>
+                                </div>
+                                <div class="col-6">
+                                    <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective #searchInput type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" placeholder="Enter your search text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="tab-a" *ngIf="!switch.value">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="grid-table-container">
+                                    <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                                        <igx-column field="leave_type" header="Type" width="30%"></igx-column>
+                                        <igx-column field="start_date" header="Start Date" width="15%">
+                                            <ng-template igxCell let-val>
+                                                <div class="left-align-text">{{val | dateDisplay}}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="end_date" header="End Date" width="15%">
+                                            <ng-template igxCell let-val>
+                                                <div class="left-align-text">{{val | dateDisplay}}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="resumption_date" header="Resumption Date" width="15%">
+                                            <ng-template igxCell let-val>
+                                                <div class="left-align-text">{{val | dateDisplay}}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="number_of_days" header="No. of Days" width="15%" dataType="number"></igx-column>
+                                        <igx-column field="id" header="  " class="text-center" width="10%">
+                                            <ng-template igxCell let-val>
+                                                <div class="hover-menu-container"><span class="text-center"></span>
+                                                    <div class="hover-menu">
+                                                        <div class="hover-icons">
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                    </igx-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-b" *ngIf="switch.value">
+                        <div class="grid-table-container">
+                            <igx-grid #awaitingApprovalDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [height]="null">
+                                <igx-column field="leave_type" header="Type" width="30%"></igx-column>
+                                <igx-column field="start_date" header="Start Date" width="15%">
+                                    <ng-template igxCell let-val>
+                                        <div class="left-align-text">{{val | dateDisplay}}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="end_date" header="End Date" width="15%">
+                                    <ng-template igxCell let-val>
+                                        <div class="left-align-text">{{val | dateDisplay}}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="resumption_date" header="Resumption Date" width="15%">
+                                    <ng-template igxCell let-val>
+                                        <div class="left-align-text">{{val | dateDisplay}}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="number_of_days" header="No. of Days" width="15%" dataType="number"></igx-column>
+                                <igx-column field="id" header="  " class="text-center" width="10%">
+                                    <ng-template igxCell let-val>
+                                        <div class="hover-menu-container"><span class="text-center"></span>
+                                            <div class="hover-menu">
+                                                <div class="hover-icons">
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Invalidate Leave Request" (click)="onAwaitingApprovalCancelIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                            </igx-grid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-absence-leave-proxy-apply-editor #editor [width]="32" [show]="showEditor$ | async" [data]="null" [mode]="'APPLY'" [leaveTypes]="leaveTypes$ | async" [selectOptionData]="selectOptionData$ | async" [comprehensiveData]="comprehensiveData$ | async"
+    [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-absence-leave-proxy-apply-editor>
+
+<x365-fm-workforce-absence-leave-proxy-reset-editor #resetEditor [width]="32" [show]="showResetEditor$ | async" [data]="null"
+    [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelEditor()" [selectedEmployeeId]="employeeLook.value"></x365-fm-workforce-absence-leave-proxy-reset-editor>
+
+<x365-fm-workforce-absence-leave-historical #historicalEditor [width]="32" [show]="showHistoricalEditor$ | async" [data]="null" [leaveTypes]="leaveTypes$ | async" [selectOptionData]="selectOptionData$ | async" [comprehensiveData]="comprehensiveData$ | async"
+    [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelHistoricalEditor()"></x365-fm-workforce-absence-leave-historical>
+
+
+<x365-fm-workforce-absence-leave-proxy-apply-viewer #viewer [width]="32" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()"></x365-fm-workforce-absence-leave-proxy-apply-viewer>

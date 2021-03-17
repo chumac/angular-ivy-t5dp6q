@@ -1,0 +1,17 @@
+
+<div *ngIf="src; else loading">
+  <div *ngIf="!makeAvatarALink" class="avatar" [class.mx-auto]="centerAvatar" [ngStyle]="getStyles()"></div>
+  <a [attr.href]="linkUrl">
+    <div *ngIf="makeAvatarALink" class="avatar" [class.mx-auto]="centerAvatar" [ngStyle]="getStyles()"></div>
+  </a>
+</div>
+
+<ng-template #loading>
+  <div class="avatar-placeholder-container" [class.mx-auto]="true" [ngStyle]="getLoadingStyles()">
+    <div>
+      <div class="spinner" [ngStyle]="getLoadingStyles()" [style.background-image]="getSpinnerBackgroundImage()">
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,22 @@
+<div class="container-fluid">
+<div class="row">
+  <div class="col-1 text-left">
+    <i (click)="owlCarousel.prev()" class="fa fa-chevron-left" aria-hidden="true"></i>
+  </div>
+  <div class="col-10">
+    <owl-carousel-o #owlCarousel [options]="customOptions">
+      <ng-container *ngFor="let item of carouselData">
+        <ng-template carouselSlide [width]="item.width">
+         <div class="slider">
+          <x365-shared-ui-concentra-chart *ngIf="isConcentra(item)" [data]=item></x365-shared-ui-concentra-chart>
+          <x365-shared-ui-concentri-chart *ngIf="!isConcentra(item)" [data]=item></x365-shared-ui-concentri-chart>
+         </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+  <div class="col-1 text-right">
+    <i (click)="owlCarousel.next()" class="fa fa-chevron-right" aria-hidden="true"></i>
+  </div>
+</div>
+</div>

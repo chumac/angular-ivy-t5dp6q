@@ -1,0 +1,25 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Tax Percent Of Gross'" [subTitle]="''" [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">      
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Tax percent on gross:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="taxpercentongross" type="text" class="form-control form-font">
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,35 @@
+<div *ngIf="defaultMode" class="row image-picker bg-color">
+  <div class="col-md-12">
+    <div class="d-block mb-4">
+      <p class="image-label">{{ imagePickerLabel }}</p>
+    </div>
+    <div *ngIf="!imageUploaded" class="mb-2">
+      <span><i class="fa fa-file-image-o fa-5x"></i></span>
+    </div>
+    <div>
+      <div class="upload-btn-wrapper">
+        <button type="button" mdbBtn rounded="true" outline="true" color="default" class="btn btn-sm waves-effect" (click)="showModal()">{{ caption }}</button>
+      </div>
+      <p *ngIf="!imageUploaded">
+        <small>{{ captionSubText }}. <br> <span class="font-weight-bold">Format: </span>PNG, JPEG, jpg, gif etc. <br>
+        <span class="font-weight-bold">Maximum size:</span> {{ (docMaxSize$ | async)?.img_size + 'Kb' }}
+      </small>
+      </p>
+    </div>
+  </div>
+  <div *ngIf="imageUploaded" class="col-md-12">
+    <div class="selected-image" [attr.data-src]="selectedImageSrc" #image [style.background-image]="getSelectedImage(selectedImageSrc)"></div>
+    <div class="details">
+      <div class="text-center">
+        <p class="image-name-extension"></p>
+        <p class="image-size"></p>
+      </div>
+    </div>
+    <div>
+      <a role="button" class="btn btn-link" (click)="removeFile()"><i class="fa fa-times" aria-hidden="true"></i>
+        <span class="ml-2">Remove</span></a>
+    </div>
+  </div>
+</div>
+
+<a *ngIf="!defaultMode" (click)="showSecondModalOption()">{{caption}}</a>

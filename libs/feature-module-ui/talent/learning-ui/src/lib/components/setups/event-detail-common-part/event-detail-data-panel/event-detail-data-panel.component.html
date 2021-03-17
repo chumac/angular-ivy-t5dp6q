@@ -1,0 +1,17 @@
+<div class="card card-container business-people-section">
+  <div class="business-people-sectionbox">
+  <div class="item-left business-people-left">
+    <div class="usersicon-section">
+      <i class="fa fa-users" aria-hidden="true"></i>
+    </div>
+    <div>
+    <h6>{{eventDetailData[0]?.event_title | stringDisplay}}</h6>
+    <span>{{eventDetailData[0]?.course_id_text | stringDisplay}}<br>
+    {{eventDetailData[0]?.start_date | dateDisplay}} - {{eventDetailData[0]?.end_date | dateDisplay}} </span>
+  </div>
+  </div>
+    <div class="business-people-right">
+      <a>{{eventDetailData[0]?.status_text | stringDisplay}}</a>  
+  </div>
+  </div>
+</div>

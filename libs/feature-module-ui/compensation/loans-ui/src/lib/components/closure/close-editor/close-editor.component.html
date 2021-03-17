@@ -1,0 +1,21 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Close Loan Transaction'" [subTitle]="'Details of loan closure'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Reason:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="reason" type="text" class="md-textarea md-textarea-auto form-control"
+              ></textarea>
+          </div>
+        </div>
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

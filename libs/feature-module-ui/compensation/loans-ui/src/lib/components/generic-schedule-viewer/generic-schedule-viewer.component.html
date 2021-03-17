@@ -1,0 +1,39 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Generic Loan Schedule'" [subTitle]="'Details of schedule on loan'" [loading]='!(genericScheduleList)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <igx-grid #genericScheduleGrid [data]="genericScheduleList" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [showToolbar]="false" [rowSelectable]="false" width="900px" *ngIf="show">
+        <igx-column field="pay_period_name" header="Pay Period" width="14%"></igx-column>
+        <igx-column field="total_days" header="Total Days" width="13%" dataType="number"></igx-column>
+        <igx-column field="balance" header="Balance" width="17%" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="p_deduction" header="Principal" width="14%" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="i_deduction" header="Interest" width="11%" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="t_deduct" header="Monthly Deduction" width="15%" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="bal_cf" header="Carried Forward" width="16%" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </x365-shared-ui-form-container>

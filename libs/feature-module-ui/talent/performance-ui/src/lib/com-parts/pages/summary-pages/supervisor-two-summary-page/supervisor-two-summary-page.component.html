@@ -1,0 +1,77 @@
+<div class="base" *ngIf="show">
+  <div class="top">
+    <h5>Summary Page: Supervisor II</h5>
+    <span>Supervisor summary page</span>
+  </div>
+  <div class="content">
+    <div class="content-l">
+      <div class="mx-3">
+        <div class="row mb-3">
+          <div class="col-12 mt-0">
+            <h5>Page Completion Status</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <ul>
+          <li *ngFor="let item of fs.reviewForms; let i = index">
+            <x365-fm-talent-summary-page-status-row [data]="item" [completed]="item?.status===1"></x365-fm-talent-summary-page-status-row>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="content-r">
+      <div class="mx-3 mt-5">
+        <div class="row mb-3">
+          <div class="col-4 score-label">
+            <label>Score:</label>
+          </div>
+          <div class="col-8 mt-0 text-right font-weight-bold score">
+            {{ getScore | stringDisplay}}
+          </div>
+        </div>
+
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="completeButtonClicked()">
+          <div class="md-form mt-5">
+            <div class="row mb-0">
+              <div class="col-12 mt-0">
+                <h5>One-on-one Session</h5>
+                <hr class="mt-1">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-12 mt-0">
+                <mdb-checkbox formControlName="oneOnOneCompleted" class="form-checked">Completed</mdb-checkbox>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-12 mt-0">
+                <textarea formControlName="oneOnOneComment"  type="text" class="md-textarea form-control" placeholder="One-on-one Comment" mdbInput></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="md-form mt-5">
+            <div class="row mb-3 mt-5">
+              <div class="col-12 mt-0">
+                <mdb-select formControlName="recommendation" [options]="fs?.recommendations" [filterEnabled]="true" placeholder="Recommendation" showClearButton=true></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-12 mt-0">
+                <textarea  formControlName="comment" type="text" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row mt-5 mb-3">
+          <div class="col-12 mt-0 text-right">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="completeButtonClicked()" [disabled]="isSelfReviewCompleted"><span *ngIf="completeProcessingStatus"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;Complete&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom"></div>
+</div>

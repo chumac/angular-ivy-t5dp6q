@@ -1,0 +1,47 @@
+$logo_width: 8.2em;
+
+.logo {
+  width: $logo_width;
+  height: 33px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  // border: 1px solid gray;
+
+  // background-image: url("/assets/images/client-logo.png");
+
+  // height: 33px;
+  // width: 100px;
+  // background-repeat: no-repeat;
+  // // background-position: 0px 6px;
+  // background-size: 100%;
+  // border: 1px solid gray;
+}
+
+.fa {
+  font-size: 1.2em;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+}
+
+.nav-main {
+  display: flex;
+  flex-direction: column;
+
+  .nav-t {
+    flex-grow: 1;
+  }
+
+  .nav-b {
+    flex-basis: 5px;
+    // background-color: rgb(255, 187, 0);
+  }
+}
+x365-shared-ui-report-notification {
+  margin: 0 1rem 0 1rem;
+}
+
+

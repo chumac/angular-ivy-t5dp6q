@@ -1,0 +1,64 @@
+<div class="card card-container container-fluid">
+
+  <div class="d-flex flex-column doc-container-t font-size">
+    <div class="doc-container-t-ct">
+      <div class="doc-container-t-ct-l">
+      </div>
+      <div class="doc-container-t-ct-r">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-6 md-form">
+          </div>
+          <div class="col-1"></div>
+          <div class="col-4 md-form">
+            <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)"
+            [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="doc-container-s">
+    <div class="row">
+      <div class="col-12 md-form mb-1">
+        <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1"
+          placeholder="Enter your search string i.e. Event Title, Pre-Requisites type, Course" class="form-control font-size">
+      </div>
+    </div>
+  </div>
+
+  <div class="card-content font-size">
+    <div class="card-content-bottom">
+      <igx-grid #grid [data]="PreRequisitesData$ | async" [paging]="true" [perPage]="15" [height]="null" [paginationTemplate]="" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+
+        <igx-column field="event_text" header="Event title" width="28%"></igx-column>
+        <igx-column field="pre_requisite_type_text" header="Type" width="29%"></igx-column>
+        <igx-column field="course_text" header="Course" width="28%"></igx-column>
+        <igx-column field="id" header="..." width="15%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon *ngIf='isReview' [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                    (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                    (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon *ngIf='isReview' [iconClass]="'fa fa-trash-o fa-icon'" title="Delete"
+                    (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>
+<x365-fm-talent-event-detail-pre-requisites-editor #editor [width]="35" [eventDetailId]="eventDetailId"
+  [show]="showEditor$ | async" [PreRequisitesDataType]="PreRequisitesDataType$ | async"
+  [courseData]="courseData$ | async" [data]="null" (cancelClick)="onCancelEditor()">
+</x365-fm-talent-event-detail-pre-requisites-editor>
+<x365-fm-talent-event-detail-pre-requisites-viewer #viewer [width]="35" [show]="showViewer$ | async" [data]="null">
+</x365-fm-talent-event-detail-pre-requisites-viewer>

@@ -1,0 +1,165 @@
+<div class="card card-container">
+  <div class="card-content font-size">
+    <div class="card-row">
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Corporate ID</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Expires</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.corporate_id_expires | dateDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">National ID</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.national_id_number | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Issue Date</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.national_id_issuedate | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Expires</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.national_id_expires | dateDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Passport Information</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.passport_no | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Authority</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.passport_authority | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Issue Date</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.passport_date_issued | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Expires</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.passport_expires | dateDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Local Driver's License</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.license_no | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Issue Date</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.license_issuedate | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Expires</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.license_expires | dateDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">International Driver's License</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.intl_license_no | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Issue Date</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.intl_license_issuedate | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Expires</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.intl_license_expires | dateDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Signature</span>
+        <div class="row mb-2">
+            <div class="col-4 row-label">
+              <label></label>
+            </div>
+            <div class="col-8 row-text mt-0 mb-2 font-weight-bold">
+              <x365-shared-ui-avatar [width]="'22em'" [height]="'22em'" [src]="signatureImage$ | async" [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="command-panel"><a title="Edit" (click)="showEditor()"><i class="fa fa-pencil-square-o"></i></a></div>
+</div>
+
+<x365-fm-workforce-hr-identification-editor [width]="28" [show]="showEditor$ | async" [data]="approvedData$ | async"
+[employeeId]="employeeId" [position]="positionData$ | async"  [payroll]="payGroup$ | async" [jobTitle]="jobTitle$ | async"
+[actingTitle]="actingJobTitle$ | async" [paymentMode]="paymentMode$ | async" [reportTo]="reportTo$ | async"  [backUpOfficer]="backUpOfficer$ | async"
+(cancelClick)="onCancelEditor()"></x365-fm-workforce-hr-identification-editor>
+<x365-fm-workforce-hr-identification-viewer [width]="28" [show]="showViewer$ | async" [data]="awaitingApprovalData$ | async"  (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-identification-viewer>

@@ -1,0 +1,206 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Leave Details'" [subTitle]="'Leave details'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.employee_name | stringDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.leave_type | stringDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.start_date | dateDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.end_date | dateDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Resumption Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.resumption_date | dateDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>No. of days:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.number_of_days }} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Return Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.actual_return_date | dateDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Reason:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.leave_reason | stringDisplay}} 
+          </div>
+        </div>
+
+        <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label>City:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.CityInfo | stringDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>State:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.StateInfo | stringDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.NationalityInfo | stringDisplay}} 
+          </div>
+        </div> -->
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Backup Officer:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.backup_officer  | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Supervisor:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.reports_to | stringDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Address:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.address | stringDisplay}} 
+          </div>
+        </div>
+
+        <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label>Address 2:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.address2 | stringDisplay}} 
+          </div>
+        </div> -->
+<!-- 
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Zip:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.zip | stringDisplay}} 
+          </div>
+        </div> -->
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Phone:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.telephone_no | stringDisplay}} 
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Emergency No.:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.emergency_no | stringDisplay}} 
+          </div>
+        </div>
+
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Is Paid:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.pay_allowance | booleanDisplay}} 
+          </div>
+        </div>
+
+        <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label>Currency:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.currency_id | stringDisplay}} 
+          </div>
+        </div> -->
+
+        <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label>Document:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.supporting_document | stringDisplay}} 
+          </div>
+        </div> -->
+
+        
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

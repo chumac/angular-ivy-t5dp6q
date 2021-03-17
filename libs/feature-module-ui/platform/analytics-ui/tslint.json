@@ -1,0 +1,17 @@
+{
+  "extends": "../../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "x365-fm-plf-analytics",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "x365-fm-plf-analytics",
+      "kebab-case"
+    ]
+  }
+}

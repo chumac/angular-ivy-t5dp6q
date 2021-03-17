@@ -1,0 +1,147 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Review Plan'" [subTitle]="'Add/Edit Review Plan'"
+        [loading]='inEditMode() && !data'>
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Review Group:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="reviewGroups$ | async" formControlName="salary_review_group_id" valueExpr="salary_review_id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="auto" class="form-font" [disabled]="true">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payroll_profile_id" [options]="payrollProfileList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="" [disabled]="true">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="effective_date" class="form-font"></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Allowance Reviews</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Allowances Affected:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="allowances_affected" [options]="allowanceAffectedList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Review Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="g_allow_review_rule" [options]="allowanceRuleList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Rule Value:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="rule_value_allowance" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Deduction Reviews</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Deduction Affected:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="deduction_affected" [options]="deductionAffectedList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Review Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="g_deduct_review_rule" [options]="deductionRuleList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Rule Value:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="rule_value_deduction" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Eligibility Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="eligibility_rule" [options]="eligibilityRuleList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

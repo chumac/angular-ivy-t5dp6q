@@ -1,0 +1,40 @@
+<div class="card card-container">
+    <div class="card-content font-size">
+        <!-- <div class="card-content-top mb-2">
+            <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+        </div> -->
+        <div class="card-content-bottom">
+            <igx-grid #dataGrid [data]="familyData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                <igx-column field="firstname" header="Firstname" width="12%"></igx-column>
+                <igx-column field="othernames" header="Othernames" width="14%"></igx-column>
+                <igx-column field="dobirth" header="Date of  Birth" width="15%">
+                    <ng-template igxCell let-val>
+                        <div>{{ val | dateDisplay }}</div>
+                    </ng-template>
+                </igx-column>
+                <igx-column field="gender" header="Gender" width="12%"></igx-column>
+                <igx-column field="country" header="Country" width="12%"></igx-column>
+                <igx-column field="state" header="State" width="12%"></igx-column>
+                <igx-column field="area" header="City" width="12%"></igx-column>
+                <igx-column field="family_id" header="..." class="text-center" width="10%">
+                    <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                            <div class="hover-menu">
+                                <span class="hover-ellipse-menu"></span>
+                                <div class="hover-icons">
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 3" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 3" [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </igx-column>
+            </igx-grid>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-hr-reboard-family-editor #editor [width]="34" [show]="showEditor$ | async" [data]="null" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-family-editor>
+<x365-fm-workforce-hr-reboard-family-viewer #viewer [width]="34" [show]="showViewer$ | async" [data]="null" [imageData]="imageData$ | async" [dataDoc]="documentData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-reboard-family-viewer>

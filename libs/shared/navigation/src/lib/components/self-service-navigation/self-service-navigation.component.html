@@ -1,0 +1,282 @@
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <mdb-accordion [multiple]="false" aria-multiselectable="false">
+            <mdb-accordion-item class="no-collase">
+                <mdb-accordion-item-head mdbWavesEffect routerLink="/d/analytics/dashboard" routerLinkActive="active">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" class="svg-inline--fa fa-home fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            <path fill="currentColor"
+              d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z">
+            </path>
+          </svg>
+                    <span>Home</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-alt" class="svg-inline--fa fa-user-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M256 288c79.5 0 144-64.5 144-144S335.5 0 256 0 112 64.5 112 144s64.5 144 144 144zm128 32h-55.1c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16H128C57.3 320 0 377.3 0 448v16c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48v-16c0-70.7-57.3-128-128-128z">
+            </path>
+          </svg>
+                    <span>Personal</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li *ngIf="((this.reboardMode$ | async) > 0)">
+                            <a routerLink="/d/workforce/employee-profiles/my-reboarding" routerLinkActive="active"><span>My
+                  Reboarding</span></a>
+                        </li>
+                        <li *ngIf="((this.reboardMode$ | async) === 0)">
+                            <a routerLink="/d/workforce/employee-profiles/my-data" routerLinkActive="active"><span>My Data</span></a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/workforce/employee-profiles/my-team" routerLinkActive="active"><span>My Team</span></a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="briefcase" class="svg-inline--fa fa-briefcase fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M320 336c0 8.84-7.16 16-16 16h-96c-8.84 0-16-7.16-16-16v-48H0v144c0 25.6 22.4 48 48 48h416c25.6 0 48-22.4 48-48V288H320v48zm144-208h-80V80c0-25.6-22.4-48-48-48H176c-25.6 0-48 22.4-48 48v48H48c-25.6 0-48 22.4-48 48v80h512v-80c0-25.6-22.4-48-48-48zm-144 0H192V96h128v32z">
+            </path>
+          </svg>
+                    <span>Worklife</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li>
+                            <a routerLink="/d/workforce/absence/leave/daily" routerLinkActive="active">Leave</a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/workforce/absence/leave/staggered" routerLinkActive="active">Staggered Leave</a>
+                        </li>
+                        <li [className]="
+                (enableHourlyLeave$ | async) === 'NO'
+                  ? 'mdb-accordion-border-botton'
+                  : ''
+              ">
+                            <a routerLink="/d/workforce/absence/leave/plan" routerLinkActive="active">Leave Plan</a>
+                        </li>
+                        <li *ngIf="(enableHourlyLeave$ | async) === 'YES'" class="mdb-accordion-border-botton">
+                            <a routerLink="/d/workforce/absence/leave/hourly" routerLinkActive="active">Leave (Hourly)</a>
+                        </li>
+                        <!-- <li class="mdb-accordion-border-botton">
+              <a routerLink="/d/workforce/benefits" routerLinkActive="active"
+                >Benefits</a
+              >
+            </li> -->
+                        <li class="mdb-accordion-border-botton">
+                            <a routerLink="/d/workforce/time/time-sheets" routerLinkActive="active">Time Sheet</a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/workforce/employee-profiles/team-deployment" routerLinkActive="active">Team
+                Deployments</a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="coins" class="svg-inline--fa fa-coins fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M0 405.3V448c0 35.3 86 64 192 64s192-28.7 192-64v-42.7C342.7 434.4 267.2 448 192 448S41.3 434.4 0 405.3zM320 128c106 0 192-28.7 192-64S426 0 320 0 128 28.7 128 64s86 64 192 64zM0 300.4V352c0 35.3 86 64 192 64s192-28.7 192-64v-51.6c-41.3 34-116.9 51.6-192 51.6S41.3 334.4 0 300.4zm416 11c57.3-11.1 96-31.7 96-55.4v-42.7c-23.2 16.4-57.3 27.6-96 34.5v63.6zM192 160C86 160 0 195.8 0 240s86 80 192 80 192-35.8 192-80-86-80-192-80zm219.3 56.3c60-10.8 100.7-32 100.7-56.3v-42.7c-35.5 25.1-96.5 38.6-160.7 41.8 29.5 14.3 51.2 33.5 60 57.2z">
+            </path>
+          </svg>
+                    <span>Compensation</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li>
+                            <a routerLink="/d/compensation/loans" routerLinkActive="active">Loans</a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 24 24">
+            <path
+              d="M 22 2 L 16.699219 2.8007812 L 18.242188 4.34375 L 15.177734 7.4082031 L 13.568359 5.9003906 L 9.4921875 10.078125 L 8.0078125 8.59375 L 3.3027344 13.203125 L 4.703125 14.630859 L 7.9921875 11.40625 L 9.5078125 12.921875 L 13.630859 8.6992188 L 15.222656 10.191406 L 19.65625 5.7578125 L 21.199219 7.3007812 L 22 2 z M 19 10 L 19 21 L 21 21 L 21 10 L 19 10 z M 15 12 L 15 21 L 17 21 L 17 12 L 15 12 z M 11 14 L 11 21 L 13 21 L 13 14 L 11 14 z M 7 16 L 7 21 L 9 21 L 9 16 L 7 16 z M 3 18 L 3 21 L 5 21 L 5 18 L 3 18 z">
+            </path>
+          </svg>
+                    <span>Performance</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li class="mdb-accordion-border-botton">
+                            <a routerLink="/d/talent/performance/dashboard" routerLinkActive="active">Dashboard</a>
+                        </li>
+                        <li *ngIf="(performanceAllowEmpObjectiveUpload$ | async) === 'YES'">
+                            <a routerLink="/d/talent/performance/load-objectives" routerLinkActive="active">Upload Objectives</a>
+                        </li>
+                        <li class="mdb-accordion-border-botton" *ngIf="(performanceAllowLmObjectiveUpload$ | async) === 'YES'">
+                            <a routerLink="/d/talent/performance/single-employee-load-objectives" routerLinkActive="active">Upload
+                Objectives (LM)</a>
+                        </li>
+                        <li class="mdb-accordion-border-botton">
+                            <a routerLink="/d/talent/performance/manage-objectives" routerLinkActive="active">My Objectives</a>
+                        </li>
+                        <li class="mdb-accordion-border-botton">
+                            <a routerLink="/d/talent/performance/lm-manage-objectives" routerLinkActive="active">Team Objectives</a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/talent/performance/manage-review" routerLinkActive="active">Review</a>
+                        </li>
+                        <li class="mdb-accordion-border-botton">
+                            <a routerLink="/d/talent/performance/team-review" routerLinkActive="active">Team Review</a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+            <!-- Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+            <path
+              d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z" />
+            </svg>
+                    <span>Learning</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li>
+                            <a routerLink="/d/talent/learning/learning-plan" routerLinkActive="active">Learning Plan</a>
+                            <a routerLink="/d/talent/learning/learning-library" routerLinkActive="active">Learning Library</a>
+                            <a routerLink="/d/talent/learning/my-action" routerLinkActive="active">My Action</a>
+                            <a routerLink="/d/talent/learning/manager-action" routerLinkActive="active">Line Manager Action</a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="columns" class="svg-inline--fa fa-columns fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64V160h160v256zm224 0H288V160h160v256z">
+            </path>
+          </svg>
+                    <span>Processes</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li>
+                            <a routerLink="/d/workforce/processes/self-process-transaction" routerLinkActive="active">My Processes
+              </a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/workforce/processes/team-process-transaction" routerLinkActive="active">Team Processes
+              </a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/workforce/processes/reviewer-process-transaction" routerLinkActive="active">Process
+                Contribution
+              </a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-out-alt" class="svg-inline--fa fa-sign-out-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+              d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z">
+            </path>
+          </svg>
+                    <span>Exiting</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul>
+                        <li>
+                            <a routerLinkActive="active" [routerLink]="(isExitProcessInitiated$ | async) ? '/d/workforce/exit/process-steps' : '/d/workforce/exit/my-resignation'">Process
+                Exit</a>
+                        </li>
+                        <li>
+                            <a routerLink="/d/workforce/exit/my-response-queue" routerLinkActive="active">
+                                <div class="queue-container">
+                                    <span>My Response Queue</span>
+                                    <span *ngIf="(responseQueueNotifications$ | async) !== null && (responseQueueNotifications$ | async) >= 0" class="pulse">{{ responseQueueNotifications$ | async }}</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="mdb-accordion-border-botton">
+                            <a routerLink="/d/workforce/exit/proxy-resignation" routerLinkActive="active">Proxy Resignation (LM)</a>
+                        </li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item class="no-collase">
+                <mdb-accordion-item-head mdbWavesEffect routerLink="/d/approvals" routerLinkActive="active">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check-square" class="svg-inline--fa fa-check-square fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="currentColor"
+              d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z">
+            </path>
+          </svg>
+                    <span>Approvals</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item class="no-collase">
+                <mdb-accordion-item-head mdbWavesEffect routerLink="/d/reports" routerLinkActive="active">
+                    <!-- <svg><use xlink:href="/assets/images/sprite.svg#chart" /></svg> -->
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-pie" class="svg-inline--fa fa-chart-pie fa-w-17" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544 512">
+  <path fill="currentColor"
+    d="M527.79 288H290.5l158.03 158.03c6.04 6.04 15.98 6.53 22.19.68 38.7-36.46 65.32-85.61 73.13-140.86 1.34-9.46-6.51-17.85-16.06-17.85zm-15.83-64.8C503.72 103.74 408.26 8.28 288.8.04 279.68-.59 272 7.1 272 16.24V240h223.77c9.14 0 16.82-7.68 16.19-16.8zM224 288V50.71c0-9.55-8.39-17.4-17.84-16.06C86.99 51.49-4.1 155.6.14 280.37 4.5 408.51 114.83 513.59 243.03 511.98c50.4-.63 96.97-16.87 135.26-44.03 7.9-5.6 8.42-17.23 1.57-24.08L224 288z">
+  </path>
+</svg>
+                    <span>Reports</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item class="no-collase">
+                <mdb-accordion-item-head mdbWavesEffect routerLink="/d/workforce/employee-profiles/people" routerLinkActive="active">
+                    <!-- <svg><use xlink:href="/assets/images/sprite.svg#team" /></svg> -->
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-friends" class="svg-inline--fa fa-user-friends fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+            <path fill="currentColor"
+              d="M192 256c61.9 0 112-50.1 112-112S253.9 32 192 32 80 82.1 80 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C51.6 288 0 339.6 0 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zM480 256c53 0 96-43 96-96s-43-96-96-96-96 43-96 96 43 96 96 96zm48 32h-3.8c-13.9 4.8-28.6 8-44.2 8s-30.3-3.2-44.2-8H432c-20.4 0-39.2 5.9-55.7 15.4 24.4 26.3 39.7 61.2 39.7 99.8v38.4c0 2.2-.5 4.3-.6 6.4H592c26.5 0 48-21.5 48-48 0-61.9-50.1-112-112-112z">
+            </path>
+          </svg>
+                    <span>People</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item class="no-collase">
+                <mdb-accordion-item-head mdbWavesEffect routerLink="/d/documents" routerLinkActive="active">
+                    <!-- <svg><use xlink:href="/assets/images/sprite.svg#document" /></svg> -->
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-alt" class="svg-inline--fa fa-file-alt fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+  <path fill="currentColor"
+    d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z">
+  </path>
+</svg>
+                    <span>Documents</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <!-- <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Exclusion Transaction</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payroll/admin/transaction/exclusion-transaction" routerLinkActive="active">Transaction</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item> -->
+        </mdb-accordion>
+    </ul>
+</li>

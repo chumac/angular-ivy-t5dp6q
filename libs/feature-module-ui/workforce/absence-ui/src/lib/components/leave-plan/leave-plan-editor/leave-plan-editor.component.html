@@ -1,0 +1,247 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Leave Plan'" [subTitle]="'create a leave plan'" [loading]='inEditMode() && !data || !(leavePlanIdentity$ | async)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form *ngIf="(leavePlanIdentity$ | async)" class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div formGroupName="EssHrLeavePlansMaster">
+                <input formControlName="leave_plan_id" [value]="+control.value" type="hidden">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup #entitlementLookup formControlName="leave_id" [dataSource]="leaveTypes" valueExpr="leave_id" displayExpr='description' (onValueChanged)="loadLeaveEntitlement($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                        class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Entitlement:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input #entitlementControl type="text" readonly="true" [value]="(leaveEntitlement$ | async)?.summaryCaption" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Reason:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="4" formControlName="leave_reason" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Address Line I:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="address1" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Address Line II:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="address2" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Country:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="country_id" [options]="countries$ | async" [filterEnabled]="true" (selected)="onCountrySelected($event)" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">State:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="state_id" [options]="stateList$ | async" [filterEnabled]="true" (selected)="onStateSelected($event)" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">City:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="city_id" [options]="cityList$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="sub-heading row mt-4 mb-1">
+                    <div class="col-12 md-form mt-2">
+                        <h5>Contact Information</h5>
+                        <hr class="mt-1">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Phone:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="telephone_no" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label" title="Emergency Phone">Emergency Phone:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="emergency_no" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Zip:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="zip" type="text" class="form-control form-font">
+                    </div>
+                </div>
+            </div>
+            <div formArrayName="EssHrLeaveplanDetails">
+                <div class="sub-heading row">
+                    <div class="col-12 mt-2">
+                        <h5>Details</h5>
+                        <hr class="mt-1 leave-detail-hr">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 md-form mt-0">
+                        <input #control [value]="(leavePlanIdentity$ | async)" type="hidden" />
+                        <span class="pull-left">No. of Days Left: {{ (this.leaveEntitlement$ | async)?.available_days - totalDaysSelected }}</span>
+                        <button mdbBtn type="button" class="add-detail-btn pull-right" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="showSubForm()">&nbsp;&nbsp;Add Row</button>
+                    </div>
+                </div>
+
+
+                <!-- Details -->
+                <div class="row mb-1">
+                    <div class="col-md-12 mb-3" *ngFor="let item of leaveDetailsList; let pointIndex=index">
+                        <div class="card rounded" @fade>
+                            <div class="card-image">
+                                <span class="card-close" (click)="onDeleteDetailRow(pointIndex)"><i class="fa fa-times"></i></span>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="card-text"><strong> Start Date:&nbsp;&nbsp;&nbsp;</strong>{{ item.start_date | dateDisplay }} </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="card-text"><strong> No. of days:&nbsp;&nbsp;&nbsp;</strong>{{ item.no_of_days }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div *ngIf="entitlementLookup?.selectedItem?.supports_allowance_payment">
+                                            <p class="card-text"><strong>Pay Me:&nbsp;&nbsp;&nbsp;</strong>{{ item.pay_allowance | booleanDisplay }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div *ngIf="item.currency_id">
+                                            <div class="card-text">
+                                                <strong> Currency:&nbsp;&nbsp;&nbsp;</strong>
+                                                <div class="dxl-label" id="dxlookup-label">
+                                                    <dx-lookup [dataSource]="currencyList$ | async" [value]="item.currency_id" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true disabled="true" placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                                                        class="form-font text-left"></dx-lookup>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="card-text"><strong>End Date:&nbsp;&nbsp;&nbsp;</strong>{{ item.end_date | dateDisplay }} </p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="card-text"><strong>Resume Date:&nbsp;&nbsp;&nbsp;</strong>{{ item.resumption_date | dateDisplay }} </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card-text">
+                                            <strong>Backup Officer:&nbsp;&nbsp;&nbsp;</strong>
+                                            <div class="dxl-label" id="dxlookup-label">
+                                                <dx-lookup [dataSource]="activePersonnel" [value]="item.assigned_backup_id" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true disabled="true" placeholder="Backup Officer" closeOnOutsideClick=false
+                                                    popupHeight="400px" class="form-font text-left"></dx-lookup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Details -->
+
+                <form #scrollMe class="row mb-1 detail-form-layout" *ngIf="rowFormFlag" [formGroup]="fs.rowForm" @fade>
+                    <div class="col-12 detail-form">
+                        <div class="detail-body">
+                            <input formControlName="leave_plan_id" #control [value]="(leavePlanIdentity$ | async)" type="hidden" />
+                            <div class="row mb-1">
+                                <div class="col-4">
+                                    <label class="required center-label">Start Date:</label>
+                                </div>
+                                <div class="col-8 md-form mt-0">
+                                    <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="start_date" placeholder="" class="form-font"></dx-date-box>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-4">
+                                    <label class="required center-label">No. of Days:</label>
+                                </div>
+                                <div class="col-8 md-form mt-0">
+                                    <input formControlName="no_of_days" placeholder="" type="number" class="form-control form-font">
+                                </div>
+                            </div>
+                            <div  *ngIf="entitlementLookup?.selectedItem?.supports_allowance_payment">
+                                <div class="row mb-1 pay-mt">
+                                    <div class="col-4">
+                                        <label class="required">Pay Me:</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="switch">
+                                            <label>
+                                            No
+                                            <input #allowPay formControlName="pay_allowance" value="false" type="checkbox">
+                                            <span class="lever"></span>
+                                            Yes
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-1" *ngIf="fs?.rowForm?.get('pay_allowance')?.value">
+                                    <div class="col-4">
+                                        <label class="required center-label">Currency:</label>
+                                    </div>
+                                    <div class="col-8 md-form mt-0">
+                                        <mdb-select formControlName="currency_id" [options]="currencyList$ | async" class="form-font"></mdb-select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <div class="col-4">
+                                    <label class="required center-label">Backup Officer:</label>
+                                </div>
+                                <div class="col-8 md-form mt-0">
+                                    <dx-lookup formControlName="assigned_backup_id" [dataSource]="activePersonnel" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="350px" class="form-font"></dx-lookup>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="hr-line">
+                        <div class="detail-footer">
+                            <button mdbBtn type="button" class="add-detail-btn-xm pull-right" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="removeSubForm()">&nbsp;&nbsp;Cancel</button>
+                            <button mdbBtn type="button" class="add-detail-btn-xm pull-right" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="addToCollection(+control.value, fs.rowForm.value)">&nbsp;&nbsp;Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

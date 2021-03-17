@@ -1,0 +1,342 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Identification'" [subTitle]="'This is identification information about staff'" [loading]='isLoading$ | async'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Employment Info</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Employment Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="employment_date" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Proposed Confirmation Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd"
+                  formControlName="p_confirm_date" [placeholder]=""></dx-date-box>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Actual Confirmation Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="a_confirm_date" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label" title="">Position:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="position_id" [dataSource]="positionData$ | async" valueExpr="value"
+                  displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+                  closeOnOutsideClick=false class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label" title="">Reports To:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="reports_to" [dataSource]="reportTos$ | async" valueExpr="value"
+                  displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+                 class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label" title="">Backup Officer:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="backup_officer_id" [dataSource]="backupOfficers$ | async" valueExpr="value"
+                  displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+                 class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label" title="">Job Title:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="title_id" [dataSource]="jobTitles$ | async" valueExpr="value"
+                  displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+                 class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label" title="">Acting Title:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="acting_title_id" [dataSource]="actingJobTitles$ | async" valueExpr="value"
+                  displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+                 class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Is Staff Permanent?</label>
+              </div>
+              <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+                No <label class="switch">
+                  <input formControlName="is_permanentstaff" type="checkbox" (change)=isPermanentStaff($event)>
+                  <span class="slider round"></span>
+                </label> Yes
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Start Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="emp_duration_from"
+                  [placeholder]=""></dx-date-box>
+              </div>
+            </div>
+            <div class="row mb-1" *ngIf=!(fs.permanentStaff)>
+              <div class="col-4">
+                <label class="required center-label">End Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="emp_duration_to" [placeholder]=""></dx-date-box>
+              </div>
+            </div>
+
+            <div class="sub-heading row mt-4 mb-1">
+              <div class="col-12 md-form mt-2">
+                <h5>Payroll Information</h5>
+                <hr class="mt-1">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Grade:</label>
+              </div>
+              <div class="col-8 md-form mt-0" #lookupContainer>
+                <dx-lookup formControlName="grade_id" [dataSource]="paygradeData$ | async" valueExpr="value" displayExpr='label'
+                  searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="auto"
+                  class="form-font" (onItemClick)="onPaygradeSelected($event)">
+                </dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Is User on Payroll?</label>
+              </div>
+              <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+                No <label class="switch">
+                  <input [(ngModel)]="onPayroll" formControlName="on_payroll" type="checkbox" (change)=isUserOnPayroll($event)>
+                  <span class="slider round"></span>
+                </label> Yes
+              </div>
+            </div>
+            <div class="row mb-1" *ngIf="onPayroll">
+              <div class="col-4">
+                <label class="required center-label">Payment Group:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="paygroup_id" [dataSource]="paygroupsData$ | async" valueExpr="value" displayExpr='label'
+                  searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="auto"
+                  class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1" *ngIf="onPayroll">
+              <div class="col-4">
+                <label class="required center-label">Payment Mode:</label>
+              </div>
+              <div class="col-8 md-form mt-0" #lookupContainer>
+                <dx-lookup formControlName="payment_mode" [dataSource]="paymentModes$ | async" valueExpr="value" displayExpr='label' showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="auto"
+                  class="form-font">
+                </dx-lookup>
+              </div>
+            </div>
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Corporate ID</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [disableControl]="fs?.empDurationTo.value" [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="corporate_id_expires" [placeholder]=""></dx-date-box>
+                    <!-- <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="corporate_id_expires" [placeholder]=""></dx-date-box> -->
+                </div>
+            </div>
+
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>National ID</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="national_id_number" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="national_id_issuedate" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="national_id_expires" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Passport Information</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="passport_no" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Authority:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="passport_authority" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="passport_date_issued" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="passport_expires" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Local Driver's License</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label ">Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="license_no" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label ">Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="license_issuedate" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label ">Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="license_expires" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>International Driver's License</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label ">Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="intl_license_no" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label ">Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="intl_license_issuedate" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label ">Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="intl_license_expires" [placeholder]=""></dx-date-box>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" #imagePicker [caption]="'Select Image'" [captionSubText]="'Select an image from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Signature Image'" [cropperHeaderMessage]="'Upload Image'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

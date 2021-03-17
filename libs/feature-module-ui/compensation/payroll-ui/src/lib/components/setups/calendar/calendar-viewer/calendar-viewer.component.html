@@ -1,0 +1,109 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Deduction'" [subTitle]="'Details of fixed allowance'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+        <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.paygroup_code | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Short Name:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.shortname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Grade:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.gradeInfo?.description | stringDisplay }}
+          </div>
+        </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Currency:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.currencyInfo?.currency_name | stringDisplay }}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Rank:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.rank | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Annual Gross:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.annual_gross | number | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Tax Percent:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.taxpercentongross | number | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Annula Gross (Calculated):</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.taxpercentongross_calculated | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Fixed Relief:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.fixed_relief | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Fixed Total Taxable:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.fixed_total_taxable | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Fixed Total Annual Tax:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.fixed_total_annual_tax | stringDisplay}}
+            </div>
+          </div> -->
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

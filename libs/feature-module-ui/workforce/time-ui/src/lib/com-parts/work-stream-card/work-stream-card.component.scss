@@ -1,0 +1,117 @@
+@import 'colors';
+
+:host {
+  display: block;
+  width: 100%;
+  background-color: rgb(252, 252, 252);
+  margin-bottom: 8px;
+  border: 1px solid rgb(221, 221, 221);
+}
+
+.card-base {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-base-content {
+  display: block;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  flex-grow: 1;
+  padding: 13px 8px 8px 8px;
+  /* overflow-y: auto;
+  overflow-x: hidden; */
+
+  .pwidth {
+    width: 200px;
+  }
+
+  .title {
+    display: block;
+    color: rgb(102, 102, 102);
+    font-size: 9px;
+    font-weight: bold;
+  }
+
+  .field-text {
+    color: rgb(182, 182, 182);
+    font-size: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+.card-base-footer {
+  flex: 0 0 2.7em;
+  background-color: rgb(250, 250, 250);
+  border-radius: 0 0 3px 3px;
+  padding: 10px 8px 0 0;
+
+  i.fa {
+    font-size: 15px;
+  }
+
+  a {
+    color: rgb(97, 97, 97);
+  }
+
+  a:hover {
+    color: $app_brand_color;
+  }
+}
+
+.overflow-wrap {
+  content: '';
+}
+
+.details-text {
+  height: 10rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* width */
+.details-text::-webkit-scrollbar {
+  opacity: 0.5;
+  width: 3px;
+  border-radius: 5px;
+}
+
+/* Track */
+.details-text::-webkit-scrollbar-track {
+  opacity: 0.5;
+  border-radius: 5px;
+  width: 3px;
+}
+
+.badge-default, .badge-danger, .badge-success {
+  float: left;
+  margin-left: 10px;
+}
+
+.show-less {
+  font-size: 16px;
+  line-height: 16px;
+  height: 32px;
+  overflow: hidden;
+}
+
+.show {
+  overflow: visible;
+  height: auto;
+}
+
+.show-btn {
+  float: right;
+  font-size: 0.6rem;
+  color:  #73a0ff!important;
+  font-weight: 600;
+}
+
+.show-btn:hover {
+  font-size: 0.6rem;
+}
+.pill {
+  font-size: 0.56rem;
+}

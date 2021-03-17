@@ -1,0 +1,67 @@
+.business-people-section {
+  border: 1px solid #d4d4d4;
+  padding: 20px 30px;
+}
+
+.business-people-sectionbox {
+  display: flex;
+  align-items: flex-start;
+}
+
+.business-people-left {
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.business-people-right {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.usersicon-section {
+  margin-right: 15px;
+}
+
+.usersicon-section i {
+  font-size: 30px;
+}
+
+.business-people-left h6 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 5px
+}
+
+.business-people-left span {
+  font-size: 12px !important;
+  font-weight: 700;
+  width: 100%;
+  display: inline-block;
+  line-height: 18px;
+}
+
+.business-people-right a {
+  padding: 0.5rem 1.6rem;
+  font-size: 0.64rem;
+  background-color: #ffbb33 !important;
+  color: #fff;
+  border-radius: 50px;
+}
+
+@media(max-width:576px) {
+  .business-people-sectionbox {
+    flex-wrap: wrap;
+  }
+
+  .business-people-left {
+    width: 100%;
+  }
+
+  .business-people-right {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 15px;
+  }
+}

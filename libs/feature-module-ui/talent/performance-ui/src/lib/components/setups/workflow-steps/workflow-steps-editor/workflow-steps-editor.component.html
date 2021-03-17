@@ -1,0 +1,48 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Workflow Step'" [subTitle]="'Creates new workflow step'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Workflow:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="workflow_id" [options]="workflowDefinitionList$ | async" disabled="true" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Step:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="step" type="number" class="form-control form-font">
+                        <!-- <mdb-select formControlName="step" [options]="stepOpts" [filterEnabled]="true" class="form-font"></mdb-select> -->
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Role:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="role" [options]="roleOpts" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">System Rule:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="sys_rule" type="text" class="form-control form-font">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

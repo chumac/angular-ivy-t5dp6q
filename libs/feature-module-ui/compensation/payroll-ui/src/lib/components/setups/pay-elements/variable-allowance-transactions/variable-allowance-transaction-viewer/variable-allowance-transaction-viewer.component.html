@@ -1,0 +1,94 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Deduction'" [subTitle]="'Details of fixed allowance'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.transaction_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Employee:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.employeeName | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Variable Allowance:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.variableAllowance | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Value:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.value | stringDisplay}}
+          </div>
+        </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Number of Units:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.no_of_units | stringDisplay }}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Pay Period:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.pay_in_period | dateDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Recalculate:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{(data?.recalculate ? 'YES' : 'NO') | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Overridden:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{(data?.overriden ? 'YES' : 'NO') | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Is Timesheet:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{(data?.is_timesheet ? 'YES' : 'NO') | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Is Gateway:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.is_gateway ? 'YES' : 'NO' | stringDisplay}}
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

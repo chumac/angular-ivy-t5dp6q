@@ -1,0 +1,119 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Vacation History'" [subTitle]="'Details of Employee Vacation History'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Leave Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.leave_type | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Transaction Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.transaction_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.start_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.end_date | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Resumption Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.resumption_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Number of Days:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.number_of_days | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Has Returned:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.has_returned | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Address:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.address | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Telephone:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.telephone_no | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Emergency:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.emergency_no | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Reports To:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.pay_allowance | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Return Reason:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.return_reason | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Leave Reason:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.leave_reason | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

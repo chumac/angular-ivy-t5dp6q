@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+.card {
+    background: #FFFFFF;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: unset;
+    font-family: "Lato";
+    flex: 1 1 auto;
+    .card-body {
+        padding: 1.25rem 0.8rem;
+    }
+}
+
+.icon-holder {
+    height: 2.5rem;
+    width: 2.5rem;
+    // background: red;
+    border-radius: 50%;
+}
+
+p {
+    font-size: 0.85rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1;
+    padding-top: 6px;
+}
+
+small {
+    font-size: 0.65rem;
+}
+
+.fa-2x {
+    font-size: 1.5em!important;
+}
+
+i {
+    color: white;
+}
+
+// .x-yellow {
+//   small {
+//       color: #ff9014;
+//   }
+//   i {
+//       color: white;
+//   }
+//   .icon-holder {
+//       background-color: #ff9014;
+//   }
+// }
+// .x-red {
+//   small {
+//       color: #a10f0f;
+//   }
+//   i {
+//       color: white;
+//   }
+//   .icon-holder {
+//       background-color: #a10f0f;
+//   }
+// }
+// .x-blue {
+//   small {
+//       color: #3385ff;
+//   }
+//   i {
+//       color: white;
+//   }
+//   .icon-holder {
+//       background-color: #3385ff;
+//   }
+// }
+// .x-green {
+//   small {
+//       color: #047e33;
+//   }
+//   i {
+//       color: white;
+//   }
+//   .icon-holder {
+//       background-color: #047e33;
+//   }
+// }
+// .x-purple {
+//   small {
+//       color: #7f229b;
+//   }
+//   i {
+//       color: white;
+//   }
+//   .icon-holder {
+//       background-color: #7f229b;
+//   }
+// }

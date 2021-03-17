@@ -1,0 +1,125 @@
+
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="back-navigation">
+          <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+        </div>
+    <div class="d-flex align-items-center justify-content-end middle">
+      <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+    </div>
+  </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+          </div>
+
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+              <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-5"></div>
+                <div class="col-7 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1" placeholder="Enter your search string i.e. Employee, Current Grade, Current Paygroup, New Grade, New Paygroup, Effective Date" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a" *ngIf="!switch.value">
+            <div class="row">
+              <div class="col-12">
+                <div class="grid-table-container">
+                  <igx-grid #approveDataGrid [data]="approvedSubmittedData$ | async"
+                  [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+                  <igx-column field="employee_name" header="Employee" width="27%">
+                  </igx-column>
+                  <igx-column field="current_grade" header="Current Grade" width="13%">
+                  </igx-column>
+                  <igx-column field="current_paygroup" header="Current Paygroup" width="13%">
+                  </igx-column>
+                  <igx-column field="new_grade" header="New Grade" width="12%">
+                  </igx-column>
+                  <igx-column field="new_paygroup" header="New Paygroup" width="12%">
+                  </igx-column>
+                  <igx-column field="effective_date" header="Effective Date" width="12%">
+                    <ng-template igxCell let-val>
+                      <div class="right-align-text1">{{ val | dateDisplay }}</div>
+                    </ng-template>
+                  </igx-column>
+                  <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="8%">
+                    <ng-template igxCell let-val>
+                      <div class="hover-menu-container"><span class="text-center"></span>
+                        <div class="hover-menu">
+                          <div class="hover-icons">
+                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewApprovedIconClicked(val)"></x365-shared-ui-hover-icon>
+                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)=" onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </igx-column>
+                  </igx-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-b" *ngIf="switch.value">
+            <div class="grid-table-container">
+              <igx-grid #awaitingApprovalDataGrid [data]="awaitingApprovalSubmittedData$ | async"
+              [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+              <igx-column field="employee_name" header="Employee" width="25%">
+              </igx-column>
+              <igx-column field="current_grade" header="Current Grade" width="13%">
+              </igx-column>
+              <igx-column field="current_paygroup" header="Current Paygroup" width="13%">
+              </igx-column>
+              <igx-column field="new_grade" header="New Grade" width="12%">
+              </igx-column>
+              <igx-column field="new_paygroup" header="New Paygroup" width="12%">
+              </igx-column>
+              <igx-column field="effective_date" header="Effective Date" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text1">{{ val | dateDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="10%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewAwaitingIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Remove" (click)="onRemoveIconClicked(val)"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+              </igx-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <x365-fm-workforce-promotions-promotion-editor #promotionEditor [width]="32" [show]="showEditor$ | async" [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelPromotionEditor()" [paygroupSelectOption]="paygroupSelectOption$ | async" [paygradeSelectOption]="paygradeSelectOption$ | async" [arrearsStatusSelectOption]="arrearsStatusSelectOption$ | async" [actionSelectOption]="actionSelectOption$ | async" [currentPaygradeSelectOption]="paygradeSelectOption$ | async" [currentPaygroupSelectOption]="currentPaygroupSelectOption$ | async"></x365-fm-workforce-promotions-promotion-editor>
+  <x365-fm-workforce-promotion-viewer #viewer [width]="30" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()" [isPending]="false"></x365-fm-workforce-promotion-viewer>

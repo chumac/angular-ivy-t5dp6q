@@ -1,0 +1,27 @@
+<mdb-card>
+  <mdb-card-body>
+    <mdb-card-title class="bg-default">
+      <p>Please Select the employee you want to redirect to</p>
+    </mdb-card-title>
+
+   <div class="container mx-auto">
+    <div class="row d-flex justify-content-between mt-3">
+      <div class="col-sm-12 col-md-4">
+        <label class="required center-label">Employee:</label>
+      </div>
+      <div class="col-sm-12 col-md-8 md-form mt-0">
+        <dx-lookup [(ngModel)]="logonName" [dataSource]="activePersonnelDataSource" valueExpr="logon_name" displayExpr='emp_fullname'
+          searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+          class="form-font"></dx-lookup>
+      </div>
+    </div>
+   </div>
+    <div class="d-flex justify-content-end align-items-center">
+      <button mdbBtn type="button" color="warning" outline="true" [rounded]="true" size="sm" mdbWavesEffect (click)="onCancelClicked()"
+        [disabled]="false">Cancel</button>
+      <button mdbBtn type="button" color="warning" [rounded]="true" size="sm" mdbWavesEffect
+        (click)="onSubmit()" [disabled]="!logonName"><span *ngIf="isProcessing$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span><span
+          *ngIf="!(isProcessing$ | async)"><i class="fa fa-file-text-o"></i></span>&nbsp;&nbsp;Redirect</button>
+    </div>
+  </mdb-card-body>
+</mdb-card>

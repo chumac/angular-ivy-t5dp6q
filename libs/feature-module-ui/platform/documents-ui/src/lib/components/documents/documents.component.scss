@@ -1,0 +1,133 @@
+@import 'my-personal-data-grid';
+.doc-container-t {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 7.7em;
+    background-color: rgb(251, 251, 251);
+    padding-left: 5px;
+    .doc-container-t-sp {
+        flex-basis: 2em;
+    }
+    .doc-container-t-ct {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        padding-top: 1.4em;
+        .doc-container-t-ct-l {
+            flex-basis: 23%;
+            padding-top: 1.5em;
+        }
+        .doc-container-t-ct-r {
+            flex-basis: 77%;
+            padding-right: 5px;
+        }
+    }
+}
+
+.doc-container-b {
+    flex-grow: 1;
+    padding-top: 0;
+    .tab-a {
+        flex-grow: 1;
+        background: #fbfbfb;
+    }
+    .tab-b {
+        flex-grow: 1;
+    }
+}
+
+.md-form input[type='text'] {
+    font-size: 0.83rem;
+}
+
+.doc-title:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+a {
+    color: #0366d6;
+}
+
+.pd {
+    padding: 0 2rem;
+}
+
+.fpd {
+    padding: 2rem;
+}
+
+.folder {
+    cursor: pointer;
+    .icon {
+        width: 6rem;
+        height: 6rem;
+        color: #e7a61a;
+        text-shadow: 3px 4px #212529;
+        &:hover {
+            color: #e7a61a; 
+            text-shadow: 5px 6px #212529;
+        }
+    }
+    .count {
+        top: 35px;
+        left: 55px;
+        position: relative;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        padding: 8px;
+        background: #fff;
+        border: 2px solid #e7a61a;
+        color: #e7a61a;
+        text-align: center;
+        font: 15px Arial, sans-serif;
+    }
+    p {
+        font-size: 0.7rem;
+        word-wrap: break-word;
+        font-weight: 600;
+        border: #e7a61a 2px solid;
+        padding: 3px;
+        color: #e7a61a;
+        border-radius: 4px;
+    }
+}
+
+.file {
+    cursor: pointer;
+    .icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        color: #e7a61a;
+        text-shadow: 3px 4px #212529;
+        &:hover {
+            color: #e7a61a; 
+            text-shadow: 5px 6px #212529;
+        }
+    }
+    p {
+        font-size: 0.7rem;
+        word-wrap: break-word;
+        font-weight: 600;
+        border: #e7a61a 2px solid;
+        padding: 3px;
+        color: #e7a61a;
+        border-radius: 4px;
+    }
+    
+}
+
+.back-icon {
+    cursor: pointer;
+    text-shadow: 3px 4px #212529;
+    color: dimgrey;
+}
+
+.mw {
+    max-width: 100%;
+}
+
+.empty-msg {
+    margin: auto;
+}

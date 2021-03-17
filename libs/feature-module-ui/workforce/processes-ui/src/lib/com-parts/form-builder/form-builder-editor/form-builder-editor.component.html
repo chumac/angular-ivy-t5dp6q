@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="builder-container">
+        <div class="b-header">
+          <h5>Edit Controls</h5>
+          <small class="text-muted">Edit form control properties.</small>
+        </div>
+        <div class="b-content">
+          <form [formGroup]="form">
+            <div class="form-controls-container">
+              <input type="hidden" formControlName="widget_id">
+              <input type="hidden" formControlName="widget">
+              <input type="hidden" formControlName="type">
+              <input type="hidden" formControlName="hasOptions">
+  
+              <input type="hidden" formControlName="optionsType" [value]="data.optionsType">
+              <input type="hidden" formControlName="optionsData" [value]="data.optionsData">
+              <input type="hidden" formControlName="optionsDataSetId" [value]="data.optionsDataSetId">
+  
+              <mat-form-field><mat-label>Field Name</mat-label><input required matInput formControlName="field_name"></mat-form-field>
+              <mat-form-field><mat-label>Label</mat-label><input required matInput formControlName="label"></mat-form-field>
+              <mat-form-field><mat-label> Value</mat-label><input matInput formControlName="value"></mat-form-field>
+              <mat-form-field>
+                <mat-select formControlName="validationType" placeholder="Required">
+                  <mat-option [value]="({ required: true }) | json">Yes</mat-option>
+                  <mat-option [value]="({ required: false }) | json ">No</mat-option>
+                </mat-select>
+              </mat-form-field>
+  
+              <!-- Creates additional fields for regex text box-->
+              <mat-form-field *ngIf="data.type === 'regex'"><mat-label> Regex </mat-label><input matInput formControlName="extra"></mat-form-field>
+  
+              <!-- Creates additional fields for drop downs-->
+              <div *ngIf="data.hasOptions" class="options-style">
+  
+                <!-- Simple Drop Down -->
+                <div class="option-type" *ngIf="data.optionsType === selectOptionTypes.default">
+                  <div class="fb-table-container">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Label</th>
+                          <th>Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let options of data.optionsData let i = index">
+                          <td>{{ options.label }}</td>
+                          <td>{{ options.value }}</td>
+                          <td><a><i class="fa fa-close" (click)="data.optionsData.splice(i, 1)"></i></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="opt-container">
+                    <input #optLabel class="opt-control" placeholder="Enter Label">
+                    <input #optValue class="opt-control" placeholder="Enter Value">
+                  </div>
+                  <div class="opt-control-btn">
+                    <a class="btn-sm"
+                      (click)="data.optionsData.push({label: optLabel.value, value: optValue.value})">Add</a>
+                  </div>
+                </div>
+                <!-- / End Simple Drop Down -->
+  
+                <!-- Dataset Drop Down -->
+                <div class="option-type" *ngIf="data.optionsType === selectOptionTypes.data_set">
+                  <mat-form-field>
+                    <mat-select formControlName="optionsDataSetId" placeholder="Data set">
+                      <mat-option *ngFor="let types of dataSetTypes$ | async" [value]="types.id">{{ types.description}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- / End Dataset Drop Down -->
+  
+                <!-- Dictionary Drop Down -->
+                <div class="option-type" *ngIf="data.optionsType === selectOptionTypes.dictionary">
+                  <div class="fb-table-container">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Label</th>
+                          <th>Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let options of data.optionsData let i = index">
+                          <td>{{ options.label }}</td>
+                          <td>{{ options.value }}</td>
+                          <td><a><i class="fa fa-close" (click)="data.optionsData.splice(i, 1)"></i></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <mat-form-field>
+                    <textarea #dict rows="4" matInput></textarea>
+                  </mat-form-field>
+                  <div class="opt-control-btn">
+                    <a class="btn-sm"
+                      (click)="data.optionsData = parseToJson(dict.value); dict.value = null;">Process</a>
+                  </div>
+                </div>
+                <!-- / End Dictionary Drop Down -->
+  
+                <!-- Cascading Drop Down -->
+                <div class="option-type" *ngIf="data.optionsType === selectOptionTypes.cascade">
+                  <mat-form-field>
+                    <mat-select formControlName="optionsDataSetId" placeholder="Data set">
+                      <mat-option *ngFor="let types of dataSetTypes$ | async" [value]="types.id">{{ types.description}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-label> Child Field</mat-label>
+                    <input #cascChild matInput [value]="data.extra.field_name">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <mat-select #childDataSet [value]="data.extra.optionDataSetId" placeholder="Child Data set">
+                      <mat-option *ngFor="let types of cascadeDataSetTypes$ | async" [value]="types.id">{{ types.description}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <!-- / End Cascading Drop Down -->
+              </div>
+            </div>
+            <mat-action-row><button (click)="submit(form)" mdbBtn type="button" color="warning" rounded="true" size="sm"
+                mdbWavesEffect>Save</button></mat-action-row>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

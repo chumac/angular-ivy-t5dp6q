@@ -1,0 +1,71 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="pageTitle || 'Ratings page viewer'" [subTitle]="'View asset definition'" [loading]='!data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <div class="mx-3">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Title:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.title | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Allow self rating:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.allow_self_rating | boolDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Use Rating Stars:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.use_rating_stars | boolDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Is for 360:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.is_for_360 | boolDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Role 360:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.role_360 | roleOpt | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Role 360 Anonymous Employee:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.role_360_anon_emp | boolDisplay}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,181 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Employee Payments'" [subTitle]="'Details of payments for each employee'" [loading]='!(data)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="container-fluid mt-4">
+        <div class="row mb-3">
+          <div class="col-6">
+
+          </div>
+          <div class="col-6">
+            <dx-lookup #employeeSelect [dataSource]="employeeData" valueExpr="employee_id" displayExpr='employees'
+              (onItemClick)="onEmployeeSelected($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=false popupHeight="420px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="card flex-md-row shadow-sm h-md-250">
+              <div class="card-body">
+                <div class="employee-header mb-4">
+                  <h6 class="font-weight-bold">Employee Details</h6>
+                </div>
+                <div class="row">
+                  <div class="col-6" *ngIf="!(selectedEmployeeData | async)">
+                    <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                  </div>
+                  <div class="col-6" *ngIf="!(selectedEmployeeData | async)">
+                    <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                  </div>
+                  <div class="col-6" *ngFor="let employee of (selectedEmployeeData | async)">
+                    <div class="details d-flex justify-content-between mb-2">
+                      <div class="label row-label">{{ employee.label_description }}: </div>
+                      <div class="value font-weight-bold d-flex justify-content-start"><p>{{ employee.label_value | stringDisplay }}</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="box">
+              <div class="row mb-3">
+                <div class="col-6 border-right" *ngIf="!(allowanceData | async)">
+                  <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-6" *ngIf="!(deductionData | async)">
+                  <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-6 border-right">
+                  <div class="employee-header mb-4 border-title" *ngIf="(allowanceData | async)">
+                    <h6 class="font-weight-bold">Allowances</h6>
+                  </div>
+                  <div class="details" *ngFor="let allowance of (allowanceData | async)">
+                    <div class="details d-flex justify-content-between mb-2">
+                      <div class="label font-weight-bold">{{ allowance.label_description }}: </div>
+                      <div class="data-value">{{ allowance.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="employee-header mb-4 border-title" *ngIf="(deductionData | async)">
+                    <h6 class="font-weight-bold">Deductions</h6>
+                  </div>
+                  <div class="details" *ngFor="let deduction of (deductionData | async)">
+                    <div class="details d-flex justify-content-between mb-2">
+                      <div class="label font-weight-bold">{{ deduction.label_description }}: </div>
+                      <div class="data-value">{{ deduction.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                  <div class="details" *ngFor="let tax of (taxPayData | async)">
+                    <div class="details d-flex justify-content-between mb-2">
+                      <div class="label font-weight-bold">{{ tax.label_description }}: </div>
+                      <div class="data-value">{{ tax.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                  <div class="details" *ngFor="let loan of (loanData | async)">
+                    <div class="details d-flex justify-content-between mb-2">
+                      <div class="label font-weight-bold">{{ loan.label_description }}: </div>
+                      <div class="data-value">{{ loan.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-6 border-right" *ngIf="!(loanData | async)">
+                  <x365-shared-ui-shimmer-placeholder [noOfLines]="1" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-6" *ngIf="!(loanData | async)">
+                  <x365-shared-ui-shimmer-placeholder [noOfLines]="1" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-6 border-right">
+                  <div class="details bg-light p-2 mb-2" *ngFor="let gross of (grossPayData | async)">
+                    <div class="details d-flex justify-content-between align-items-center">
+                      <div class="label font-weight-bold">{{ gross.label_description }}: </div>
+                      <div class="data-value">{{ gross.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="details bg-light p-2 mb-2" *ngFor="let total of (totalDeductionData | async)">
+                    <div class="details d-flex justify-content-between align-items-center">
+                      <div class="label font-weight-bold">{{ total.label_description }}: </div>
+                      <div class="data-value">{{ total.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                  <div class="details bg-light p-2" *ngFor="let net of (netPayData | async)">
+                    <div class="details d-flex justify-content-between align-items-center">
+                      <div class="label font-weight-bold">{{ net.label_description }}: </div>
+                      <div class="data-value">{{ net.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row mb-3">
+                <div class="col-6 border-right" *ngIf="!(loanData | async)">
+                  <x365-shared-ui-shimmer-placeholder [noOfLines]="1" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-6" *ngIf="!(loanData | async)">
+                  <x365-shared-ui-shimmer-placeholder [noOfLines]="1" [photo]="false" [box]="false">
+                  </x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-6 border-right">
+                  <div class="details bg-light p-2 mb-2" *ngFor="let gross of (grossPayData | async)">
+                    <div class="details d-flex justify-content-between align-items-center">
+                      <div class="label font-weight-bold">{{ gross.label_description }}: </div>
+                      <div class="data-value">{{ gross.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="details bg-light p-2" *ngFor="let net of (netPayData | async)">
+                    <div class="details d-flex justify-content-between align-items-center">
+                      <div class="label font-weight-bold">{{ net.label_description }}: </div>
+                      <div class="data-value">{{ net.pay_amount | number: '1.2-5' }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3 bottom-box">
+          <div class="col-6">
+            <div class="employee-header mb-4 bg-light p-2">
+              <h6 class="font-weight-bold">Employer Contributions</h6>
+            </div>
+            <div class="details" *ngFor="let contribution of (employerContributionData | async)">
+              <div class="details d-flex justify-content-between mb-2">
+                <div class="label font-weight-bold">{{ contribution.label_description }}: </div>
+                <div class="value">{{ contribution.pay_amount | number: '1.2-5' }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="employee-header mb-4 bg-light p-2">
+              <h6 class="font-weight-bold">Reliefs</h6>
+            </div>
+            <div class="details" *ngFor="let relief of (reliefData | async)">
+              <div class="details d-flex justify-content-between mb-2">
+                <div class="label font-weight-bold">{{ relief.label_description }}: </div>
+                <div class="value">{{ relief.pay_amount | number: '1.2-5' }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </x365-shared-ui-form-container>

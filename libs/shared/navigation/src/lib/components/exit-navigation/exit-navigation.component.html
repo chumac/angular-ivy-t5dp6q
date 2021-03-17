@@ -1,0 +1,38 @@
+<li>
+  <ul class="collapsible collapsible-accordion">
+    <mdb-accordion [multiple]="false" aria-multiselectable="false">
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Exit Management</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/workforce/exit/admin/employees-resignations" routerLinkActive="active">Employees Resignations</a></li>
+            <li>
+              <a routerLink="/d/workforce/exit/admin/response-queue" routerLinkActive="active">
+                <div class="queue-container">
+                  <span>Response Queue</span>
+                  <span *ngIf="(hrResponseQueueNotifications$ | async) !== null && (hrResponseQueueNotifications$ | async) >= 0" class="pulse">{{ hrResponseQueueNotifications$ | async }}</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Setup</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/workforce/exit/admin/checklist" routerLinkActive="active">Checklist</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+    </mdb-accordion>
+  </ul>
+</li>

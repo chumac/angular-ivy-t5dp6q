@@ -1,0 +1,236 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'General Information'" [subTitle]="'This is general information about staff'" [loading]='!countries$ | async'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Surname:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="employee_surname" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">First Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="employee_firstname" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Middle Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="employee_midname" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="employee_number" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">File Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="employee_fileno" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="title" [options]="selectOptionData?.Titles" placeholder="Choose Title" (selected)="onTitleSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Gender:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="gender" [options]="selectOptionData?.Gender" placeholder="Choose Gender" (selected)="onGenderSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Date of Birth:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="date_of_birth" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Marital Status:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="marital_status" [options]="selectOptionData?.MaritalStatus" placeholder="Choose Marital Status" (selected)="onMaritalStatusSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Wedding/Annv.:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="wedding_date" [placeholder]="'Select date'"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Maiden Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="maiden_name" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Home Town:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="homeplace" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Other Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Birth Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="birth_country_id" [options]="countries$ | async" [allowClear]="true" [filterEnabled]="true" placeholder="Choose Birth Country" (selected)="onBirthCountrySelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Birth State:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="birthstate_id" [options]="birthStateList$ | async" [allowClear]="true" [filterEnabled]="true" placeholder="Choose Birth State" (selected)="onBirthStateSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Birth City:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="area_id" [options]="birthCityList$ | async" [allowClear]="true" [filterEnabled]="true" placeholder="Choose Birth City"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Nationality:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="nationality_id" [options]="countries$ | async" [allowClear]="true" [filterEnabled]="true" placeholder="Choose Nationality" (selected)="onNationalitySelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">State of Origin:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="state_id" [options]="stateOfOriginList$ | async" [allowClear]="true" [filterEnabled]="true" placeholder="Choose State" (selected)="onStateSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Local Govt.:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="lga_id" [options]="lgaList$ | async" [allowClear]="true" [filterEnabled]="true" placeholder="Choose Local Govt"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Religion:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="religion_id" [options]="selectOptionData?.Religion" placeholder="Choose Religion"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)"></x365-shared-ui-file-picker>
+          </div>
+          <div class="col-1"></div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Social Media <em>(Optional)</em></h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+         <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Facebook Url:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="emp_facebook" type="text" class="form-control pt-0">
+          </div>
+        </div>
+         <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">LinkedIn Url:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="emp_linkedin" type="text" class="form-control pt-0">
+          </div>
+        </div>
+         <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Twitter Url:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="emp_twitterhandle" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Directory Service Identity</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Preferred Surname:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="sync_surname" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Preferred Firstname:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="sync_firstname" type="text" class="form-control pt-0">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

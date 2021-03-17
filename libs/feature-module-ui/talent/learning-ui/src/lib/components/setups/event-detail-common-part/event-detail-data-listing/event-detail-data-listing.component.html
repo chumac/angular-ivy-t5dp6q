@@ -1,0 +1,37 @@
+<div class="card card-container container-fluid">
+  <div class="card-content font-size">
+    <div class="card-content-bottom">
+      <igx-grid [data]="eventDetailData$ | async" [paging]="false" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+
+        <igx-column field="event_title" header="Event title" width="20%"></igx-column>
+        <igx-column field="course_id_text" header="Course" width="20%"></igx-column>
+        <igx-column field="start_date" header="Start Date" width="20%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="end_date" header="End Date" width="20%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="event_type_text" header="Event Type" width="20%"></igx-column>
+        <!-- <igx-column field="id" header="..." width="20%">
+          <ng-template igxCell let-val let-cell="cell">
+            <div class="hover-menu-container"><span></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status == 0 && 'isReview'" [iconClass]="'fa fa-feed'"
+                    title="Publish Event" (click)="onPublishEvent(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status == 1 && 'isReview'" [iconClass]="'fa fa-feed'"
+                    title="UnPublish Event" (click)="onUnPublishEvent(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column> -->
+      </igx-grid>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Staff Group Setup'" [subTitle]="'Sets up a staff group'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="code" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="10" formControlName="description" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Details:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="10" formControlName="details" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1 pay-mt">
+                    <div class="col-4">
+                        <label class="required">Has Value(s):</label>
+                    </div>
+                    <div class="col-8">
+                        <div class="switch">
+                            <label>
+                            No
+                            <input formControlName="has_values" value="false" type="checkbox">
+                            <span class="lever"></span>
+                            Yes
+                            </label>
+                        </div>
+                    </div><br><br><br><br>
+                </div>
+                <div class="row mb-1" *ngIf="fs.hasValue.value?fs.hasValue.value:fs.rValue.setValue(null);">
+                    <div class="col-4">
+                        <label class="center-label">Value(s):</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="10" formControlName="restricted_values" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">System Rule:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="10" formControlName="sys_rule" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

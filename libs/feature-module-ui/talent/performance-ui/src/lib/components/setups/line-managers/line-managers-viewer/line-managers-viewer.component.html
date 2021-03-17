@@ -1,0 +1,56 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Line Managers'" [subTitle]="'line managers'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Line Manager:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.LineManagerinfo.employee_surname | stringDisplay}} {{data?.LineManagerinfo.employee_firstname | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label>Employee:</label>
+            </div>
+            <div class="col-8 md-form mt-0 text-value text-right">
+                {{data?.employeeinfo.employee_surname | stringDisplay}}  {{data?.employeeinfo.employee_firstname | stringDisplay}} 
+            </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Score Percentage:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.score_percent | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="">Role:</label>
+            </div>
+            <div class="col-8 md-form mt-0 text-value text-right">
+                {{data?.role | roleOpt | stringDisplay}}
+            </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Plan:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.PlanInfo.code | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

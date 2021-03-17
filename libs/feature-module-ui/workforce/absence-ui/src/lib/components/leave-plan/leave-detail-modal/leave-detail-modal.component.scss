@@ -1,0 +1,30 @@
+.full-width {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.body {
+    font-size: 0.9rem;
+    height: 20rem;
+    overflow: auto;
+}
+
+.md-form {
+    margin-top: 0rem !important;
+    margin-bottom: 0rem !important;
+    padding-top: 0rem;
+}
+
+.md-form textarea.md-textarea-auto {
+    padding: 0;
+    padding-top: 0rem;
+}
+
+.md-form label {
+    position: absolute;
+    top: 0.2rem;
+    left: 0;
+    transition: 0.2s ease-out;
+    cursor: text;
+    color: #757575;
+}

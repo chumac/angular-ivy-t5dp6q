@@ -1,0 +1,161 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Objective'" [subTitle]="'Creates new objective'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="code" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="description" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Period Start Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="period_start_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Period End Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="period_end_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Is Current:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_current" type="checkbox" class="form-check-input" id="is_current">
+                            <label class="form-check-label" for="is_current"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Review Start Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="review_start_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Review End Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="review_end_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Is Active:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_active" type="checkbox" class="form-check-input" id="is_active">
+                            <label class="form-check-label" for="is_active"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Use 360:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="use_360" type="checkbox" class="form-check-input" id="use_360">
+                            <label class="form-check-label" for="use_360"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Objective Start Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="objective_start_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Objective End Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="objective_end_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Business Rule:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="business_rule" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Link to:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="link_to" type="text" class="form-control form-font">
+          </div>
+        </div> -->
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Is Published:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_published" type="checkbox" class="form-check-input" id="is_published">
+                            <label class="form-check-label" for="is_published"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Require ratings:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="req_ratings" type="checkbox" class="form-check-input" id="req_ratings">
+                            <label class="form-check-label" for="req_ratings"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Require comments:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="req_comments" type="checkbox" class="form-check-input" id="req_comments">
+                            <label class="form-check-label" for="req_comments"></label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

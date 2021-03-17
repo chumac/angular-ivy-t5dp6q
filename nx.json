@@ -1,0 +1,207 @@
+{
+  "npmScope": "nutela",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "self-service-shell": {
+      "tags": []
+    },
+    "self-service-shell-e2e": {
+      "tags": []
+    },
+    "admin-shell": {
+      "tags": []
+    },
+    "admin-shell-e2e": {
+      "tags": []
+    },
+    "layout-ui": {
+      "tags": []
+    },
+    "models-workforce-leave": {
+      "tags": []
+    },
+    "models-core-api": {
+      "tags": []
+    },
+    "models-workforce-personnel": {
+      "tags": []
+    },
+    "feature-modules-self-service": {
+      "tags": []
+    },
+    "feature-modules-workforce-leave-manager": {
+      "tags": []
+    },
+    "ui-components-workforce-personnel-ui": {
+      "tags": []
+    },
+    "ui-components-workforce-leave-ui": {
+      "tags": []
+    },
+    "shared-auth": {
+      "tags": []
+    },
+    "shared-navigation": {
+      "tags": []
+    },
+    "shared-app-global": {
+      "tags": []
+    },
+    "shared-ui": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "models-core-data": {
+      "tags": []
+    },
+    "shared-animations": {
+      "tags": []
+    },
+    "feature-module-ui-talent-performance-ui": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-employee-profiles-ui": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-absence-ui": {
+      "tags": []
+    },
+    "component-ui": {
+      "tags": []
+    },
+    "store-app-state": {
+      "tags": []
+    },
+    "store-reducers": {
+      "tags": []
+    },
+    "store-modules-workforce-employee-profiles": {
+      "tags": []
+    },
+    "models-workforce-employee-profiles": {
+      "tags": []
+    },
+    "models-common": {
+      "tags": []
+    },
+    "store-modules-foundation": {
+      "tags": []
+    },
+    "models-foundation": {
+      "tags": []
+    },
+    "core-services": {
+      "tags": []
+    },
+    "store-shared": {
+      "tags": []
+    },
+    "models-talent-learning": {
+      "tags": []
+    },
+    "store-modules-workforce-absence": {
+      "tags": []
+    },
+    "store-self-service": {
+      "tags": []
+    },
+    "feature-module-ui-approvals-ui": {
+      "tags": []
+    },
+    "feature-module-ui-platform-reports-ui": {
+      "tags": []
+    },
+    "feature-module-ui-platform-analytics-ui": {
+      "tags": []
+    },
+    "feature-module-ui-platform-hr-foundations-ui": {
+      "tags": []
+    },
+    "feature-module-ui-platform-provisioning-ui": {
+      "tags": []
+    },
+    "comparts": {
+      "tags": []
+    },
+    "models-talent-performance": {
+      "tags": []
+    },
+    "feature-module-ui-platform-documents-ui": {
+      "tags": []
+    },
+    "models-workforce-subscription": {
+      "tags": []
+    },
+    "models-platform-report": {
+      "tags": []
+    },
+    "models-platform-document": {
+      "tags": []
+    },
+    "feature-module-ui-compensation-loans-ui": {
+      "tags": []
+    },
+    "feature-module-ui-compensation-payroll-ui": {
+      "tags": []
+    },
+    "feature-module-ui-platform-lookup-ui": {
+      "tags": []
+    },
+    "feature-module-ui-enterprise-planning-enterprise-structure-ui": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-medical-ui": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-subscription-ui": {
+      "tags": []
+    },
+    "models-compensation-loans": {
+      "tags": []
+    },
+    "models-platform-lookup": {
+      "tags": []
+    },
+    "feature-module-ui-platform-data-upload-ui": {
+      "tags": []
+    },
+    "models-platform-data-upload": {
+      "tags": []
+    },
+    "models-compensation-payroll": {
+      "tags": []
+    },
+    "models-compensation-payment": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-time-ui": {
+      "tags": []
+    },
+    "models-workforce-time-sheet": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-exit-ui": {
+      "tags": []
+    },
+    "models-workforce-exit": {
+      "tags": []
+    },
+    "feature-module-ui-compensation-payment-ui": {
+      "tags": []
+    },
+    "feature-module-ui-workforce-processes-ui": {
+      "tags": []
+    },
+    "feature-module-ui-talent-learning-ui": {
+      "tags": []
+    }
+  }
+}

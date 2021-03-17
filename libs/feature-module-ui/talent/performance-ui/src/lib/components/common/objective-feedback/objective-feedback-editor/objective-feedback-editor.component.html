@@ -1,0 +1,55 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+      <div class="header">
+          <x365-shared-ui-form-header [title]="'Feedback Editor'" [subTitle]="'Edit feedback objectives'" [loading]="false"></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+          <form class="mx-3" novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Description:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea rows="10" formControlName="description" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg"></textarea>
+              </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Metric:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea rows="10" formControlName="metric" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg"></textarea>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Target:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="target" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Due Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="due_date" class="form-font"></dx-date-box>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Weight:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea rows="10" disabled="true" formControlName="weight" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg"></textarea>
+                </div>
+            </div>
+          </form>
+      </div>
+      <div class="footer">
+          <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="false" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+  </div>
+</div>

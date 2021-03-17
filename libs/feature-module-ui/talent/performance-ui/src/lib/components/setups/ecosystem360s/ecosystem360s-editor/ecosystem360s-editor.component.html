@@ -1,0 +1,70 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'360 Ecosystem'" [subTitle]="'Create 360 Ecosystem'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Plan:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="plan_id" [dataSource]="planList$ | async" valueExpr="id" displayExpr='code' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <mat-form-field class="example-chip-list">
+                        <mat-chip-list #chipList aria-label="Employee selection">
+                            <mat-chip *ngFor="let employee of selectedEmployees" [selectable]="selectable" [removable]="removable" (removed)="remove(employee)">
+                                {{employee.description}}
+                                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <!-- <input placeholder="New fruit..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)"> -->
+                        </mat-chip-list>
+                    </mat-form-field>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup #employeeLookup formControlName="employee_id" [dataSource]="employeeList$ | async" valueExpr="employee_id" displayExpr='emp_fullname' (onValueChanged)="add($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+                            popupHeight="400px" class="form-font"></dx-lookup>
+                        <small class="text-info">Select employee for whom to provide feedback</small>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Role Staff:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="role_staff_id" [dataSource]="employeeList$ | async" valueExpr="employee_id" displayExpr='emp_fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                        <small class="text-info">Select employee to provide feedback</small>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Role:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="role" [options]="role360Options" [filterEnabled]="true" class="form-font">
+                        </mdb-select>
+                    </div>
+                </div>
+                <!-- <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Role Staff Email:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="role_email" type="text" class="form-control form-font">
+                    </div>
+                </div> -->
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

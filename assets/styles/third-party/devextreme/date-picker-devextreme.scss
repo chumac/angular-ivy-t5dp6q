@@ -1,0 +1,117 @@
+@import 'colors';
+
+.dx-dropdowneditor-button-visible.dx-editor-underlined .dx-texteditor-input {
+  padding-right: 0;
+}
+
+.dx-texteditor-input {
+  color: black;
+}
+
+.dx-datebox.dx-textbox.dx-texteditor.dx-editor-underlined.dx-widget.dx-visibility-change-handler.dx-auto-width.dx-dropdowneditor-button-visible.dx-dropdowneditor.dx-datebox-date.dx-datebox-calendar {
+  width: 100% !important;
+}
+
+.dx-datebox-calendar .dx-dropdowneditor-icon {
+  font-family: FontAwesome;
+}
+
+.dx-datebox-calendar .dx-dropdowneditor-icon:before {
+  content: '\f107';
+  font-size: 0.85rem;
+  color: black;
+  left: 67%;
+}
+
+.dx-datebox-time {
+  width: 100% !important;
+}
+
+.dx-dropdowneditor .dx-dropdowneditor-icon:before,
+.dx-dropdowneditor-button.dx-state-active .dx-dropdowneditor-icon:before {
+  font-family: FontAwesome;
+  content: '\f107';
+  font-size: 0.85rem;
+  color: black;
+  transition: all 0.3s;
+}
+
+.dx-dropdowneditor.dx-dropdowneditor-active .dx-dropdowneditor-icon:before,
+.dx-dropdowneditor-button.dx-state-active .dx-dropdowneditor-icon:before {
+  font-family: FontAwesome;
+  content: '\f107';
+  font-size: 0.85rem;
+  color: black;
+  transform: rotate(180deg);
+}
+
+.dx-texteditor.dx-editor-underlined .dx-texteditor-input,
+.dx-dropdowneditor-overlay.dx-popup-wrapper
+  .dx-overlay-content
+  *:not(.dx-icon) {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+}
+
+// Underline Styles
+.dx-texteditor.dx-editor-underlined:after {
+  border-bottom: 1px solid #ced4da;
+}
+
+.dx-texteditor.dx-editor-underlined {
+  &:hover {
+    &::after {
+      border-bottom: 1px solid #ced4da;
+    }
+  }
+}
+
+.dx-texteditor.dx-state-focused::before,
+.dx-texteditor.dx-state-active::before {
+  border-bottom: 1px solid #4285f4;
+  box-shadow: 0 1px #4285f4;
+  transform: none;
+  transition: border-bottom 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// Remove Validation Styling
+.dx-invalid-message.dx-overlay {
+  display: none;
+}
+
+.dx-invalid.dx-texteditor .dx-texteditor-container::after {
+  display: none !important;
+}
+
+.dx-invalid.dx-texteditor.dx-state-focused::before,
+.dx-invalid.dx-texteditor.dx-state-active::before {
+  border-top: none;
+  border-bottom: 1px solid #4285f4;
+}
+
+.dx-texteditor.dx-editor-underlined.dx-invalid::after {
+  border-bottom-color: #ced4da;
+}
+
+.dx-placeholder {
+  color: $form_placeholder_text_color;
+  font-family: $app_font_name;
+  font-size: 1em;
+}
+
+.dx-state-disabled .dx-placeholder {
+  color: $form_disabled_placeholder_text_color;
+  font-family: $app_font_name;
+  font-size: 1.1em;
+}
+
+.dx-datebox.dx-auto-width.dx-dropdowneditor-button-visible.dx-editor-underlined
+  .dx-texteditor-input {
+  padding: 0;
+  height: 2rem;
+  padding-bottom: 5px;
+}
+
+.dx-invalid.dx-texteditor .dx-texteditor-buttons-container:after {
+  display: none;
+}

@@ -1,0 +1,55 @@
+<ul>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.GENERAL_INFORMATION)" (click)="onNavItemClick(NavMenuItemTypes.GENERAL_INFORMATION)"><a>Personal Information</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PROFILE_PICTURE)" (click)="onNavItemClick(NavMenuItemTypes.PROFILE_PICTURE)"><a>Profile Picture</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.CONTACT)" (click)="onNavItemClick(NavMenuItemTypes.CONTACT)"><a>Contact</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.IDENTIFICATION)" (click)="onNavItemClick(NavMenuItemTypes.IDENTIFICATION)"><a>Identification</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PAYMENT)" (click)="onNavItemClick(NavMenuItemTypes.PAYMENT)"><a>Payment</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.WORK_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.WORK_HISTORY)"><a>Work History</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.EDUCATIONAL_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.EDUCATIONAL_HISTORY)"><a>Educational History</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PROFESSIONAL_QUALIFICATIONS)" (click)="onNavItemClick(NavMenuItemTypes.PROFESSIONAL_QUALIFICATIONS)"><a>Professional Qualifications</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.DEPENDANTS)" (click)="onNavItemClick(NavMenuItemTypes.DEPENDANTS)"><a>Dependants</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.BENEFICIARIES)" (click)="onNavItemClick(NavMenuItemTypes.BENEFICIARIES)"><a>Beneficiaries</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PERSONAL_REFEREES)" (click)="onNavItemClick(NavMenuItemTypes.PERSONAL_REFEREES)"><a>Personal Referees</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.FAMILY)" (click)="onNavItemClick(NavMenuItemTypes.FAMILY)"><a>Family</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.GUARANTORS)" (click)="onNavItemClick(NavMenuItemTypes.GUARANTORS)"><a>Employment Guarantors</a></li>
+   <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.HR_CUSTOM_DATA_FORMS)" (click)="onNavItemClick(NavMenuItemTypes.HR_CUSTOM_DATA_FORMS)"><a>Custom Data Forms</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.CUSTOM_FORMS)" (click)="onNavItemClick(NavMenuItemTypes.CUSTOM_FORMS)"><a>Custom Forms</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.TRAINING_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.TRAINING_HISTORY)"><a>Training History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.COMPETENCY_PROFILE)" (click)="onNavItemClick(NavMenuItemTypes.COMPETENCY_PROFILE)"><a>Competency Profile</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PROMOTION_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.PROMOTION_HISTORY)"><a>Promotion History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.TRANSFER_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.TRANSFER_HISTORY)"><a>Transfer History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.VACATION_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.VACATION_HISTORY)"><a>Vacation History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PERFORMANCE_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.PERFORMANCE_HISTORY)"><a>Performance History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.DISCIPLINARY_ACTIONS)" (click)="onNavItemClick(NavMenuItemTypes.DISCIPLINARY_ACTIONS)"><a>Disciplinary Actions</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.COMMENDATIONS)" (click)="onNavItemClick(NavMenuItemTypes.COMMENDATIONS)"><a>Commendations</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.REWARDS_PROFILE)" (click)="onNavItemClick(NavMenuItemTypes.REWARDS_PROFILE)"><a>Rewards Profile</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PERSONALITY_PROFILE)" (click)="onNavItemClick(NavMenuItemTypes.PERSONALITY_PROFILE)"><a>Personality Profile</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.CONFIRMATION_INFORMATION)" (click)="onNavItemClick(NavMenuItemTypes.CONFIRMATION_INFORMATION)"><a>Confirmation Information</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PAYROLL_PAYMENT_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.PAYROLL_PAYMENT_HISTORY)"><a>Payroll Payment History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.LOAN_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.LOAN_HISTORY)"><a>Loan History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.WORKFLOW_TRANSACTIONS)" (click)="onNavItemClick(NavMenuItemTypes.WORKFLOW_TRANSACTIONS)"><a>Workflow Transactions</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.TAX_INFORMATION)" (click)="onNavItemClick(NavMenuItemTypes.GUARANTORS)"><a>Tax Information</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.TEAM)" (click)="onNavItemClick(NavMenuItemTypes.TEAM)"><a>Team</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.CAREER_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.CAREER_HISTORY)"><a>Career History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.SUCCESSION_PROFILE)" (click)="onNavItemClick(NavMenuItemTypes.SUCCESSION_PROFILE)"><a>Succession Profile</a></li>
+
+
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.SEPARATION)" (click)="onNavItemClick(NavMenuItemTypes.SEPARATION)"><a>Separation</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.REINSTATEMENT_HISTORY)" (click)="onNavItemClick(NavMenuItemTypes.REINSTATEMENT_HISTORY)"><a>Re-instatement History</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.COUNSELING_MENTORSHIP)" (click)="onNavItemClick(NavMenuItemTypes.COUNSELING_MENTORSHIP)"><a>Counseling and Mentorship</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.COMMUNITY_VOLUNTEERING)" (click)="onNavItemClick(NavMenuItemTypes.COMMUNITY_VOLUNTEERING)"><a>Community and Volunteering</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PROVISIONING_DETAILS)" (click)="onNavItemClick(NavMenuItemTypes.PROVISIONING_DETAILS)"><a>Provisioning Details</a></li>
+  <li *ngIf="false" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.REPORTS)" (click)="onNavItemClick(NavMenuItemTypes.REPORTS)"><a>Reports</a></li>
+</ul>

@@ -1,0 +1,8 @@
+<div class="container-fluid">
+  <div class="back-navigation mb-3">
+    <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect
+      (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+  </div>
+  <x365-fm-es-manage-detail-card [selectedDetails]="selectedDetails$ | async"
+    [structureNameAndId]="structureNameAndId$ | async"></x365-fm-es-manage-detail-card>
+</div>

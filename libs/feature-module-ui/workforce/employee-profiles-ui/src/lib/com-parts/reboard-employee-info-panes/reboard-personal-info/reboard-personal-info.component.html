@@ -1,0 +1,157 @@
+<div class="card card-container font-size">
+  <div class="content">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-4 d-flex flex-column justify-content-sm-start justify-content-lg-center">
+      <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="profileImage"
+        [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'"
+        [makeAvatarALink]="false" [linkUrl]="''" [altText]="''" [centerAvatar]="true"></x365-shared-ui-avatar>
+      <p class="text-center">Profile Picture</p>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Title</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.title}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Gender</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.gender}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Date of Birth</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.date_of_birth | dateDisplay}}</label>
+        </div>
+      </div>
+      <hr class="horizontal-rule">
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Marital Status</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.marital_status | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Anniversary</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.wedding_date | dateDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Maiden Name</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.maiden_name | stringDisplay}}</label>
+        </div>
+      </div>
+      <hr class="horizontal-rule">
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Home Town</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.homeplace | stringDisplay}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Birth Country</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.birth_country | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Birth State</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.birthstate | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Birth City</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.birth_area | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Nationality</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.nationality | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>State of Origin</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.state_of_origin | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Local Government</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.lga_of_origin | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>Religion</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.religion | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-4 row-label">
+          <label>File Number</label>
+        </div>
+        <div class="col-8 row-text mt-0 font-weight-bold">
+          <label>{{data?.employee_fileno | stringDisplay}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    </div>
+    <div *ngIf="reboardMode === 2" class="command-panel"><span><a title="Edit" (click)="showEditor()"><i class="fa fa-pencil-square-o"></i></a></span></div>
+</div>
+
+<x365-fm-workforce-reboard-personal-info-editor #editor [width]="34" [show]="showEditor$ | async" [data]="generalData$ | async" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-reboard-personal-info-editor>
+
+<x365-fm-workforce-reboard-personal-info-viewer [width]="34" [show]="showViewer$ | async" [data]="generalData$ | async" [dataDoc]="document$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-reboard-personal-info-viewer>

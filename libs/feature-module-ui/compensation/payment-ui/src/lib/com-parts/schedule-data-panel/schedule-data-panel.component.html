@@ -1,0 +1,196 @@
+<div class="card card-container">
+  <div class="item-left font-size">
+    <div class="im-top">
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Schedule Type</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.description | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Log Date</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.log_date | dateDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Payment Date:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label> {{data?.value_date | dateDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Expiry Date:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label> {{data?.expiry_date | dateDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Status:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>
+            <mdb-badge *ngIf="data?.status===7" pill="true" color="indigo">{{ data?.status_text | stringDisplay }}
+            </mdb-badge>
+            <mdb-badge *ngIf="data?.status===6" pill="true" success="true">{{ data?.status_text | stringDisplay }}
+            </mdb-badge>
+            <mdb-badge *ngIf="data?.status===5" pill="true" color="orange darken-2">
+              {{ data?.status_text | stringDisplay }}</mdb-badge>
+            <mdb-badge *ngIf="data?.status===4" pill="true" color="green darken-2">
+              {{ data?.status_text | stringDisplay }}</mdb-badge>
+            <mdb-badge *ngIf="data?.status===3" pill="true" color="purple">{{ data?.status_text | stringDisplay }}
+            </mdb-badge>
+            <mdb-badge *ngIf="data?.status===2" pill="true" primary="true">{{ data?.status_text | stringDisplay }}
+            </mdb-badge>
+            <mdb-badge *ngIf="data?.status===1" pill="true" default="true">{{ data?.status_text | stringDisplay }}
+            </mdb-badge>
+            <mdb-badge *ngIf="data?.status===0" pill="true" danger="true">{{ data?.status_text | stringDisplay }}
+            </mdb-badge>
+          </label>
+        </div>
+      </div>
+      <hr class="horizontal-rule">
+    </div>
+  </div>
+
+  <div class="item-middle font-size">
+    <div class="im-top">
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Bank</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.bank_description | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Account Type:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.account_type | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Account Number:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label> {{data?.account_no | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>CBN Code:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.bank_cbn_code | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2" *ngIf="data?.payroll_profile_id">
+        <div class="col-5 row-label">
+          <label>Payroll Profile:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.payroll_profile_text | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2" *ngIf="data?.payroll_profile_id">
+        <div class="col-5 row-label">
+          <label>Payroll Source:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.payroll_source_text | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2" *ngIf="data?.payroll_profile_id">
+        <div class="col-5 row-label">
+          <label>Pay Period:</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.payroll_period | dateDisplay}}</label>
+        </div>
+      </div>
+    </div>
+    <hr class="horizontal-rule">
+  </div>
+
+  <div class="item-right font-size">
+    <div class="row mb-2">
+      <div class="col-5 row-label">
+        <label>Pay Desk:</label>
+      </div>
+      <div class="col-7 row-text mt-0 font-weight-bold">
+        <label>{{data?.paydesk | stringDisplay}}</label>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-5 row-label">
+        <label>Payment Source:</label>
+      </div>
+      <div class="col-7 row-text mt-0 font-weight-bold">
+        <label> {{data?.source_text | stringDisplay}}</label>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-5 row-label">
+        <label>Transaction Fee: </label>
+      </div>
+      <div class="col-7 row-text mt-0 font-weight-bold">
+        <label><span class="curr" *ngIf="data?.currency_code===currencyCode">&#8358;</span>&nbsp;
+          {{data?.trans_fee | number: '1.2-5'}}</label>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <div class="col-5 row-label">
+        <label>Total Amount: </label>
+      </div>
+      <div class="col-7 row-text mt-0 font-weight-bold">
+        <label><span class="curr" *ngIf="data?.currency_code===currencyCode">&#8358;</span>&nbsp;
+          {{data?.total_value | number: '1.2-5'}}</label>
+      </div>
+    </div>
+    <hr class="horizontal-rule">
+    <div class="row">
+      <div class="col-8 d-flex justify-content-end p-0">
+        <div class="file-field md-form">
+          <div *ngIf="data?.source===1" mdbBtn color="warning" size="sm" class="waves-light disabled"
+            [class.disabled]="!(data?.approval_status == 1 && data?.status == 0)" mdbWavesEffect>
+            <span><i class="fa fa-excel-o"></i>&nbsp;&nbsp;Select File</span>
+            <input #file type="file" (change)="onFileChange($event)">
+          </div>
+          <button *ngIf="data?.source===0" [disabled]="!(data?.approval_status == 1 && data?.status == 0)" mdbBtn
+            type="button" color="warning" size="sm" mdbWavesEffect (click)="onProcess()"><i
+              class="fa fa-gears"></i>&nbsp;&nbsp;Process</button>
+        </div>
+      </div>
+      <div class="col-4 m-auto">
+        <div class="d-flex align-items-left justify-content-start">
+          <i *ngIf="isProcessingUpload$ | async" class="select-plan-spinner fa fa-spinner fa-spin fa-2x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

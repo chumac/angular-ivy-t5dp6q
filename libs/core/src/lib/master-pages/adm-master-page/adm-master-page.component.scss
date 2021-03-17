@@ -1,0 +1,127 @@
+@import 'general';
+
+:host /deep/ .navbar .navbar-toggler-icon {
+  // background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  cursor: pointer;
+}
+
+:host /deep/ .navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  content: '';
+  background: no-repeat center center;
+  background-size: 100% 100%;
+}
+
+:host /deep/ .navbar {
+  padding-left: 13.3rem;
+  box-shadow: 0 4px 10px 0 rgba(197, 197, 197, 0.16),
+    0 2px 10px 0 rgba(197, 197, 197, 0.12);
+}
+
+:host /deep/ .navbar .breadcrumb-dn {
+  width: 100%;
+}
+
+:host /deep/ .bg-side-nav {
+  // background-color: rgb(56, 56, 56);
+}
+
+:host /deep/ .side-nav {
+  box-shadow: none;
+}
+
+:host /deep/ header {
+  // background: rgb(245, 245, 245)!important;
+}
+
+:host /deep/ main {
+  padding-left: 15rem;
+}
+
+:host /deep/ ul li.dropdown a.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bounds {
+  height: 100vh;
+}
+
+.nav-header-container {
+  border-bottom: 1px solid rgb(73, 73, 73);
+}
+
+.side-navigation-container {
+  position: relative;
+  padding: 0 0.7em 0 0.3em;
+  overflow-x: hidden;
+  overflow-y: auto;
+  // border: 1px solid red;
+}
+
+.app-version-container {
+  color: rgb(189, 189, 189);
+  font-size: 10px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.view-port {
+  height: calc(100vh - #{$app_bar_height});
+  background: rgb(245, 245, 245);
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0px solid rgb(104, 102, 102);
+}
+
+.mega-menu {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 63px;
+  width: $mega_menu_width;
+  padding: 0.07em;
+
+  opacity: 0;
+
+  -webkit-transition: opacity 0.3s ease 0.15s;
+  -moz-transition: opacity 0.3s ease 0.15s;
+  -o-transition: opacity 0.3s ease 0.15s;
+  -ms-transition: opacity 0.3s ease 0.15s;
+  transition: opacity 0.3s ease 0.15s;
+
+  z-index: 3000;
+}
+
+@media only screen and (max-width: 992px) {
+  :host /deep/ header,
+  main {
+    padding-left: 0;
+  }
+
+  :host /deep/ .mega-menu {
+    opacity: 0;
+  }
+}
+
+/*.breadcrumb-container {
+  position: relative;
+  top: 67px;
+  left: 233px;
+  margin-bottom: -33px;
+  font-size: 10px;
+  font-weight: bold;
+  padding-left: 58px;
+}*/
+
+.iframe-container {
+  bottom: 0;
+  height: 24rem;
+  position: absolute;
+  right: 10px;
+}

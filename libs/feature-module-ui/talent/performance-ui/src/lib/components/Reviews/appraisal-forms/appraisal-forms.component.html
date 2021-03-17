@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="card card-container">
+        <div class="doc-pane">
+            <div class="doc-header d-flex flex-column justify-content-around">
+                <h3>Appraisal Forms</h3>
+                <small class="text-uppercase font-weight-bold">Review Type: {{ employeeConfirmationStatus$ | async | stringDisplay }}</small>
+            </div>
+            <div class="doc-content">
+                <template #templateContainer></template>
+            </div>
+        </div>
+        <div class="command-pane">
+            <div class="header">
+                <div class="form-status" *ngIf="isSelfReviewCompleted">[COMPLETED]</div>
+                <div class="page-link profile-page-link border-shadow" (click)="onProfilePageClick()">
+                    <div class="l1-text">Profile</div>
+                    <div class="l2-text">Page</div>
+                </div>
+                <div class="page-link summary-page-link border-shadow" (click)="onSummaryPageClick()">
+                    <div class="l1-text">Summary</div>
+                    <div class="l2-text">Page</div>
+                </div>
+
+                <!-- <div class="page-link score-info-page-link border-shadow"  (click)="onScoreInfoPageClick()">
+          <div class="l1-text">Score Info</div><div class="l2-text">Page</div>
+        </div> -->
+                <div class="page-link quick-info-page-link border-shadow" (click)="onQuickInfoPageClick()">
+                    <div class="l1-text">Quick Info</div>
+                    <div class="l2-text">Page</div>
+                </div>
+            </div>
+            <div class="body">
+                <x365-fm-talent-page-navigator #pageNavigator [list]="pageNavigatorList$ | async" (reOpenIconClicked)="onReOpenIconClicked($event)" (buttonClicked)="onPageNavigatorClicked($event)"></x365-fm-talent-page-navigator>
+            </div>
+            <div class="footer">
+                <div class="top" *ngIf="!isSectionCompleted"></div>
+                <div class="bottom" *ngIf="!isSectionCompleted">
+                    <div class="row">
+                        <div class="col-4">
+                            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="saveButtonClicked()" [disabled]="(saveContinueDisabledStatus$ | async) || isSectionCompleted"><span *ngIf="saveAndContinueProcessingStatus"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;Save&nbsp;</button>
+                        </div>
+                        <div class="col-8">
+                            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="completeSectionButtonClicked()" [disabled]="isSectionCompleted"><span *ngIf="completeSectionProcessingStatus"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;Complete Section</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

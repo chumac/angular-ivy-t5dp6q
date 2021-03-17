@@ -1,0 +1,17 @@
+{
+  "extends": "../../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "x365-fm-estruct",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "x365-fm-estruct",
+      "kebab-case"
+    ]
+  }
+}

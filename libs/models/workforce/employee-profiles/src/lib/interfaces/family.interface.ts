@@ -1,0 +1,52 @@
+import { ICountry, IState, ICity } from "@nutela/models/core-data";
+
+export interface IFamily {
+  family_id: number;
+  employee_id: number;
+  surname: string;
+  firstname: string;
+  othernames: string;
+  dobirth: Date;
+  gender: string;
+  member_type: number;
+  member_type_text: string;
+  special_circumstance: number;
+  business_type: string;
+  address_line1: string;
+  address_line2: string;
+  areaInfo: ICity;
+  stateInfo: IState;
+  countryInfo: ICountry;
+  area?: ICity;
+  state?: IState;
+  country?: ICountry;
+  CityInfo?: ICity;
+  StateInfo?: IState;
+  CountryInfo?: ICountry;
+  phone_no: string;
+  email: string;
+  comment: string;
+  on_payroll: boolean;
+  bank: string;
+  bank_branch: string;
+  account_no: number;
+  formula_id: number;
+  direct_amount: number;
+  hmo: string;
+  hmoplan: string;
+  hospital: string;
+  archive_status: boolean;
+  approval_status: number;
+  approval_status_text: string;
+  img_size: string;
+  img_extension: string;
+  img_guid: string;
+  img_url: string;
+  passport_picture: string;
+  img_extension_passport: string;
+  bank_id: number,
+  hmo_id: number,
+  hmoplan_id: number,
+  hospital_id: number,
+  additional_document: string,
+}

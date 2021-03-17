@@ -1,0 +1,131 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Employment Guarantors'" [subTitle]="'Details of your employment guarantors (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Tag:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.requirement_type_text | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Title:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.title | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Employment Date">Surname:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.ref_surname | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Firstname:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.ref_firstname | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Other Names:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.ref_othernames | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Gender:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.gender | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Position Before Exit">Full Address:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.fulladdress | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Department on Exit">Company Name:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.company_name | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Department on Exit">Company Address:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.company_address | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Department on Exit">Phone 1:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.phone1 | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Department on Exit">Phone 2:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.phone2 | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Department on Exit">Email:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.email | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label title="Department on Exit">BVN:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.bvn | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mt-4 mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-12 row-text mt-0 mb-2 text-right">
+                    <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="imageData" [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

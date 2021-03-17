@@ -1,0 +1,25 @@
+<dx-popup [width]="width" [height]="height" [visible]="visible" [showTitle]="showTitle" [closeOnOutsideClick]="clickOutsideToClose">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view width="100%" height="100%">
+      <div id="textBlock">
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+      </div>
+      <div class="col-8 md-form mt-0">
+        No <label class="switch">
+          <input #checkAgree type="checkbox" unchecked>
+          <span class="slider round"></span>
+        </label>Yes<br><br>
+      </div>
+    </dx-scroll-view>
+  </div>
+  <div class="row mb-1">
+    <div class="col-4">
+      <label class="center-label">Do you agree?</label>
+    </div>
+  </div>
+</dx-popup>

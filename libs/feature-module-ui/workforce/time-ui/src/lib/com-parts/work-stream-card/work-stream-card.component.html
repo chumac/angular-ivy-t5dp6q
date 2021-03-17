@@ -1,0 +1,54 @@
+
+<div class="card-base">
+  <div class="card-base-content">
+    <h6 class="title">Project</h6>
+    <p class="field-text overflow-wrap pwidth mb-2" [innerHtml]="data?.project_text | stringWrap"></p>
+
+    <h6 class="title">Cost Center</h6>
+    <p class="field-text overflow-wrap mb-2" [innerHtml]="data?.cost_centre_text | stringWrap"></p>
+
+    <div class="row">
+      <div class="col-6">
+          <h6 class="title">Work Hours</h6>
+          <p class="field-text overflow-wrap mb-2" [innerHtml]="data?.wk_hours | hrMinDisplay"></p>      
+      </div>
+      <div class="col-6">
+          <h6 class="title">Work Hour Type</h6> 
+          <p class="field-text overflow-wrap pill">
+            <ng-container [ngSwitch]="true">
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 0"><mdb-badge pill="true" success="true">Standard</mdb-badge></ng-container>
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 1"><mdb-badge pill="true" danger="true">Overtime</mdb-badge></ng-container>
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 2"><mdb-badge pill="true" default="true">Weekend</mdb-badge></ng-container>
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 3"><mdb-badge pill="true" info="true">Unpaid Leave</mdb-badge></ng-container>
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 4"><mdb-badge pill="true" warning="true">Holiday</mdb-badge></ng-container>
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 5"><mdb-badge pill="true" class="badge-dark">Extra</mdb-badge></ng-container>
+                <ng-container *ngSwitchCase="data?.wk_hours_type === 6"><mdb-badge pill="true" primary="true">Leave</mdb-badge></ng-container>
+                <ng-container *ngSwitchDefault>---</ng-container>
+            </ng-container>
+          </p>      
+      </div>
+    </div>
+    <h6 class="title">Details</h6>
+    <div>
+        <p *ngIf="(data?.description?.length < 20);else detailsElem" class="field-text overflow-wrap mb-2" [innerHtml]="data?.description | stringWrap" ></p>
+      <ng-template #detailsElem>
+        <p class="field-text overflow-wrap show-less" [class.show]="show" [innerHtml]="data?.description | stringWrap" ></p>
+        <a class="show-btn" (click)="show = !show">{{ show ? 'Show less': 'Show More' }}</a>
+      </ng-template>  
+    </div>
+  </div>
+  <div class="card-base-footer text-right">
+    <div class="text-center">
+        <ng-container [ngSwitch]="true">
+            <ng-container *ngSwitchCase="data?.approval_status === 0"><mdb-badge danger="true">Not Approved</mdb-badge></ng-container>
+            <ng-container *ngSwitchCase="data?.approval_status === 1"><mdb-badge default="true">Submitted</mdb-badge></ng-container>
+            <ng-container *ngSwitchCase="data?.approval_status === 2"><mdb-badge success="true">Approved</mdb-badge></ng-container>
+            <ng-container *ngSwitchDefault><mdb-badge danger="true">Not Approved</mdb-badge></ng-container>
+        </ng-container>
+    </div>
+    <div *ngIf="(data?.approval_status === 0)" class="control-panel">
+        <a (click)="onEditWorkActivity(data)" class="mr-2 mt-5" title="Edit"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span></a>
+        <a (click)="onDeleteWorkActivity(data)" title="Delete"><span><i class="fa fa-trash" aria-hidden="true"></i></span></a>    
+    </div>
+  </div>
+</div>

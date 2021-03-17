@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="top">
+                <x365-fm-workforce-absence-leave-availability-chart [leaveEntitlements]="leaveEntitlements$ | async"></x365-fm-workforce-absence-leave-availability-chart>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4"> </div>
+        <div class="col-8">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <x365-shared-ui-hrz-command-bar [showApplyButton]="true" [showRefreshButton]="true" (buttonClicked)="onButtonClicked($event)"></x365-shared-ui-hrz-command-bar>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="item-container bottom">
+                <div>
+                    <div class="row py-2">
+                        <div class="col-12">
+                            <div class="middle1">
+                                <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="middle1">
+                                <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                                    <igx-column field="LeaveInfo" header="Type" width="25%">
+                                        <ng-template igxCell let-cell="cell">
+                                            {{ cell.row.rowData.LeaveInfo.description }}
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="start_date" header="Start Date" width="15%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="end_date" header="End Date" width="15%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="resumption_date" header="Resumption Date" width="15%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="no_of_days" header="No. of Days" width="10%"></igx-column>
+                                    <igx-column field="actual_return_date" header="Actual Return Date" width="10%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+
+                                    <igx-column field="leave_trans_id" header="..." class="text-center" width="10%">
+                                        <ng-template igxCell let-val>
+                                            <div class="hover-menu-container"><span class="text-center"></span>
+                                                <div class="hover-menu">
+                                                    <div class="hover-icons">
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-calendar-check-o'" title="Reschedule" (click)="onRescheduleIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-reply'" title="Return" (click)="onReturnIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Cancel" (click)="onApprovedCancelIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onApprovedDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </igx-column>
+                                </igx-grid>
+
+                                <igx-grid #awaitingApprovalDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [height]="null">
+                                    <igx-column field="LeaveInfo" header="Type" width="30%">
+                                        <ng-template igxCell let-cell="cell">
+                                            {{ cell.row.rowData.LeaveInfo.description }}
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="start_date" header="Start Date" width="15%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="end_date" header="End Date" width="15%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="resumption_date" header="Resumption Date" width="20%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+                                    <igx-column field="no_of_days" header="No. of Days" width="10%"></igx-column>
+                                    <igx-column field="leave_trans_id" header="..." class="text-center" width="10%">
+                                        <ng-template igxCell let-val>
+                                            <div class="hover-menu-container"><span class="text-center"></span>
+                                                <div class="hover-menu">
+                                                    <div class="hover-icons">
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-reply-all'" title="Recall" (click)="onRecallIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Cancel" (click)="onAwaitingApprovalCancelIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onAwaitingApprovalDownloadIconClicked(val)" *ngIf="hasDocumentAwaitingApproval(val)"></x365-shared-ui-hover-icon> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </igx-column>
+                                </igx-grid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-absence-leave-apply #editor [width]="32" [show]="showEditor$ | async" [data]="null" [mode]="'APPLY'" [leaveTypes]="leaveTypes$ | async" [selectOptionData]="selectOptionData$ | async" [comprehensiveData]="comprehensiveData$ | async" [contactInfo]="contactInfo$ | async"
+    [activePersonnel]="activePersonnel$ | async" [allowBackupOfficerSelectionForLeaveApply]="allowBackupOfficerSelectionForLeaveApply$ | async" [allowSupervisorSelectionForLeaveApply]="allowSupervisorSelectionForLeaveApply$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-absence-leave-apply>
+<x365-fm-workforce-absence-leave-return #return [width]="32" [show]="showReturnEditor$ | async" [data]="null" (cancelClick)="onCancelReturnEditor()"></x365-fm-workforce-absence-leave-return>
+<x365-fm-workforce-absence-leave-cancel-approved #cancelApproved [width]="32" [show]="showCancelApprovedEditor$ | async" [data]="null" (cancelClick)="onCancelApprovedEditor()"></x365-fm-workforce-absence-leave-cancel-approved>

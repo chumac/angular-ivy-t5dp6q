@@ -1,0 +1,125 @@
+@import 'colors';
+
+:host {
+  display: block;
+  width: 20em;
+  height: 100%;
+  background-color: rgb(253, 253, 253);
+  margin-right: 15px;
+  border: 1px solid rgb(216, 216, 216);
+}
+
+.panel-base {
+    display: flex;
+    flex-direction: column;
+    background: #ebecf0;
+}
+
+.panel-base-header {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 4em;
+  background-color: rgb(238, 238, 238);
+  padding: 0.2em;
+  border-radius: 3px 3px 0 0;
+  border-bottom: 5px solid lighten($app_brand_color, 15%);
+
+  a {
+    color: rgb(80, 80, 80);
+  }
+
+  a:hover {
+    color: $app_brand_color;
+  }
+}
+
+.panel-base-header-top {
+  flex-basis: 2em;
+  padding: 3px 3px 0 0;
+}
+
+.panel-base-header-bottom {
+  flex-grow: 1;
+}
+
+/* just added class */
+
+.panel-base-inline-header {
+  display: flex;
+  flex: 0 0 auto;
+  padding: 10px 8px;
+  position: relative;
+  min-height: 20px;
+}
+
+.title {
+  float: left;
+  width: 95%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tool-bar {
+  float: right;
+}
+/* just added class */
+
+.panel-base-content {
+  display: block;
+  flex-grow: 1;
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0em 0em 0em 0em;
+}
+
+.panel-base-inline-footer {
+  display: flex;
+  flex: 0 0 auto;
+  padding: 7px 8px;
+  position: relative;
+  min-height: 20px;
+  border-top: 1px solid #cccccc;
+}
+
+.dropdown-menu {
+  width: 5rem !important;
+  font-size: 10px !important;
+}
+.dropdown-item {
+  padding: 0.25rem 0.4rem;
+}
+
+/* width */
+.panel-base-content::-webkit-scrollbar {
+  height: 12px;
+}
+
+/* Track */
+.panel-base-content::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.panel-base-content::-webkit-scrollbar-thumb {
+  opacity: 0.5; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.panel-base-content::-webkit-scrollbar-thumb:hover {
+  opacity: 0.8; 
+}
+
+.add-icon {
+  content: '';
+}
+.hover-icon:hover {
+  font-size: 14px;
+}
+.footer-link:hover {
+  text-decoration: underline!important;
+}
+    
+

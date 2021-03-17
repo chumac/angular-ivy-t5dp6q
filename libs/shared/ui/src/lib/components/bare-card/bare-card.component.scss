@@ -1,0 +1,8 @@
+@import 'mixins';
+
+$roundedSize: 0.2em;
+
+.bare-card {
+  @include borderRadius($roundedSize, $roundedSize, $roundedSize, $roundedSize);
+  @include boxShadow(0, 2px, 8px, 0px, #d4d3d3, null);
+}

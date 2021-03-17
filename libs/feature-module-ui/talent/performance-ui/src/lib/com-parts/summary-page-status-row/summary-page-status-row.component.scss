@@ -1,0 +1,33 @@
+.li-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 3em;
+  background-color: rgb(253, 253, 253);
+  border-bottom: 1px solid rgb(242, 242, 242);
+
+  .li-row-l {
+    flex-grow: 1;
+    padding: 12px;
+  }
+
+  .li-row-r {
+    display: flex;
+    flex-basis: 4em;
+    background-color: rgb(252, 252, 252);
+    align-items: center;
+
+    .fa {
+      font-size: 1.2em;
+      margin: 0 auto;
+    }
+
+    .completed {
+      color: rgb(145, 207, 51);
+    }
+
+    .not-completed {
+      color: rgb(231, 4, 4);
+    }
+  }
+}

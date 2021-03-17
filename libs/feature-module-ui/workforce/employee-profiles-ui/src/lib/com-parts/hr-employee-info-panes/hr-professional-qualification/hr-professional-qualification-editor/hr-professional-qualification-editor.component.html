@@ -1,0 +1,92 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Professional Qualification'" [subTitle]="'Details of your professional qualification'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">Tag:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="requirement_type" [options]="selectOptionData?.RequirementTypeQualificationLevels" [filterEnabled]="true" class="form-font"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">Institution:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="institution_id" [options]="institutions" [filterEnabled]="true" class="form-font" [mdbTooltip]="fs.formToolTips.institutionToolTip" (selected)="onInstitutionSelected($event)" (opened)="onInstitutionDropdownOpened($event)"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">Qualification:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="qualification_id" [mdbTooltip]="this.fs.formToolTips.qualificationToolTip" [options]="qualifications$ | async" [filterEnabled]="true" class="form-font" (selected)="onQualificationSelected($event)" (opened)="onQualificationDropdownOpened($event)"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label" title="Membership ID">Member ID:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <input formControlName="membershipID" type="text" class="form-control form-font">
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label" title="Professional Award">Prof. Award:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="award_id" [options]="selectOptionData?.ProfessionalAwards" [filterEnabled]="true" class="form-font"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="center-label">Award Year:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" formControlName="year_of_award" [placeholder]=""></dx-date-box>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="center-label" title="Membership requires renewal">This membership requires renewal:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-checkbox formControlName="req_renewal"></mdb-checkbox>
+              </div>
+          </div>
+
+          <div class="row mb-1" *ngIf="fs.reqRenewal.value">
+              <div class="col-4">
+                  <label class="center-label" title="Next Renewal Date">Next Renewal Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" formControlName="next_renewal_date" [placeholder]=""></dx-date-box>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-1"></div>
+              <div class="col-10 text-center">
+                  <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" [caption]="'Select Image'" [captionSubText]="'Select an image from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Certificate Image'" [cropperHeaderMessage]="'Upload Image'"
+                      (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+              </div>
+              <div class="col-1"></div>
+          </div>
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

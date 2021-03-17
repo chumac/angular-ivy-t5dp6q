@@ -1,0 +1,94 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Uploads'" [subTitle]="'Details of Uploads'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Filename:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.filename | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Verification Id:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.verification_id | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Transaction Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.import_date | dateDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Destination:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.datadestination | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Delimeter:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.delimeter | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Status:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.uploadstatus | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Reverse Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.reverse_date | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Import Counts:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.import_table_index | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Total Records:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.total_records | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>System Message:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.sys_message | stringDisplay}}
+        </div>
+        </div>
+      </div>
+      <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+      </div>
+    </div>
+  </div>

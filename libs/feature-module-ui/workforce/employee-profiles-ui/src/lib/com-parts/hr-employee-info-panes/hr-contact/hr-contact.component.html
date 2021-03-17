@@ -1,0 +1,333 @@
+<div class="card card-container">
+  <div class="card-content font-size">
+    <div class="card-row">
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Residential Address</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Street I</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.street1_r | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Street II</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.street2_r | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Country</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.country_r?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>State</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.state_r?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>City</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.area_r?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Zipcode</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.zip_r | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Permanent Address</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Street I</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.street1_p | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Street II</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.street2_p | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Country</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.country_p?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>State</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.state_p?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>City</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.area_p?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Zipcode</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.zip_p | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Digital Contact</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Email</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.email | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Email (Personal)</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.email_personal | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Preferred Email</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.email_personal | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Home Phone</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.phone | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Mobile Phone</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.mobile_phone | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Office Extension</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.office_ext | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Pager</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.pager | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item  mb-4">
+        <span class="d-block font-weight-bold mb-1">Next-of-Kin</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Title</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.kin_title | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Relationship</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.kin_relationship | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>First Name</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.kin_firstname | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Surname</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.kin_Surname | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Other Names</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.kin_otherNames | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Email</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.email_kin | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Gender</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.kin_gender | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Street I</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.street1_kin | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Street II</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.street2_kin | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Zip Code</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.zip_kin | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Home phone</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.tel1_kin | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Mobile phone</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.tel2_kin | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>City</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.area_kin?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>State</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.state_kin?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Country</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.country_kin?.description | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-2 mt-5 mb-6" *ngIf="false">
+        <div class="col-12 row-text mt-0">
+          <x365-shared-ui-file-downloader *ngIf="true" [data]=""></x365-shared-ui-file-downloader>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="command-panel"><a title="Edit" (click)="showEditor()"><i class="fa fa-pencil-square-o"></i></a></div>
+</div>
+
+
+<x365-fm-workforce-hr-contact-editor [width]="28" [employeeId]="employeeId" [show]="showEditor$ | async" [data]="approvedData$ | async" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-hr-contact-editor>
+<x365-fm-workforce-hr-contact-viewer [width]="28" [show]="showViewer$ | async" [data]="awaitingApprovalData$ | async"  (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-contact-viewer>

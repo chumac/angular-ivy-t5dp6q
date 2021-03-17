@@ -1,0 +1,47 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Performance History'" [subTitle]="'Details of Employee Performance History'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Performance Plan:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.perf_plan | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Final Score Before Moderation:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.final_score_before_moderation | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Final Score After Moderation:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.final_score_moderated | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Finalized Score:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.finalized_score | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

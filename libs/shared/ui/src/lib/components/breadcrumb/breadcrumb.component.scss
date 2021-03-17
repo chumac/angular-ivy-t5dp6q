@@ -1,0 +1,13 @@
+.bc-icons-2 .breadcrumb-item + .breadcrumb-item::before {
+  content: none;
+}
+
+.bc-icons-2 {
+  mdb-breadcrumb {
+    mdb-breadcrumb-item.active {
+      .breadcrumb-item {
+        color: #000 !important;
+      }
+    }
+  }
+}

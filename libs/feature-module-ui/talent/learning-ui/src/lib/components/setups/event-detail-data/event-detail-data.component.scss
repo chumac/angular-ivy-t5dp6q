@@ -1,0 +1,60 @@
+.f-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding: 0.7em 3.1em;
+
+  .top {
+    flex: 0 0 0em;
+    margin-bottom: 0em;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    .navigation {
+      flex: 0 0 15em;
+      background: transparent;
+      padding-top: 0.5em;
+      margin-right: 0.8em;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+
+      .content-top {
+        flex: 0 0 2.7em;
+        display: flex;
+        justify-content: space-between;
+
+        .back-navigation {
+          button {
+            transition: all .2s ease-in-out;
+            border-color: rgba(black, 0.7) !important;
+            color: rgba(black, 0.7) !important;
+          }
+
+          button {
+
+            &:hover,
+            &:active,
+            &:focus {
+              background-color: rgba(black, 0.7) !important;
+              color: #fff !important;
+              outline: none !important;
+              border-color: transparent !important;
+            }
+          }
+        }
+      }
+
+      .content-bottom {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}

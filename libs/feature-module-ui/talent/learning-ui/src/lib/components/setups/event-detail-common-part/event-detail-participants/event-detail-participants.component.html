@@ -1,0 +1,77 @@
+<div class="card card-container container-fluid">
+
+  <div class="d-flex flex-column doc-container-t font-size">
+    <div class="doc-container-t-ct">
+      <div class="doc-container-t-ct-l">
+      </div>
+      <div class="doc-container-t-ct-r">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-6 md-form">
+          </div>
+          <div class="col-1"></div>
+          <div class="col-4 md-form">
+            <mdb-select #filterBy [options]="service.filterList" (selected)="search()" [filterEnabled]="true"
+              [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-container-s">
+    <div class="row">
+      <div class="col-12 md-form mb-1">
+        <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+          placeholder="Enter your search string i.e. Event Text, Employee Name, Schedule Text, Source Text, Recommendation Un, Recommendation Source Text."
+          class="form-control font-size">
+      </div>
+    </div>
+  </div>
+
+  <div class="card-content font-size">
+    <div class="card-content-bottom">
+      <igx-grid #eventParticipantDataGrid [data]="eventParticipantData$ | async" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true"
+        [perPage]="15" [height]="null" [paginationTemplate]="">
+        <igx-column field="event_text" header="Event Text" width="15%">
+        </igx-column>
+        <igx-column field="employee_name" header="Employee Name" width="15%">
+        </igx-column>
+        <igx-column field="schedule_text" header="Schedule Text" width="15%">
+        </igx-column>
+        <igx-column field="source_text" header="Source Text" width="15%">
+        </igx-column>
+        <igx-column field="recommendation_un" header="Recommendation Un" width="10%">
+        </igx-column>
+        <igx-column field="recommendation_source_text" header="Recommendation Source Text" width="15%">
+        </igx-column>
+        <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="15%">
+          <ng-template igxCell let-cell="cell" let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon *ngIf='isReview' [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                    (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View Report"
+                    (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon *ngIf='isReview' [iconClass]="'fa fa-trash'" title="Remove"
+                    (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>
+<x365-fm-talent-event-detail-participants-editor #eventParticipantsEditor [width]="40"
+  [showCreate]="showEventParticipantsEditor$ | async" [data]="null"
+  [eventParticipantSource]="eventParticipantSource$ | async"
+  [eventParticipantEmployee]="eventParticipantEmployee$ | async"
+  [eventParticipantSchedule]="eventParticipantSchedule$ | async" [eventId]="eventDetailId">
+</x365-fm-talent-event-detail-participants-editor>
+<x365-fm-talent-event-detail-participants-view #eventParticipantsView [width]="40"
+  [showView]="showEventParticipantsView$ | async" [data]="null" [eventId]="eventDetailId">
+</x365-fm-talent-event-detail-participants-view>

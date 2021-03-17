@@ -1,0 +1,30 @@
+$nine_box_size: 1.15em;
+
+$logo_width: 7em;
+$logo_height: 1.6em;
+
+:host {
+  display: block;
+}
+
+.nine-box {
+  width: $nine_box_size;
+  height: $nine_box_size;
+  cursor: pointer;
+}
+
+.logo {
+  width: $logo_width;
+  height: $logo_height;
+  cursor: pointer;
+}
+
+div {
+  display: flex;
+  align-items: center !important;
+
+  a {
+    line-height: normal;
+    height: auto;
+  }
+}

@@ -1,0 +1,26 @@
+<div class="card card-container">
+    <div class="card-content font-size">
+        <div class="card-row">
+            <div class="card-row-item mb-4">
+                <div class="row mb-2">
+                    <div class="col-4 row-label">
+                        <div class="">
+                            <div class="mx-3">
+                                <div class="row mb-2">
+                                    <div class="col-12 row-text mt-0 mb-2 text-right">
+                                        <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="approvedPhoto$ | async" [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8 row-text mt-0 font-weight-bold">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="command-panel"><a title="Edit" (click)="showEditor()"><i class="fa fa-pencil-square-o"></i></a></div>
+</div>
+<x365-fm-workforce-profile-picture-editor [width]="28" [show]="showEditor$ | async" [data]="approvedPhoto$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-profile-picture-editor>
+<x365-fm-workforce-profile-picture-viewer [width]="28" [show]="showViewer$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-profile-picture-viewer>

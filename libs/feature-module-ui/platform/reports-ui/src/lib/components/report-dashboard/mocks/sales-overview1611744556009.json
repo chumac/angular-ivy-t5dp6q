@@ -1,0 +1,466 @@
+{
+  "Dashboard": {
+    "@CurrencyCulture": "en-US",
+    "Title": {
+      "@Text": "Sales Overview",
+      "@Alignment": "Left"
+    },
+    "DataSources": {
+      "Item1": {
+        "@Name": "Sales",
+        "@ComponentName": "dsSales",
+        "@ItemType": "ObjectDataSource",
+        "DataMember": "24CFBE767F0B85CEDA1C64DBA0EEC1824910587D8D548404F4235DE54B22A22D8BB03E1D28008F9BEDDBA88B9BE0CCA39F1F658509830006CE4517AD9D1190A1347C3AFF"
+      }
+    },
+    "Items": {
+      "Item1": {
+        "@ComponentName": "range",
+        "@Name": "Filter by Date",
+        "@DataSource": "dsSales",
+        "@ItemType": "RangeFilter",
+        "DataItems": {
+          "Item1": {
+            "@DataMember": "CurrentDate",
+            "@Name": "Date",
+            "@DateTimeGroupInterval": "MonthYear",
+            "@DefaultId": "DataItem1",
+            "@ItemType": "Dimension"
+          },
+          "Item2": {
+            "@DataMember": "Category",
+            "@DefaultId": "DataItem2",
+            "@ItemType": "Dimension"
+          },
+          "Item3": {
+            "@DataMember": "Sales",
+            "@DefaultId": "DataItem0",
+            "@ItemType": "Measure"
+          }
+        },
+        "SeriesDimensions": {
+          "Item1": {
+            "@DefaultId": "DataItem2",
+            "@ItemType": "SeriesDimension"
+          }
+        },
+        "Argument": {
+          "@DefaultId": "DataItem1"
+        },
+        "Series": {
+          "Item1": {
+            "@SeriesType": "StackedLine",
+            "@ItemType": "Simple",
+            "Value": {
+              "@DefaultId": "DataItem0"
+            }
+          }
+        },
+        "DateTimePeriods": {
+          "Item1": {
+            "@Name": "6 Months",
+            "@ItemType": "DateTimePeriod",
+            "StartLimit": {
+              "FlowDateTimePeriodLimit": {
+                "@Interval": "Month",
+                "@Offset": "-5"
+              }
+            }
+          },
+          "Item2": {
+            "@Name": "12 Months",
+            "@ItemType": "DateTimePeriod",
+            "StartLimit": {
+              "FlowDateTimePeriodLimit": {
+                "@Interval": "Month",
+                "@Offset": "-11"
+              }
+            }
+          },
+          "Item3": {
+            "@Name": "Quarter to date",
+            "@ItemType": "DateTimePeriod",
+            "StartLimit": {
+              "FlowDateTimePeriodLimit": {
+                "@Interval": "Quarter"
+              }
+            },
+            "EndLimit": {
+              "FlowDateTimePeriodLimit": {
+                "@Interval": "Day"
+              }
+            }
+          },
+          "Item4": {
+            "@Name": "Year to date",
+            "@ItemType": "DateTimePeriod",
+            "StartLimit": {
+              "FlowDateTimePeriodLimit": null
+            },
+            "EndLimit": {
+              "FlowDateTimePeriodLimit": {
+                "@Interval": "Day"
+              }
+            }
+          }
+        }
+      },
+      "Item2": {
+        "@ComponentName": "gridSalesByState",
+        "@Name": "Sales by State",
+        "@DataSource": "dsSales",
+        "@ItemType": "Grid",
+        "InteractivityOptions": {
+          "@MasterFilterMode": "Multiple"
+        },
+        "DataItems": {
+          "Item1": {
+            "@DataMember": "SalesTarget",
+            "@DefaultId": "DataItem5",
+            "@ItemType": "Measure"
+          },
+          "Item2": {
+            "@DataMember": "Sales",
+            "@DefaultId": "DataItem4",
+            "@ItemType": "Measure"
+          },
+          "Item3": {
+            "@DataMember": "Sales",
+            "@DefaultId": "DataItem3",
+            "@ItemType": "Measure"
+          },
+          "Item4": {
+            "@DataMember": "State",
+            "@SortOrder": "Descending",
+            "@SortByMeasure": "DataItem4",
+            "@DefaultId": "DataItem1",
+            "@ItemType": "Dimension"
+          },
+          "Item5": {
+            "@DataMember": "Sales",
+            "@DefaultId": "DataItem0",
+            "@ItemType": "Measure"
+          },
+          "Item6": {
+            "@DataMember": "CurrentDate",
+            "@DateTimeGroupInterval": "MonthYear",
+            "@DefaultId": "DataItem6",
+            "@ItemType": "Dimension"
+          }
+        },
+        "FormatRules": {
+          "Item1": {
+            "@Name": "FormatRule 1",
+            "@DataItem": "DataItem3",
+            "@ItemType": "GridItemFormatRule",
+            "FormatConditionBar": {
+              "NegativeStyleSettings": {
+                "@PredefinedColor": "PaleRed"
+              },
+              "StyleSettings": {
+                "@PredefinedColor": "PaleGreen"
+              },
+              "BarOptions": null
+            }
+          }
+        },
+        "GridColumns": {
+          "Item1": {
+            "@Name": "State",
+            "@Weight": "85.6135653213202",
+            "@FixedWidth": "14.16",
+            "@ItemType": "GridDimensionColumn",
+            "Dimension": {
+              "@DefaultId": "DataItem1"
+            }
+          },
+          "Item2": {
+            "@Name": "Sales vs Target",
+            "@Weight": "68.935598050933137",
+            "@FixedWidth": "15.15",
+            "@ItemType": "GridDeltaColumn",
+            "ActualValue": {
+              "@DefaultId": "DataItem4"
+            },
+            "TargetValue": {
+              "@DefaultId": "DataItem5"
+            },
+            "DeltaOptions": {
+              "@ResultIndicationThreshold": "0.3",
+              "@ValueType": "PercentVariation"
+            }
+          },
+          "Item3": {
+            "@Name": "Sales",
+            "@Weight": "77.8305139284729",
+            "@FixedWidth": "20.98",
+            "@ItemType": "GridMeasureColumn",
+            "Measure": {
+              "@DefaultId": "DataItem3"
+            },
+            "Totals": {
+              "Item1": {
+                "@Type": "Sum",
+                "@ItemType": "Total"
+              }
+            }
+          },
+          "Item4": {
+            "@Name": "Trend",
+            "@Weight": "98.955939137629827",
+            "@FixedWidth": "14.32",
+            "@ItemType": "GridSparklineColumn",
+            "SparklineValue": {
+              "@DefaultId": "DataItem0"
+            },
+            "SparklineOptions": {
+              "@HighlightStartEndPoints": "false"
+            }
+          }
+        },
+        "SparklineArgument": {
+          "@DefaultId": "DataItem6"
+        },
+        "GridOptions": {
+          "@ShowVerticalLines": "false",
+          "@ColumnWidthMode": "Manual"
+        }
+      },
+      "Item3": {
+        "@ComponentName": "chartSalesByCategory",
+        "@Name": "Sales by Product Category",
+        "@DataSource": "dsSales",
+        "@ItemType": "Chart",
+        "DataItems": {
+          "Item1": {
+            "@DataMember": "Sales",
+            "@DefaultId": "DataItem1",
+            "@ItemType": "Measure"
+          },
+          "Item2": {
+            "@DataMember": "CurrentDate",
+            "@DateTimeGroupInterval": "DayMonthYear",
+            "@DefaultId": "DataItem2",
+            "@ItemType": "Dimension",
+            "DateTimeFormat": {
+              "@DateFormat": "Long"
+            }
+          },
+          "Item3": {
+            "@DataMember": "Category",
+            "@DefaultId": "DataItem3",
+            "@ItemType": "Dimension"
+          }
+        },
+        "SeriesDimensions": {
+          "Item1": {
+            "@DefaultId": "DataItem3",
+            "@ItemType": "SeriesDimension"
+          }
+        },
+        "Arguments": {
+          "Item1": {
+            "@DefaultId": "DataItem2",
+            "@ItemType": "Argument"
+          }
+        },
+        "Panes": {
+          "Item1": {
+            "@Name": "Pane 1",
+            "@ItemType": "Pane",
+            "AxisY": {
+              "@TitleVisible": "false",
+              "@Title": "Sales",
+              "@AlwaysShowZeroLevel": "false",
+              "@Logarithmic": "true"
+            },
+            "Series": {
+              "Item1": {
+                "@SeriesType": "Line",
+                "@ItemType": "Simple",
+                "Value": {
+                  "@DefaultId": "DataItem1"
+                }
+              }
+            }
+          }
+        },
+        "ChartLegend": {
+          "@InsidePosition": "TopLeftVertical"
+        },
+        "AxisX": {
+          "DateTimeFormat": {
+            "@DateFormat": "Short"
+          }
+        }
+      },
+      "Item4": {
+        "@ComponentName": "cardDashboardItem1",
+        "@Name": "Sales vs Target by Product Category",
+        "@ShowCaption": "false",
+        "@DataSource": "dsSales",
+        "@ContentLineCount": "4",
+        "@ItemType": "Card",
+        "InteractivityOptions": {
+          "@MasterFilterMode": "Multiple"
+        },
+        "DataItems": {
+          "Item1": {
+            "@DataMember": "Category",
+            "@DefaultId": "DataItem0",
+            "@ItemType": "Dimension"
+          },
+          "Item2": {
+            "@DataMember": "Sales",
+            "@DefaultId": "DataItem1",
+            "@ItemType": "Measure",
+            "NumericFormat": {
+              "@FormatType": "Currency",
+              "@Precision": "1",
+              "@Unit": "Millions",
+              "@IncludeGroupSeparator": "true"
+            }
+          },
+          "Item3": {
+            "@DataMember": "SalesTarget",
+            "@DefaultId": "DataItem2",
+            "@ItemType": "Measure"
+          }
+        },
+        "FormatRules": {
+          "Item1": {
+            "@Name": "Format Rule 1",
+            "@LayoutItemApplyTo": "Indicator",
+            "@DeltaValueType": "PercentVariation",
+            "@CardId": "DataItem1",
+            "@ItemType": "CardItemDeltaFormatRule",
+            "FormatConditionValue": {
+              "@Condition": "LessOrEqual",
+              "IconSettings": {
+                "@IconType": "IndicatorRedFlag"
+              },
+              "Value1": {
+                "@Type": "System.Decimal",
+                "@Value": "-0.02"
+              }
+            }
+          },
+          "Item2": {
+            "@Name": "Format Rule 2",
+            "@LayoutItemApplyTo": "Indicator",
+            "@DeltaValueType": "PercentVariation",
+            "@CardId": "DataItem1",
+            "@ItemType": "CardItemDeltaFormatRule",
+            "FormatConditionValue": {
+              "@Condition": "GreaterOrEqual",
+              "IconSettings": {
+                "@IconType": "IndicatorGreenFlag"
+              },
+              "Value1": {
+                "@Type": "System.Decimal",
+                "@Value": "0.02"
+              }
+            }
+          }
+        },
+        "SeriesDimensions": {
+          "Item1": {
+            "@DefaultId": "DataItem0",
+            "@ItemType": "SeriesDimension"
+          }
+        },
+        "Cards": {
+          "Item1": {
+            "@ItemType": "Card",
+            "ActualValue": {
+              "@DefaultId": "DataItem1"
+            },
+            "TargetValue": {
+              "@DefaultId": "DataItem2"
+            },
+            "AbsoluteVariationNumericFormat": null,
+            "PercentVariationNumericFormat": null,
+            "PercentOfTargetNumericFormat": null,
+            "LayoutTemplate": {
+              "@MinWidth": "270",
+              "@MaxWidth": "270",
+              "@Type": "Centered",
+              "MainValue": {
+                "@Visible": "true",
+                "@ValueType": "Title",
+                "@DimensionIndex": "0"
+              },
+              "SubValue": {
+                "@Visible": "true",
+                "@ValueType": "Subtitle",
+                "@DimensionIndex": "0"
+              },
+              "BottomValue": {
+                "@Visible": "true",
+                "@ValueType": "ActualValue",
+                "@DimensionIndex": "0"
+              },
+              "BottomSubValue1": {
+                "@Visible": "true",
+                "@ValueType": "AbsoluteVariation",
+                "@DimensionIndex": "0"
+              },
+              "BottomSubValue2": {
+                "@Visible": "true",
+                "@ValueType": "PercentVariation",
+                "@DimensionIndex": "0"
+              },
+              "DeltaIndicator": {
+                "@Visible": "true"
+              },
+              "Sparkline": {
+                "@Visible": "true"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LayoutTree": {
+      "LayoutItems": {
+        "Item1": {
+          "@Orientation": "Vertical",
+          "@Weight": "100",
+          "@ItemType": "LayoutGroup",
+          "LayoutItems": {
+            "Item1": {
+              "@Weight": "76.209434947791692",
+              "@ItemType": "LayoutGroup",
+              "LayoutItems": {
+                "Item1": {
+                  "@DashboardItem": "chartSalesByCategory",
+                  "@Weight": "48.135527143113769",
+                  "@ItemType": "LayoutItem"
+                },
+                "Item2": {
+                  "@DashboardItem": "gridSalesByState",
+                  "@Weight": "29.996954899982796",
+                  "@ItemType": "LayoutItem"
+                }
+              }
+            },
+            "Item2": {
+              "@DashboardItem": "cardDashboardItem1",
+              "@Weight": "23.131740954201998",
+              "@ItemType": "LayoutItem"
+            },
+            "Item3": {
+              "@DashboardItem": "range",
+              "@Weight": "22.52634205490973",
+              "@ItemType": "LayoutItem"
+            }
+          }
+        }
+      }
+    },
+    "CustomProperties": {
+      "Description": "[\"This sample dashboard displays statistical information on bicycle sales and related equipment/accessories.\",\"The rightmost grid includes a sales breakdown by state. Cards display sales by the product category and compared to target values. The chart visualizes sales over time by product category.\"]",
+      "Links": "[{\"href\":\"https://docs.devexpress.com/Dashboard/116912/main-features/interactivity/master-filtering\",\"text\":\"Dashboard Master Filtering\"},{\"href\":\"https://docs.devexpress.com/Dashboard/117168/creating-dashboards/creating-dashboards-on-the-web/designing-dashboard-items/range-filter\",\"text\":\"Range Filter\"},{\"href\":\"https://docs.devexpress.com/Dashboard/117379/creating-dashboards/creating-dashboards-on-the-web/designing-dashboard-items/range-filter/predefined-ranges\",\"text\":\"Predefined Ranges\"}]"
+    }
+  }
+}

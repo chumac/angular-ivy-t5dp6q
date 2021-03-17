@@ -1,0 +1,143 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Family'" [subTitle]="'Details of your Family (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Surname:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.surname | stringDisplay}}
+              </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Firstname:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.firstname | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Othernames:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.othernames | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Date of Birth:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.dobirth | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Gender">Gender:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.gender | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Relationship:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.member_type_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Address:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.address_line1 | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label></label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.address_line2 | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Country">Country:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.country | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="State">State:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.state | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="City">City:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.area | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Industry">Industry:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.business_type | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Phone Number">Phone Number:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.phone_no | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Email">Email:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.email | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mt-4 mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-12 row-text mt-0 mb-2 text-right">
+            <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="imageData" [showBorder]="false"
+              [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false"
+              [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

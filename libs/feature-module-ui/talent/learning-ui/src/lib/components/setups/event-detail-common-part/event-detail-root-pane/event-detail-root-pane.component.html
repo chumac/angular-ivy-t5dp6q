@@ -1,0 +1,10 @@
+<div [ngSwitch]="selectedModuleId">
+  <x365-fm-talent-event-detail-data-listing *ngSwitchCase="NavMenuItemTypes.EVENT_DETAILS" [eventDetailId]="eventDetailId" [isReview]="isReview"></x365-fm-talent-event-detail-data-listing>
+  <x365-fm-talent-schedule *ngSwitchCase="NavMenuItemTypes.SCHEDULE" [eventDetailId]="eventDetailId" [isReview]="isReview"></x365-fm-talent-schedule>
+  <x365-fm-talent-event-detail-pre-requisites *ngSwitchCase="NavMenuItemTypes.PRE_REQUISITES" [eventDetailId]="eventDetailId" [isReview]="isReview"></x365-fm-talent-event-detail-pre-requisites>
+  <x365-fm-talent-event-detail-assets *ngSwitchCase="NavMenuItemTypes.ASSETS" [eventDetailId]="eventDetailId" [isReview]="isReview" [isOpen]="isOpen"></x365-fm-talent-event-detail-assets>
+  <x365-fm-talent-event-detail-facilitators *ngSwitchCase="NavMenuItemTypes.FACILITATORS" [eventDetailId]="eventDetailId" [isReview]="isReview"></x365-fm-talent-event-detail-facilitators>
+  <x365-fm-talent-event-detail-feedback-forms *ngSwitchCase="NavMenuItemTypes.FEEDBACK_FORMS" [eventDetailId]="eventDetailId" [isReview]="isReview" [isOpen]="isOpen"></x365-fm-talent-event-detail-feedback-forms>
+  <x365-fm-talent-event-detail-participants *ngSwitchCase="NavMenuItemTypes.PARTICIPANTS" [eventDetailId]="eventDetailId" [isReview]="isReview"></x365-fm-talent-event-detail-participants>
+</div>
+

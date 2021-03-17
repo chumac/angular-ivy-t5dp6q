@@ -1,0 +1,260 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="title?title:'Form Renderer'" [subTitle]="subTitle?subTitle:'Displays already create form controls'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body" *ngIf="isAccessible">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div *ngFor="let formElement of transformedData let i = index" [ngSwitch]="formElement.widget_id">
+          
+          <!-- Text Box Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.text_box">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-form-field><input formControlName="{{ formElement.field_name }}" matInput type="text"></mat-form-field>
+            </div>
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Text Box Renderer-->
+
+          <!-- Number Text Box Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.number_text_box">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-form-field><input formControlName="{{ formElement.field_name }}" matInput type="number"></mat-form-field>
+            </div>
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Number Text Box Renderer-->
+
+          <!-- Simple Drop Down Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.drop_down">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <dx-lookup formControlName="{{ formElement.field_name }}" [dataSource]="formElement.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+            </div> 
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div> 
+          <!-- / End Simple Drop Down Renderer-->
+
+          <!-- Text Area Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.text_area">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-form-field><textarea formControlName="{{ formElement.field_name }}" rows="4" matInput></textarea></mat-form-field>
+            </div> 
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div> 
+          <!-- / End Text Area Renderer-->
+
+          <!-- Date Picker Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.date_picker">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-form-field><input formControlName="{{ formElement.field_name }}" matInput type="date"></mat-form-field>
+            </div>  
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Date Picker Renderer-->
+
+          <!-- Check Box Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.check_box">
+            <div class="col-12 fbl-col">
+              <label class="" [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-checkbox formControlName="{{ formElement.field_name }}"></mat-checkbox>              
+            </div> 
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Check Box Renderer-->
+
+          <!-- File Picker Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.file_picker">
+            <div class="col-12 fbl-col">
+              <label class="" [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <x365-shared-ui-file-picker [fileBlobObject]="formElement.value" (fileSelected)="onFileSelected($event, formElement.field_name)" (fileRemoved)="onFileRemoved(formElement.field_name)"></x365-shared-ui-file-picker>
+           
+            </div> 
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End File Picker Renderer-->
+
+           <!-- Regex Text Box Renderer-->
+           <div class="row mb-4" *ngSwitchCase="formWidgetType.regex_text_box">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-form-field><input  (paste)="regexPasteEventHandler($event)" (keypress)="regexEventHandler($event, formElement.extra)" formControlName="{{ formElement.field_name }}" matInput type="text"></mat-form-field>
+            </div>
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Regex Text Box Renderer-->
+
+          <!-- Dictionary Drop Down Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.dictionary_drop_down">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <dx-lookup formControlName="{{ formElement.field_name }}" [dataSource]="formElement.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+            </div> 
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+ 
+          </div>
+          <!-- / End Dictionary Drop Down Renderer-->
+
+          <!-- Dataset Drop Down Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.dataset_drop_down">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">                      
+              <dx-lookup #dataSetDropDownLookUp formControlName="{{ formElement.field_name }}" [dataSource]="formElement.optionsData" valueExpr="code" displayExpr='description' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+            </div> 
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div> 
+          <!-- / End Dataset Drop Down Renderer-->
+
+          <!-- Date Picker Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.time_picker">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <mat-form-field><input formControlName="{{ formElement.field_name }}" matInput type="time"></mat-form-field>
+            </div>  
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Date Picker Renderer-->
+
+          <!-- Cascade Drop Down Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.cascading_drop_down">
+            <div class="col-12 fbl-col">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}:</label>
+            </div>
+            <div class="col-12 fbi-col">
+              <dx-lookup formControlName="{{ formElement.field_name }}" [dataSource]="formElement.optionsData" valueExpr="code" displayExpr='description' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+            </div>
+
+            <div *ngIf="submitted && this.fs.f.get(formElement?.field_name)?.errors" class="invalid-feedback">
+                <div *ngIf="this.fs.f.get(formElement?.field_name)?.errors?.required">{{ formElement.label }} is required</div>
+            </div>
+
+          </div>
+          <!-- / End Cascade Drop Down Renderer--> 
+
+          
+          <!-- Sub Heading Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.sub_heading">
+            <div class="col-12 fbl-col sub-heading">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}</label>
+            </div>
+            <!-- <div class="col-12 fbi-col">
+              <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+            </div>  -->
+          </div> 
+          <!-- / End Sub Heading Renderer-->
+
+          <!-- Label Renderer-->
+          <div class="row mb-4" *ngSwitchCase="formWidgetType.label">
+            <div class="col-12 fbl-col desc-label">
+              <label class="_center " [class.required]="toJson(formElement?.validationType)?.required">{{ formElement.label }}</label>
+            </div>
+            <!-- <div class="col-12 fbi-col">
+              <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+            </div>  -->
+          </div> 
+          <!-- / End Label Renderer-->
+
+        </div>
+
+      </form>
+    </div>
+    <div *ngIf="!isAccessible" class="body no-access-messsage">
+      <div class="row mt-2">
+        <div class="col-12">
+          <i class="fa fa-ban fa-3x text-danger d-block text-center mb-4"></i> 
+          <p class="font-weight-bolder text-center h6">You don't have access to this form</p>    
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <!-- <button *ngIf="showPrimaryButton" [disabled]="primaryButtonDisabled" (click)="onPrimaryClick()" mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-warning"><i *ngIf="primaryBusy" class="fa fa-spinner fa-spin fa-lg fa-fw">&nbsp;&nbsp;</i>{{ primaryButtonText }}</button>
+      <button *ngIf="showSecondaryButton" [disabled]="secondaryButtonDisabled" (click)="onSecondaryClick()" mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-warning"><i *ngIf="secondaryBusy" class="fa fa-spinner fa-spin fa-lg fa-fw">&nbsp;&nbsp;</i>{{ secondaryButtonText }}</button>
+      <button *ngIf="showThirdButton" [disabled]="thirdButtonDisabled" (click)="onThirdClick()" mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-warning"><i *ngIf="thirdBusy" class="fa fa-spinner fa-spin fa-lg fa-fw">&nbsp;&nbsp;</i>{{ thirdButtonText }}</button>
+      <button *ngIf="showCancelButton" (click)="onCancelClick()" mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning">Cancel</button> -->
+
+
+      <x365-shared-ui-form-footer 
+        [showPrimaryButton]="showSubmit"
+        [doneText]="submitText?submitText:'Submit'" 
+        [busy]="isBusy"  
+        (doneClick)="onSubmit()" 
+        (cancelClick)="onCancel()"
+      
+        [showSecondaryButton]="showSave" 
+        [secondaryButtonText]="'Save'" 
+        [secondaryBusy]="isSecondaryBusy"
+        (secondaryClick)="onSave()" >
+      </x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

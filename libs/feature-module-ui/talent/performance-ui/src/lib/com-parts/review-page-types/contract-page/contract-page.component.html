@@ -1,0 +1,14 @@
+<div class="base" *ngIf="show">
+  <div class="top">
+    <h5>{{service?.data?.ContractPageDTO?.title}}</h5>
+    <span>{{service?.data?.ContractPageDTO?.sub_title}}</span>
+  </div>
+  <div class="content">
+    <div [froalaView]>{{service?.data?.ContractPageDTO?.body}}</div>
+  </div>
+  <div class="bottom">
+    <form novalidate [formGroup]="f">
+      <mdb-checkbox class="read-only-checked" [disabled]="isCompleted" formControlName="agreeCheck">{{service?.data?.ContractPageDTO?.must_agree_text}}</mdb-checkbox>
+    </form>
+  </div>
+</div>

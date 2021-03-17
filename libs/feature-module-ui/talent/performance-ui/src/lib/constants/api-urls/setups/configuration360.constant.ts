@@ -1,0 +1,15 @@
+export const CONFIGURATION360_URLs = {
+    getConfiguration360Data: '/api/measure/performance/360/configuration/hr/getAll',
+    add: '/api/measure/performance/360/configuration/hr/create',
+    update: '/api/measure/performance/360/configuration/hr/update',
+    archiveData: '/api/measure/performance/360/configuration/hr/archive',
+    deleteData: '/api/measure/performance/360/configuration/hr/delete/',
+    getAnalysis: '/api/structuretype/list',
+    // getAnalysisDet: '/api/structuredetail/list',
+    getAnalysisDet: '/api/structure-detail/get-by-analysis-id',
+    getPositions: '/api/position/getall',
+    getDesignations: '/api/designation/list',
+    getGrades: '/api/grade/getall',
+    getEmployees: '/api/employees/hr-staff-list/get',
+    getPlan: '/api/measure/performance/plan/hr/getAll',
+  };

@@ -1,0 +1,151 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Promotion Editor'" [subTitle]="'Add/Edit Promotion'" [loading]="false"></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+              <label class="required center-label">Action:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="action" [options]="actionSelectOption$ | async" placeholder=""></mdb-select>
+          </div>
+        </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Employee</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup #employeeId formControlName="employee_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font" (onValueChanged)="onEmployeeSelected($event)"></dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="center-label">Current Grade:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="cur_grade_id" [options]="currentPaygradeSelectOption$ | async" placeholder="" [disableControl]="true"></mdb-select>
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="center-label">Current Group:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="cur_paygroup_id" [options]="currentPaygroupSelectOption$ | async" placeholder="" [disableControl]="true"></mdb-select>
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">New Grade:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select (selected)="onNewGradeSelected($event)" formControlName="new_grade_id" [options]="newPaygradeSelectOption$ | async" placeholder="" [filterEnabled]="true"></mdb-select>
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">New Group:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="new_paygroup_id" [options]="newPaygroupSelectOption$ | async" placeholder="" [filterEnabled]="true"></mdb-select>
+              </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label class="required center-label" title="Effective Date">Effective Date:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_date" [placeholder]="''"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label class="required center-label">Arrear Status:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="status" [options]="arrearsStatusSelectOption$ | async" placeholder=""></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-6">
+              <label class="required center-label">Process differencial?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="process_differential" type="checkbox" (change)=onProcessDifferentialChecked($event)>
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="fs.isProcessDifferential">
+            <div class="col-6">
+              <label class="required center-label">Tri-quarterly differencial?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="p_diff_triquart" type="checkbox">
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="fs.isProcessDifferential">
+            <div class="col-6">
+              <label class="required center-label">Quarterly differencial?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="p_diff_quarterly" type="checkbox">
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="fs.isProcessDifferential">
+            <div class="col-6">
+              <label class="required center-label">Half year differencial?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="p_diff_halfyear" type="checkbox">
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="fs.isProcessDifferential">
+            <div class="col-6">
+              <label class="required center-label">Yearly differencial?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="p_diff_year" type="checkbox">
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-6">
+              <label class="required center-label">Treat transaction as promotion?</label>
+            </div>
+            <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+              No <label class="switch">
+                <input  formControlName="update_last_promo_date" type="checkbox">
+                <span class="slider round"></span>
+              </label> Yes
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="">Note:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <textarea rows="4" formControlName="notes" type="text" class="md-textarea md-textarea-auto form-control"
+                ></textarea>
+            </div>
+          </div>
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

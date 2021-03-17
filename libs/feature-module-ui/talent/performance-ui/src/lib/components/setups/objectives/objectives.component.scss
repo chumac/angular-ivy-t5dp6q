@@ -1,0 +1,65 @@
+.container-fluid {
+    padding: 0.7em 3.1em;
+  
+    .item-container {
+      background-color: #fff;
+      box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+      border: 1px solid #d4d4d4;
+      border-radius: 3px;
+      padding: 1em 1.5em;
+    }
+  }
+  
+  .middle {
+    min-height: 4em;
+  }
+  
+  .bottom {
+    min-height: 35em;
+  }
+
+  .panel-background {
+    box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    background-color: #fff;
+  }
+
+  .file-path-wrapper {
+    overflow: visible;
+    display: block;
+    flex-grow: 1;
+  }
+
+  .dx-lookup.dx-editor-underlined {
+    height: 38px;
+    margin-right: 1.0em;
+  }
+  
+
+  .disabled {
+    opacity: 0.5 !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 0.5 !important;
+    }
+  }
+
+  .top { min-height: 10rem; }
+  .bottom { min-height: 25rem; }
+  
+  .container-card {
+    box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    background-color: #fff;
+    }
+  .select-objective-spinner{
+    margin-top: 2.4rem;
+  }

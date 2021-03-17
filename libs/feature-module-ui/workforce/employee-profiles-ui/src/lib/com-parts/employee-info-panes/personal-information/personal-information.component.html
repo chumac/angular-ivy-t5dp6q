@@ -1,0 +1,149 @@
+<div class="card card-container">
+    <div class="content">
+        <div class="content-left font-size pr-1">
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Title</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.title}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Gender</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.gender}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Date of Birth</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.date_of_birth | dateDisplay}}</label>
+                </div>
+            </div>
+            <hr class="horizontal-rule">
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Marital Status</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.marital_status | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Anniversary</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.wedding_date | dateDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Maiden Name</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.maiden_name | stringDisplay}}</label>
+                </div>
+            </div>
+            <hr class="horizontal-rule">
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Home Town</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.homeplace | stringDisplay}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-right font-size pr-1">
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Birth Country</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.birth_country | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Birth State</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.birthstate | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Birth City</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.birth_area | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Nationality</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.nationality | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>State of Origin</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.state_of_origin | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Local Government</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.lga_of_origin | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-4 row-label">
+                    <label>Religion</label>
+                </div>
+                <div class="col-8 row-text mt-0 font-weight-bold">
+                    <label>{{data?.religion | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-4 row-label">
+                <label>File Number</label>
+              </div>
+              <div class="col-8 row-text mt-0 font-weight-bold">
+                <label>{{data?.employee_fileno | stringDisplay}}</label>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="command-panel"><span><a title="Edit" (click)="showEditor()"><i class="fa fa-pencil-square-o"></i></a></span></div>
+</div>
+
+<x365-fm-workforce-personal-information-editor [width]="34" [show]="showEditor$ | async" [data]="approvedData$ | async" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-personal-information-editor>
+
+<x365-fm-workforce-personal-information-viewer [width]="34" [show]="showViewer$ | async" [data]="awaitingApprovalData$ | async" [dataDoc]="awaitingApprovalDocument$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-personal-information-viewer>

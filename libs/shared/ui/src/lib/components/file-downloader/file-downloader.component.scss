@@ -1,0 +1,29 @@
+
+$color-brand-light: #f3842b;
+
+.box {
+  position: relative;
+  width: 100% !important;
+  -webkit-transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
+  transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
+  text-align: center !important;
+  margin: 0;
+  outline: 1px dashed transparent;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn-outline-default {
+  color: $color-brand-light !important;
+  border: 2px solid $color-brand-light !important;
+}
+
+.fa {
+  color : rgb(129, 129, 129);
+}
+
+.download-icon {
+  cursor: pointer;
+}

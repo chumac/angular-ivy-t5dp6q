@@ -1,0 +1,126 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="top">
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <dx-lookup #plansLookup [dataSource]="planlist$ | async" valueExpr="id" displayExpr='description' (onValueChanged)="onPlanSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Plan" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font"></dx-lookup>
+                    </div>
+                    <div class="col-4">
+                        <input #employeeId type="hidden" [value]="(comprehensiveData$ | async)?.employee_id">
+                        <dx-lookup #employeesLookup [dataSource]="employeelist$ | async" valueExpr="employee_id" displayExpr='employee_fullname' (onValueChanged)="onEmployeeSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Employee" closeOnOutsideClick=false
+                            popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                    <div class="col-1 mt-1">
+                        &nbsp;<span *ngIf="isProcessing$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw fa-sm"></i></span>&nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="item-container bottom">
+                <div class="card-content-top mb-2">
+                    <x365-shared-ui-switch #switch [checkedText]="'Pre-Scored'" [unCheckedText]="'Standard'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                </div>
+                <ng-container *ngIf="!switch.value">
+                    <igx-grid #objectivesDataGrid [data]="objectivesMasterData$ | async" [paging]="true" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [height]="null" [showToolbar]="false">
+                        <igx-column field="PerspectivesInfo" header="Perspective">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val?.description | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="description" header="Description">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="metric" header="Metric">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="weight" header="Weight">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="target" header="Target">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="due_date" header="Due Date">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="id" header="..." class="text-right">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-right"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="Progress" (click)="onProgressIconClicked(val)"></x365-shared-ui-hover-icon>
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </ng-container>
+                <ng-container *ngIf="switch.value">
+                    <igx-grid #preScoredObjectiveMaster [data]="preScoredObjectivesMasterData$ | async" [paging]="true" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [height]="null" [showToolbar]="false">
+                        <igx-column field="PerspectivesInfo" header="Perspective">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val?.description | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="description" header="Description">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="metric" header="Metric">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="weight" header="Weight">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="target" header="Target">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="due_date" header="Due Date">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="id" header="..." class="text-right">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-right"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewPreScoredIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-objective-master-viewer #viewer [width]="32" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()" [componentName]="'manage-objectives'"></x365-fm-talent-objective-master-viewer>

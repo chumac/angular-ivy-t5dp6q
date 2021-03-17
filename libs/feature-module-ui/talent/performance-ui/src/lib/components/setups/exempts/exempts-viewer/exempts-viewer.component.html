@@ -1,0 +1,40 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Exemptions'" [subTitle]="'Exemptions'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.EmployeeInfo.employee_surname | stringDisplay}} {{data?.EmployeeInfo.employee_firstname | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Plan:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.PlanningInfo.code | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Is Specific:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.is_specific_plan_exempt | booleanDisplay}} 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

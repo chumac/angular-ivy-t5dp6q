@@ -1,0 +1,60 @@
+:host {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 16px;
+}
+
+igx-checkbox {
+    margin-top: 16px;
+}
+:host {
+    display: block;
+    padding: 16px;
+}
+
+.list-sample {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+igx-icon {
+  cursor: pointer;
+}
+
+.list-container {
+  display: flex;
+}
+
+.list-container {
+  height: 500px;
+  margin: 10px 20px;
+}
+igx-list {
+    margin: 20px;
+}
+igx-list{
+  overflow: scroll;
+  padding:10px;
+  height: 95%;
+}
+.list-sample{
+  height: 500px;
+  width: 385px;
+  margin: 10px 20px;
+}
+igx-buttongroup{
+  display: inline-block;
+  max-width: 400px;
+  margin-top: 225px;
+}
+.sample-column{
+  margin-top:150px;
+}
+
+.material-icons.igx-icon{
+  background-color: transparent;
+}
+.igx-button--flat{
+  background: #c4c1c2;
+}

@@ -1,0 +1,36 @@
+.content-wrapper {
+  min-height: 70vh;
+}
+.modal-header {
+  padding: 16px !important;
+}
+.panel-title {
+  display: inline;
+  font-weight: bold;
+}
+.checkbox.pull-right {
+  margin: 0;
+}
+.pl-ziro {
+  padding-left: 0px;
+}
+
+.badge {
+  color: rgb(8, 8, 8) !important;
+}
+
+.md-form input[type='text']:focus:not([readonly]) + label, .md-form input[type='password']:focus:not([readonly]) + label {
+  color: #ff9515;
+}
+
+.md-form label {
+  font-size: 12px !important;
+}
+
+.modal-header .close {
+  padding: 0rem 0.4rem !important;
+}
+
+.modal-title {
+  margin: auto !important;
+}

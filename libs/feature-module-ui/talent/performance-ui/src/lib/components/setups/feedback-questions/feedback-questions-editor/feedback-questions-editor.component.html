@@ -1,0 +1,31 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Feedback Question'" [subTitle]="'Creates new feedback question'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Role:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="question_role" [options]="roleTypes" readonly [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Question:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="question_text" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

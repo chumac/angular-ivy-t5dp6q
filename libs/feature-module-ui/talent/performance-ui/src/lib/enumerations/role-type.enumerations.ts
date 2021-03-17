@@ -1,0 +1,9 @@
+export enum RoleTypes {
+  EMPLOYEE = 0,
+  LINE_MANAGER = 1,
+  EMPLOYEE_ACCEPT_REJECT = 2,
+  REVIEWER_ASSESSING = 3,
+  REVIEWER_REVIEWING = 4,
+  MODERATION = 5,
+  HR = 6
+}

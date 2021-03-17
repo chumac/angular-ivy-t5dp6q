@@ -1,0 +1,9 @@
+<ul>
+  <li [class.active]="isSelectedItem(item.id)" *ngFor="let item of list; trackBy: itemTracker let i = index" [ngClass]="{ first: first, last: last }" (click)="itemClicked(item)">
+    <div class="title-pane">{{item?.description}}</div>
+    <div class="stub-pane" *ngIf="(item?.role === roles.EMPLOYEE) || (item?.role === roles.LINE_MANAGER) || (item?.role === roles.REVIEWER_ASSESSING)">
+      <i *ngIf="!item?.status" class="fa fa-unlock open"></i>
+      <i *ngIf="item?.status" class="fa fa-lock" title="Re-open section" (click)="reOpenPageSection(item)"></i>
+    </div>
+  </li>
+</ul>

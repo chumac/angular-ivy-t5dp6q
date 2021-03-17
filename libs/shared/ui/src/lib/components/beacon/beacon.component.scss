@@ -1,0 +1,71 @@
+/***** VARIABLES ****/
+
+$beacon-speed: 3; // Speed =[1,2,3,4,5]; Fasted speed = 1; Slowest speed = 5
+$color-beacon-center: rgb(255, 149, 21);;
+$color-beacon: rgb(255, 149, 21);;
+
+
+/**** FUNCTIONS ****/
+@function set-animation-time($time, $circle-type) {
+  @return -($time * ($time / 4) - $circle-type) + s;
+}
+
+div.beacon-container {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+
+  div.beacon-center {
+    z-index: 100;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background-color: $color-beacon-center;
+  }
+
+  div.beacon-circle {
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    opacity: 1;
+    animation: beaconPulse ($beacon-speed + s) infinite
+      cubic-bezier(0.36, 0.11, 0.89, 0.32);
+  }
+
+  div.beacon-circle-1 {
+    background-color: $color-beacon;
+    animation-delay: set-animation-time($beacon-speed, 1);
+  }
+
+  div.beacon-circle-2 {
+    background-color: $color-beacon;
+    animation-delay: set-animation-time($beacon-speed, 2);
+  }
+
+  div.beacon-circle-3 {
+    background-color: $color-beacon;
+    animation-delay: set-animation-time($beacon-speed, 3);
+  }
+
+  div.beacon-cirle-4 {
+    background-color: $color-beacon;
+    animation-delay: 0s;
+  }
+}
+
+/**** KEYFRAMES ****/
+@keyframes beaconPulse {
+  0% {
+    transform: scale(0.5, 0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+  }
+}

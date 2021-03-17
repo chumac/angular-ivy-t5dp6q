@@ -1,0 +1,22 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Close Exclusion'" [loading]='false'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-12">
+          <label class="required center-label">Why do you want to opt out of this exclusion:</label>
+        </div>
+        <div class="col-8 md-form mt-10">
+          <textarea formControlName="unsuspend_reason" class="form-control form-font" rows="4" cols="100"></textarea>
+        </div>
+      </div>      
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,88 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Time & Attendance'" [subTitle]="'View Time & attendance record'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.transaction_date | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">In:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.clock_in_time | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Time:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.standard_time | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.day_type | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Day:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.day_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Status:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.employee_status_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Absence Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.absence_classification | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Adjusted:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{ (data?.adjustment_reason?true:false) | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Adjustment Reason:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.adjustment_reason | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

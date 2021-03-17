@@ -1,0 +1,131 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Pay Group'" [subTitle]="'Add/Edit Pay Group'"
+        [loading]='inEditMode() && !data'>
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="paygroup_code" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Short Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="shortname" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Rank:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="rank" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="grade_id" [options]="gradeSelectOption" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Estimated Tax Rate:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="estimated_tax_rate" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Annual Gross:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="annual_gross" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Fixed Relief:<br> <em>(For Fixed Tax System)</em></label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="fixed_relief" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Total Taxable:<br><em>(For Fixed Tax System)</em></label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="fixed_total_taxable" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Annual Tax:<br><em>(For Fixed Tax System)</em></label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="fixed_total_annual_tax" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Confirmation Status:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="confirmation_status" [options]="confirmationSelectOption" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""
+              (select)="onConfirmationSelected($event)">
+            </mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">This Paygroup is active?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="is_active" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

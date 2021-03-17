@@ -1,0 +1,33 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Pending Responses'" [subTitle]="'Details of employees and roles linked to this process'"
+      [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-0">
+      <igx-grid #dataGrid [data]="data" [paging]="false" [height]="null" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+        <igx-column field="employee_name" header="Employee" width="50%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | stringDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="validation_role_text" header="Validation Role" width="25%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | stringDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="is_validated" header="status" width="25%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | stringDisplay }}</div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [showCancelButton]="false" (doneClick)="onDoneClicked()">
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

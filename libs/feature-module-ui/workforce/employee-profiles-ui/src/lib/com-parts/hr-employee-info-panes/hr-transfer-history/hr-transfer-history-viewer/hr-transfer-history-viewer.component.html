@@ -1,0 +1,135 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Transfer History'" [subTitle]="'Details of Employee Transfer History'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Current Location Structure:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.current_location_structure | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Current Location Details:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.current_location_details | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">New Location Structure:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.new_location_structure | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">New Location Details:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.new_location_details | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Current Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.current_position | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">New Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.new_position | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.effective_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Temporary:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.is_temporary | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.end_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Resumed:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.has_resumed | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Resumption Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.resumption_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Reports To:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.reports_to | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Narration:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.narration | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Current Designation:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.current_designation | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">New Designation:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.new_designation | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

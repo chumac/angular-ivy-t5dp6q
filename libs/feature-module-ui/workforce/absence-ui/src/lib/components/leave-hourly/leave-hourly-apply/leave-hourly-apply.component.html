@@ -1,0 +1,84 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Apply for Leave'" [subTitle]="'Details of your leave application'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label required">Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="leave_id" [options]="leaveTypes" class="form-font"></mdb-select>
+
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Avail Hrs for Paid Leave:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="entitlementHourly" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required">Request Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="request_date"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label required">No. of Hours:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="no_of_hours" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <!-- <div class="row mb-1" *ngIf="true">
+                    <div class="col-4">
+                        <label class="center-label">Pay me:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_paid" type="checkbox" class="form-check-input" id="is_paidUnchecked">
+                            <label class="form-check-label" for="is_paidUnchecked"></label>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Reason:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="3" formControlName="leave_reason" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Backup Officer:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="backup_officer_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Supervisor:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="supervisor_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

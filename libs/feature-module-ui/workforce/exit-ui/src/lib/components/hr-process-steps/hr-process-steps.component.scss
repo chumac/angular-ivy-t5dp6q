@@ -1,0 +1,243 @@
+// @import 'colors';
+
+// .card {
+//   box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+//   border: 1px solid #d4d4d4;
+//   border-radius: 3px;
+//   padding: 1.5rem;
+//   padding-top: 0.5rem;
+// }
+
+// .card-container {
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+//   // height: 100%;
+//   background: rgb(255, 255, 255);
+//   padding-top: 1.6em;
+// }
+
+// .item-left {
+//   display: flex;
+//   flex-grow: 1;
+//   flex: 0 0 15em;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   margin-right: 2em;
+
+//   .data-row {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//   }
+
+//   .dr-name {
+//     color: rgb(94, 94, 94);
+//     font-size: 1em;
+//     &:hover {
+//       color: #3c5a99;
+//       cursor: pointer;
+//       font-weight: 700!important;
+//     }
+//   }
+// }
+
+// .item-middle {
+//   display: flex;
+//   flex-grow: 1;
+//   flex-direction: column;
+//   flex: 1 0 auto;
+
+//   .im-top {
+//     flex: 0 0 6em;
+//   }
+
+//   .im-bottom {
+//     flex: 1;
+//     margin-right: 14em;
+//     padding-top: 0.1em;
+
+//     ul > li {
+//       display: inline-block;
+//       font-size: 0.8em;
+//       margin-right: 0.5em;
+//     }
+
+//     ul > li {
+//       display: inline-block;
+//       font-size: 0.8em;
+//       margin-right: 0.5em;
+//     }
+
+//     .fa-linkedin {
+//       background: #006192;
+//     }
+
+//     .fa-twitter {
+//       background: #1da1f2;
+//     }
+
+//     .fa-google-plus {
+//       background: #db4437;
+//     }
+
+//     .fa-facebook {
+//       background: #3c5a99;
+//     }
+
+//     i:hover,
+//     i:focus,
+//     i:active {
+//       color: rgb(228, 228, 228);
+//     }
+//   }
+// }
+
+// .item-right {
+//   flex-grow: 1;
+//   flex: 1 0 auto;
+// }
+
+// .wrap {
+//   word-break: break-word;
+// }
+
+// ::ng-deep .employee-menu {
+//   background-color: #fff;
+//   border-radius: 8px;
+
+//   .mat-menu-content {
+//     padding-top: 0px!important;
+//     padding-bottom: 0px!important;
+//     .container {
+//       margin-top: 10px;
+//       margin-bottom: 5px;
+//       .header {
+//         margin: auto;
+//         align-items: center;
+//       }
+//       .body {
+//         overflow: auto;
+//         padding: 0px 0 7px 7px;
+
+//         .inline {
+//           margin: 5px 0 5px 0;
+//           h6 {
+//             font-size: 0.75rem;
+//             color: darkgrey;
+//           }
+//           p {
+//             font-size: 0.8rem;
+//             color: black;
+//           }
+//         }
+//       }
+//       .footer {
+//         align-items: right;
+
+//         .inline {
+//           small {
+//             font-size: 0.59rem;
+//             float: right;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+// }
+
+// .break {
+//   flex-basis: 100%;
+// }
+
+
+// .container-fluid {
+//   padding: 0.7em 3.1em;
+
+//   .item-container {
+//     background-color: #fff;
+//     box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+//     border: 1px solid #d4d4d4;
+//     border-radius: 3px;
+//     padding: 1em 1.5em;
+//   }
+
+
+//   .back-navigation {
+//     float: left;
+//     button {
+//       transition: all 0.2s ease-in-out;
+//       border-color: rgba(black, 0.7) !important;
+//       color: rgba(black, 0.7) !important;
+//     }
+//     button {
+//       &:hover,
+//       &:active,
+//       &:focus {
+//         background-color: rgba(black, 0.7) !important;
+//         color: #fff !important;
+//         outline: none !important;
+//         border-color: transparent !important;
+//       }
+//     }
+//   }
+// }
+
+// .top {
+//   height: auto;
+// }
+
+// .middle {
+//   min-height: 4em;
+// }
+
+// .bottom {
+//   min-height: 40em;
+// }
+
+
+@import 'my-personal-data-grid';
+
+.doc-container-t {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 7.7em;
+  background-color: rgb(251, 251, 251);
+  padding-left: 5px;
+
+  .doc-container-t-sp {
+    flex-basis: 2em;
+  }
+
+  .doc-container-t-ct {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    padding-top: 1.4em;
+
+    .doc-container-t-ct-l {
+      flex-basis: 23%;
+      padding-top: 1.5em;
+    }
+
+    .doc-container-t-ct-r {
+      flex-basis: 77%;
+      padding-right: 5px;
+    }
+  }
+}
+
+.doc-container-b {
+  flex-grow: 1;
+  padding-top: 0;
+
+  .tab-a {
+    flex-grow: 1;
+  }
+
+  .tab-b {
+    flex-grow: 1;
+  }
+}
+

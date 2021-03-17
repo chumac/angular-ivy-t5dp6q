@@ -1,0 +1,71 @@
+
+<div class="f-container">
+  <div class="reboard-button mb-3">
+    <x365-shared-ui-hrz-command-bar
+      [showRefreshButton]="refreshButton"
+      [showSubmitButton]="(reboardMode$ | async) === 2"
+      [showCancelButton]="(allowReboardCancel$ | async) === 'YES'"
+      [showStartButton]="(reboardMode$ | async) === 1 && startButtonStatus"
+      [showRetrieveButton]="(reboardMode$ | async) === 3"
+      (buttonClicked)="onButtonClicked($event)"
+      [isProcessingRetrieve]="isProcessingRetrieve$ | async"
+      [isProcessingStart]="isProcessingStart$ | async"
+      [isProcessingSubmit]="isLoading$ | async"
+      [isProcessingCancel]="isProcessingCancel$ | async"
+      [disableCancelButton]="!((reboardMode$ | async) === 1 || (reboardMode$ | async) === 2)"
+       [isRounded]="false">
+    </x365-shared-ui-hrz-command-bar>
+  </div>
+  <div class="top">
+    <x365-fm-workforce-reboard-employee-data-panel [data]="comprehensiveData$ | async" [employeePhoto]="employeePhoto$ | async" [employeeReboardDetails]="myReboardDetails$ | async"></x365-fm-workforce-reboard-employee-data-panel>
+  </div>
+  <div class="bottom mt-3">
+    <div class="navigation">
+      <x365-fm-workforce-reboard-navigation-panel (navMenuItemSelected)="onNavMenuItemSelected($event)"></x365-fm-workforce-reboard-navigation-panel>
+    </div>
+    <div class="content">
+      <div class="content-top mb-3">
+        <x365-shared-ui-hrz-command-bar [showAddButton]="(reboardMode$ | async) === 2 && addButtonStatus" [showEditButton]="(reboardMode$ | async) === 2 && editButtonStatus" [showAwaitingButton]="(reboardMode$ | async) === 2 && awaitingButtonStatus" (buttonClicked)="onButtonClicked($event)" [viewAwaitingText]="'View Details'"></x365-shared-ui-hrz-command-bar>
+      </div>
+      <div class="content-bottom">
+        <x365-fm-workforce-reboard-info-root-pane [selectedModuleId]="selectedModuleId" [data]="comprehensiveData$ | async" [reboardMode]="reboardMode$ | async" [employeeId]="myId$ | async"></x365-fm-workforce-reboard-info-root-pane>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <x365-shared-ui-agreement-modal [visible]="showAgreement"></x365-shared-ui-agreement-modal> -->
+<dx-popup [width]="550" [(visible)]="showAgreement" [showTitle]="true" title="User Agreement"
+  [closeOnOutsideClick]="true">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view #scrollView width="100%" height="100%" showScrollbar="true" (onScroll)="onScroll($event)">
+      <div id="textBlock">
+        {{agreementText$ | async}}
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat corporis laborum possimus blanditiis architecto, quos consequuntur ab numquam. Velit, repudiandae?</p>
+      </div>
+    </dx-scroll-view>
+    <div class="popout" id="popup" data-bind="dxPopup: {}">
+      <div class="footer">
+        <div class="d-flex justify-content-end">
+          <button mdbBtn type="button" color="primary" [rounded]="false" size="sm" mdbWavesEffect
+            (click)="agreeButtonClicked()" [disabled]="disableAgreeButton">Agree and Continue</button>
+          <button mdbBtn type="button" color="default" outline="true" [rounded]="false" size="sm" mdbWavesEffect
+            (click)="disagreeButtonClicked()">I do not Agree</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dx-popup>

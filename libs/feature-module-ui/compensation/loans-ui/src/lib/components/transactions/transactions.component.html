@@ -1,0 +1,201 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+              <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]=""
+                [unCheckedColor]=""></x365-shared-ui-switch>
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-5"></div>
+                <div class="col-7 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true"
+                    (selected)="search()" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Name, Loan Type, Amount, Effective Date"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a" *ngIf="!switch.value">
+            <div class="row">
+              <div class="col-12">
+                <div class="grid-table-container">
+                  <igx-grid #transactionsDataGrid [data]="applicationsData$ | async" [autoGenerate]="false"
+                    [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+                    <igx-column field="employeeInfo" header="Employee" width="25%">
+                    </igx-column>
+                    <igx-column field="loanDefinition" header="Type" width="13%">
+                    </igx-column>
+                    <igx-column field="initial_loan_amount" header="Amount" width="12%" dataType="number">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="status" header="Status" width="7%">
+                      <ng-template igxCell let-val>
+                        <div class="text-center">
+                          <mdb-badge *ngIf="val === runningStatus.running" pill="true" success="true">Running
+                          </mdb-badge>
+                          <mdb-badge *ngIf="val === runningStatus.notRunning" pill="true" info="true">Not Running
+                          </mdb-badge>
+                          <mdb-badge *ngIf="val === runningStatus.closed" pill="true" info="true">Closed</mdb-badge>
+                        </div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="monthly_deduction" header="Monthly Deduction" width="15%" dataType="number">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="loan_balance" header="Balance" width="13%" dataType="number">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="loandetail_id" header="..." headerClasses="headerAlignSyle" width="16%">
+                      <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                          <div class="hover-menu">
+                            <div class="hover-icons text-center">
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                                (click)="onViewApprovedIconClicked(val)"></x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-calendar-plus-o'"
+                                title="View Manual Repayment" (click)=" onRepaymentIconClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-calendar-plus-o'"
+                                title="System Deduction" (click)="onViewActualScheduleClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-calendar-plus-o'"
+                                title="Standard Schedule" (click)="onViewGenericScheduleClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                                (click)="onApprovedEditIconClicked(val)" *ngIf="isApprovedLoanRunning(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete"
+                                (click)="onApprovedDeleteIconClicked(val)" *ngIf="isApprovedLoanRunning(val)">
+                              </x365-shared-ui-hover-icon>
+
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </igx-column>
+                  </igx-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-b" *ngIf="switch.value">
+            <div class="grid-table-container">
+              <igx-grid #awaitingApprovalDataGrid [data]="awaitingApprovalTransactionsData$ | async"
+                [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+                <igx-column field="employeeInfo" header="Employee" width="24%">
+                </igx-column>
+                <igx-column field="loanDefinition" header="Type" width="12%">
+                </igx-column>
+                <igx-column field="initial_loan_amount" header="Amount" width="11%" dataType="number">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="status" header="Status" width="7%">
+                  <ng-template igxCell let-val>
+                    <div class="text-center">
+                      <mdb-badge *ngIf="val === runningStatus.closed" pill="true" danger="true">Closed</mdb-badge>
+                      <mdb-badge *ngIf="val === runningStatus.running" pill="true" success="true">Running</mdb-badge>
+                      <mdb-badge *ngIf="val === runningStatus.notRunning" pill="true" info="true">Not Running
+                      </mdb-badge>
+
+                    </div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="monthly_deduction" header="Monthly Deduction" width="15%" dataType="number">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="interest_rate" header="Rate" width="8%" dataType="number">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text1">{{val | number: '1.1-5' }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="proxy_date" header="Proxy Date" width="12%" dataType="number">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text1">{{val | dateDisplay }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="loandetail_id" header="..." headerClasses="headerAlignSyle" width="16%">
+                  <ng-template igxCell let-val>
+                    <div class="hover-menu-container"><span class="text-center"></span>
+                      <div class="hover-menu">
+                        <div class="hover-icons">
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                            (click)="onViewAwaitingIconClicked(val)"></x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-calendar-plus-o'"
+                            title="Possible Schedule" (click)="onAwaitingViewGenericScheduleClicked(val)">
+                          </x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                            (click)="onAwaitingEditIconClicked(val)" *ngIf="isAwaitingLoanRunning(val)">
+                          </x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete"
+                            (click)="onAwaitingDeleteIconClicked(val)" *ngIf="isAwaitingLoanRunning(val)">
+                          </x365-shared-ui-hover-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </igx-column>
+              </igx-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<x365-fm-loans-trasaction-apply-editor #transactionApplyEditor [width]="32" [show]="showEditor$ | async"
+  [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelApplicationEditor()">
+</x365-fm-loans-trasaction-apply-editor>
+<x365-fm-loans-repayment-schedule-viewer #repaymentScheduleViewer [width]="60"
+  [show]="showRepaymentScheduleViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()"
+  [repaymentsScheduleList]="repaymentScheduleData$| async"></x365-fm-loans-repayment-schedule-viewer>
+<x365-fm-loans-transaction-apply-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()" [dataDoc]="documentData$ | async"></x365-fm-loans-transaction-apply-viewer>
+<x365-fm-loans-generic-schedule-viewer #genericScheduleViewer [width]="60" [show]="showViewerGenericSchedule$ | async"
+  [data]="null" (cancelClick)="onCancelViewer()" [genericScheduleList]="genericScheduleData$ | async">
+</x365-fm-loans-generic-schedule-viewer>
+<x365-fm-loans-actual-schedule-viewer #actualScheduleViewer [width]="60" [show]="showViewerActualSchedule$ | async"
+  [data]="null" (cancelClick)="onCancelViewer()" [actualScheduleList]="actualScheduleData$ | async">
+</x365-fm-loans-actual-schedule-viewer>

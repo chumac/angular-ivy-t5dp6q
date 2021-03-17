@@ -1,0 +1,77 @@
+<article class="content-wrapper">
+  <div class="content">
+    <div class="content-header">
+      <div class="content-name">Create/Edit Work Activity</div>
+    </div>
+
+    <div class="content-body">
+      <div class="content-body-item">
+        <form novalidate [formGroup]="this.fs.f" (ngSubmit)="onOkClick()">
+          <div class="md-form">
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label info">Cost Center:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup #costCenterLookUp formControlName="cost_centre_id" [dataSource]="costCenters$ | async" valueExpr="value" displayExpr='label' disabled="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                <span class="button btn-rounded" (click)="toggleStructurTreeView()">Change</span>
+              </div>
+            </div>
+            <div class="row mb-4" *ngIf="showStructureTree">
+              <div class="col-12">
+                <div class="container-fluid struct-container">
+                    <x365-shared-ui-structure-tree-view (selectedStructure)="setStructure($event)"></x365-shared-ui-structure-tree-view>
+                    <span class="button btn-rounded" (click)="toggleStructurTreeView()">Close</span>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label info">Project:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="project_id" [dataSource]="projects$ | async" valueExpr="id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label info">Work Hour/Min(s):</label>
+              </div>
+              <div class="col-4 md-form mt-0">
+                <input formControlName="work_hour" type="number" class="form-control form-font ff" placeholder="Hour(s)">
+              </div>
+
+              <div class="col-4 md-form mt-0">
+                <input formControlName="work_min" type="number" class="form-control form-font ff" placeholder="Min(s)">
+              </div>
+            </div>
+
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label info">Work Hour Type:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <dx-lookup formControlName="wk_hours_type" [dataSource]="fs.valueLabelWorkTypes" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-4">
+                <label class="center-label info">Details:</label>
+              </div>
+              <div class="col-8 md-form mt-0 pd-0">
+                  <textarea rows="10" formControlName="description" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg"></textarea>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" (click)="onOkClick()" size="sm" mdbWavesEffect  [disabled]="isProcessing">&nbsp;&nbsp;<span *ngIf="isProcessing"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning" (click)="onCancel()" mdbWavesEffect>&nbsp;Cancel&nbsp;</button>
+    </div>
+  </div>
+</article>

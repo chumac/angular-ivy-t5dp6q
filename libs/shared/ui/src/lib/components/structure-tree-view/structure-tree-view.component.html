@@ -1,0 +1,16 @@
+<dx-tree-view
+    id="treeview"
+    [createChildren]="createChildren"
+    [searchEnabled]="true"
+    displayExpr="description"
+    keyExpr="structure_id"
+    parentIdExpr="sourced_from_id"
+    dataStructure="plain"
+    [rootValue]=""
+    [searchMode]="'contains'" 
+    [searchExpr]="['description']"
+    [height]="200"
+    (onItemClick)="selectStructure($event)">
+</dx-tree-view>
+
+

@@ -1,0 +1,95 @@
+@import 'mixins';
+
+$roundedSize: 0.15em;
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  padding: 1.5rem;
+  padding-top: .5rem;
+
+  .item-container-top {
+    flex-basis: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .top-content-left {
+
+      color: rgb(172, 172, 172);
+
+      h5 {
+        font-size: .9rem;
+      }
+    }
+
+    .top-content-right {
+
+      .btn-group {
+        button.dropdown-toggle::after {
+          display: none;
+        }
+
+        i.fa-angle-down {
+          margin-left: 0.5rem;
+          transition: all 0.3s linear;
+        }
+
+        &.show {
+          i.fa-angle-down {
+            transform: rotate(-180deg);
+          }
+        }
+
+        .btn {
+          color: gray;
+          background: transparent;
+          font-size: 0.75em;
+          text-transform: none;
+          padding: 0.5rem 0.1rem;
+          border: 1px solid rgb(219, 219, 219);
+
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          min-width: 10rem;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+
+          &:hover,
+          &:focus {
+            box-shadow: 0 2.5px 14px rgba(0, 0, 0, .14);
+          }
+        }
+
+        .dropdown-menu {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+
+  .item-container-bottom {
+    flex-grow: 1;
+    height: 80%;
+    font-size: 0.9rem;
+
+    .body-cell {
+      display: inline-flex;
+      margin: 0.5em;
+      width: calc((100% / 7) - 1em); // 7 cells per row
+      border: 1px solid #dee2e6;
+      @include borderRadius($roundedSize, $roundedSize, $roundedSize, $roundedSize);
+    }
+  }
+}
+
+
+.md-form input[type='text'] {
+  font-size: 0.9rem;
+}

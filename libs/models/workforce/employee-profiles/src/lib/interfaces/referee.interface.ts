@@ -1,0 +1,34 @@
+export interface IReferee {
+  ref_id: number;
+  employee_id: number;
+  title: string;
+  ref_surname: string;
+  ref_firstname: string;
+  ref_othernames: string;
+  gender: string;
+  fulladdress: string;
+  company_name: string;
+  company_address: string;
+  phone1: string;
+  phone2: string;
+  requirement_type: number;
+  requirement_type_text: string;
+  remark: string;
+  verification_sent_date: Date;
+  verification_received_date: Date;
+  email: string;
+  verification_status: string;
+  archive_status: boolean;
+  approval_status: number;
+  approval_status_text: string;
+  attach_document: any;
+  passport_picture: string;
+  img_extension_passport: string;
+  img_extension_document: string;
+  img_url_passport: string;
+  img_url_document: string;
+  img_guid_passport: string;
+  img_guid_document: string;
+  img_size_passport: string;
+  img_size_document: string;
+}

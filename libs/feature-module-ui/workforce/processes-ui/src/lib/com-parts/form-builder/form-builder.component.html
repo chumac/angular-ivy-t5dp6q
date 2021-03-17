@@ -1,0 +1,327 @@
+<div class="container-fluid">
+  <div class="row"> 
+    <div class="col-sm-12 col-md-4">
+      <div class="builder-container">
+        <div class="b-header">
+          <h5>Builder Controls</h5>
+          <small class="text-muted">Select widgets to add to a form.</small>
+        </div>
+        <div class="b-content">
+          <form [formGroup]="form">
+
+            <mat-accordion [multi]="false" formArrayName="ctrls">
+              <form [formGroup]="ctrlForm">
+                <mat-expansion-panel *ngFor="let widgets of widgetDefinitionsList">
+                  <mat-expansion-panel-header><mat-panel-title> {{ widgets.spec }} </mat-panel-title></mat-expansion-panel-header>
+
+                    <input type="hidden" formControlName="widget_id">
+                    <input type="hidden" formControlName="widget">
+                    <input type="hidden" formControlName="type">
+                    <input type="hidden" formControlName="hasOptions">
+
+                    <input type="hidden" formControlName="optionsType" [value]="widgets.optionsType">
+                    <input type="hidden" formControlName="optionsData" [value]="widgets.optionsData">
+                    <input type="hidden" formControlName="optionsDataSetId" [value]="widgets.optionsDataSetId">
+                    
+                    <mat-form-field><mat-label>Field Name</mat-label><input required matInput formControlName="field_name"></mat-form-field>
+                    <mat-form-field><mat-label>Label</mat-label><input required matInput formControlName="label"></mat-form-field>
+                    <mat-form-field><mat-label> Value</mat-label><input matInput formControlName="value"></mat-form-field>
+                    <mat-form-field>
+                      <mat-select formControlName="validationType" placeholder="Required" [disabled]="widgets.id === formWidgetType.check_box">
+                        <mat-option [value]="({ required: true }) | json">Yes</mat-option>
+                        <mat-option [value]="({ required: false }) | json">No</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+
+                    
+                    <!-- Creates additional fields for regex text box-->
+                    <mat-form-field *ngIf="widgets.type === 'regex'"><mat-label> Regex </mat-label><input matInput formControlName="extra"></mat-form-field>
+
+                    <!-- Creates additional fields for drop downs-->
+                    <div *ngIf="widgets.hasOptions" class="options-style">
+   
+                      <!-- Simple Drop Down -->
+                      <div class="option-type" *ngIf="widgets.optionsType === selectOptionTypes.default">
+                        <div class="fb-table-container">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Label</th>
+                                <th>Value</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let options of widgets.optionsData let i = index">
+                                <td>{{ options.label }}</td>
+                                <td>{{ options.value }}</td>
+                                <td><a><i class="fa fa-close" (click)="widgets.optionsData.splice(i, 1)"></i></a></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="opt-container">
+                          <input #optLabel class="opt-control" placeholder="Enter Label">
+                          <input #optValue class="opt-control" placeholder="Enter Value">  
+                        </div>
+                        <div class="opt-control-btn">
+                          <a class="btn-sm" (click)="widgets.optionsData.push({label: optLabel.value, value: optValue.value})">Add</a>
+                        </div>
+                      </div>
+                      <!-- / End Simple Drop Down -->
+
+                      <!-- Dataset Drop Down -->
+                      <div class="option-type" *ngIf="widgets.optionsType === selectOptionTypes.data_set">
+                        <mat-form-field>
+                          <mat-select formControlName="optionsDataSetId" placeholder="Data set">
+                            <mat-option *ngFor="let types of dataSetTypes$ | async" [value]="types.id">{{ types.description}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <!-- / End Dataset Drop Down -->
+
+                      <!-- Dictionary Drop Down -->
+                      <div class="option-type" *ngIf="widgets.optionsType === selectOptionTypes.dictionary">
+                        <div class="fb-table-container">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Label</th>
+                                <th>Value</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let options of widgets.optionsData let i = index">
+                                <td>{{ options.label }}</td>
+                                <td>{{ options.value }}</td>
+                                <td><a><i class="fa fa-close" (click)="widgets.optionsData.splice(i, 1)"></i></a></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                        <mat-form-field>
+                          <textarea #dict rows="4" matInput></textarea>
+                        </mat-form-field>
+                        <div class="opt-control-btn">
+                          <a class="btn-sm" (click)="widgets.optionsData = parseToJson(dict.value); dict.value = null;">Process</a>
+                        </div>
+                      </div>
+                      <!-- / End Dictionary Drop Down -->
+
+                      <!-- Cascading Drop Down -->
+                      <div class="option-type" *ngIf="widgets.optionsType === selectOptionTypes.cascade">
+                        <mat-form-field>
+                          <mat-select formControlName="optionsDataSetId" placeholder="Data set">
+                            <mat-option *ngFor="let types of dataSetTypes$ | async" [value]="types.id">{{ types.description}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <mat-label> Child Field</mat-label>
+                          <input #cascChild matInput>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <mat-select #childDataSet placeholder="Child Data set">
+                            <mat-option *ngFor="let types of cascadeDataSetTypes$ | async" [value]="types.id">{{ types.description}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <!-- / End Cascading Drop Down -->
+
+                    </div>
+
+                    <mat-action-row><button  (click)="addWidgetToForm(ctrlForm, widgets); widgets.optionsData = []" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect>Add</button></mat-action-row>
+                </mat-expansion-panel>
+              </form>    
+            </mat-accordion>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <div class="renderer-container"> 
+        <div class="r-header">
+          <h5>Preview</h5>
+          <small class="text-muted">Renders already created widgets.</small>
+        </div>
+        <div class="r-content" #scroll>
+
+          <div *ngFor="let masters of masterFormBuilderData let i = index" class="animated bounceIn list" [ngSwitch]="masters.widget_id">
+            <div class="hover-menu">
+              <span><i (click)="levelUpControl(masters, i)" class="fa fa-level-up menu-item"></i></span>
+              <span><i (click)="levelDownControl(masters, i)" class="fa fa-level-down menu-item"></i></span>
+              <span><i (click)="openEditorDialog(masters, i)" class="fa fa-edit menu-item"></i></span>
+              <span><i (click)="removeWidgetFromForm(masters, i)" class="fa fa-trash-o menu-item"></i></span>
+            </div>
+            <!-- Text Box Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.text_box">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-form-field><input matInput type="text"></mat-form-field>
+              </div>
+            </div>
+            <!-- / End Text Box Renderer-->
+
+            <!-- Number Text Box Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.number_text_box">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-form-field><input matInput type="number"></mat-form-field>
+              </div>
+            </div>
+            <!-- / End Number Text Box Renderer-->
+
+            <!-- Simple Drop Down Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.drop_down">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+              </div> 
+            </div> 
+            <!-- / End Simple Drop Down Renderer-->
+
+            <!-- Text Area Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.text_area">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-form-field><textarea rows="4" matInput></textarea></mat-form-field>
+              </div> 
+            </div> 
+            <!-- / End Text Area Renderer-->
+
+            <!-- Date Picker Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.date_picker">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-form-field><input matInput type="date"></mat-form-field>
+              </div>  
+            </div>      
+            <!-- / End Date Picker Renderer-->
+
+            <!-- Check Box Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.check_box">
+              <div class="col-12 fbl-col">
+                <label class="" [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-checkbox></mat-checkbox>              
+              </div> 
+            </div>
+            <!-- / End Check Box Renderer-->
+
+            <!-- File Picker Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.file_picker">
+              <div class="col-12 fbl-col">
+                <label class="" [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <x365-shared-ui-file-picker></x365-shared-ui-file-picker>
+             
+              </div> 
+            </div>
+            <!-- / End File Picker Renderer-->
+
+             <!-- Regex Text Box Renderer-->
+             <div class="row mb-1" *ngSwitchCase="formWidgetType.regex_text_box">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-form-field><input matInput type="text"></mat-form-field>
+              </div>
+            </div>
+            <!-- / End Regex Text Box Renderer-->
+
+            <!-- Dictionary Drop Down Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.dictionary_drop_down">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+              </div> 
+            </div> 
+            <!-- / End Dictionary Drop Down Renderer-->
+
+            <!-- Dataset Drop Down Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.dataset_drop_down">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+              </div> 
+            </div> 
+            <!-- / End Dataset Drop Down Renderer-->
+
+            <!-- Date Picker Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.time_picker">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <mat-form-field><input matInput type="time"></mat-form-field>
+              </div>  
+            </div>      
+            <!-- / End Date Picker Renderer-->
+
+             <!-- Cascade Drop Down Renderer-->
+             <div class="row mb-1" *ngSwitchCase="formWidgetType.cascading_drop_down">
+              <div class="col-12 fbl-col">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}:</label>
+              </div>
+              <div class="col-12 fbi-col">
+                <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+              </div> 
+            </div> 
+            <!-- / End Cascade Drop Down Renderer-->
+
+            <!-- Sub Heading Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.sub_heading">
+              <div class="col-12 fbl-col sub-heading">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}</label>
+              </div>
+              <!-- <div class="col-12 fbi-col">
+                <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+              </div>  -->
+            </div> 
+            <!-- / End Sub Heading Renderer-->
+
+            <!-- Label Renderer-->
+            <div class="row mb-1" *ngSwitchCase="formWidgetType.label">
+              <div class="col-12 fbl-col desc-label">
+                <label class="_center " [class.required]="toJson(masters?.validationType)?.required">{{ masters.label }}</label>
+              </div>
+              <!-- <div class="col-12 fbi-col">
+                <dx-lookup [dataSource]="masters.optionsData" valueExpr="value" displayExpr='label' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+              </div>  -->
+            </div> 
+            <!-- / End Label Renderer-->
+
+
+          </div>
+        </div>
+
+        
+        <div class="row">
+          <div class="col-12">
+            <button (click)="onShowRenderer(masterFormBuilderData)" mdbBtn type="button" class="pull-right" color="warning" rounded="true" size="sm" mdbWavesEffect>Open Renderer</button>
+          </div>
+        </div>
+
+      </div> 
+
+    </div>  
+  </div>
+</div>
+
+<x365-form-renderer #renderer [width]="34" [show]="showRenderer" [data]="null" [title]="fbWorkAreaData?.title" [subTitle]="fbWorkAreaData?.description" (formSubmit)="onRendererSubmit($event)" (cancelClick)="onCancelRenderer()"></x365-form-renderer>

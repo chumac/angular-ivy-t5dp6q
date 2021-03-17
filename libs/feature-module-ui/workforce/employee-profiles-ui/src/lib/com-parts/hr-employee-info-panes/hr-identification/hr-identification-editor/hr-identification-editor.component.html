@@ -1,0 +1,339 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Identification'" [subTitle]="'This is identification information about staff'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Employment Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Proposed Confirmation Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="p_confirm_date" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Actual Confirmation Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="a_confirm_date" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="grade_id" [options]="grade$ | async" [filterEnabled]="true" [allowClear]="true" placeholder="" (selected)="onGradeSelected($event)"></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Pay Group:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="paygroup_id" [options]="payroll" [filterEnabled]="true" [allowClear]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_id" [options]="position" [filterEnabled]="true" [allowClear]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Job Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="title_id" [options]="jobTitle" [filterEnabled]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Acting Job Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="acting_title_id" [options]="actingTitle" [filterEnabled]="true" [allowClear]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Report To:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="reports_to" [options]="reportTo" [filterEnabled]="true" [allowClear]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">BackUp Officer:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="backup_officer_id" [options]="backUpOfficer" [filterEnabled]="true" [allowClear]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Employment Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="employment_date" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+          <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Is this staff a Permanent Staff:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-checkbox formControlName="is_permanentstaff" (change)="PermanentStaff($event)"></mdb-checkbox>
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="!fs.permanentStaff.value">
+          <div class="col-4">
+            <label class="center-label">Employment Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="emp_duration_from" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="!fs.permanentStaff.value">
+          <div class="col-4">
+            <label class="center-label">Employment End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="emp_duration_to" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Is this staff on Payroll:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-checkbox formControlName="on_payroll"></mdb-checkbox>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Payment Mode:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <!-- <input formControlName="payment_mode" type="text" class="form-control form-font"> -->
+            <mdb-select formControlName="payment_mode" [options]="paymentMode" [filterEnabled]="true" [allowClear]="true" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Corporate ID</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Expires:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [disabled]="!((useCorporateIdField$ | async) === 'YES')" [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="corporate_id_expires" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>National ID</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="national_id_number" type="text" class="form-control pt-0">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Issue Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="national_id_issuedate" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Expires:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="national_id_expires" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Passport Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="passport_no" type="text" class="form-control pt-0" >
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Authority:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="passport_authority" type="text" class="form-control pt-0" >
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Issue Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="passport_date_issued" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Expires:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="passport_expires" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Local Driver's License</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label ">Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="license_no" type="text" class="form-control pt-0" >
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label ">Issue Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="license_issuedate" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label ">Expires:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="license_expires" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>International Driver's License</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label ">Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="intl_license_no" type="text" class="form-control pt-0" >
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label ">Issue Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="intl_license_issuedate" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label ">Expires:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="intl_license_expires" [placeholder]=""
+              ></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" [caption]="'Select Image'" [captionSubText]="'Select an image from your system to upload'"
+              [maxImageSize]="200" [imagePickerLabel]="'Upload Signature Image'" [cropperHeaderMessage]="'Upload Image'"
+              (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

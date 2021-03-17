@@ -1,0 +1,42 @@
+
+
+
+<div class="f-container">
+  <div class="reboard-buttons mb-3">
+    <x365-shared-ui-hrz-command-bar
+      [isProcessingSubmit]="isLoading$ | async"
+      (buttonClicked)="onButtonClicked($event)"
+      [showApproveButton]="(reboardMode$ | async) === 3" [showDeclineButton]="(reboardMode$ | async) === 3"
+      [showCancelButton]="(reboardMode$ | async) === 3"
+      [showRetrieveButton]="(reboardMode$ | async) === 3"
+      [isProcessingRetrieve]="isProcessingRetrieve$ | async"
+    ></x365-shared-ui-hrz-command-bar>
+  </div>
+  <div class="top">
+    <x365-fm-workforce-reboard-employee-data-panel [data]="comprehensiveData$ | async" [employeePhoto]="employeePhoto$ | async" [employeeReboardDetails]="employeeReboardDetails$ | async"></x365-fm-workforce-reboard-employee-data-panel>
+  </div>
+  <div class="bottom mt-3">
+    <div class="navigation">
+      <x365-fm-workforce-reboard-navigation-panel (navMenuItemSelected)="onNavMenuItemSelected($event)"></x365-fm-workforce-reboard-navigation-panel>
+    </div>
+    <div class="content">
+      <div class="content-top mb-3">
+        <div class="back-navigation">
+          <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect
+            (click)="backButtonClicked()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+        </div>
+        <x365-shared-ui-hrz-command-bar [showAddButton]="addButtonStatus" [showEditButton]="editButtonStatus" [showAwaitingButton]="awaitingButtonStatus" [showRefreshButton]="refreshButton" [disableAdd]="(reboardMode$ | async) !== 3" [disableEdit]="(reboardMode$ | async) !== 3" (buttonClicked)="onButtonClicked($event)" [viewAwaitingText]="'View Details'"></x365-shared-ui-hrz-command-bar>
+      </div>
+      <div class="content-bottom">
+        <x365-fm-workforce-hr-reboard-info-root-pane [selectedModuleId]="selectedModuleId" [data]="comprehensiveData$ | async" [reboardMode]="reboardMode$ | async" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-info-root-pane>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<x365-fm-approvals-approve-editor #approveEditor [width]="28" [show]="showApproveEditor$ | async"
+  [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelApproveEditor()"
+></x365-fm-approvals-approve-editor>
+<x365-fm-approvals-decline-editor #declineEditor [width]="28" [show]="showDeclineEditor$ | async"
+  (cancelClick)="onCancelDeclineEditor()"></x365-fm-approvals-decline-editor>

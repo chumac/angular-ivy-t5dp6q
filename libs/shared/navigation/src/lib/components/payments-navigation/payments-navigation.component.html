@@ -1,0 +1,38 @@
+<li>
+  <ul class="collapsible collapsible-accordion">
+    <mdb-accordion [multiple]="false" aria-multiselectable="false">
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#task" /></svg> <span>Schedules</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payments/admin/schedule/closed" routerLinkActive="active">Closed</a>
+            </li>
+            <li><a routerLink="/d/compensation/payments/admin/schedule/completed"
+                routerLinkActive="active">Completed</a>
+            </li>
+            <li><a routerLink="/d/compensation/payments/admin/schedule/pending" routerLinkActive="active">Pending</a>
+            </li>
+            <li><a routerLink="/d/compensation/payments/admin/schedule/processing"
+                routerLinkActive="active">Processing</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg>
+            <use xlink:href="/assets/images/sprite.svg#user" /></svg> <span>Setup</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/payments/admin/setup/pay-desk" routerLinkActive="active"><span>Pay
+                  Desk</span></a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+    </mdb-accordion>
+  </ul>
+</li>

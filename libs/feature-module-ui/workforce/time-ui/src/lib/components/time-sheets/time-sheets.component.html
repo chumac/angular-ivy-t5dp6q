@@ -1,0 +1,157 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onAddBtnClicked()" title="Add Time Sheet">&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefreshBtnClicked()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+              <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="null | async" [show]="true"></x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+                <div class="row grid-select">
+                    <div class="col-12">
+                        <x365-shared-ui-switch #switch [checkedText]="'UnProcessed'" [unCheckedText]="'Submitted'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                    </div>
+                </div>
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                  <div class="col-6"></div>
+                <div class="col-6 md-form">
+                  <mdb-select [options]="service.filterList" (selected)="onFilterListselected($event)" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective #searchInput type="text" (keyup)="filter($event.target.value, dropDownFilterValue, switch.value)" placeholder="Enter your search text" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a" *ngIf="!switch.value">
+            <div class="row">
+              <div class="col-12">
+                <div class="grid-table-container">
+                  <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [paging]="true" [perPage]="15" [height]="null" [showToolbar]="false">
+                    <igx-column field="description" header="Description" width="30%">
+                      <ng-template igxCell let-val>
+                        <div class="left-align-text">{{val | stringDisplay}}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="start_date" header="Start Date" width="15%">
+                      <ng-template igxCell let-val>
+                        <div class="left-align-text">{{val | dateDisplay}}</div>
+                      </ng-template>
+                    </igx-column>
+
+                    <igx-column field="end_date" header="End Date" width="15%">
+                      <ng-template igxCell let-val>
+                        <div class="left-align-text">{{val | dateDisplay}}</div>
+                      </ng-template>
+                    </igx-column>
+
+                    <igx-column field="total_hours" header="Total Hrs" width="15%">
+                      <ng-template igxCell let-val>
+                        <div class="left-align-text">{{val | hrMinDisplay}}</div>
+                      </ng-template>
+                    </igx-column>
+
+                    <igx-column field="status_text" header="Status" sortable="true" width="15%">
+                        <ng-template igxCell let-val>
+                          <mdb-badge pill="true" default="true">{{val | stringDisplay}}</mdb-badge>
+                         </ng-template>
+                    </igx-column>
+
+                    <igx-column field="tms_id" header="  " class="text-center" width="10%">
+                        <ng-template igxCell let-val>
+                            <div class="hover-menu-container"><span class="text-center"></span>
+                                <div class="hover-menu">
+                                    <div class="hover-icons">
+                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-share'" title="Go to Workstream" (click)="showApprovedEditor(val)"></x365-shared-ui-hover-icon>
+                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewApprovedIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-reply-all'" title="Recall" (click)="onRecallIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-archive'" title="Archive" (click)="onArchiveIconClicked(val)"></x365-shared-ui-hover-icon> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </igx-column>
+                  </igx-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-b" *ngIf="switch.value">
+            <div class="grid-table-container">
+              <igx-grid #awaitingDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [paging]="true" [perPage]="15" [height]="null" width="100%" [showToolbar]="false">
+                <igx-column field="description" header="Description" width="30%">
+                  <ng-template igxCell let-val>
+                    <div class="left-align-text">{{val | stringDisplay}}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="start_date" header="Start Date" width="15%">
+                  <ng-template igxCell let-val>
+                    <div class="left-align-text">{{val | dateDisplay}}</div>
+                  </ng-template>
+                </igx-column>
+
+                <igx-column field="end_date" header="End Date" width="15%">
+                  <ng-template igxCell let-val>
+                    <div class="left-align-text">{{val | dateDisplay}}</div>
+                  </ng-template>
+                </igx-column>
+
+                <igx-column field="total_hours" header="Total Hrs" width="15%">
+                  <ng-template igxCell let-val>
+                    <div class="left-align-text">{{val | hrMinDisplay}}</div>
+                  </ng-template>
+                </igx-column>
+
+                <igx-column field="status_text" header="Status" sortable="true" width="15%">
+                    <ng-template igxCell let-val>
+                      <mdb-badge pill="true" default="true">{{val | stringDisplay}}</mdb-badge>
+                      </ng-template>
+                </igx-column>
+
+                <igx-column field="tms_id" header="  " class="text-center" width="10%">
+                    <ng-template igxCell let-val let-cell="cell">
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                            <div class="hover-menu">
+                                <div class="hover-icons">
+                                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-share'" title="Go to Workstream" (click)="showAwaitingApprovalEditor(val)"></x365-shared-ui-hover-icon>
+                                  <x365-shared-ui-hover-icon *ngIf="(cell?.cellID?.rowID?.status === status.UN_SUBMITTED)" [iconClass]="'fa fa-book'" title="Submit" (click)="onSubmitIconClicked(val)"></x365-shared-ui-hover-icon>
+                                  <x365-shared-ui-hover-icon *ngIf="(cell?.cellID?.rowID?.status === status.AWAITING_APPROVAL)" [iconClass]="'fa fa-mail-reply-all'" title="Recall" (click)="onRecallIconClicked(val)"></x365-shared-ui-hover-icon>
+                                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewAwaitingApprovalIconClicked(val)"></x365-shared-ui-hover-icon>
+                                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-eraser'" title="Reset" (click)="onResetIconClicked(val)"></x365-shared-ui-hover-icon>
+                                  <x365-shared-ui-hover-icon *ngIf="(cell?.cellID?.rowID?.status === status.UN_SUBMITTED)" [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </igx-column>
+              </igx-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <x365-fm-workforce-time-time-sheets-editor #editor [width]="80" [show]="showEditor$ | async" [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-workforce-time-time-sheets-editor> -->
+<x365-fm-workforce-time-time-sheets-viewer #viewer [width]="34" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()"></x365-fm-workforce-time-time-sheets-viewer>

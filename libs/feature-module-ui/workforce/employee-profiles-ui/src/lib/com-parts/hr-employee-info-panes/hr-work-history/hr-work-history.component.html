@@ -1,0 +1,70 @@
+<div class="card card-container">
+  <div class="card-content font-size">
+    <div class="card-content-top mb-2">
+      <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+    </div>
+    <div class="card-content-bottom">
+      <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+        <igx-column field="requirement_type_text" header="Tag" width="10%"></igx-column>
+        <igx-column field="employer" header="Employer" width="20%"></igx-column>
+        <igx-column field="employment_date" header="Emp. Date" width="15%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="exit_date" header="Exit Date" width="15%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="company_address" header="Address" width="30%"></igx-column>
+        <igx-column field="prev_id" header="..." class="text-center" width="10%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onApprovedViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onApprovedDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onApprovedDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+
+      <igx-grid #awaitingApprovalDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [height]="null">
+        <igx-column field="requirement_type_text" header="Tag" width="10%"></igx-column>
+        <igx-column field="employer" header="Employer" width="20%"></igx-column>
+        <igx-column field="employment_date" header="Emp. Date" width="15%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="exit_date" header="Exit Date" width="15%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="company_address" header="Address" width="30%"></igx-column>
+        <igx-column field="prev_id" header="..." class="text-center" width="10%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" (click)="onAwaitingApprovalViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o'" (click)="onAwaitingApprovalDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" (click)="onAwaitingApprovalDownloadIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>
+
+<x365-fm-workforce-hr-work-history-editor #editor [width]="28" [show]="showEditor$ | async" [employeeId]="employeeId" [data]="null" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-hr-work-history-editor>
+<x365-fm-workforce-hr-work-history-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null" [dataDoc]="documentData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-work-history-viewer>

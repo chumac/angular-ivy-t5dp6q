@@ -1,0 +1,55 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Range Percent'" [subTitle]="''" [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Gross lower:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.gross_lower | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Gross upper:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.gross_upper | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Gross Percent:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.gross_percent | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">This is annual tax </label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-control custom-switch">
+          <div *ngIf="data?.is_annual_tax != null && data?.is_annual_tax == true">
+            Yes
+          </div>
+          <div *ngIf="data?.is_annual_tax == null || data?.is_annual_tax == false">
+            No
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Done'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      [showCancelButton]="false"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,12 @@
+
+mdb-checkbox.read-only-checked {
+  .form-check-input[type="checkbox"]:checked:disabled + label:before,
+  label.btn input[type="checkbox"]:checked:disabled + label:before {
+    border-right: 2px solid #4285f4;
+    border-bottom: 2px solid #4285f4;
+  }
+
+  .form-check-input:disabled ~ .form-check-label {
+    color: #212529;
+  }
+}

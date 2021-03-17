@@ -1,0 +1,58 @@
+<div class="comments-container">
+    <span *ngFor='let errorMsg of errorMessage'>{{errorMsg }}</span>
+    <div class="sl-timeline-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+        <div *ngIf="progressTransactionInfo;else alternative">
+            <ul id="comments-list" class="comments-list" *ngFor='let progressTrans of progressTransactionInfo'>
+                <li>
+                    <div class="comment-main-level">
+                        <!-- <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div> -->
+                        <div class="comment-box">
+                            <div class="comment-head">
+                                <h6 class="comment-name by-author">Transaction</h6>
+                                <span>Report to : {{ progressTrans.reportsToInfo.employee_firstname }} {{ progressTrans.reportsToInfo.employee_surname }} | {{ progressTrans.transaction_date | dateDisplay }}</span>
+                                <i (click)="onTransactionDeleteIconClicked(progressTrans)" class="fa fa-close"></i>
+                                <i (click)="onTransactionDownloadIconClicked(progressTrans)" class="fa fa-cloud-download"></i>
+                                <i (click)="onAddCommentIconClicked(progressTrans)" class="fa fa-comment-o"></i>
+                            </div>
+                            <div class="comment-content transaction-container">
+                                <div class="row">
+                                    <div class="col-12 text-value text-right text-xs">
+                                        {{ progressTrans.comment }}
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="">Percentage Completed:</label>
+                                    </div>
+                                    <div class="col-8 text-value text-right">
+                                        {{ progressTrans.perc_complete }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="comments-list reply-list">
+                        <li *ngFor='let progressTransComment of progressTrans.ProgressTransactionCommentList'>
+                            <div class="comment-avatar">
+                                <x365-fm-talent-sl-timeline-avatar [data]="progressTransComment?.CommentByInfo?.employee_id"></x365-fm-talent-sl-timeline-avatar>
+                            </div>
+                            <!-- <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div> -->
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    <h6 class="comment-name"><a href="#">{{ progressTransComment?.CommentByInfo?.employee_firstname}} {{ progressTransComment?.CommentByInfo?.employee_surname}}</a></h6>
+                                    <span>{{ progressTransComment?.created_date | dateDisplay}}</span>
+                                    <i (click)="onTransactionCommentDeleteIconClicked(progressTransComment)" class="fa fa-close"></i>
+                                    <i (click)="onTransactionCommentDownloadIconClicked(progressTransComment)" class="fa fa-cloud-download"></i>
+                                </div>
+                                <div class="comment-content">
+                                    {{ progressTransComment?.comment }}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <ng-template #alternative>
+            Please wait loading transactions ...
+        </ng-template>
+    </div>
+</div>

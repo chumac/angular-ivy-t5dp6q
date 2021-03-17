@@ -1,0 +1,49 @@
+<article class="content-wrapper">
+  <div class="content">
+    <div class="content-header">
+      <div class="content-image">
+        <x365-shared-ui-avatar class="avatar avatar-size" [width]="'5em'" [height]="'5em'" [src]="profilePicture"
+          [showBorder]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false"
+          [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+      </div>
+      <div class="content-name">
+        {{ dialogData?.staff_name }}
+      </div>
+    </div>
+
+    <div class="content-body">
+      <div class="content-body-item">
+        <p class="title">Email</p>
+        <p class="info">{{ dialogData?.email_address_office }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Personal Email</p>
+        <p class="info">{{ dialogData?.email_address_personal }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Office Extension</p>
+        <p class="info">{{ dialogData?.contact_info_office_ext }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Phone Number</p>
+        <p class="info">{{ dialogData?.contact_info_gsm }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Position</p>
+        <p class="info">{{ dialogData?.position }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Supervisor</p>
+        <p class="info">{{ dialogData?.supervisor }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Enterprise Structure</p>
+        <p class="info">{{ dialogData?.enterprise_structure }}</p>
+      </div>
+      <div class="content-body-item">
+        <p class="title">Enterprise Structure Address</p>
+        <p class="info">{{ dialogData?.ent_struc_address }}</p>
+      </div>
+    </div>
+  </div>
+</article>

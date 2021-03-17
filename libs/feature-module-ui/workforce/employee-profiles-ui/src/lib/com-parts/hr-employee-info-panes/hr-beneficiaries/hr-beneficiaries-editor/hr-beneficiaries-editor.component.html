@@ -1,0 +1,137 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Beneficiaries'" [subTitle]="'Details of your beneficiaries'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="title" [options]="selectOptionData?.Titles" (selected)="onTitleSelected($event)"></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Surname:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="surname" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">First Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <input formControlName="firstname" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Other Names:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <input formControlName="othernames" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Relationship:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="relationship_type" [options]="selectOptionData?.BeneficiaryRelationshipTypes" placeholder=""></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Gender:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="gender" [options]="selectOptionData?.Gender"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Phone Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="phone_no" type="text" class="form-control form-font" NumbersOnly [allowDecimals]="false">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label" title="Email">Email:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="email" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label" title="Street I">Street I:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="address_line1" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label" title="Street II">Street II:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="address_line2" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label" title="Country of Residence">Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="country_id" [options]="countries$ | async" [filterEnabled]="true" [allowClear]="true" (selected)="onCountrySelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label" title="State of Residence">State:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="state_id" [options]="stateList$ | async" [filterEnabled]="true" [allowClear]="true"  (selected)="onStateSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">City:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="area_id" [options]="cityList$ | async" [filterEnabled]="true" [allowClear]="true"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label" title="Percentage to be allotted to this beneficiary">percentage:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="percentage" type="number" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" [caption]="'Select Photo'" [captionSubText]="'Select a photo from your system to upload'"
+            [maxImageSize]="200" [imagePickerLabel]="'Upload Photo'" [cropperHeaderMessage]="'Upload Photo'"
+            (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

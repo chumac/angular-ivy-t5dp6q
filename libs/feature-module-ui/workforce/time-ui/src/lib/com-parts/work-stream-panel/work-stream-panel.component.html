@@ -1,0 +1,23 @@
+<div class="panel-base">
+  <div class="panel-base-inline-header">
+    <div class="title">
+      {{formattedDate}}
+    </div>
+    <div class="tool-bar"> 
+        <div *ngIf="(data?.approval_status === 0)" class="btn-group" mdbDropdown>
+          <mdb-icon fas icon="ellipsis-h " classInside="dropdown-toggle" mdbDropdownToggle class="waves-effect hover-icon" mdbWavesEffect></mdb-icon>
+          <div class="dropdown-menu dropdown-primary">
+            <a class="dropdown-item" (click)="createWorkActivity(null, false)">Add new activity</a>
+            <a class="dropdown-item" (click)="submitWorkActivity()">Submit for approval</a>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="panel-base-content">   
+    <x365-shared-ui-shimmer-placeholder *ngIf="!data?.workStream" [perColumn]="2" [noOfLines]="3" [photo]="false"></x365-shared-ui-shimmer-placeholder>
+    <x365-fm-workforce-time-work-stream-card class="border-radius" *ngFor="let item of data.workStream" [data]="item" (editWorkStreamEvtData)="editWorkActivity($event)" (deleteWorkStreamEvtData)="deleteWorkActivity($event)"></x365-fm-workforce-time-work-stream-card>
+  </div>
+  <div *ngIf="(data?.approval_status === 0)" class="panel-base-inline-footer">
+    <a (click)="createWorkActivity(null, false)" class="footer-link"><i class="fa fa-plus">&nbsp;&nbsp;</i>Add new activity</a>
+  </div>
+</div>

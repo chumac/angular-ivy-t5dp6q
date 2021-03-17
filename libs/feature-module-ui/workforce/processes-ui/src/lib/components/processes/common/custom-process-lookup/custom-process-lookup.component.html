@@ -1,0 +1,106 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+      <div class="col-12">
+        <button (click)="goBack()" class="float-left" mdbBtn type="button" color="warning" rounded="true" size="sm" outline="true" mdbWavesEffect>
+          <i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back
+        </button>
+        <div class="d-flex align-items-center justify-content-end middle">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onRefreshButtonClicked()">Refresh</button>
+        </div>
+      </div>
+  </div>
+  <div class="row mb-3">
+      <div class="col-12">
+          <div class="d-flex flex-column doc-container border-radius border-shadow">
+            <input #role type="hidden" [value]="(userMetaData$ | async)?.roleId">
+            <!--Projects section v.1-->
+            <section>
+
+              <!--Section heading-->
+              <h2 class="text-center h4 mt-4">
+                <strong>List of processes</strong>
+              </h2>
+
+              <!--Section description-->
+              <p class="grey-text text-center">Select from the list of processes and complete the forms accordingly.</p>
+
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                  <div class="md-form">
+                    <input mdbInput type="text" [(ngModel)]="term" placeholder="Type to search list" class="form-control">
+                  </div>
+                </div>
+                <div class="col-4"></div>
+              </div>
+              
+              <div class="row my-4">
+                <div class="col-6">
+                  <dx-lookup #employeeLookup [dataSource]="((userMetaData$ | async)?.roleId === roles.lineManager)? (teamMembers$ | async): (activePersonnel$ | async)" valueExpr="value" displayExpr="label" [value]="+(userMetaData$ | async)?.employeeId"  [disabled]="(+(userMetaData$ | async)?.roleId)?false:true" searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Employee" closeOnOutsideClick=false popupHeight="400px"
+                  class="form-font">
+                  </dx-lookup>
+                </div>
+              </div>
+              
+              <!--Grid row-->
+              <div class="row text-center">
+                <div class="col-sm-12" *ngIf="(isProcessing$ | async) && ((processList$ | async)?.length < 1)">
+                  <x365-shared-ui-shimmer-placeholder [perColumn]="2" [noOfLines]="3" [photo]="false"></x365-shared-ui-shimmer-placeholder>
+                </div>
+
+                <!--Grid column-->
+                <div class="col-xlg-2 col-lg-3 col-md-3 col-sm-12 mb-4"  *ngFor="let data of processList$ | async | filter:term">
+
+                  <!--Card-->
+                  <mdb-card dark="true">
+
+                    <!--Card image-->
+                    <div class="view overlay waves-light" mdbWavesEffect>
+                      <img class="card-img" [src]="'data:image/png;base64,' + data?.title_art | bypassSanitizer:'url'" onerror="this.onerror=null; this.src='assets/images/title-art-placeholder.svg'" alt="">
+                      <a>
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
+                    </div>
+                    <!--/.Card image-->
+
+                    <!--Card content-->
+                    <mdb-card-body class="elegant-color white-text h6">
+                      <!--Title-->
+                      <mdb-card-title>
+                        <h6 class="text-left ovflw">{{ data?.title }}</h6>
+                      </mdb-card-title>
+
+                      <hr class="hr-light">
+
+                      <!--Text-->
+
+                      <mdb-card-text class="white-text text-left">
+                        <p class="description">{{ data?.description }}</p>
+                      </mdb-card-text>
+
+                      <a (click)="onRunButtonClicked(data?.id, role.value)" class="white-text d-flex justify-content-end">
+                        <h6 class="waves-light white-text" mdbWavesEffect>
+                          RUN
+                          <span>
+                            <mdb-icon fas icon="chevron-right" class="pl-2 waves-light" mdbWavesEffect></mdb-icon>
+                          </span>
+                        </h6>
+                      </a>
+                    </mdb-card-body>
+                    <!--/.Card content-->
+                  </mdb-card>
+                  <!--/.Card-->
+
+                </div>
+                <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+
+            </section>
+            <!--/Projects section v.1-->
+          </div>
+      </div>
+  </div>
+</div>
+<x365-shared-ui-overlay-loader [show]="isInitiating$ | async"></x365-shared-ui-overlay-loader>

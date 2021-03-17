@@ -1,0 +1,183 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Event Detail'" [subTitle]="'Creates new event detail'"
+        [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Course:</label>
+          </div>
+
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="course_id" [dataSource]="courseData" valueExpr="course_id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Event Title</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="event_title" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Detail:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="detail" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Event Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="event_type" [dataSource]="eventDetailType" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Is e learning? :</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="is_e_learning" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" dateSerializationFormat="yyyy-MM-dd" formControlName="start_date" class="form-font">
+            </dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" dateSerializationFormat="yyyy-MM-dd" formControlName="end_date" class="form-font">
+            </dx-date-box>
+          </div>
+        </div>
+        <div *ngIf="inEditMode()" class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Organized By:</label>
+          </div>
+
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="organized_by" [dataSource]="eventDetailFaculty" valueExpr="id"
+              displayExpr='fac_name' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Employees can apply?:</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="employees_can_apply" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Application open date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" dateSerializationFormat="yyyy-MM-dd" formControlName="application_open_date" class="form-font">
+            </dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Application close date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" dateSerializationFormat="yyyy-MM-dd" formControlName="application_close_date"
+              class="form-font"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="mt-2">Has certification?:</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="has_certification" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Use kudos: </label>
+          </div>
+          <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="use_kudos" type="checkbox" [(ngModel)]="showHidePay"
+                (ngModelChange)="onKudosChange($event)">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showHidePay">
+          <div class="col-4">
+            <label class="required center-label">kudos pay:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="kudos_pay" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showHidePay">
+          <div class="col-4">
+            <label class="required center-label">kudos receipt:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="kudos_receipt" type="text" class="form-control form-font">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

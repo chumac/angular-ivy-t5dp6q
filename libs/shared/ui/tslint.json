@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "x365-shared-ui",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "x365-shared-ui",
+      "kebab-case"
+    ]
+  }
+}

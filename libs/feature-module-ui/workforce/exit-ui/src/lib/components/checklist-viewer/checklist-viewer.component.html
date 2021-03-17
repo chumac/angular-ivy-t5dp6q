@@ -1,0 +1,53 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Resignation Checklist'" [subTitle]="'Details of resignation checklist'"
+      [loading]='!checklistData'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-0">
+      <igx-grid #dataGrid [data]="checklistData" [paging]="false" [height]="null" [autoGenerate]="false"
+        [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+        <igx-column field="description" header="Item" width="15%">
+        </igx-column>
+        <igx-column field="validation_role" header="Validation Role" width="10%">
+        </igx-column>
+        <igx-column field="is_validated" header="Status" width="10%">
+          <ng-template igxCell let-val>
+            <div class="left-align-text" *ngIf=val></div>
+            <mdb-badge *ngIf="val === 1" pill="true"><i class="fa fa-check fa-2x text-success"></i>
+            </mdb-badge>
+            <mdb-badge *ngIf="val === 0" pill="true" warning="true">Pending</mdb-badge>
+          </ng-template>
+        </igx-column>
+        <igx-column field="validated_by" header="Validated By" width="20%">
+        </igx-column>
+        <igx-column field="validated_comment" header="Comment" width="20%">
+        </igx-column>
+        <igx-column field="validated_date" header="Validation Date" width="15%">
+        </igx-column>
+        <igx-column field="id" header="..." class="text-center" width="10%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-check-square-o'" (click)="onValidateIconClicked(val)"
+                    title="View Process Table">
+                  </x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [showCancelButton]="true" [showCancelButton]="true" (cancelClick)="onCancelClicked()">
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>
+
+<x365-fm-workforce-exit-validate-editor #editor [width]="45" [show]="showEditor$ | async"
+  (cancelClick)="onCancelEditor()" [activePersonnel]="activePersonnel$ | async">
+</x365-fm-workforce-exit-validate-editor>

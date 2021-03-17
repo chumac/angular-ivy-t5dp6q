@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-5 card card-container">
+    <div class="card-content">
+      <dx-list #rolesList
+        [dataSource]="rolesData"
+        [height]="350"
+        [selectionMode]="'all'"
+        [selectAllMode]="'page'"
+        [showSelectionControls]="true"
+        [selectedItemKeys]="[]"
+        [searchEnabled]="true"
+        itemTemplate="data"
+      >
+        <div *dxTemplate="let item of 'data'">
+          <div class="item-name">{{item.role_name}}</div>
+        </div>
+      </dx-list>
+    </div>
+  </div>
+  <div class="col-2 my-auto">
+    <div class="wrapper px-1">
+      <button type="button" class="btn btn-sm btn-rounded btn-sm" mdbBtn color="warning" mdbWavesEffect (click)="addSelectedRows()"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
+      <button type="button" class="btn btn-rounded btn-sm" mdbBtn color="warning" mdbWavesEffect (click)="removeSelectedRows()"><i class="fa fa-chevron-left"><i class="fa fa-chevron-left"></i></i></button>
+    </div>
+  </div>
+  <div class="col-5 card card-container">
+    <div class="card-content">
+      <div class="grid__wrapper">
+          <dx-list #addedRolesList
+          [dataSource]="selectedRolesList"
+          [height]="350"
+          [selectionMode]="'all'"
+          [selectAllMode]="'page'"
+          [showSelectionControls]="true"
+          [selectedItemKeys]="[]"
+          [searchEnabled]="true"
+          itemTemplate="data">
+          <div *dxTemplate="let item of 'data'">
+            <div class="item-name">{{item.role_name}}</div>
+          </div>
+        </dx-list>
+      </div>
+    </div>
+  </div>
+</div>

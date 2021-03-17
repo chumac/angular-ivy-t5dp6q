@@ -1,0 +1,143 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'HR View Objectives'" [subTitle]="'Uploaded Objectives'" [loading]='!data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <div class="mx-3">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Asset Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.asset_type | valueTransform:assetOptions | stringDisplay}}
+                    </div>
+                </div>
+                <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Asset Key:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.asset_key | stringDisplay}}
+          </div>
+        </div> -->
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Parent:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.parent_id | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.code | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.description | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Title:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.title | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Subtitle:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.sub_title | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Widget:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.widget | valueTransform:widgetOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">JSON:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.json_properties | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Eligibility:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.eligibility | valueTransform:eligibilityRuleOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Rank:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.rank | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Line Manager Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_lm | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Reviewer Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_reviewer | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Moderator Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_moderator | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">HR Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_hr | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Reviewer Assessing Perm:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.perm_reviewer_assessing | valueTransform:permOptions | stringDisplay}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

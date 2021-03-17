@@ -1,0 +1,149 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Payroll Profile'" [subTitle]="'Details of payroll profile'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Code:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.code | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Description:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Current Period:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.current_period | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Allow Negative Pay?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{(data?.allow_neg_pay)? 'YES' : 'NO' | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Coinage Rounding:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.coinage_rounding | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <h5>Prorate</h5>
+      <div class="row mb-1">
+        <div class="col-12 text-value text-right md-form mt-0">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item d-flex justify-content-between"><div>Yearly</div><div><mdb-badge warning="true">{{data?.prorate_yearly | number}}</mdb-badge></div></li>
+            <li class="list-group-item d-flex justify-content-between"><div>Half Year</div><div><mdb-badge warning="true">{{data?.prorate_halfyear | number}}</mdb-badge></div></li>
+            <li class="list-group-item d-flex justify-content-between"><div>Quarterly</div><div><mdb-badge warning="true">{{data?.prorate_quarterly | number}}</mdb-badge></div></li>
+            <li class="list-group-item d-flex justify-content-between"><div>Weekly</div><div><mdb-badge warning="true">{{data?.prorate_weekly | number}}</mdb-badge></div></li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Cutoff Day:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.cut_off_day | number}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Payment Runday:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.payment_runday | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Financial Year Start:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.finyear_start | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Employment Date">Financial Year End:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.finyear_end | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Is usin Multi-currency?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{(data?.use_multi_currency)? 'YES': 'NO' | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Is using security group?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{(data?.use_security_group)? 'YES': 'NO' | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Security group:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.security_group | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Is using periodic tax for adjusted pay?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{(data?.use_periodic_tax_for_adjusted_pay)? 'YES': 'NO' | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Payment Period Covered:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.payment_period_covered | number}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,517 @@
+<div #megaMenuContent class="mega-menu container" *ngIf="true">
+    <div class="foot-note-left">v {{ environment?.version }}</div>
+    <div class="foot-note-right">
+        <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"> <path d="m136 210c-24.814 0-45 20.186-45 45v122c0 24.814 20.186 45 45 45s45-20.186 45-45v-122c0-24.814-20.186-45-45-45z"/> <path d="M61,255c0-4.327,0.571-8.507,1.278-12.634C44.2,248.209,31,265.001,31,285v62c0,19.999,13.2,36.791,31.278,42.634 C61.571,385.507,61,381.327,61,377V255z"/> <path d="m376 210c-24.814 0-45 20.186-45 45v122c0 24.814 20.186 45 45 45 4.51 0 8.782-0.868 12.892-2.108-5.584 18.509-22.587 32.108-42.892 32.108h-47.763c-6.213-17.422-22.707-30-42.237-30-24.814 0-45 20.186-45 45s20.186 45 45 45c19.53 0 36.024-12.578 42.237-30h47.763c41.353 0 75-33.647 75-75v-152c0-24.814-20.186-45-45-45z"/> <path d="m449.72 242.37c0.707 4.127 1.278 8.307 1.278 12.634v122c0 4.327-0.571 8.507-1.278 12.634 18.078-5.843 31.278-22.635 31.278-42.634v-62c0-19.999-13.2-36.791-31.278-42.634z"/> <path d="M256,0C131.928,0,31,100.928,31,225v0.383c8.937-6.766,19.277-11.717,30.687-13.934C68.698,110.251,153.054,30,256,30 s187.302,80.251,194.313,181.448c11.409,2.217,21.749,7.169,30.687,13.934V225C481,100.928,380.072,0,256,0z"/></svg>        Get support <a href="https://support.xceed365.com" target="_blank" rel="noopener noreferrer">Here</a>
+    </div>
+    <div class="row mt-1">
+        <div class="col-4">
+
+        </div>
+        <div class="col-8 ss-title">
+            <a *ngIf="(reboardMode$ | async) === 0" mdbBtn role="button" gradient="peach" mdbWavesEffect routerLink="/d/workforce/employee-profiles/my-data" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.APP_AREAS.SELF_SERVICE)"><i
+          class="fa fa-arrow-circle-o-left" aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;<b class="bold-text">Back to Self Service</b></i></a>
+            <a *ngIf="(reboardMode$ | async) > 0" mdbBtn role="button" gradient="peach" mdbWavesEffect routerLink="/d/workforce/employee-profiles/my-reboarding" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.APP_AREAS.SELF_SERVICE)"><i
+          class="fa fa-arrow-circle-o-left" aria-hidden="true">&nbsp;&nbsp;&nbsp;&nbsp;<b class="bold-text">Back to Self Service</b></i></a>
+
+            <!-- <a mdbBtn role="button" gradient="peach" mdbWavesEffect href="https://support.xceed365.com" target="_blank" rel="noopener noreferrer">
+        <svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+          <path d="m512 346.5c0-74.628906-50.285156-139.832031-121.195312-159.480469-4.457032-103.878906-90.347657-187.019531-195.304688-187.019531-107.800781 0-195.5 87.699219-195.5 195.5 0 35.132812 9.351562 69.339844 27.109375 99.371094l-26.390625 95.40625 95.410156-26.386719c27.605469 16.324219 58.746094 25.519531 90.886719 26.90625 19.644531 70.914063 84.851563 121.203125 159.484375 121.203125 29.789062 0 58.757812-7.933594 84.210938-23.007812l80.566406 22.285156-22.285156-80.566406c15.074218-25.453126 23.007812-54.421876 23.007812-84.210938zm-411.136719-15.046875-57.117187 15.800781 15.800781-57.117187-3.601563-5.632813c-16.972656-26.554687-25.945312-57.332031-25.945312-89.003906 0-91.257812 74.242188-165.5 165.5-165.5s165.5 74.242188 165.5 165.5-74.242188 165.5-165.5 165.5c-31.671875 0-62.445312-8.972656-89.003906-25.945312zm367.390625 136.800781-42.382812-11.726562-5.660156 3.683594c-21.941407 14.253906-47.433594 21.789062-73.710938 21.789062-58.65625 0-110.199219-37.925781-128.460938-92.308594 89.820313-10.355468 161.296876-81.832031 171.65625-171.65625 54.378907 18.265625 92.304688 69.808594 92.304688 128.464844 0 26.277344-7.535156 51.769531-21.789062 73.710938l-3.683594 5.660156zm0 0" />
+          <path d="m180.5 271h30v30h-30zm0 0" />
+          <path d="m225.5 150c0 8.519531-3.46875 16.382812-9.765625 22.144531l-35.234375 32.25v36.605469h30v-23.394531l25.488281-23.328125c12.398438-11.347656 19.511719-27.484375 19.511719-44.277344 0-33.085938-26.914062-60-60-60s-60 26.914062-60 60h30c0-16.542969 13.457031-30 30-30s30 13.457031 30 30zm0 0" />
+        </svg> &nbsp;
+        Support
+      </a> -->
+        </div>
+    </div>
+    <div class="row mt-4 admin-title-row">
+        <div class="col-12">
+            <p class="font-weight-bold mb-1">ADMINISTRATION</p>
+        </div>
+    </div>
+
+    <div class="row mt-3 px-1 mb-5">
+        <div class="col-4">
+            <p class="text-muted font-weight-bold module-title mb-1">WORKFORCE</p>
+            <ul class="module-list">
+                <li>
+                    <a routerLink="/d/workforce/absence/admin/leave/details" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.ABSENCE)" href="">
+                        <p>Leave & Absence</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/workforce/employee-profiles/admin/employees" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.EMPLOYEE_PROFILES)" href="">
+                        <p>Employee Profiles</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/workforce/exit/admin/employees-resignations" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.EXIT_MANAGEMENT)" href="">
+                        <p>Exit Management</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/workforce/processes/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.PROCESSES)" href="">
+                        <p>Custom Processes</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-4">
+            <p class="text-muted font-weight-bold module-title mb-1">TALENT</p>
+            <ul class="module-list">
+                <li>
+                    <a routerLink="/d/talent/performance/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.TALENT_MODULES.PERFORMANCE)" href="">
+                        <p>Performance</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/talent/learning/admin/" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.TALENT_MODULES.LEARNING)" href="">
+                        <p>Learning</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://xr.xceed365.com/employers/dashboard" target="_blank" rel="noopener noreferrer">
+                        <p>Sourcing & Onboarding</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-4">
+            <p class="text-muted font-weight-bold module-title mb-1">ENTERPRISE PLANNING</p>
+            <ul class="module-list">
+                <li>
+                    <a routerLink="/d/enterprise-planning/enterprise-structure/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.ENTERPRISE_PLANNING_MODULES.ENTERPRISE_STRUCTURE)" href="">
+                        <p>Enterprise Structure</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <p class="text-muted font-weight-bold module-title mb-1">COMPENSATION</p>
+            <ul class="module-list">
+                <li>
+                    <a routerLink="/d/compensation/loans/admin/proxy-applications" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.LOANS)" href="">
+                        <p>Loans</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/compensation/payments/admin/schedule/pending" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.PAYMENTS)" href="">
+                        <p>Payments</p>
+                    </a>
+                </li>
+                <!-- <li><a routerLink="/d/compensation/payroll/admin/execution/payroll-run" routerLinkActive="active"
+              (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.PAYROLL)" href="">
+              <p>Payroll</p>
+            </a>
+          </li> -->
+                <li>
+                    <a routerLink="/d/compensation/payroll/admin/profiles" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.PAYROLL)" href="">
+                        <p>Payroll</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-4">
+            <p class="text-muted font-weight-bold module-title mb-1">PLATFORM</p>
+            <ul class="module-list">
+                <li>
+                    <a routerLink="/d/platform/foundation/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.HR_FOUNDATIONS)" href="">
+                        <p>Foundation</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/platform/provisioning/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.PROVISIONING)" href="">
+                        <p>Provisioning</p>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/d/platform/data-administration/lists/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.DATA_ADMINISTRATION)" href="">
+                        <p>Data Administration</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <div class="row py-4 px-3" *ngIf="false">
+        <div class="col-12">
+            <div class="mb-3 pb-3">
+                <a routerLink="/d/workforce/employee-profiles/my-data" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.APP_AREAS.SELF_SERVICE)">
+                    <p class="standalone-menu-item">Self-Service</p>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-muted font-weight-bold mb-1">ADMINISTRATION</p>
+                <ul>
+                    <li>
+                        <a routerLink="/d/platform/foundation/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.HR_FOUNDATIONS)" href="">
+                            <p>Foundation</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/platform/provisioning/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.PROVISIONING)" href="">
+                            <p>Provisioning</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/enterprise-planning/enterprise-structure/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.ENTERPRISE_PLANNING_MODULES.ENTERPRISE_STRUCTURE)" href="">
+                            <p>Enterprise Planning</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/workforce/absence/admin/leave/details" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.ABSENCE)" href="">
+                            <p>Leave & Absence</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/compensation/loans/admin/proxy-applications" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.LOANS)" href="">
+                            <p>Loans</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/compensation/payments/admin/schedule/pending" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.PAYMENTS)" href="">
+                            <p>Payments</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/platform/data-administration/lists/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.DATA_ADMINISTRATION)" href="">
+                            <p>Data Administration</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/talent/performance/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.TALENT_MODULES.PERFORMANCE)" href="">
+                            <p>Performance</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/workforce/employee-profiles/admin/employees" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.EMPLOYEE_PROFILES)" href="">
+                            <p>Workforce</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div #megaMenuContent class="mega-menu container zx-depth-1" *ngIf="false">
+    <div class="row py-4 px-3">
+        <div class="col-12">
+            <div class="mb-3 pb-3">
+                <a routerLink="/d/workforce/employee-profiles/my-data" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.APP_AREAS.SELF_SERVICE)">
+                    <p class="standalone-menu-item">Self-Service</p>
+                </a>
+            </div>
+
+            <div>
+                <p class="text-muted font-weight-bold mb-1">ADMINISTRATION</p>
+                <ul>
+                    <li>
+                        <a routerLink="/d/platform/foundation/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.HR_FOUNDATIONS)" href="">
+                            <p>Foundation</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/platform/provisioning/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.PROVISIONING)" href="">
+                            <p>Provisioning</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/enterprise-planning/enterprise-structure/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.ENTERPRISE_PLANNING_MODULES.ENTERPRISE_STRUCTURE)" href="">
+                            <p>Enterprise Planning</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/workforce/absence/admin/leave/details" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.ABSENCE)" href="">
+                            <p>Leave & Absence</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/compensation/loans/admin/proxy-applications" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.LOANS)" href="">
+                            <p>Loans</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/compensation/payments/admin/schedule/pending" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.COMPENSATION_MODULES.PAYMENTS)" href="">
+                            <p>Payments</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/platform/data-administration/lists/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.PLATFORM_MODULES.DATA_ADMINISTRATION)" href="">
+                            <p>Data Administration</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/talent/performance/admin" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.TALENT_MODULES.PERFORMANCE)" href="">
+                            <p>Performance</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/d/workforce/employee-profiles/admin/employees" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.WORKFORCE_MODULES.EMPLOYEE_PROFILES)" href="">
+                            <p>Workforce</p>
+                        </a>
+                    </li>
+
+                    <!-- <li><a href=""><p>Payroll</p></a></li>
+        <li><a href=""><p>Employees Profile</p></a></li>-->
+                </ul>
+            </div>
+
+        </div>
+        <div *ngIf="false" class="col-4">
+            <!-- To use, remove the ng-if and convert the col-12 above to a col-4 -->
+            <div class="mb-3 pb-3">
+                <p class="text-muted mb-1">Analytics</p>
+                <ul>
+                    <li>
+                        <a href="">
+                            <p>Item 1</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 2</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 3</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 4</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 5</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 6</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 7</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 8</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 9</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 10</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 11</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 12</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div *ngIf="false" class="col-4">
+            <!-- To use, remove the ng-if and convert the col-12 above to a col-4 -->
+            <div class="mb-3 pb-3">
+                <p class="text-muted mb-1">Compensation</p>
+                <ul>
+                    <li>
+                        <a href="">
+                            <p>Item 1</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 2</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 3</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 4</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <p class="text-muted mb-1">Talents</p>
+                <ul>
+                    <li>
+                        <a href="">
+                            <p>Item 1</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 2</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 3</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <p>Item 4</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div #megaMenuContent class="mega-menu row z-depth-1">
+  <div class="row">
+    <div class="col-md-6 col-xl-4 sub-menu mt-5 mb-5 pl-4">
+      <ul class="list-unstyled mx-4 pl-0 dark-grey-text">
+        <li class="sub-title text-uppercase mt-sm">
+          <a class="menu-item" routerLink="/dsktp/self-service" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.APP_AREAS.SELF_SERVICE)">Self-Service</a>
+        </li>
+        <li class="sub-title text-uppercase">
+          <a class="menu-item" href="">Employee Profiles</a>
+        </li>
+        <li class="sub-title text-uppercase">
+          <a class="menu-item" routerLink="/dsktp/hr-admin/performance" routerLinkActive="active" (click)="onMenuItemClicked(moduleIdConstants.TALENT_MODULES.PERFORMANCE)">Performance</a>
+        </li>
+        <li class="sub-title text-uppercase">
+          <a class="menu-item" href="">Absence</a>
+        </li>
+        <li class="sub-title text-uppercase">
+          <a class="menu-item" href="">Payroll</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6 col-xl-8">
+      <div class="row" *ngIf="false">
+        <div class="col-xl-6 mt-5 mb-4 pr-5 clearfix d-none d-block">
+          <h6 class="sub-title p-sm mb-4 text-uppercase font-weight-bold dark-grey-text">Featured</h6>
+          <div class="view overlay pb-3">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(42).jpg" class="img-fluid z-depth-1"
+              alt="First sample image">
+            <div class="mask rgba-white-slight flex-center">
+              <p></p>
+            </div>
+          </div>
+          <h4 class="mb-2">
+            <a class="news-title" href="">Lorem ipsum dolor sit amet, consectetur isum adipisicing elit.</a>
+          </h4>
+          <p class="font-small text-uppercase text-muted">By
+            <a class="m-sm" href="#!">Anna Doe</a> - July 15, 2017</p>
+        </div>
+        <div class="col-xl-6 mt-5 mb-4 pr-5 clearfix d-none d-xl-block">
+          <h6 class="sub-title p-sm mb-4 text-uppercase font-weight-bold dark-grey-text">Recent</h6>
+          <div class="news-single">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="view overlay z-depth-1">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(43).jpg" class="img-fluid"
+                    alt="Minor sample post image">
+                  <div class="mask rgba-white-slight flex-center">
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <a class="news-title smaller mb-1" href="">Duis aute irure dolor reprehenderit in voluptate.</a>
+                <p class="font-small text-uppercase text-muted">July 14, 2017</p>
+              </div>
+            </div>
+          </div>
+          <div class="news-single">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="view overlay z-depth-1">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(44).jpg" class="img-fluid"
+                    alt="Minor sample post image">
+                  <div class="mask rgba-white-slight flex-center">
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <a class="news-title smaller mb-1" href="">Tempore autem reiciendis iste nam dicta.</a>
+                <p class="font-small text-uppercase text-muted">July 14, 2017</p>
+              </div>
+            </div>
+          </div>
+          <div class="news-single">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="view overlay z-depth-1">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(41).jpg" class="img-fluid"
+                    alt="Minor sample post image">
+                  <div class="mask rgba-white-slight flex-center">
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <a class="news-title smaller mb-1" href="">Eligendi dicta sunt amet, totam ea recusandae.</a>
+                <p class="font-small text-uppercase text-muted">July 14, 2017</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

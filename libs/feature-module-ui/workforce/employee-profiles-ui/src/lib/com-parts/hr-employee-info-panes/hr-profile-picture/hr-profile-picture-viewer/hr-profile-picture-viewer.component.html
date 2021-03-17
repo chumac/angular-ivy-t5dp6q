@@ -1,0 +1,30 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Profile Photo'" [subTitle]="'Details of your profile photo (Awaiting appoval)'"
+        [loading]='false'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-2">
+          <div class="col-12 row-text mt-0 mb-5 text-right">
+            <p class="text-center">Profile Picture</p>
+            <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'"  [src]="imageBaseHeader + (awaitingApprovalEmployeePhoto$ | async)?.image_profile"
+              [showBorder]="false" [isRounded]="false" [centerAvatar]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'"
+              [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+          </div>
+          <div class="col-12 row-text mt-0 mb-2 text-right">
+            <p class="text-center">File Picture</p>
+            <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'"  [src]="imageBaseHeader + (awaitingApprovalEmployeePhoto$ | async)?.image_personal"
+              [showBorder]="false" [isRounded]="false" [centerAvatar]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'"
+              [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="content-bottom">
+  <div class="content-bottom-l">
+    <div class="content-bottom-l-b">
+      <dx-list #coursesList
+      [dataSource]="courses"
+      [selectionMode]="'all'"
+      [selectAllMode]="'page'"
+      [showSelectionControls]="true"
+      [height]="800"
+      [searchEnabled]="true"
+      itemTemplate="data">
+        <div *dxTemplate="let item of 'data'">
+          <div class="course">
+            <div>{{item.description}}</div>
+          </div>
+        </div>
+      </dx-list>
+    </div>
+  </div>
+  <div class="content-bottom-m">
+    <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onSelect()" [disabled]="disableButton"><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right"></i></button>
+    <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onUnSelect()" [disabled]="disableButton"><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i><i class="fa fa-chevron-left"></i></button>
+  </div>
+  <div class="content-bottom-r">
+    <div class="content-bottom-r-t mb-1" *ngIf="showSelectAllCheckbox">
+      <mdb-checkbox #ch (change)="checkUncheckAll($event)">Select all</mdb-checkbox>
+    </div>
+    <div class="content-bottom-r-b">
+      <ul>
+        <li *ngFor="let item of addedCourses">
+          <div class="item-base md-form">
+            <div class="item-base-t">
+              <span>{{item?.description}}</span>
+              <textarea type="text" (input)="item.comment = $event.target.value" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+            </div>
+            <div class="item-base-b">
+              <mdb-checkbox [(ngModel)]="item.isSelected" [checked]="item.isSelected" value="{{item?.course_id}}" (change)="isAllSelected()"></mdb-checkbox>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

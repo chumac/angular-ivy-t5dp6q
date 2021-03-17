@@ -1,0 +1,111 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Enterprise Structure Type'" [subTitle]="'Add/Edit Enterprise Structure Type'"
+      [loading]='isProcessing$ | async'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Code:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="analysis_Code" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Description:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="description" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Ranking:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="ranking" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Has Address:</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          <span class="label-name">No</span> <label class="switch">
+            <input formControlName="has_address" type="checkbox">
+            <span class="slider round"></span>
+          </label> <span class="label-name">Yes</span>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Known Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="Known_type" (selected)="getKnownType($event)"
+            [options]="knownTypeTransformed$ | async" placeholder="" [filterEnabled]="true"></mdb-select>
+        </div>
+      </div>
+      <div [hidden]="isOthersSelected" class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Specify Other:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input type="text" class="form-control pt-0" (keyup)="onOtherKnownTypeInput($event)">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Transfer can happen at this level?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="can_transfer" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Link to Ent. Structure:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="analysis_id_link" [options]="structureTransformed$ | async" placeholder="" [filterEnabled]="true">
+          </mdb-select>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Use for organisational chart?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="usefor_organization_chart" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Has Virtual Link?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="has_virtual_links" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

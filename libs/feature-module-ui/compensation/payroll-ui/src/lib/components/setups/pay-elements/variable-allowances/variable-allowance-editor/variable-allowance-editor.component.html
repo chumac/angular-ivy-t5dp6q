@@ -1,0 +1,149 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Variable Allowance'" [subTitle]="'Edit Variable Allowance'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Ordering Rank:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="ordering_rank" type="number" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Short Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="shortname" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Transaction Unit:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="transaction_unit" [options]="transactionList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payroll_profile" [options]="payrollProfileList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Ledger Account:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="ledger_account" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Must Apply For?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="must_apply_for" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Use Global Rate?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="use_global_rate" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Is Taxable?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="is_taxable" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Group Item?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="group_item" value="false" type="checkbox" (change)="fs.onGroupItemChecked($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="fs.showGroupName">
+          <div class="col-4">
+            <label class="center-label">Group Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="group_name_id" [options]="groupList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">System Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="12" formControlName="sys_rule" type="text" class="md-textarea form-control"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+  </div>

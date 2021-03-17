@@ -1,0 +1,136 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Plan'" [subTitle]="'Plan details'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.code | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Period Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.period_start_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Period End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.period_end_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Is Current:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.is_current | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Review Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.review_start_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Review End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.review_end_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Is Active:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.is_active | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Use 360:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.use_360 | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Plan Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.plan_start_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Plan End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.plan_end_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Business Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.business_rule | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Is Published:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.is_published | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Require ratings:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.req_ratings | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Require comments:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.req_comments | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-xl-6 mb-4">
+            <x365-comparts-event-calendar-card [viewType]="viewTypeToDoCard$ | async" [birthDays]="birthDays$ | async" [weddingAnniversaries]="weddingAnniversaries$ | async" [workAnniversaries]="workAnniversaries$ | async" (viewTypeSwitch)="onviewTypeSwitchToDoCard($event)"></x365-comparts-event-calendar-card>
+        </div>
+        <div class="col-xl-6 mb-4">
+            <x365-comparts-todo-card [viewType]="viewTypeToDoCard$ | async" [toDos]="toDos$ | async"></x365-comparts-todo-card>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-xl-6 mb-4">
+            <x365-comparts-notice-board-card [announcements]="announcements$ | async"></x365-comparts-notice-board-card>
+        </div>
+        <div class="col-xl-6">
+            <x365-comparts-leave-card [viewType]="viewTypeTeamLeaveCard$ | async" [leaveTimeline]="leaveTimeline$ | async" (viewTypeSwitch)="onviewTypeSwitchTeamLeaveCard($event)"></x365-comparts-leave-card>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <x365-comparts-team-card></x365-comparts-team-card>
+        </div>
+    </div>
+</div>

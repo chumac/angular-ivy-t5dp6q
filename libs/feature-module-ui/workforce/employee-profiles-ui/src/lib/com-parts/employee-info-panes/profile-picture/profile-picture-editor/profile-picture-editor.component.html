@@ -1,0 +1,20 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Profile Picture'" [subTitle]="'Details of your profile photo'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" [caption]="'Select Image'" [captionSubText]="'Select an image from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Profile Picture'" [cropperHeaderMessage]="'Upload Image'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

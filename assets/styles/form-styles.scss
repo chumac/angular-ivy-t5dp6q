@@ -1,0 +1,163 @@
+$form_card_outline_color: rgb(236, 236, 236);
+$form_label_color: rgb(80, 80, 80);
+
+.font-size {
+  font-size: 0.8em;
+}
+
+.form-container {
+  position: fixed;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1300; // 999; /// 1300
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.form-overlay {
+  position: relative;
+  flex-grow: 1;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.form-overlay-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.form-main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 35%;
+  top: 0;
+  right: 0;
+  order: 1;
+  background-color: rgb(250, 250, 250);
+  transition: all 0.5s ease;
+
+  .header {
+    flex: 0 0 4em;
+  }
+
+  .body {
+    flex: 1;
+    background: white;
+    font-size: 0.8em;
+    padding: 2.5em 0.3em 1em 0.3em;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .footer {
+    flex: 0 0 4.3em;
+    padding-top: 0.7em;
+  }
+
+  form {
+    label {
+      color: $form_label_color;
+      font-weight: 600;
+    }
+
+    .sub-heading h6 {
+      color: $form_label_color;
+      font-weight: 600;
+    }
+  }
+
+  .form-control {
+    font-size: 1em;
+  }
+
+  .center-label {
+    margin-top: 0.4em !important;
+  }
+
+  .md-form textarea.md-textarea-auto {
+    padding-top: 0rem;
+  }
+
+  .select-option,
+  .value {
+    font-size: 0.9em;
+  }
+
+  .mydp.picker {
+    .md-form {
+      margin: 0;
+
+      input.form-control {
+        font-size: 0.9em !important;
+        height: auto !important;
+      }
+
+      .placeholder {
+        color: $form_placeholder_text_color !important;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .required:after {
+    content: '*';
+    margin-left: 0.3rem;
+    font-weight: 600;
+    color: lighten($validation-required-color-red, 25%);
+  }
+}
+
+.horizontal-rule {
+  width: 70%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.row-label {
+  color: $app_form_label_color;
+  font-weight: 600;
+}
+
+.row-text {
+  color: $app_form_text_color;
+}
+
+.form-attachments {
+  a {
+    color: $app_form_text_color;
+  }
+
+  a:hover {
+    color: lighten($app_form_text_color, 17%);
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  text-align: right;
+}
+
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #fb3 !important;
+}
+
+.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #fb3 !important;
+}
+

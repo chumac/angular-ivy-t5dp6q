@@ -1,0 +1,5 @@
+<div class="li-row">
+  <div class="li-row-l">{{data?.AssetInfo?.description}}</div>
+  <div class="li-row-r" *ngIf="completed"><i class="fa fa-check-square-o completed" aria-hidden="true"></i></div>
+  <div class="li-row-r" *ngIf="!completed"><i class="fa fa-times not-completed" aria-hidden="true"></i></div>
+</div>

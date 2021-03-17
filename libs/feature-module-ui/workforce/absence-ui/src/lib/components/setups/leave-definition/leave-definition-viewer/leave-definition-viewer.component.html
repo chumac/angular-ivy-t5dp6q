@@ -1,0 +1,173 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Leave Definition'" [subTitle]="'Details Leave Definition'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <div class="mx-3">
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Code:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.code | stringDisplay}}
+              </div>
+          </div>
+
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Description:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.description | stringDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Is Annual:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.is_annual | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label title="Gender">Take from Annual:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.take_from_annual | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Can break:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.can_break | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Use public Holidays:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.use_public_holidays | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Support Allowance Payment</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.supports_allowance_payment | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Show in Promotion:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.show_in_promotion | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Prorate:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.prorate_leave | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Only Confirmed Staff:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.only_confirmed_staff | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Avail If no Annual:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.only_avail_ifno_annual | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Unavailable in Self Service:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.not_in_selfservice| booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Must Exhaust BackLog:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.must_exhaust_backlog | booleanDisplay}}
+              </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label>Make Staff Inactive:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.makes_staff_inactive | booleanDisplay}}
+            </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+              <label>Has Per Time Limit:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.has_per_time_limit | booleanDisplay}}
+          </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+            <label>Choose From BackLog:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.choose_frombacklog | booleanDisplay}}
+        </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-4">
+          <label>Cancel Annual:</label>
+      </div>
+      <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.cancels_annual | booleanDisplay}}
+      </div>
+  </div>
+  <div class="row mb-1">
+    <div class="col-4">
+        <label>Can Carry Over:</label>
+    </div>
+    <div class="col-8 text-value text-right md-form mt-0">
+        {{data?.can_carryover | booleanDisplay}}
+    </div>
+</div>
+<div class="row mb-1">
+  <div class="col-4">
+      <label>Archive:</label>
+  </div>
+  <div class="col-8 text-value text-right md-form mt-0">
+      {{data?.archived_status | booleanDisplay}}
+  </div>
+</div>
+<div class="row mb-1">
+  <div class="col-4">
+      <label>View in Summary:</label>
+  </div>
+  <div class="col-8 text-value text-right md-form mt-0">
+      {{data?.view_in_summary | booleanDisplay}}
+  </div>
+</div>
+      </div>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,55 @@
+<div class="card card-container">
+    <div class="card-content font-size">
+        <!-- <div class="card-content-top mb-2">
+            <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+        </div> -->
+        <div class="card-content-bottom">
+            <igx-grid #dataGrid *ngIf="true" [data]="professionalQualificationGridData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                <igx-column field="requirement_type_text" header="Tag" width="13%"></igx-column>
+                <igx-column field="membershipID" header="Member ID" width="13%"></igx-column>
+                <igx-column field="institution" header="Institution" width="20%"></igx-column>
+                <igx-column field="qualification" header="Qualification" width="13%"></igx-column>
+                <igx-column field="award" header="Prof Award" width="13%"></igx-column>
+                <igx-column field="year_of_award" header="Award Year" width="13%">
+                    <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | dateDisplay}}</div>
+                    </ng-template>
+                </igx-column>
+                <igx-column field="proqual_id" header="..." class="text-center" width="13%">
+                    <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                            <div class="hover-menu">
+                                <div class="hover-icons">
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 2" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 2" [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                    award_id: 110
+                    certificate_picture: ""
+                    employee_id: 722217
+                    img_extension: null
+                    img_guid: null
+                    img_size: 0
+                    img_url: null
+                    institution_id: 169767
+                    master_rec_id: 0
+                    membershipID: "456www"
+                    next_renewal_date: "0001-01-01T00:00:00"
+                    proqual_id: 111
+                    qualification_id: 9
+                    record_note: null
+                    req_renewal: false
+                    requirement_type: 0
+                    year_of_award: "2019-01-15T00:00:00"
+                </igx-column>
+            </igx-grid>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-reboard-pro-qualifications-editor #editor [width]="42" [show]="showEditor$ | async" [data]="null" [selectOptionData]="selectOptionData$ | async" [institutions]="institutions$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-reboard-pro-qualifications-editor>
+<x365-fm-workforce-reboard-pro-qualifications-viewer #viewer [width]="34" [show]="showViewer$ | async" [data]="null" [dataDoc]="documentData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-reboard-pro-qualifications-viewer>

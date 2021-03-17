@@ -1,0 +1,240 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show ? '0' : utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Transfer Transaction'" [subTitle]="'Add/Edit Transfer Transaction '"
+        [loading]="isLoading$ | async" ></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f"  (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup #employeeLook formControlName="employee_id" [dataSource]="employeeList$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true  (onValueChanged)="onEmployeeSelect($event)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font" [disabled]="!enableEmployeeSelect"></dx-lookup>
+            <div class="float-right">
+              <a mdbBtn floating="true" size="sm" color="warning" class="waves-light btn-sm mr-2" mdbWavesEffect
+                (click)="onChangeEmployee()" title="Select another employee">
+                <i class="fa fa-random"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+            <div class="col-12 mt-2">
+              <h5>Enterprise Structure</h5>
+              <hr class="mt-0">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12">
+          <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onTreeClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Show Enterprise Tree</button>
+            </div>
+          </div>
+         <div class="row mb-5">
+          <div class="col-4">
+            <label class="center-label">Current Structure Type:</label>
+          </div>
+           <div class="col-8 center-label ">
+            <label>{{this.fs.loc?.currentLocationText?.current_location_type | stringDisplay}}</label>
+           </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-4">
+            <label class="center-label">Current Location:</label>
+          </div>
+          <div class="col-8 center-label ">
+            <label>{{this.fs.loc?.currentLocationText?.current_location | stringDisplay}}</label>
+           </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-8">
+              <label class="required center-label">Use Enterprise Tree for selection?</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input #tree type="checkbox" (change)="onTreeSelection()" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div> -->
+        <!-- <div class="row mb-3" *ngIf="onTreeSelection()">
+          <div class="col-12">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onTreeClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Show Enterprise Tree</button>
+          </div>
+        </div> -->
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">New Structure Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+          <!-- <dx-lookup formControlName="new_location_structure" [dataSource]="structureType$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true  (onValueChanged)="onStructureTypeChanged($event)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup> -->
+          <div *ngIf="this.inEditMode()">
+          <dx-lookup formControlName="new_location_structure" [dataSource]="structureType$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true  (onValueChanged)="onStructureTypeChanged($event.value)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          <!-- <mdb-select formControlName="new_location_structure" [options]="structureType$ | async" [filterEnabled]="true" (selected)="onStructureTypeChanged($event.value)" class="form-font"></mdb-select> -->
+          </div>
+          <div *ngIf="!this.inEditMode()">
+              <dx-lookup formControlName="new_location_structure" [dataSource]="structureType$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true  (onValueChanged)="onStructureType($event)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+              <!-- <mdb-select formControlName="new_location_structure" [options]="structureType$ | async" [filterEnabled]="true" (selected)="onStructureType($event)" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Structure Type Details:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="new_location_id" [dataSource]="structureTypeDetails$ | async" valueExpr="value" displayExpr='label' searchEnabled=true
+            showPopupTitle=false paginate=true  (onValueChanged)="onStructureDetail($event)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+              <!-- <mdb-select formControlName="new_location_id" [options]="structureTypeDetails$ | async"  [filterEnabled]="true"
+        (selected)="onStructureDetail($event)" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">New Location:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="new_location_details" [dataSource]="costCenter$ | async" valueExpr="value" displayExpr='label' searchEnabled=true
+              showPopupTitle=false paginate=true  placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+             <!-- <mdb-select formControlName="new_location_details" [options]="costCenter$ | async" [filterEnabled]="true" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+            <div class="col-12 md-form mt-2">
+              <h5>Position</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+        <div class="row mb-1" *ngIf="inEditMode()">
+          <div class="col-4">
+            <label class="center-label">Current Position:</label>
+          </div>
+          <div class="col-8 center-label ">
+              <label>{{this.data?.currentPosition?.description | stringDisplay}}</label>
+            <!-- <mdb-select formControlName="current_position" [options]="position$ | async" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="!inEditMode()">
+          <div class="col-4">
+            <label class="center-label">Current Position:</label>
+          </div>
+          <div class="col-8 center-label ">
+              <label>{{this.fs.dat?.position_text | stringDisplay}}</label>
+            <!-- <mdb-select formControlName="current_position" [options]="position$ | async" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">New Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="new_position" [dataSource]="position$ | async" valueExpr="value" displayExpr='label' searchEnabled=true
+              showClearButton="true" paginate=true  (onValueChanged)="onNewPositionSelected($event)" placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+             <!-- <mdb-select formControlName="new_position" [options]="position$ | async" (selected)="onNewPositionSelected($event)" [filterEnabled]="true" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+            <div class="col-12 md-form mt-2">
+              <h5>Designation</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+        <div class="row mb-1" *ngIf="inEditMode()">
+          <div class="col-4">
+            <label class="center-label">Current Designation:</label>
+          </div>
+          <div class="col-8 center-label ">
+              <label>{{this.data?.currentDesignationInfo?.description | stringDisplay}}</label>
+            </div>
+        </div>
+        <div class="row mb-1" *ngIf="!inEditMode()">
+          <div class="col-4">
+            <label class="center-label">Current Designation:</label>
+          </div>
+          <div class="col-8 center-label ">
+              <label>{{this.fs.dat?.designation_text | stringDisplay}}</label>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">New Designation:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="new_designation_id" [dataSource]="designation$ | async" valueExpr="value" displayExpr='label' searchEnabled=true
+              showClearButton="true" paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+              <!-- <mdb-select formControlName="new_designation_id" [options]="designation$ | async" [filterEnabled]="true" class="form-font"></mdb-select> -->
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+            <div class="col-12 md-form mt-2">
+              <hr class="mt-1">
+            </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Supervisor:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="reporting_to_id" [dataSource]="employeeList$ | async" valueExpr="value" displayExpr='label' searchEnabled=true
+            showClearButton="true" paginate=true  placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_date" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-8">
+              <label class="required center-label">Make this a historical transfer?</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input  type="checkbox" formControlName="is_historical" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-8">
+              <label class="required center-label">Make this a temporary transfer?</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input #temp type="checkbox" formControlName="is_temporary" (change)="onTemporary()" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="row mb-1" *ngIf="onTemporary()">
+          <div class="col-4">
+            <label class="center-label">End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="end_date" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Narration:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea type="text" formControlName="narration" class="md-textarea md-textarea-auto form-control" mdbInput></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async"
+        (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>
+
+<x365-fm-workforce-transfer-tree #editor [width]="80" [show]="this.fs.show"  (cancelClick)="onCancelTree()"></x365-fm-workforce-transfer-tree>

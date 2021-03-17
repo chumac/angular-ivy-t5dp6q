@@ -1,0 +1,129 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Educational History'" [subTitle]="'Details of your educational history'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Tag:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="requirement_type" [options]="selectOptionData?.RequirementTypeEducationalLevels" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Country:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="country" [options]="countryList" [filterEnabled]="true" (selected)="onCountrySelected($event)" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Institution:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-lookup #institutionLookup formControlName="institution_id" [dataSource]="institutionList$ | async" valueExpr="id" displayExpr='description' [mdbTooltip]="this.fs.formToolTips.institutionToolTip" (onValueChanged)="onInstitutionSelected($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+                        closeOnOutsideClick=false popupHeight="400px" class="form-font" (onOpened)="onInstitutionDropdownOpened($event)"></dx-lookup>
+
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Location:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="location" type="text" class="form-control form-font">
+                </div>
+            </div>
+
+            <div class="row mb-1" *ngIf="allowFacultyChoiceList==='NO'">
+                <div class="col-4">
+                    <label class="required center-label">Faculty:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="faculty" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1" *ngIf="allowDepartmentChoiceList==='NO'">
+                <div class="col-4">
+                    <label class="required center-label">Department:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="department" type="text" class="form-control form-font">
+                </div>
+            </div>
+
+            <div class="row mb-1" *ngIf="allowFacultyChoiceList==='YES'">
+                <div class="col-4">
+                    <label class="required center-label">Faculty:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="faculty" [options]="faculties" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1" *ngIf="allowDepartmentChoiceList==='YES'">
+                <div class="col-4">
+                    <label class="required center-label">Department:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="department" [options]="departments" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Courses:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="course_id" [options]="courses" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Matric No:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="matricno" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Qualification:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="qualification_id" [options]="selectOptionData?.Qualifications" [filterEnabled]="true" class="form-font" [mdbTooltip]="this.fs.formToolTips.qualificationToolTip" (selected)="onQualificationSelected($event)" (opened)="onQualificationDropdownOpened()"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label" title="Educational Grade">Edu. Grade:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="edugrade_id" [options]="selectOptionData?.EducationalGrades" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label" title="Graduation Year">Grad. Year:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="graduation_year" [placeholder]="''"></dx-date-box>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" #imagePicker [caption]="'Select Image'" [captionSubText]="'Select an image from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Certificate Image'" [cropperHeaderMessage]="'Upload Image'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

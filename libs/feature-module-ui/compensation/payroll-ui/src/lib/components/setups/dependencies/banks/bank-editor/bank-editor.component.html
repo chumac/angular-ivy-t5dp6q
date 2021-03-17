@@ -1,0 +1,127 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+      <div class="header">
+        <x365-shared-ui-form-header [title]="'Bank'" [subTitle]="'Edit Bank'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Code:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              {{data?.bank_code}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Description:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              {{data?.description}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Short Name:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <input formControlName="shortname" type="text" class="form-control form-font">
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Contact:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="contact" type="text" class="form-control form-font">
+                </div>
+            </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Street 1:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="street1" type="text" class="form-control form-font">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Street 2:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <input formControlName="street2" type="text" class="form-control form-font">
+              </div>
+            </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Telephone 1:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="tel1" type="number" class="form-control form-font">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Telephone 2:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <input formControlName="tel2" type="number" class="form-control form-font">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Email:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="email" type="text" class="form-control form-font">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Website:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="website" type="text" class="form-control form-font">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Zip:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="zip" type="text" class="form-control form-font">
+              </div>
+            </div>
+            <!-- <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">Country:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <input formControlName="country" type="text" class="form-control form-font">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">State:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <input formControlName="state" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="center-label">City:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="area_id" type="text" class="form-control form-font">
+                </div>
+            </div> -->
+        </form>
+      </div>
+      <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+    </div>
+    </div>

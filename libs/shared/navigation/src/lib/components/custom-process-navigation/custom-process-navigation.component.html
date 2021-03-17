@@ -1,0 +1,27 @@
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <mdb-accordion [multiple]="false" aria-multiselectable="false">
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Transactions</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul class="">
+                        <li><a routerLink="/d/workforce/processes/admin/hr-process-transactions" routerLinkActive="active"><span>Custom Process Transaction</span></a></li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Setups</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul class="mb-5">
+                      <li><a routerLink="/d/workforce/processes/admin/custom-forms" routerLinkActive="active"><span>Custom Form Definition</span></a></li>
+                      <li><a routerLink="/d/workforce/processes/admin/process-form-definition" routerLinkActive="active"><span>Custom Process Definition</span></a></li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+        </mdb-accordion>
+    </ul>
+</li>

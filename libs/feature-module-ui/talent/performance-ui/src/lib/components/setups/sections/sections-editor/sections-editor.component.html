@@ -1,0 +1,151 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Section'" [subTitle]="'Creates new section'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Widget:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="widget" [options]="widgetOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Asset Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="asset_type" [options]="assetOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div> -->
+                <!-- <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Asset Key:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="asset_key" type="text" class="form-control form-font">
+                    </div>
+                </div> -->
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Parent:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="parent_id" [dataSource]="customPageList$ | async" valueExpr="id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="code" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="description" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Title:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="title" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Subtitle:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="sub_title" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Json Property:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="json_properties" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Eligibility:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="eligibility" [options]="eligibilityRuleOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Rank:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="rank" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_emp" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Line Manager Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_lm" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Reviewer Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_reviewer" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Moderator Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_moderator" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">HR Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_hr" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Reviewer Assessing Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_reviewer_assessing" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

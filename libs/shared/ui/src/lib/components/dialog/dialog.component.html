@@ -1,0 +1,42 @@
+<!-- <h1 mat-dialog-title>Please Confirm!</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to {{data.action}} this data?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Not Anymore</button>
+  <button mat-button (click)="onYesClick()" cdkFocusInitial>Yes</button>
+</div> -->
+
+<!-- <div class="header">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+</div>
+<div mat-dialog-content>
+  <p class="dialog-message">{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+  <button class="btn btn-cancel" style="margin-right:10px;" (click)="cancel()">{{ data.cancelText }}</button>
+  <button class="btn" (click)="confirm()">{{ data.confirmText }}</button>
+</div> -->
+
+<div class="modal-content">
+  <div class="modal-body ripe-malinka-gradient">
+    <div class="row">
+      <div class="col-md-1">
+        <div class="warning-icon">
+          <i class="fa fa-exclamation-circle fa-2x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="col-md-11">
+        <div class="warning-text">
+          {{ data.message }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-warning btn-rounded btn-min-width" *ngIf="true"
+      (click)="confirm()" mdbWavesEffect>{{ data.confirmText }}</button>
+    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" *ngIf="true"
+       (click)="cancel()" mdbWavesEffect>{{ data.cancelText }}</button>
+  </div>
+</div>

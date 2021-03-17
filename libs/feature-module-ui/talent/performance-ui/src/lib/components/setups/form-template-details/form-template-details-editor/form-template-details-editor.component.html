@@ -1,0 +1,107 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Form Template Detail'" [subTitle]="'Creates new form template detail'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Review Form:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="review_form_id" [dataSource]="formTemplateList$ | async" valueExpr="id" displayExpr='description' disabled="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Pages:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup #pagesLookUp [dataSource]="pageList$ | async" valueExpr="id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Weight:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="weight" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Page Rank:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="page_rank" [options]="rankOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Is Active:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_active" type="checkbox" class="form-check-input" id="is_active">
+                            <label class="form-check-label" for="is_active"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_emp" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Line Manager Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_lm" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Reviewer Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_reviewer" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Moderator Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_moderator" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">HR Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_hr" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Reviewer Assessing Permission:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perm_reviewer_assessing" [options]="permOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

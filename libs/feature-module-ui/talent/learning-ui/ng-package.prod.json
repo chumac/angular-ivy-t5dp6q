@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../../dist/libs/feature-module-ui/talent/learning-ui",
+  "lib": {
+    "entryFile": "src/index.ts"
+  }
+}

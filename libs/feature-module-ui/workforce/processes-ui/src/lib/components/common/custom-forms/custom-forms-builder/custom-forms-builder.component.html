@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <button (click)="goBack()" [disabled]="isProcessing$ | async" class="float-left" mdbBtn type="button" color="warning" rounded="true" size="sm" outline="true" mdbWavesEffect>
+                <i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back
+            </button>
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onSaveButtonClicked()"><span *ngIf="isProcessing$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;<i class="fa fa-file-text"></i>&nbsp;&nbsp;Save</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onRefreshButtonClicked()">Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                
+                <x365-form-builder #builder></x365-form-builder>
+                
+            </div>
+        </div>
+    </div>
+</div>

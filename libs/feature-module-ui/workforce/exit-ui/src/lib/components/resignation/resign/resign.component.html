@@ -1,0 +1,71 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Initiate Exit Process'" [subTitle]="isProxy ? 'Proxy Exit Process Initiation' : 'My Exit Process Initiation'" [loading]="false">
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1" *ngIf="isProxy">
+          <div class="col-4">
+            <label class="required center-label">Employee</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="employee_id" [dataSource]="employeeData" valueExpr="employee_id"
+              displayExpr='fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+              popupHeight="400px" class="form-font" (valueChange)="onEmployeeSelected($event)"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Separation Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="separation_type" [options]="separationTypes$ | async" placeholder="" [disabled]="processInitiated"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box dateSerializationFormat="yyyy-MM-dd" [acceptCustomValue]="false" [openOnFieldClick]="true"
+              formControlName="effective_date" [placeholder]="''" [disabled]="processInitiated"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Upload Letter</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input type="checkbox" (change)="onUploadLetterChecked($event)" [disabled]="processInitiated">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="useUpload">
+          <div class="col-1"></div>
+          <div class="col-10 md-form mt-0">
+            <div class="mb-2">Upload resignation letter (PDF or MS Word file only)</div>
+            <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved()"
+              [showText]="false" [showUploadDetails]="false" [disableButton]="processInitiated">
+            </x365-shared-ui-file-picker>
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <div class="row mb-1" *ngIf="!useUpload">
+          <div class="col-12 md-form mt-0">
+              <angular-editor formControlName="resign_letter" [config]="fs.editorConfig"></angular-editor>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Send Letter'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()" [doneButtonDisabled]="processInitiated"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

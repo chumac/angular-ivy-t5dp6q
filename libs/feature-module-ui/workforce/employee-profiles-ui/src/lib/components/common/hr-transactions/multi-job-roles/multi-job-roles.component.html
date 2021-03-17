@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="!(this.employeeSelect.value)" (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="!(this.employeeSelect.value)" (click)="onDeleteMultiple()"><i class="fa fa-trash"></i>&nbsp;&nbsp;Delete</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="!(this.employeeSelect.value)" (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="d-flex flex-column doc-container border-radius border-shadow">
+      <div class="d-flex flex-column doc-container-t">
+        <div class="doc-container-t-sp">
+          <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+        </div>
+        <div class="doc-container-t-ct">
+          <div class="doc-container-t-ct-l">
+              <dx-lookup #employeeSelect [dataSource]="employeeList$ | async" valueExpr="value" displayExpr='label' searchEnabled=true 
+              showPopupTitle=false paginate=true closeOnOutsideClick="false" popupHeight="400px" class="form-font"
+              showClearButton="true" (onValueChanged)="onEmployeeSelect($event)" placeholder="Select Employee..."></dx-lookup>
+          </div>
+          <div class="doc-container-t-ct-r">
+            <div class="row">
+              <div class="col-2"></div>
+              <div class="col-5 md-form">
+              </div>
+              <div class="col-5 md-form">
+                <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by ..."></mdb-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-container-s">
+        <div class="row">
+          <div class="col-12 md-form mb-1">
+            <input mdbInputDirective  #searchInput type="text" (keyup.enter)="search()" placeholder="Enter your search text and press the Enter key." class="form-control">
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-column doc-container-b">
+        <div class="row">
+          <div class="col-12">
+            <div class="grid-table-container">
+              <igx-grid #multiJobRoles [data]="multiJobRole$ | async" [paging]="true" [perPage]="15" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [rowSelectable]="true" [showToolbar]="false" [height]="null">
+                <igx-column field="position_id_text" header="Position" width="35%"></igx-column>
+                <igx-column field="effective_from" header="Effective Date" width="20%">
+                  <ng-template igxCell let-val>
+                    {{val | dateDisplay}}
+                    </ng-template>  
+                </igx-column>
+                <igx-column field="is_temp" header="Temporary" width="15%"></igx-column>
+                <igx-column field="end_date" header="End Date" width="20%">
+                  <ng-template igxCell let-val>
+                    {{val | dateDisplay}}
+                    </ng-template>  
+                </igx-column>
+                <igx-column field="id" header="..." width="10%" headerClasses="headerAlignSyle">
+                  <ng-template igxCell let-val>
+                    <div class="hover-menu-container"><span class="text-center"></span>
+                      <div class="hover-menu">
+                        <div class="hover-icons">
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditMultijobIconClicked(val)"></x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash'" title="Delete" (click)="onDeleteMultijobIconClicked(val)"></x365-shared-ui-hover-icon>
+
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </igx-column>
+              </igx-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<x365-fm-workforce-multi-job-roles-editor #editor [width]="30" [show]="showEditor$  | async" [data]="null"  
+[employeeId] = "this.service.employeeId" (cancelClick)="onCancelEditor()"></x365-fm-workforce-multi-job-roles-editor>

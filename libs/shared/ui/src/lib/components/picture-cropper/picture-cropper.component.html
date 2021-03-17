@@ -1,0 +1,160 @@
+<!-- <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-frame modal-bottom" role="document">
+
+        <div class="modal-content">
+            <div *ngIf="!previewMode" class="cropper">
+                <div class="modal-header">
+                    <h6 class="font-weight-bold">{{ uploadHeaderMessage }}</h6>
+                    <div class="upload-btn-wrapper">
+                        <button mdbBtn rounded="true" class="btn btn-sm waves-effect" type="button" (click)="triggerFileChange()">
+          <span class="mr-3">{{ (recroppedImage || reselectMode) ? uploadButtonLabels?.changeText : uploadButtonLabels?.selectText }}</span>
+          <span><i class="fa fa-file-image-o"></i></span>
+        </button>
+                        <input type="file" #image (change)="fileChangeEvent($event)">
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="cropper-window">
+                        <image-cropper *ngIf="!recroppedImage || reselectMode" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" outputType="both" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+                        </image-cropper>
+                        <image-cropper *ngIf="recroppedImage && !reselectMode" [imageBase64]="recroppedImage" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" outputType="both" (imageCropped)="imageCropped($event)"></image-cropper>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="button-group-left">
+                        <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onPreviewClick()" mdbWavesEffect>Preview</button>
+                    </div>
+                    <div class="button-group-right">
+                        <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onSelect()" mdbWavesEffect>Select</button>
+                        <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onCancel()" mdbWavesEffect>Close</button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="previewMode" class="preview">
+                <div class="modal-header">
+                    <h6 class="font-weight-bold">{{ uploadButtonLabels?.previewText }}</h6>
+                </div>
+                <div class="modal-body">
+                    <div class="preview-window">
+                        <img [src]="croppedImage" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="button-group-left"></div>
+                    <div class="button-group-right">
+                        <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onSelect()" mdbWavesEffect>Select</button>
+                        <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onGoBack()" mdbWavesEffect>Close Preview</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal-content" [class]="animationClasses" [hidden]="hideModal">
+    <div *ngIf="!previewMode" class="cropper">
+        <div class="modal-header">
+            <h6 class="font-weight-bold">{{ uploadHeaderMessage }}</h6>
+            <div class="upload-btn-wrapper">
+                <button mdbBtn rounded="true" class="btn btn-sm waves-effect" type="button" (click)="triggerFileChange()">
+          <span class="mr-3">{{ (recroppedImage || reselectMode) ? uploadButtonLabels?.changeText : uploadButtonLabels?.selectText }}</span>
+          <span><i class="fa fa-file-image-o"></i></span>
+        </button>
+                <input type="file" #image (change)="fileChangeEvent($event)">
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="cropper-window">
+                <image-cropper *ngIf="!recroppedImage || reselectMode" [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [aspectRatio]="1 / 1" outputType="both" [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+                </image-cropper>
+                <image-cropper *ngIf="recroppedImage && !reselectMode" [imageBase64]="recroppedImage" [maintainAspectRatio]="false" [aspectRatio]="1 / 1" outputType="both" (imageCropped)="imageCropped($event)"></image-cropper>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="button-group-left">
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onPreviewClick()" mdbWavesEffect>Preview</button>
+            </div>
+            <div class="button-group-right">
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onSelect()" mdbWavesEffect>Use Image</button>
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onCancel()" mdbWavesEffect>Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="previewMode" class="preview">
+        <div class="modal-header">
+            <h6 class="font-weight-bold">{{ uploadButtonLabels?.previewText }}</h6>
+        </div>
+        <div class="modal-body">
+            <div class="preview-window">
+                <img [src]="croppedImage" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="button-group-left"></div>
+            <div class="button-group-right">
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onSelect()" mdbWavesEffect>Select</button>
+                <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" (click)="onGoBack()" mdbWavesEffect>Close Preview</button>
+            </div>
+        </div>
+    </div>
+</div>

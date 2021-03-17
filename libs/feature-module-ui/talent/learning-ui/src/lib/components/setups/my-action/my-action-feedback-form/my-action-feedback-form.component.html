@@ -1,0 +1,13 @@
+<x365-form-renderer *ngIf="data"
+  #renderer 
+  [width]="34" 
+  [show]="show" 
+  [data]="data[0]?.json_string" 
+  title="Feedback Form" 
+  subTitle="Feedback Form" 
+  showSave="false"
+  [showSubmit]="data[0]?.id"
+  (formSubmit)="onRendererSubmit($event)" 
+  (formSave)="onRendererSave($event)" 
+  (cancelClick)="onCancel()">
+</x365-form-renderer>

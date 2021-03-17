@@ -1,0 +1,111 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Educational History'" [subTitle]="'Details of your previous employment (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Tag:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.requirement_type_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.country | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Institution:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.institution | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Faculty:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.faculty | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Department:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.department | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Courses:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.course | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Matric No:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.matricno | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Qualification:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.qualification | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Educational Grade">Edu. Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.edugrade | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Graduation Year">Grad. Year:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.graduation_year | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Location:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.location | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mt-4 mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

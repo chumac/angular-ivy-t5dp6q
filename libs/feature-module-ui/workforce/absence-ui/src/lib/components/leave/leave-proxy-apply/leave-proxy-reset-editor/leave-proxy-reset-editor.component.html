@@ -1,0 +1,37 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Reset Leave Proxy'" [subTitle]="'Resets Leave for selected employee'" [loading]="false"></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup #employeeLookup formControlName="employee_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font">
+                        </dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-12 my-2 px-2 bg-warning text-white">
+                    <p>Leaving this field blank indicates that you want to reset All leave for this employee</p>
+                  </div>
+                    <div class="col-4">
+                        <label class="center-label">Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="leave_id" [options]="leaveTypes$ | async" (selected)="onLeaveTypeSelected($event)" [allowClear]="true" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Save'" [doneButtonDisabled]="isProcessing$ | async" (doneClick)="onSubmit()"
+                [busy]="isProcessing$ | async" (cancelClick)="onCancelEditor()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

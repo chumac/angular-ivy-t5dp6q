@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <!-- <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onResign()"><i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Send Resignation Letter</button>
+        <button *ngIf="true" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+          [disabled]="false" (click)="onViewLetterClicked()"><i class="fa fa-envelope"></i>&nbsp;&nbsp;View
+          Letter</button> -->
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" (selected)="search()"
+                    placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Exit Type, Effective Date, Process Type"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #queueDataGrid [data]="queueData$ | async" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true"
+              [perPage]="15" [height]="null" [paginationTemplate]="">
+              <igx-column field="employee_name" header="Employee" width="25%">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text1">{{val | stringDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="exit_type_id_text" header="Exit Type" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text1">{{val | stringDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="effective_date" header="Effective Date" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text1">{{val | dateDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="status_text" header="Status" width="15%">
+                <ng-template igxCell let-val>
+                  <mdb-badge *ngIf="getStatus(val) === status.INITIATED" pill="true" primary="true">{{ val | stringDisplay}}
+                  </mdb-badge>
+                  <mdb-badge *ngIf="getStatus(val) === status.AWAITING_APPROVAL || getStatus(val) === status.EXIT_INTERVIEW" pill="true"
+                    warning="true">{{ val | stringDisplay}}
+                  </mdb-badge>
+                  <mdb-badge *ngIf="getStatus(val) === status.CLEARANCE_PROCESS || getStatus(val) === status.REGISTER_ON_ALUMNI"
+                    pill="true" color="indigo">{{ val | stringDisplay}}
+                  </mdb-badge>
+                  <mdb-badge
+                    *ngIf="getStatus(val) === status.CLEARANCE_PROCESS_COMPLETE || getStatus(val) === status.EXIT_INTERVIEW_COMPLETE || getStatus(val) === status.PROCESS_COMPLETE"
+                    pill="true" success="true">{{ val | stringDisplay}}
+                  </mdb-badge>
+                  <mdb-badge *ngIf="getStatus(val) === status.PROCESS_CANCELLED" pill="true" danger="true">{{ val | stringDisplay}}
+                  </mdb-badge>
+                </ng-template>
+              </igx-column>
+              <igx-column field="process_id_text" header="Process Type" width="25%">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text1">{{val | stringDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="5%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-external-link-square'" title="Respond"
+                          (click)="onRespondIconClicked(val)"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+
+<div class="base" *ngIf="show">
+  <div class="top">
+    <h5>{{pageTitle}}</h5>
+    <span>{{pageSubTitle}}</span>
+  </div>
+
+  <div class="loading-bar" *ngIf="isPageReview">
+    <div class="row">
+      <div class="col-11"></div>
+      <div class="col-1">
+        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="loading" [show]="true"></x365-shared-ui-spinner>
+      </div>
+    </div>
+  </div>
+
+  <div class="name-bar" *ngIf="isPageReview">
+    <div class="row mb-3">
+      <div class="col-8">
+        <mdb-select [options]="valueLabelSupervisors" [(ngModel)]="selectedSupervisorId" [filterEnabled]="true" (selected)="onSupervisorSelected($event)" placeholder="Supervisor"></mdb-select>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="row">
+      <div class="col-12">
+        <table mdbTable table-borderless>
+          <tbody>
+            <tr mdbTableCol *ngFor="let data of rowData; let index = index">
+              <td *ngIf="data.show">
+                <x365-fm-talent-rating-feedback-row-template [index]=index+1 [data]="data" [valueLabelRatings]="data?.employeeRatings" [empRatingValue]="data.empRatingValue" [revRatingValue]="data.revRatingValue" [mode]="getMode" [useInputTextForRating]="parameter?.useDirectRatingValueForPerformance"></x365-fm-talent-rating-feedback-row-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="bottom grey lighten-5 w-100"></div>
+</div>

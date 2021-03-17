@@ -1,0 +1,106 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Work Details'" [subTitle]="'Complete Work Details View'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Step:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.wfstep | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Send To:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.sendto_type | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Escalates:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.can_escalate | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Gender">Escalates in Hour:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.escalate_hour | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Use Enterprised Structure:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.use_enterprise_structure | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Allow Redirect:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.allow_manual_nextStep | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Specific Individual</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.spec_individual | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Country">Specific Position:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.spec_position_basedon_sender | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Role">Role:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.send_to_role | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Business Rule">Business Rule:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.sys_rule | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="State">Extended Business Rule:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.w_sys_rule | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>
+
+

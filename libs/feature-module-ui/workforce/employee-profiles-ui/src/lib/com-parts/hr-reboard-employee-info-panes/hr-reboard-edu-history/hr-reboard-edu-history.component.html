@@ -1,0 +1,39 @@
+<div class="card card-container">
+    <div class="card-content font-size">
+        <!-- <div class="card-content-top mb-2">
+            <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+        </div> -->
+        <div class="card-content-bottom">
+            <igx-grid #approvedDataGrid *ngIf="true" [data]="educationData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                <igx-column field="requirement_type_text" header="Tag" width="10%"></igx-column>
+                <igx-column field="institution" header="Institution" width="20%"></igx-column>
+                <igx-column field="course" header="Course" width="13%"></igx-column>
+                <igx-column field="matricno" header="Matric. No." width="13%"></igx-column>
+                <igx-column field="graduation_year" header="Graduation Date" width="13%">
+                    <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | dateDisplay}}</div>
+                    </ng-template>
+                </igx-column>
+                <igx-column field="qualification" header="Qualification" width="11%"></igx-column>
+                <igx-column field="edu_id" header="..." class="text-center" width="14%">
+                    <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                            <div class="hover-menu">
+                                <div class="hover-icons">
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 3" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 3" [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </igx-column>
+            </igx-grid>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-hr-reboard-edu-history-editor #editor [width]="34" [show]="showEditor$ | async" [data]="null" [selectOptionData]="selectOptionData$ | async" [countryList]="countryList$ | async" [institutions]="institutions$ | async" [faculties]="faculties$ | async"
+    [departments]="departments$ | async" [courses]="courses$ | async" [allowFacultyChoiceList]="allowFacultyChoiceList$ | async" [allowDepartmentChoiceList]="allowDepartmentChoiceList$ | async" (cancelClick)="onCancelEditor()" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-edu-history-editor>
+<x365-fm-workforce-hr-reboard-edu-history-viewer #viewer [width]="34" [show]="showViewer$ | async" [data]="null" [dataDoc]="documentData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-reboard-edu-history-viewer>

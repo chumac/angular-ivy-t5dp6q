@@ -1,0 +1,142 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Deduction'" [subTitle]="'Details of fixed allowance'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.code | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Short Name:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.shortname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Deduct Frequency:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.deduct_frequency | number}}
+          </div>
+        </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Maximum Deduction:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.max_deduct | number: '2.2-5' | stringDisplay }}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Eligibility:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.eligibility_type_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Start Period:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.start_period | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Currency:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.deduct_currency_type_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Employee Contribution Amount:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.empcontribute_amount | number: '2.2-5' | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Employee Contribution Formula:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.empcontribute_formula_type_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Group:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.groupname_type_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Effective From:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.eff_period_from | dateDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">To:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.eff_period_to | dateDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Payroll Type:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.payroll_type_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Payroll Profile:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.payroll_profile_type_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">System Rule:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.sys_rule | stringDisplay}}
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

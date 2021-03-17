@@ -1,0 +1,48 @@
+@import 'colors';
+
+mdb-accordion {
+  mdb-accordion-item {
+    font-size: 4rem;
+
+    svg {
+      width: 1.4rem;
+      height: 1.4rem;
+      fill: #fff;
+      stroke: #fff;
+      stroke-width: 1.5px;
+      margin-right: 1rem;
+    }
+
+    mdb-accordion-item-head {
+      .side-nav .collapsible .card .card-header a h5 {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    mdb-accordion-item-body {
+      a.waves-effect {
+        padding-left: 2rem;
+        font-size: 0.72rem;
+
+        svg {
+          fill: currentColor;
+          stroke: currentColor;
+          width: 0.9rem;
+          height: 0.9rem;
+        }
+
+        &:hover {
+          color: $app_brand_color;
+        }
+      }
+    }
+  }
+}
+
+mdb-accordion-item:hover {
+  mdb-accordion-item-head:not(:hover) {
+    background-color: darken($app_brand_color, 15%);
+    border-radius: 3px;
+  }
+}

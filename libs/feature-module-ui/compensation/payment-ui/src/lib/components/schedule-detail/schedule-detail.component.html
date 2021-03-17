@@ -1,0 +1,154 @@
+<!-- <x365-shared-ui-breadcrumb [breadcrumb]="breadcrumbs"></x365-shared-ui-breadcrumb> -->
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <x365-fm-cmp-payment-schedule-data-panel [data]="scheduleData$ | async" (valueChange)="onFileChange($event)"
+        (processClick)="onProcessClick($event)">
+      </x365-fm-cmp-payment-schedule-data-panel>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-4">
+      <div class="back-navigation d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect
+          (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <div class="d-flex justify-content-end">
+          <button *ngIf="canValidate()" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+            (click)="onValidateButtonClicked()">&nbsp;<span *ngIf="isProcessing$ | async"><i
+                class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Validate Payment</button>
+          <button *ngIf="canValidateBeforeSubmit()" [disabled]="isGridEmpty()" mdbBtn type="button" color="warning"
+            rounded="true" size="sm" mdbWavesEffect (click)="onValidateBeforeSubmitButtonClicked()">&nbsp;<span
+              *ngIf="isValidatingRecord$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Validate
+            Record</button>
+
+          <button *ngIf="awaitingSubmission()" [disabled]="disableSubmitButton()" mdbBtn type="button" color="warning"
+            rounded="true" size="sm" mdbWavesEffect (click)="onSubmitButtonClicked()">&nbsp;<span
+              *ngIf="isSubmitting$ | async"><i
+                class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Submit</button>
+
+          <button *ngIf="canPay()" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+            (click)="onPayButtonClicked()">Make Payment</button>
+
+          <button *ngIf="isCompletedAndCanRequeue()" mdbBtn type="button" color="warning" rounded="true" size="sm"
+            mdbWavesEffect (click)="onRequeueButtonClicked()">&nbsp;<span *ngIf="isRequeueing$ | async"><i
+                class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Requeue</button>
+          <button *ngIf="awaitingSubmission()" mdbBtn type="button" color="warning" rounded="true" size="sm"
+            mdbWavesEffect (click)="onResetButtonClicked()">&nbsp;<span *ngIf="isReseting$ | async"><i
+                class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Reset</button>
+          <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+            (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="bottom container-card">
+        <div class="content-header">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5 md-form">
+                  <dx-lookup #filterBy [dataSource]="service.filterList" valueExpr="value" displayExpr='label'
+                    searchEnabled=true showPopupTitle=false paginate=true placeholder="Filter by ..."
+                    closeOnOutsideClick=false popupHeight="auto" class="form-font" (onItemClick)="search()">
+                  </dx-lookup>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-container-s">
+            <div class="row">
+              <div class="col-12 md-form mb-1">
+                <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()"
+                  placeholder="Enter your search string i.e. Full Name, Mobile Number, Email, Account Number, Account Type, Source, etc."
+                  class="form-control">
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="content-body">
+          <igx-grid #scheduleDetailDataGrid [data]="scheduleDetailData$| async" [paging]="true" [perPage]="15" [height]="null" [autoGenerate]="false"
+            [emptyGridMessage]="(isProcessingDataGrid$ | async)?'Fetching data.....':'No data available'"
+            [showToolbar]="false" width="100%">
+
+            <igx-column field="fullname" header="Name" width="22%">
+              <ng-template igxCell let-val>
+                <div class="left-align-text">{{val | stringDisplay}}</div>
+              </ng-template>
+            </igx-column>
+
+            <igx-column field="mobile_number" header="Mobile No." width="12%">
+              <ng-template igxCell let-val>
+                <div class="left-align-text">{{val | stringDisplay}}</div>
+              </ng-template>
+            </igx-column>
+
+            <igx-column field="account_no" header="Account No." width="12%">
+              <ng-template igxCell let-val>
+                <div class="left-align-text">{{val | stringDisplay}}</div>
+              </ng-template>
+            </igx-column>
+
+            <igx-column field="actual_amount" header="Amount" width="16%" dataType="number">
+              <ng-template igxCell let-val>
+                <div class="right-align-text">{{val | number: '1.2-5'}}</div>
+              </ng-template>
+            </igx-column>
+
+            <igx-column field="payable_amount" header="Amount Payable" width="16%" dataType="number">
+              <ng-template igxCell let-val>
+                <div class="right-align-text">{{val | number: '1.2-5'}}</div>
+              </ng-template>
+            </igx-column>
+
+            <igx-column field="paid" header="Status" width="9%">
+              <ng-template igxCell let-val>
+                <mdb-badge *ngIf="val" pill="true" success="true">Paid</mdb-badge>
+                <mdb-badge *ngIf="!val" pill="true" danger="true">Not Paid</mdb-badge>
+              </ng-template>
+            </igx-column>
+
+            <igx-column field="id" header="..." class="text-right" width="13%">
+              <ng-template igxCell let-val>
+                <div class="hover-menu-container"><span class="text-right"></span>
+                  <div class="hover-menu">
+                    <div class="hover-icons">
+                      <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                        (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                      <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                        (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </igx-column>
+          </igx-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-cmp-payment-schedule-detail-editor #editor [width]="32" [show]="showEditor$ | async" [data]="null"
+  (cancelClick)="onCancelEditor()" [accountTypeSelectOption]="accountTypeSelectOption$ | async"
+  [currencySelectOption]="currencySelectOption$ | async"></x365-fm-cmp-payment-schedule-detail-editor>
+
+<x365-fm-cmp-payment-schedule-detail-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()"></x365-fm-cmp-payment-schedule-detail-viewer>
+
+<x365-fm-cmp-payment-pay-editor #payEditor></x365-fm-cmp-payment-pay-editor>

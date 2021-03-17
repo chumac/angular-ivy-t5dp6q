@@ -1,0 +1,101 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Deduction'" [subTitle]="'Details of fixed allowance'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.payroll_profile_id_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Month:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.x_months_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Year:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.x_year | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Format:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.format_text | stringDisplay }}
+          </div>
+        </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Source:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.source_text | stringDisplay }}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Status:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.status_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Session:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.session_id | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Total Records:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.total_records | number | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Rule (Custom):</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.custom_rule | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Start Runtime:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.start_runtime | dateDisplay | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">End Runtime:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.end_runtime | dateDisplay | stringDisplay}}
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

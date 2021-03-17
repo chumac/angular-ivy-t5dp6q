@@ -1,0 +1,29 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">To Dos</h5>
+    </div>
+  </div>
+  <div class="item-container-bottom">
+    <div class="grid-table-container">
+      <igx-grid #gridToDos id="gridToDos" [data]="toDos" [autoGenerate]="false" width="100%" [showToolbar]="false" toolbarTitle="" displayDensity="cosy" [height]="null">
+        <igx-column field="subject" header="Subject" width="50%"></igx-column>
+        <igx-column field="due_date" header="Due On" width="30%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text">{{ val | dateDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="priority" header="Priority" width="20%">
+          <!-- <ng-template igxCell let-val>
+            <div title="Normal" *ngIf="true">
+              <span class="glow-spot green-color"></span>
+              <mdb-badge pill="true" success="true"></mdb-badge>
+
+              <mdb-badge pill="true" success="true">Running</mdb-badge> val==='Normal'
+            </div>
+          </ng-template> -->
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>

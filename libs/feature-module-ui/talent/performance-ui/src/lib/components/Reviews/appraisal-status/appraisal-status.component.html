@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onInitialize()">&nbsp;&nbsp;<span *ngIf="isLoadingDataReviewWorkflowProcess$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;<i class="fa fa-ticket"></i>&nbsp;&nbsp;Initialize Appraisal</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="!(appraisalStatus$ | async)" [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l"></div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-7"></div>
+                                <div class="col-5 md-form">
+                                    <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by ..."></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective #searchInput type="text" (keyup.enter)="search()" placeholder="Enter your search text and press the Enter key. Search by Employee Name, Appraisal Stage, Location, Reviewer and Exemption Status." class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="grid-table-container">
+                                <igx-grid #grid [data]="appraisalStatus$ | async" [paging]="true" [perPage]="15" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [fixedHeaders]="true" [showToolbar]="false" [height]="null">
+                                    <igx-column field="emp_fullname" header="Employee Name" width="20%"></igx-column>
+                                    <igx-column field="review_status_text" header="Appraisal Stage" width="13%"></igx-column>
+                                    <igx-column field="role_text" header="Location" width="15%"></igx-column>
+                                    <igx-column field="reviewer_fullname" header="Reviewer Name" width="20%"></igx-column>
+                                    <igx-column field="exemption_status" header="Exemption Status" width="12%"></igx-column>
+                                    <igx-column field="submitted_date" header="Entry Date" dataType="date" width="15%">
+                                        <ng-template igxCell let-val>
+                                            <div class="right-align-text1">{{val | dateTimeDisplay}}</div>
+                                        </ng-template>
+                                    </igx-column>
+
+                                    <igx-column field="employee_id" header="..." width="5%" headerClasses="headerAlignSyle">
+                                        <ng-template igxCell let-cell="cell">
+                                            <div class="hover-menu-container"><span class="text-center"></span>
+                                                <div class="hover-menu">
+                                                    <div class="hover-icons">
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-superpowers'" title="Reappraise" (click)="onReAppraiseIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-forumbee'" title="Restart" (click)="onRestartIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-forumbee'" title="Re-route" (click)="onReRouteIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-forumbee'" title="Move to HR" (click)="onMoveToHRIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-forumbee'" title="Move to Moderation" (click)="onMoveToModerationIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </igx-column>
+                                </igx-grid>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

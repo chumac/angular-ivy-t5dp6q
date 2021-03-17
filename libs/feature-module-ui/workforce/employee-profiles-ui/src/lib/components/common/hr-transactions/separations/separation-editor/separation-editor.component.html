@@ -1,0 +1,120 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show ? '0' : utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Separation Transaction'" [subTitle]="'Add/Edit Separation Transaction '"
+        [loading]="inEditMode() && !data" ></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f"  (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="employee_id" [disabled]="disableEmployeeField" [dataSource]="employeeList$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true  placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_date" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-8">
+              <label class="required center-label">Did the employee send prior notice?</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input type="checkbox" formControlName="sent_notice"  unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Reason for Separation:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="reason_4exit_id" [options]="reasons$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12 my-2 px-2 py-1 bg-warning text-white">
+            <p class="text-danger font-weight-bold"><span><i class="fa fa-exclamation-triangle"></i></span>&nbsp;&nbsp; Important Information</p>
+            <p>Optionally select another employee to replace in areas such as relief and backup. If none is selected, the standing backup officer for the employee is used. If no standing backup office is found, then no replacements will be made.</p>
+          </div>
+          <div class="col-4">
+            <label class="center-label">Substitute Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="replace_id" [dataSource]="replaceList$ | async" valueExpr="value" displayExpr='label' searchEnabled=true
+            showClearButton="true" paginate=true  placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-8">
+              <label class="required center-label">Do you want payroll to be processed for this transaction?</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input type="checkbox" formControlName="process_payroll" (change)="onProcessPayrollChecked($event)" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="row mb-1" *ngIf="fs.showLumpsum">
+            <div class="col-8">
+              <label class="center-label">Make payment as a defined lumpsum:</label>
+            </div>
+            <div class="col-4 md-form mt-0">
+                No <label class="switch">
+                    <input type="checkbox" formControlName="pay_lumpsum" (change)="onClickLumpsum($event)" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="row mb-1" *ngIf="this.fs.status">
+          <div class="col-4">
+            <label class="required center-label">Lumpsum Amount:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="lumpsum_amount" type="number" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="this.fs.status">
+          <div class="col-4">
+            <label class="center-label">Select the allowance to hold this lumpsum value:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="lumpsum_allowance_id" [options]="allowance$ |async" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="this.fs.status">
+          <div class="col-4">
+            <label class="center-label">Select currency:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="currency_id" [options]="currency$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Additional Notes/Remarks:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea type="text" formControlName="exit_notes" class="md-textarea md-textarea-auto form-control" mdbInput></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async"
+        (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

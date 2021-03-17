@@ -1,0 +1,167 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Promotion History'" [subTitle]="'Details of Employee Promotion History'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.employee_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Current Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.current_grade | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">New Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.new_grade | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Current Paygroup:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.current_paygroup | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">New Paygroup:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.new_paygroup | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.effective_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Notes:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.notes | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.position | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Closed:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.is_closed | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Effected:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.is_effected | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Status:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.status | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Action:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.action | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Payroll Processed:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.is_payroll_processed | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Process Differential:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.process_differential | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Process Differential Quarterly:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.process_differential_quarterly | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Process Differential Half-Year:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.process_differential_halfyear | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Process Differential Yearly:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.process_differential_yearly | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Batch ID:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.batch_id | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Process Differential:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.process_differential_triquart | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

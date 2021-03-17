@@ -1,0 +1,23 @@
+.container-fluid {
+  padding: 0.7em 3.1em;
+
+  .item-container {
+    background-color: #fff;
+    box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+    border: 1px solid #d4d4d4;
+    border-radius: 3px;
+    padding: 1em 1.5em;
+  }
+}
+
+.top {
+  height: auto;
+}
+
+.middle {
+  min-height: 4em;
+}
+
+.bottom {
+  min-height: 35em;
+}

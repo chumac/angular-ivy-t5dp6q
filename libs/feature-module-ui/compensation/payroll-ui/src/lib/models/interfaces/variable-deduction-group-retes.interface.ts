@@ -1,0 +1,20 @@
+export interface IVariableDeductionGroupRate {
+  vdeductgrprate_id: number,
+  paygroup_id: number,
+  paygroup_code: string,
+  paygroup_text: string,
+  short_name: string,
+  rank: number,
+  grade_id: number,
+  grade_text: string,
+  vardeduction_id: number,
+  vardeduction_text: string,
+  usedirect_amount: boolean,
+  direct_amount: number,
+  currency_id: number,
+  currency_text: string,
+  formula_id: number,
+  formula_text: string,
+  relief_amount: number,
+  relief_percent: number
+}

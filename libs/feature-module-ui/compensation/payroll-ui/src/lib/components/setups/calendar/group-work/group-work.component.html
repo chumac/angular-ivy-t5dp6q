@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-4">
+          <div class="d-flex align-items-center justify-content-start middle">
+            <!-- <button mdbBtn type="button" color="dark" rounded="true" outline="true" size="sm" mdbWavesEffect
+              (click)="goBack()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button> -->
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="d-flex align-items-center justify-content-end middle">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+              (click)="onAdd()"><span *ngIf="isProcessing$ | async"><i class="fa-spinner fa-spin fa-lg fa-fw"></i></span><span *ngIf="!(isProcessing$ | async)"><i class="fa fa-plus"></i></span>&nbsp;&nbsp;Add</button>
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+              (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+              <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+            </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5 md-form">
+                    <!-- <mdb-select [options]="profileCalendarService.filterList" (selected)="search()" placeholder="Filter by ..."></mdb-select> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+                <!-- <input mdbInputDirective type="text" (keyup.enter)="search()" id="form1" placeholder="Enter your search string " class="form-control"> -->
+              </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="row">
+            <div class="col-12">
+              <div class="grid-table-container">
+                  <igx-grid #calendar [data]="calendarData$ | async" [paging]="false" [autoGenerate]="false" width="100%"
+        [emptyGridMessage]="'No data available'"  [showToolbar]="true" [height]="null">
+        <igx-column field="paygroup" header="Paygroup" class="text-center" width="21%"></igx-column>
+        <igx-column-group header="Weekdays" class="text-center">
+          <igx-column sortable="true" field="Work Start" width="11%"></igx-column>
+          <igx-column sortable="true" field="Work End" width="11%"></igx-column>
+        </igx-column-group>
+        <igx-column-group header="Weekends" class="text-center">
+          <igx-column sortable="true" field="Work Start" width="11%"></igx-column>
+          <igx-column sortable="true" field="Work End" width="11%"></igx-column>
+        </igx-column-group>
+        <igx-column-group header="Public Holidays" class="text-center">
+          <igx-column sortable="true" field="Work Start" width="11%"></igx-column>
+          <igx-column sortable="true" field="Work End" width="11%"></igx-column>
+        </igx-column-group>
+        <igx-column field="calendar_id" header="..." class="text-center" width="13%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <span class="hover-ellipse-menu"></span>
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop-o'" title="View" (click)="onViewIconClicked(val)">
+                  </x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                    (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+        </igx-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-payrl-calendar-editor #editor [width]="30"  [show]="showEditor$ | async" [paygroupSelectOption]="paygroupSelectOption$ | async" [activePersonnel]="null" [data]="null"  (cancelClick)="onCancelEditor()"></x365-fm-payrl-calendar-editor>
+<x365-fm-payrl-calendar-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()"></x365-fm-payrl-calendar-viewer>

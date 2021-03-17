@@ -1,0 +1,21 @@
+.container-fluid {
+  padding: 0.7em 3.1em;
+
+  .back-navigation {
+    button {
+      transition: all .2s ease-in-out;
+      border-color: rgba(black, 0.7) !important;
+      color: rgba(black, 0.7) !important;
+    }
+    button {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: rgba(black, 0.7) !important;
+        color: #fff !important;
+        outline: none !important;
+        border-color: transparent !important;
+      }
+    }
+  }
+}

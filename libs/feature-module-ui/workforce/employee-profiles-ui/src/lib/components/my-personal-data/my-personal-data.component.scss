@@ -1,0 +1,38 @@
+.f-container {
+  display: flex;
+  flex-direction: column;
+  height: 35em; // 41em
+  padding: 0.7em 3.1em;
+
+  .top {
+    flex: 0 0 13em;
+    margin-bottom: 0.3em;
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    .navigation {
+      flex: 0 0 15em;
+      background: transparent;
+      padding-top: 0.5em;
+      margin-right: 0.8em;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+
+      .content-top {
+        flex: 0 0 2.7em;
+      }
+
+      .content-bottom {
+        flex: 1 1 auto;
+      }
+    }
+  }
+}

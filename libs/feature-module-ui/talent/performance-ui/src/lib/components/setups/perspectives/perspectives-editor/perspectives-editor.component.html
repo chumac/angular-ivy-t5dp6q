@@ -1,0 +1,47 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Perspective'" [subTitle]="'Creates a new perspective'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="code" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="description" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="type" [options]="typeOptions" (selected)="onTypeSelected($event)" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div *ngIf="(typeValue === PERSPECTIVE_TYPE_CONSTANTS.others) || (fs.typeOther.value !== null)" class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Others:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="type_other" type="text" class="form-control form-font">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

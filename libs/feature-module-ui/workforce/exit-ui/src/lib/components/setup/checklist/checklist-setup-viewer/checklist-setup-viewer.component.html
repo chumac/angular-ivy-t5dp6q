@@ -1,0 +1,102 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Checklist Item'" [subTitle]="'Details of Checklist Item'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Code</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.code | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Description:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Link to Exit Interview:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.link_to_exit_interview | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Requires Comment:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.requires_comment | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Instruction:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.instructions | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Options:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.option_values | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Validation Role:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.validation_role_text | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Summary:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.summary | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="data?.use_custom_form">
+        <div class="col-4">
+          <label>Custom Form:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.form_id_text | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Employment Date">System Rule:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.sys_rule | dateDisplay}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

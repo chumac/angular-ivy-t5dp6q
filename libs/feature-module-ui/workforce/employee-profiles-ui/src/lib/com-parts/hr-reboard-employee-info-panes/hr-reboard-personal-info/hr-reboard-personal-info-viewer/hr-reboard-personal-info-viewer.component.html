@@ -1,0 +1,229 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Personal Information'" [subTitle]="'This is general information about staff (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Biographical Information</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Surname:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.employee_surname | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>First Name:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.employee_firstname | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Middle Name:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.employee_midname | stringDisplay }}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Title:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.title | stringDisplay }}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Gender:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.gender | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Date of Birth:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.date_of_birth | dateDisplay}}
+                </div>
+            </div>
+            <!-- <div class="row mb-1">
+                <div class="col-5">
+                    <label>Age:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{'' | stringDisplay}}
+                </div>
+            </div> -->
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Marital Information</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Marital Status:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.marital_status | stringDisplay }}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Wedding Date.:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.wedding_date | dateDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Maiden Name:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.maiden_name | stringDisplay}}
+                </div>
+            </div>
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Home Place</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Home Town:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.homeplace | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="sub-heading row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Other Information</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Birth Country:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.birth_country?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Birth State:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.birthstate?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Birth City:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.area?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Nationality:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.nationality?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>State of Origin:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.state?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Local Govt.:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.lga?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Religion:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.religion?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Facebook Url:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.emp_facebook | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>LinkedIn Url:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.emp_linkedin | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-5">
+                    <label>Twitter Url:</label>
+                </div>
+                <div class="col-7 md-form mt-0 text-value text-right">
+                    {{data?.emp_twitterhandle | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-6 row-text mt-0 mb-5 text-right">
+                <p class="text-center">Profile Picture</p>
+                <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'"
+                  [src]="imageBaseHeader + data?.image_profile" [showBorder]="false"
+                  [isRounded]="false" [centerAvatar]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'"
+                  [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+              </div>
+              <div class="col-6 row-text mt-0 mb-2 text-right">
+                <p class="text-center">File Picture</p>
+                <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'"
+                  [src]="imageBaseHeader + data?.image_personal" [showBorder]="false"
+                  [isRounded]="false" [centerAvatar]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'"
+                  [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+              </div>
+            </div>
+            <div class="row mt-4 mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,75 @@
+@import 'colors';
+
+.card {
+  box-shadow: none;
+
+  &.card-base {
+    margin: 0 .5rem;
+
+    .card-header {
+      background-color: darken($app_brand_color, 5%);
+      color: #ffffff;
+      border-bottom: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+    }
+
+    .card-body {
+      background:  linear-gradient(170deg, rgb(252, 204, 72),  darken($app_brand_color, 8%)) !important;
+      min-height: 10rem;
+      display: flex;
+      justify-content: space-around;
+      border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+
+      .ring1-container {
+        text-align: center;
+        color: white;
+
+        > h5 {
+          font-size: 0.9rem;
+          margin-bottom: .7rem;
+        }
+      }
+
+      .ring2-container,
+      .ring3-container {
+        text-align: center;
+        color: white;
+
+        >h5 {
+          font-size: 0.9rem;
+          margin-bottom: 0.9rem;
+        }
+
+        >div.circle {
+          position: relative;
+          width: 5.3rem;
+          height: 5.3rem;
+          background-color: lighten(rgba($app_brand_color, .3), 45%);
+          border-radius: 50%;
+
+          >.display-pane {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+
+            span {
+              display: block;
+            }
+
+            .value {
+              font-weight: 300;
+              font-size: 1.8rem;
+              line-height: 1.2;
+            }
+
+            .value-unit-text {
+              font-size: .8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

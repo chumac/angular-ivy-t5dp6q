@@ -1,0 +1,298 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Fixed Deduction'" [subTitle]="'Edit Fixed Deduction'"
+        [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Short Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="shortname" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Item type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="deductitem_type" [options]="paymentItemList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Frequency:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="paymentFrequencyList$ | async" formControlName="deduct_frequency" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font"
+              (onItemClick)="onFrequencySelected($event)">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Maximum Deduction:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="max_deduct" type="text" class="form-control form-font" [disableControl]="true">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Start Period:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="start_period" [options]="monthList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Pay at Start Period:</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="deduct_at_startPeriod" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Is Statutory:</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="is_statutory" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Eligibility:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="eligibility" [options]="eligibilityList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payroll Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payroll_type" [options]="payrollTypeList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payroll_profile" [options]="payrollProfileList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Rank:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="rank" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Ledger Account:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="ledger_account" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-7">
+            <label class="required center-label">Prorate Deduction:</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="prorate_deduction" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Group Item?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="group_item" value="false" type="checkbox"
+                (change)="fs.onGroupItemChecked($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="fs.showGroupName">
+          <div class="col-4">
+            <label class="center-label">Group Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="groupname_id" [options]="groupList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-7">
+            <label class="required center-label">Accumulate with Deduction?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="cumulate_deduction" value="false" type="checkbox"
+                (change)="fs.onAccumulateDeductionChecked($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="fs.showAccumulateDeduction">
+          <div class="col-4">
+            <label class="center-label">Cumulated Deduction:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="cumulate_deduction_id" [options]="deductionList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-7">
+            <label class="required center-label">Link to a monthly deduction:</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="link_to" value="false" type="checkbox"
+                (change)="fs.onMonthlyDeductionChecked($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="fs.showMonthlyDeduction">
+          <div class="col-4">
+            <label class="center-label">Deduction:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="link_deduction_id" [options]="deductionList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">This Item cannot be excluded?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="non_exclusion" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Employees Can Subscribe?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="can_subscribe" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1 level-switch">
+          <div class="col-7">
+            <label class="required center-label">Has Employee Contribution?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="has_employer_contribution" value="false" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">System Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="12" formControlName="sys_rule" type="text" class="md-textarea form-control"></textarea>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

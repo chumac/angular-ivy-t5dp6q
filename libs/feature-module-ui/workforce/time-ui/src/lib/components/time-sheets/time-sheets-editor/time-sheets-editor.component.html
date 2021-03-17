@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+          <div class="back-navigation">
+              <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect
+                (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="item-container bottom">
+                <div class="body base px-3">
+                    <div class="header font-weight-bold">WORK STREAM ACTIVITIES</div>
+                    <div class="base-content">
+                      <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="!(timeSheetDayStreamData$ | async)" [show]="true"></x365-shared-ui-spinner>
+                      <x365-fm-workforce-time-work-stream-panel class="work-stream-panel border-radius border-shadow" *ngFor="let item of timeSheetDayStreamData$ | async" [data]="item"></x365-fm-workforce-time-work-stream-panel>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="area d-flex flex-column w-100">
+
+  <div class="d-flex flex-column align-items-center pre-selection">
+    <div class="file-preview">
+      <img [src]="domSanitizationService.bypassSecurityTrustUrl(previewHolder)" class="img-thumbnail">
+    </div>
+    <div class="controls">
+      <div class="file-field md-form">
+        <div mdbBtn color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect>
+          <span class="pt-0">Choose file</span>
+          <input type="file" mdbFileSelect (uploadOutput)="onFileSelect($event)" [uploadInput]="uploadInput">
+        </div>
+      </div>
+      <!-- <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm"
+        mdbWavesEffect>Warning</button> -->
+    </div>
+    <div class="instruction">2</div>
+    <div class="supported-types">3</div>
+    <div class="maximum-size">4</div>
+  </div>
+
+  <div class="d-flex flex-column align-items-center post-selection">
+    <div class="name">5</div>
+    <div class="size">6</div>
+    <div class="type">7</div>
+    <div class="date">8</div>
+  </div>
+
+</div>

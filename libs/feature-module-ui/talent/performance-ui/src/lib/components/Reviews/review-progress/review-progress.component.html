@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l"></div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5 md-form">
+                  <mdb-select #filterBy [options]="null" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective #searchInput type="text" (keyup)="search()" placeholder="Enter your search text" class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="row">
+            <div class="col-12">
+              <div class="grid-table-container">
+                <igx-grid #reviewWorkflowProcessesGrid [data]="reviewWorkflowProcesses$ | async" [paging]="false" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [fixedHeaders]="true" [showToolbar]="false" [height]="null">
+                  <igx-column field="reviewer_name" header="Name" width="40%"></igx-column>
+                  <igx-column field="role_type" header="Role" width="25%"></igx-column>
+
+                  <igx-column field="submitted_date" header="Entry Date" dataType="date" width="15%">
+                    <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | dateTimeDisplay}}</div>
+                    </ng-template>
+                  </igx-column>
+
+                  <igx-column field="exit_date" header="Exit Date" dataType="date" width="15%">
+                    <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | dateTimeDisplay}}</div>
+                    </ng-template>
+                  </igx-column>
+
+                  <igx-column field="workflow_process_id" header="..." width="5%" headerClasses="headerAlignSyle">
+                    <ng-template igxCell let-val>
+                      <div class="hover-menu-container"><span class="text-center"></span>
+                        <div class="hover-menu">
+                          <div class="hover-icons">
+                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-external-link'" title="Go" (click)="onRowIconClicked(val)"></x365-shared-ui-hover-icon>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </igx-column>
+                </igx-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

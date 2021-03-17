@@ -1,0 +1,30 @@
+<article class="content-wrapper">
+  <div class="content">
+    <div class="content-header">
+      <div class="content-name">Recall Time Sheet</div>
+    </div>
+
+    <div class="content-body">
+      <div class="content-body-item">
+        <form novalidate [formGroup]="this.fs.f" (ngSubmit)="onOkClick()">
+          <div class="md-form mt-3">
+
+            <div class="row">
+              <!-- <div class="col-4">
+                <label class="required center-label info">Reason:</label>
+              </div> -->
+              <div class="col-12 md-form mt-0 pd-0">
+                <textarea rows="10" formControlName="recall_reason" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg" placeholder="Enter the reason why you recalled this time sheet"></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" size="sm" mdbWavesEffect (click)="onOkClick()">&nbsp;&nbsp;<span *ngIf="isProcessing"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning" (click)="onCancel()" mdbWavesEffect>&nbsp;Cancel&nbsp;</button>
+    </div>
+  </div>
+</article>

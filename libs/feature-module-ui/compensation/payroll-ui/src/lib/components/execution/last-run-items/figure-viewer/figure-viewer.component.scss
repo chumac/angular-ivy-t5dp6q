@@ -1,0 +1,285 @@
+// @import 'my-personal-data-grid';
+// @import 'my-personal-data-grid';
+
+// .doc-container-t {
+//   display: flex;
+//   flex-direction: column;
+//   flex-basis: 7.7em;
+//   background-color: #ffbb33;
+//   padding-left: 5px;
+//   box-shadow: -5px -4px 10px -7px;
+
+//   .doc-container-t-sp {
+//     flex-basis: 2em;
+//   }
+
+//   .doc-container-t-ct {
+//     display: flex;
+//     flex-direction: row;
+//     flex-grow: 1;
+//     padding-top: 1.4em;
+
+//     .doc-container-t-ct-l {
+//       flex-basis: 23%;
+//       padding-top: 1.5em;
+//     }
+
+//     .doc-container-t-ct-r {
+//       flex-basis: 77%;
+//       padding-right: 5px;
+//     }
+//   }
+// }
+
+// .doc-container-b {
+//   flex-grow: 1;
+//   padding-top: 0;
+
+//   .tab-a {
+//     flex-grow: 1;
+//     width: 100%;
+//   }
+
+//   .tab-b {
+//     flex-grow: 1;
+//   }
+// }
+
+// .md-form input[type='text'] {
+//   font-size: 0.83rem;
+// }
+
+// .doc-container {
+//   border: 0 !important;
+//   padding: 0 !important;
+//   height: auto !important;
+// }
+
+
+// #payslip {
+// 	// width: calc( 8.5in - 80px );
+// 	height: calc( 11in - 60px );
+//   background: #f4f4f4;
+//   // padding: 30px 40px;
+//   box-shadow: 0 10px 10px -5px;
+//   width: 100%
+// }
+
+// #title {
+// 	margin-bottom: 20px;
+// 	font-size: 38px;
+// 	font-weight: 600;
+// }
+
+// .content {
+// 	display: flex;
+// 	border-bottom: 1px solid #ffbb33;
+// 	height: auto;
+// }
+
+// .content .left-panel {
+// 	border-right: 1px solid #ffbb33;
+// 	min-width: 200px;
+// 	padding: 16px 10px;
+// }
+
+// .content .right-panel {
+// 	width: 100%;
+// 	padding: 10px 0  0 10px;
+// }
+
+// #employee, .border-title {
+// 	text-align: center;
+//   margin-bottom: 20px;
+//   border-bottom: 1px solid #ffbb33;
+// }
+// #employee #name, .section-title {
+// 	font-size: 15px;
+// 	font-weight: 700;
+// }
+
+// .details, .contributions, .ytd, .gross {
+// 	margin-bottom: 20px;
+// }
+
+// .details .entry, .contributions .entry, .ytd .entry {
+// 	display: flex;
+// 	justify-content: space-between;
+// 	margin-bottom: 6px;
+// }
+
+// .details .entry .value, .contributions .entry .value, .ytd .entry .value {
+// 	font-weight: 700;
+// 	max-width: 130px;
+// 	text-align: right;
+// }
+
+// .gross .entry .value {
+// 	font-weight: 700;
+// 	text-align: right;
+// 	font-size: 16px;
+// }
+
+// .contributions .title, .ytd .title, .gross .title {
+// 	font-size: 15px;
+// 	font-weight: 700;
+// 	border-bottom: 1px solid #ffbb33;
+// 	padding-bottom: 4px;
+// 	margin-bottom: 6px;
+// }
+
+// .content .right-panel .details {
+// 	width: 100%;
+// }
+
+// .content .right-panel .details .entry {
+// 	display: flex;
+// 	padding: 0 10px;
+// 	margin: 6px 0;
+// }
+
+// .content .right-panel .details .label {
+// 	font-weight: 700;
+// 	width: 120px;
+// }
+
+// .content .right-panel .details .detail {
+// 	font-weight: 600;
+// 	width: 130px;
+// }
+
+// .content .right-panel .details .rate {
+// 	font-weight: 400;
+// 	width: 80px;
+// 	font-style: italic;
+// 	letter-spacing: 1px;
+// }
+
+// .content .right-panel .details .amount {
+// 	text-align: right;
+// 	font-weight: 700;
+// 	width: 90px;
+// }
+
+// .content .right-panel .details .net_pay div, .content .right-panel .details .nti div {
+// 	font-weight: 600;
+// 	font-size: 12px;
+// }
+
+// .content .right-panel .details .net_pay, .content .right-panel .details .nti {
+// 	padding: 3px 0 2px 0;
+// 	margin-bottom: 10px;
+// 	background: rgba(0, 0, 0, 0.04);
+// }
+
+/*
+  Simple paper fold with hover over effect
+
+*/
+
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display+SC);
+
+// .fold{
+
+//   height: 400px;
+//   padding: 25px 25px;
+//   position: relative;
+//   font-size: 90%;
+//   text-decoration: none;
+//   background: #fff;
+//   transition: all ease .5s;
+//   box-shadow: 0 10px 10px -5px;
+// }
+
+/*
+  paper fold corner
+*/
+
+// .fold:before {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   border-style: solid;
+//   border-width: 0 100px 100px 0;
+//   border-color: #ddd #ffbb33;
+//   transition: all ease .5s;
+// }
+
+/*
+  on li hover make paper fold larger
+*/
+// .fold:hover:before {
+//   border-width: 0 150px 150px 0;
+//   border-color: #eee #f3a407;
+
+// }
+
+.body {
+  margin: 0;
+  padding: 0;
+  background: #efefef;
+}
+.border-title {
+	text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ffbb33;
+  padding: 15px;
+}
+.border-right {
+  border-right: 1px solid #ffbb33;
+}
+.box {
+  position: relative;
+  margin: 40px auto;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-radius: 2px;
+  padding: 10px 20px;
+  font-family: "Courier New", 'Playfair Display SC', Georgia, 'Times New Roman', Times, serif;
+  box-shadow: 0 5px 14px rgba(0,0,0,.7);
+}
+
+.bottom-box {
+  font-family: "Courier New", 'Playfair Display SC', Georgia, 'Times New Roman', Times, serif;
+}
+
+.data-value {
+  font-size: 18px !important;
+}
+
+.box::before,
+.box::after {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  width: 40%;
+  height: 10px;
+  box-shadow: 0 5px 14px rgba(0,0,0,.7);
+  z-index: -1;
+  transition: all .3s ease-in-out;
+}
+
+.box::before {
+  left: 15px;
+  transform: skew(-5deg) rotate(-5deg);
+}
+
+.box::after {
+  right: 15px;
+  transform: skew(5deg) rotate(5deg);
+}
+
+.box:hover::before,
+.box:hover::after {
+  box-shadow: 0 2px 14px rgba(0,0,0,.4);
+}
+
+.box:hover::before {
+  left: 5px;
+}
+
+.box:hover::after {
+  right: 5px;
+}

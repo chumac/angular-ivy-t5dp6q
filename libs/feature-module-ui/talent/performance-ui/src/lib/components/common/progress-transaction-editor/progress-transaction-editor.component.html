@@ -1,0 +1,73 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Add Progress Transaction'" [subTitle]="'Creates a new progress transaction'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Transaction Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="transaction_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Progress Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="progress_type" [options]="progressTypeOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Percentage Completed:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="perc_complete" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Actual Complete Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="actual_complete_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Comment:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="4" formControlName="comment" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Is Active:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_active" type="checkbox" class="form-check-input" id="is_active">
+                            <label class="form-check-label" for="is_active"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-1"></div>
+                    <div class="col-10">
+                        <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved($event)"></x365-shared-ui-file-picker>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

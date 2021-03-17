@@ -1,0 +1,53 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Interview Form'" [subTitle]="'Add/Edit Interview Form'"
+      [loading]='isProcessing$ | async'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <!--
+     <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Validation Request Message:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="12" formControlName="validation_req_msg" type="text"
+              class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+         -->
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Title:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="title" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Description:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="description" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">For specific grade?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="specific_grade" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,47 @@
+<div class="card card-container">
+  <div class="card-content font-size">
+    <div class="card-content-top mb-2 d-none">
+      <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+    </div>
+    <div class="card-content-bottom">
+      <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+        <igx-column field="course_name" header="Course" width="30%"></igx-column>
+        <igx-column field="event_name" header="Event" width="30%"></igx-column>
+        <igx-column field="batch_name" header="Batch" width="25%"></igx-column>
+        <igx-column field="course_id" header="..." class="text-center" width="15%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon *ngIf="false" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onApprovedEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onApprovedViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+
+      <igx-grid class="d-none" #awaitingApprovalDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [paging]="false" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+          <igx-column field="course_name" header="Course" width="30%"></igx-column>
+          <igx-column field="event_name" header="Event" width="30%"></igx-column>
+          <igx-column field="batch_name" header="Batch" width="25%"></igx-column>
+          <igx-column field="course_id" header="..." class="text-center" width="15%">
+            <ng-template igxCell let-val>
+              <div class="hover-menu-container"><span class="text-center"></span>
+                <div class="hover-menu">
+                  <div class="hover-icons">
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onAwaitingApprovalEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onAwaitingApprovalViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+    </div>
+  </div>
+</div>
+
+<x365-fm-workforce-hr-training-history-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"></x365-fm-workforce-hr-training-history-viewer>
+<!-- <x365-fm-workforce-hr-training-history-editor #editor></x365-fm-workforce-hr-training-history-editor> -->

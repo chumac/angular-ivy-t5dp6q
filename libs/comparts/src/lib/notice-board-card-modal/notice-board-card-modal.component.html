@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <article class="content-wrapper">
+                <div class="content" [innerHTML]="dialogData?.html_content"></div>
+                <footer class="modal-footer">
+                    <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+                        (click)="close()">Close</button>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onResetToMyTeamClicked()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Reset to my Team
+          Members</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l"></div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5 md-form">
+                  <mdb-select [options]="myTeamService.filterList"
+                    (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective #searchInput type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" placeholder="Enter your search text"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="row">
+            <div class="col-12">
+              <div class="grid-table-container">
+                <div class="item-container">
+                  <div class="item-container-top">
+                    <div class="top-content-left">
+                      <h5 class="font-weight-bold">
+                        <!-- <span class="capitalize">{{ teamLead?.employee_firstname }} {{ teamLead?.employee_surname }}'s</span> -->
+                        Team
+                        <span> {{ filteredTeam?.length == 1 ? 'Member' : 'Members' }} </span>
+                        ({{ filteredTeam?.length || '  ' }})
+                      </h5>
+                    </div>
+                  </div>
+                  <div class="item-container-bottom">
+                    <x365-shared-ui-employee-team-card class="body-cell"
+                      *ngFor="let member of filteredTeam; let i=index" [data]="(filteredTeam)[i]"
+                       [modeDrillDown]="true"
+                       (openTeamMembers)="onOpenTeamMembers($event)">
+                    </x365-shared-ui-employee-team-card>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

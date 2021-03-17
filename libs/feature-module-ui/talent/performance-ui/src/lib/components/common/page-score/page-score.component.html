@@ -1,0 +1,27 @@
+<article class="content-wrapper">
+  <div class="content">
+    <div class="content-header">
+      <div class="content-name">Page Scores</div>
+    </div>
+
+    <div class="content-body">
+      <div class="content-body-item">
+        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="!(pageScores$ | async)" [show]="true"></x365-shared-ui-spinner>
+
+        <table class="table no-border">
+          <tbody>
+            <tr *ngFor="let rowData of (pageScores$ | async); let i = index">
+              <td>{{rowData?.description}}</td>
+              <td class="text-right">{{rowData?.weighted_score}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" size="sm" mdbWavesEffect (click)="onOK()">&nbsp;&nbsp;<span *ngIf="false"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div> -->
+  </div>
+</article>

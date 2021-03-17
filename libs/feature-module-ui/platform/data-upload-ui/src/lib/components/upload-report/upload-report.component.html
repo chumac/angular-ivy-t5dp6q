@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+          <div class="col-6 back-navigation">
+              <button mdbBtn type="button" class="btn btn-outline-warning btn-rounded btn-sm waves-effect" (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back</button>
+          </div>
+        <div class="col-6 text-right">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefresh()"  class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+              <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+        </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5 md-form">
+                  <mdb-select #filterBy [options]="uploadStatus.filterList" (selected)="search()" placeholder="Filter by ..."></mdb-select>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+                <input mdbInputDirective #searchInput type="text" (keyup.enter)="search()" placeholder="Enter your search string i.e. Error Message." class="form-control">
+              </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="row">
+            <div class="col-12">
+              <div class="grid-table-container">
+                  <igx-grid #status [data]="uploadStatus$ | async" [paging]="false" [height]="null" [autoGenerate]="false" width="100%"
+        [emptyGridMessage]="'No data available'" [showToolbar]="true">
+        <igx-column field="transaction_date" header="Transaction Date" width="15%">
+          <ng-template igxCell let-val>
+            {{val | dateDisplay}}
+          </ng-template>
+        </igx-column>
+        <igx-column field="error_msg" header="Error Message" width="40%"></igx-column>
+        <igx-column field="import_request_id" header="Import Request Id" width="15%"></igx-column>
+        <igx-column field="sessiontype" header="Session Type" width="15%"></igx-column>
+        <igx-column field="import_table_index" header="Import Table Index" width="15%"></igx-column>
+      </igx-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

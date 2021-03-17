@@ -1,0 +1,87 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'HR View Rating Asset Details'" [subTitle]="'Rating asset details'" [loading]='!data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <div class="mx-3">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Title:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.title | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Detail:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.detail | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Information:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.info | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Employee rating list:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.emp_rating_list | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Employee Comment Req:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.emp_comment_rq | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Manager Rating List:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.mgr_rating_list | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Manager Comment Req:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.mgr_comment_rq | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Maximum Rating:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.max_rating | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Grouping Category:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.grouping_category | stringDisplay}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

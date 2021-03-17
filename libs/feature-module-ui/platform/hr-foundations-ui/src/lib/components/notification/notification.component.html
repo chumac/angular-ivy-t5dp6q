@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="d-flex align-items-center justify-content-end middle">
+            <div class="col-6 back-navigation">
+                <button mdbBtn type="button" class="btn btn-outline-warning btn-rounded btn-sm waves-effect" (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back</button>
+              </div>
+              <div class="col-6 text-right">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onRefreshedButtonClicked()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;ReFresh</button>
+             </div>
+         </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-12">
+        <div class="d-flex flex-column doc-container border-radius border-shadow">
+          <div class="d-flex flex-column doc-container-t">
+            <div class="doc-container-t-sp">
+                <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+            </div>
+            <div class="doc-container-t-ct">
+              <div class="doc-container-t-ct-l">
+              </div>
+              <div class="doc-container-t-ct-r">
+                <div class="row">
+                  <div class="col-7"></div>
+                  <div class="col-5 md-form">
+                      <mdb-select [options]="notify.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-container-s">
+            <div class="row">
+              <div class="col-12 md-form mb-1">
+                  <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1" placeholder="Enter your search string i.e. Notification To, Specific To, Process." class="form-control">
+                </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-column doc-container-b">
+            <div class="row">
+              <div class="col-12">
+                <div class="grid-table-container">
+                    <igx-grid #NotificationGrid [data]="notificationData$ | async" [paging]="true" [perPage]="15" [height]="null" [autoGenerate]="false"
+          width="100%" [emptyGridMessage]="'No data available'" [showToolbar]="true">
+          <igx-column field="group_type" header="Notification to" width="30%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay}}
+            </ng-template>
+          </igx-column>
+          <igx-column field="process_id" header="Process" width="30%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay}}
+            </ng-template>
+          </igx-column>
+          <igx-column field="group_value" header="Specific to" width="30%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay}}
+            </ng-template>
+          </igx-column>
+          <igx-column field="id" header="..." width="10%">
+            <ng-template igxCell let-val>
+              <div class="hover-menu-container"><span class="text-center"></span>
+                <div class="hover-menu">
+                  <span class="hover-ellipse-menu"></span>
+                  <div class="hover-icons">
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o'" title="Remove notification"
+                      (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <x365-fm-plf-hrf-notification-editor #editor [describe]="entityDescription" [width]="30" [position]="positionData$ | async"
+  [show]="showEditor$ | async" [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-plf-hrf-notification-editor>

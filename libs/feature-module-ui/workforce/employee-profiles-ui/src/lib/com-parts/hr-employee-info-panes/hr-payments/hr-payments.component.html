@@ -1,0 +1,121 @@
+<div class="card card-container">
+  <div class="card-content font-size">
+    <div class="card-row">
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Bank Identity</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>BVN</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.bvn | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Savings Account Information</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Bank</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.savings_bank?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Bank Branch</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.savings_bank_branch | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Account Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.savings_account_no | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Current Account Information</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Bank</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.current_bank?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Bank Branch</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.current_bank_branch | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Account Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.current_account_no | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-row-item mb-4">
+        <span class="d-block font-weight-bold mb-1">Pension, NHF & Tax</span>
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>PFA</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.pfa?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Pension Acctount Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.pension_account | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>NHF Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.nhf_number | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Tax ID Number</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{dat?.tax_id_number | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="command-panel"><a title="Edit" (click)="showEditor()"><i class="fa fa-pencil-square-o"></i></a></div>
+</div>
+
+<x365-fm-workforce-hr-payments-editor [width]="28" [show]="showEditor$ | async" [data]="approvedData$ | async" [selectOptionData]="selectOptionData$ | async" [permOption01]="permOption01$ | async" [employeeId]="employeeId" (cancelClick)="onCancelEditor()"></x365-fm-workforce-hr-payments-editor>
+
+<x365-fm-workforce-hr-payments-viewer [width]="28" [show]="showViewer$ | async" [data]="awaitingApprovalData$ | async"  (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-payments-viewer>

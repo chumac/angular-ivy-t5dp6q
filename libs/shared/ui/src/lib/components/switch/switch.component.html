@@ -1,0 +1,6 @@
+<div class="can-toggle switch-animation">
+  <input id="switch" #switch type="checkbox" (change)="onChange($event)">
+  <label for="switch">
+    <div class="can-toggle__switch" attr.data-unchecked={{unCheckedText}} attr.data-checked={{checkedText}}></div>
+  </label>
+</div>

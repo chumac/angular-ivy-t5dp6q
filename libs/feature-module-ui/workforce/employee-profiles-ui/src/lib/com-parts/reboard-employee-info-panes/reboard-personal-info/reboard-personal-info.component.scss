@@ -1,0 +1,43 @@
+@import 'colors';
+
+.card {
+  box-shadow: 0 1px 20px rgba(83, 83, 83, 0.2);
+  border: 1px solid #d4d4d4;
+  border-radius: 3px;
+  padding: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 25em;
+  overflow: scroll;
+  background: rgb(255, 255, 255);
+  padding-top: 1.5em;
+  padding-left: 1.5em;
+  padding-bottom: 1.5em;
+  position: relative;
+}
+
+.content {
+  flex-grow: 90;
+}
+
+.command-panel {
+  flex: 0 0 2em;
+  flex-grow: 1;
+  margin-left: 0.3em;
+  position: absolute;
+
+  a {
+    display: block;
+    color: $app_form_text_color;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: lighten($app_form_text_color, 17%);
+  }
+}

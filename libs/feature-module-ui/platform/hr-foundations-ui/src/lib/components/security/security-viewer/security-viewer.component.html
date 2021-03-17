@@ -1,0 +1,88 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+      <div class="header">
+        <x365-shared-ui-form-header [title]="'Security'" [subTitle]="'Complete Security View'" [loading]='!data'></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+        <div class="mx-3">
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>Action Requested:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.action_taken | stringDisplay}}
+            </div>
+          </div>
+  
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>User Name:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.user_name | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>Role Name:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.role_name | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>Requested By:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.action_taken_by | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>Request Date:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.action_logged_date |dateDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>Status:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.status | booleanDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label>Completion Date</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.complete_date | dateDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label title="Country">Requestor Comments:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.comments | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label title="State">Message:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.messages | stringDisplay}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+      </div>
+    </div>
+  </div>

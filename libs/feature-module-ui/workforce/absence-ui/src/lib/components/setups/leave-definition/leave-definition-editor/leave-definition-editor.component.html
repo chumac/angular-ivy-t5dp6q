@@ -1,0 +1,319 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show ? '0' : utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Leave Definition'" [subTitle]="'Edit Leave Definition'"
+        [loading]="inEditMode() && !data" ></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f"  (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <input formControlName="code" type="text" class="form-control form-font">
+           </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Is it annual?</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="is_annual"
+                (click)="onclick($event)"
+                unchecked
+              />
+              <span class="slider round"></span> </label
+            >Yes<br /><br />
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Take from annual</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="take_from_annual"
+                (click)="onclick($event)"
+                unchecked
+              />
+              <span class="slider round"></span> </label
+            >Yes<br /><br />
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Use Public Holidays</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              No
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  formControlName="use_public_holidays"
+                  (click)="onclick($event)"
+                  unchecked
+                />
+                <span class="slider round"></span> </label
+              >Yes<br /><br />
+            </div>
+          </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Calender to use:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="calender_to_use" [options]="definitionService.calendar" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                    <label class="required center-label">Use days:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="use_days" [options]="definitionService.Use_days" [filterEnabled]="true" class="form-font"></mdb-select>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                      <label class="required center-label">This leave is available if annual leave is exhusted</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                      No
+                      <label class="switch">
+                        <input
+                          type="checkbox"
+                          formControlName="only_avail_ifno_annual"
+                          (click)="onclick($event)"
+                          unchecked
+                        />
+                        <span class="slider round"></span> </label
+                      >Yes<br /><br />
+                    </div>
+                  </div>
+                  <div class="row mb-1">
+                      <div class="col-4">
+                        <label class="required center-label">Cancels Annual</label>
+                      </div>
+                      <div class="col-8 md-form mt-0">
+                        No
+                        <label class="switch">
+                          <input
+                            type="checkbox"
+                            formControlName="cancels_annual"
+                            (click)="onclick($event)"
+                            unchecked
+                          />
+                          <span class="slider round"></span> </label
+                        >Yes<br /><br />
+                      </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                          <label class="required center-label">Can Carryover</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                          No
+                          <label class="switch">
+                            <input
+                              type="checkbox"
+                              formControlName="can_carryover"
+                              (click)="onclick($event)"
+                              unchecked
+                            />
+                            <span class="slider round"></span> </label
+                          >Yes<br /><br />
+                        </div>
+                      </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Only Confirmed Staff</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              No
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  formControlName="only_confirmed_staff"
+                  (click)="onclick($event)"
+                  unchecked
+                />
+                <span class="slider round"></span> </label
+              >Yes<br /><br />
+            </div>
+          </div>
+
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Prorate Leave</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              No
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  formControlName="prorate_leave"
+                  (click)="onclick($event)"
+                  unchecked
+                />
+                <span class="slider round"></span> </label
+              >Yes<br /><br />
+            </div>
+          </div>
+
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Supports allowance payment</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              No
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  formControlName="supports_allowance_payment"
+                  (click)="onclick($event)"
+                  unchecked
+                />
+                <span class="slider round"></span> </label
+              >Yes<br /><br />
+            </div>
+          </div>
+
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">This leave type will not be available through self service</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              No
+              <label class="switch">
+                <input
+                  type="checkbox"
+                  formControlName="not_in_selfservice"
+                  (click)="onclick($event)"
+                  unchecked
+                />
+                <span class="slider round"></span> </label
+              >Yes<br /><br />
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">View in Summary</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                No
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    formControlName="view_in_summary"
+                    (click)="onclick($event)"
+                    unchecked
+                  />
+                  <span class="slider round"></span> </label
+                >Yes<br /><br />
+              </div>
+            </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label"> Has Per time limit</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="has_per_time_limit"
+                (click)="onclick($event)"
+                unchecked
+              />
+              <span class="slider round"></span> </label
+            >Yes<br /><br />
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Can Break </label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="can_break"
+                (click)="onCanBreakClick($event)"
+                unchecked
+              />
+              <span class="slider round"></span> </label
+            >Yes<br /><br />
+          </div>
+        </div>
+
+           <div class="row mb-1" *ngIf="isLoading$ | async">
+                  <div class="col-4">
+                    <label class="center-label">Maximum Break Slice:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                  <input formControlName="max_break_slice" type="text" class="form-control form-font">
+                  </div>
+            </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Choose from Backlog</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="choose_frombacklog"
+                (click)="onclick($event)"
+                unchecked
+              />
+              <span class="slider round"></span> </label
+            >Yes<br /><br />
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Show in Promotion</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No
+            <label class="switch">
+              <input
+                type="checkbox"
+                formControlName="show_in_promotion"
+                (click)="onclick($event)"
+                unchecked
+              />
+              <span class="slider round"></span> </label
+            >Yes<br /><br />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async"
+        (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

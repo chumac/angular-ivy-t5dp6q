@@ -1,0 +1,98 @@
+<!-- <x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)"> -->
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-4">
+      <div class="back-navigation d-flex align-items-center justify-content-start">
+        <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect
+          [disabled]="false" (click)="onCancel()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back</button>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-5 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" (selected)="search()" [filterEnabled]="true"
+                    [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Item type, Discription, Type, Percent value, Amount Value."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #configureTransactionDataGrid [data]="configureTransactionData| async" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true"
+              [perPage]="15" [height]="null" [paginationTemplate]="">
+              <igx-column field="item_type_text" header="Item Type" width="20%">
+              </igx-column>
+              <igx-column field="item_description" header="Item Description" width="20%">
+              </igx-column>
+              <igx-column field="type" header="Type" width="15%">
+              </igx-column>
+              <igx-column field="percent_value" header="Percent Value" width="15%">
+              </igx-column>
+              <igx-column field="amount_value" header="Amount Value" width="15%">
+              </igx-column>
+              <igx-column field="exclusion_det_id" header="..." headerClasses="headerAlignSyle" class="text-center" width="5%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                          (click)="onRunIconConfigureClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash'" title="Remove"
+                          (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <x365-shared-ui-form-footer [doneText]="'Submit'" (doneClick)="onSubmit()" (cancelClick)="onCancel()">
+  </x365-shared-ui-form-footer>
+</div>
+<x365-fm-payrl-transaction-configure-editor #configureeditor [width]="50"
+  [showCreate]="showCreateConfigureEditor$ | async" [data]="null" [exclusionTypeData]="exclusionTypeData$ | async"
+  [exclusionId]="exclusionId"></x365-fm-payrl-transaction-configure-editor>
+<!-- </x365-shared-ui-form-container> -->

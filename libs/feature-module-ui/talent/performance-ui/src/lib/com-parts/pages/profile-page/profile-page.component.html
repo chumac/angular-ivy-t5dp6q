@@ -1,0 +1,130 @@
+<div class="base" *ngIf="show">
+  <div class="top">
+    <h5>Profile Page</h5>
+    <span>Employee personal information</span>
+  </div>
+  <div class="content">
+    <div class="content-l">
+      <x365-shared-ui-avatar class="avatar" [width]="'12em'" [height]="'12em'" [src]="service?.employeePhoto" [isRounded]="false" [showBorder]="false" [borderColor]="'rgb(223, 223, 223)'" [borderWidth]="'0.07em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+    </div>
+    <div class="content-r">
+      <div class="content-r-t mb-5">
+        <div class="non-info-pane"></div>
+        <div class="info-pane">Appraisal Period | {{reviewStartDate | dateDisplay}} - {{reviewEndDate | dateDisplay}}</div>
+      </div>
+      <div class="content-r-b">
+        <div class="mx-3">
+          <div class="row mt-4 mb-3">
+            <div class="col-12 mt-2">
+              <h5>Appraisee Information</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Staff Number:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{ service?.data?.staff_number | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Name:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.name | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Grade:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.Staff_Grade | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Job Role:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.Job_Role | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Duration In Role:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.Duration_on_Role | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Location:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.Employee_Location | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-4">
+              <label>Employment Date:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.Employment_Date | dateDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-5">
+            <div class="col-4">
+              <label>Last Promotion Date:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+              {{service?.data?.Last_Promotion_Date | dateDisplay}}
+            </div>
+          </div>
+
+
+          <div class="row mt-5">
+            <div class="col-12 md-form mt-2">
+              <h5>Supervisor Information</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-10"></div>
+            <div class="col-2 mt-0">
+              <x365-shared-ui-avatar [width]="'5em'" [height]="'5em'" [src]="service?.reportsToPhoto" [isRounded]="false" [showBorder]="true" [borderColor]="'rgb(240, 240, 240)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-4">
+              <label>Name:</label>
+            </div>
+            <div class="col-8 mt-0 text-right font-weight-bold">
+                {{service?.data?.Supervisor | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row start-button" *ngIf="isStartButtonVisible">
+            <div class="col-12 mt-0 text-right">
+              <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="startButtonClicked()" [disabled]="isStarted"><span *ngIf="startProcessingStatus"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;Start&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom"></div>
+</div>

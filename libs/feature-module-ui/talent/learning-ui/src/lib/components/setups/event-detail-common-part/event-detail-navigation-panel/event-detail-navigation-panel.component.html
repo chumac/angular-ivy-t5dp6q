@@ -1,0 +1,16 @@
+<ul>
+  <li *ngIf="!isOpen" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.EVENT_DETAILS)"
+    (click)="onNavItemClick(NavMenuItemTypes.EVENT_DETAILS)"><a>Event Details</a></li>
+  <li *ngIf="!isOpen" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.SCHEDULE)"
+    (click)="onNavItemClick(NavMenuItemTypes.SCHEDULE)"><a>Schedule</a></li>
+  <li *ngIf="!isOpen" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PRE_REQUISITES)"
+    (click)="onNavItemClick(NavMenuItemTypes.PRE_REQUISITES)"><a>Pre-Requisites</a></li>
+  <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.ASSETS)"
+    (click)="onNavItemClick(NavMenuItemTypes.ASSETS)"><a>Assets</a></li>
+  <li *ngIf="!isOpen" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.PARTICIPANTS)"
+    (click)="onNavItemClick(NavMenuItemTypes.PARTICIPANTS)"><a>Participants</a></li>
+  <li [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.FEEDBACK_FORMS)"
+    (click)="onNavItemClick(NavMenuItemTypes.FEEDBACK_FORMS)"><a>Feedback Forms</a></li>
+  <li *ngIf="!isOpen" [class.active]="getActivatedMenuItemStatus(NavMenuItemTypes.FACILITATORS)"
+    (click)="onNavItemClick(NavMenuItemTypes.FACILITATORS)"><a>Facilitators</a></li>
+</ul>

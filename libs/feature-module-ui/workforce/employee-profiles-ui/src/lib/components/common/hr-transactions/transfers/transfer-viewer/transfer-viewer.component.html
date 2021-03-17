@@ -1,0 +1,137 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Transfer'" [subTitle]="'Details of your Transfer'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>FullName:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.fullName | stringDisplay}}
+              </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Current Structure Type:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.currentLocationStructure?.description | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Current Location :</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.currentLocationDetails?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Newt Structure Type:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.latestStructure | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>New Location :</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.latestLocation | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Current Position:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.oldPosition | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>New Position:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.latestPosition | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label >Current Designation:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.currentDesignationInfo?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label >New Designation:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.latestDesignation | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+                <label>Supervisor:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.supervisor | stringDisplay}}
+            </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Effective Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.effective_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Resumed?:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.has_resumed | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Historical?:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.is_historical | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Country">Temporary?:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.is_temporary | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="State">Processed Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.processed_date | dateDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

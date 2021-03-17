@@ -1,0 +1,105 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+       </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+              <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner>
+            </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-5"></div>
+                <div class="col-7 md-form">
+                    <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true" (selected)="search()"
+                      placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+                <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" placeholder="Enter your search text"
+                  class="form-control">
+              </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="row">
+            <div class="col-12">
+              <div class="grid-table-container">
+                  <igx-grid #dataGrid [data]="variableAllowanceData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" width="100%"
+        [emptyGridMessage]="'No data available'"  [showToolbar]="true">
+          <igx-column field="code" header="Code" width="12%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay }}
+            </ng-template>
+          </igx-column>
+          <igx-column field="description" header="Description" width="33%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay }}
+            </ng-template>
+          </igx-column>
+          <igx-column field="shortname" header="Short Name" width="15%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay }}
+            </ng-template>
+          </igx-column>
+          <igx-column field="use_global_rate" header="Using Global Rate" width="15%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay }}
+            </ng-template>
+          </igx-column>
+          <igx-column field="payroll_profile_text" header="Payroll Profile" width="15%">
+            <ng-template igxCell let-val>
+              {{val | stringDisplay }}
+            </ng-template>
+          </igx-column>
+          <igx-column field="varallowance_id" header="..." class="text-center" width="10%">
+            <ng-template igxCell let-val>
+              <div class="hover-menu-container"><span class="text-center"></span>
+                <div class="hover-menu">
+                  <span class="hover-ellipse-menu"></span>
+                  <div class="hover-icons">
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)">
+                    </x365-shared-ui-hover-icon>
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)=" onEditIconClicked(val)">
+                    </x365-shared-ui-hover-icon>
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-percent'" title="Set Rate" (click)=" onSetRateIconClicked(val)">
+                    </x365-shared-ui-hover-icon>
+                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Archive" (click)="onDeleteIconClicked(val)">
+                    </x365-shared-ui-hover-icon>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </igx-column>
+        </igx-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-payrl-variable-allowance-editor #editor [width]="30"  [show]="showEditor$ | async" [data]="null"  (cancelClick)="onCancelEditor()"></x365-fm-payrl-variable-allowance-editor>
+<x365-fm-payrl-variable-allowance-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()"></x365-fm-payrl-variable-allowance-viewer>
+
+<x365-fm-payrl-variable-allowance-rate-editor #rateEditor [width]="30"  [show]="showRateEditor$ | async" [data]="null"  (cancelClick)="onCancelRateEditor()" [titleFor]="'Global'"></x365-fm-payrl-variable-allowance-rate-editor>

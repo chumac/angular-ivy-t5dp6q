@@ -1,0 +1,9 @@
+<div class="dark-font bc-icons-2">
+  <mdb-breadcrumb customClass="black-text indigo lighten-4">
+    <mdb-breadcrumb-item *ngFor="let item of breadcrumb">
+      <mdb-icon fas icon="caret-right" class="mr-1"></mdb-icon> <a [routerLink]="[item.url, item.params]">
+        {{ item.label }}
+      </a>
+    </mdb-breadcrumb-item>
+  </mdb-breadcrumb>
+</div>

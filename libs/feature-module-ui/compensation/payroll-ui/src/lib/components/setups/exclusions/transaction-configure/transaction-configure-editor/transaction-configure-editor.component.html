@@ -1,0 +1,66 @@
+<x365-shared-ui-form-container [show]="showCreate" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="showCreate?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Specific item'" [subTitle]="'Add/Edit specific item'"
+      [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Choose an item:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="exclusionTypeData" formControlName="item_type" valueExpr="id"
+            displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="400px" class="form-font" (onItemClick)="onChange($event)">
+          </dx-lookup>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="exclusionItemTypeData$ | async" formControlName="item_description" valueExpr="description"
+            displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="400px" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Exclude by percentage </label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-control custom-switch">
+          No <label class="switch">
+            <input formControlName="exclude_by_percent" type="checkbox" [(ngModel)]="showhidepercentage" (ngModelChange)="onPercentChange($event)">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="showhidepercentage">
+        <div class="col-4">
+          <label class="required center-label">Percent:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="percent_value" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="showhidepercentage == null || showhidepercentage == false">
+        <div class="col-4">
+          <label class="required center-label">Amount:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="amount_value" type="text" class="form-control form-font">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

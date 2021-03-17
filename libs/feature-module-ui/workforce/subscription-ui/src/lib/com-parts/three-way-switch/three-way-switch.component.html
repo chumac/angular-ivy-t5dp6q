@@ -1,0 +1,12 @@
+<div class="switch-container">
+    <div *ngFor="let option of options" style="display:inline;">
+        <input class="radio" type="radio" name="state-d" id="{{'l'+option}}" [(ngModel)]="pos" [value]="option" />
+        <label class="radio" for="{{'l'+option}}">
+           {{option}}
+        </label>
+    </div>
+</div>
+<div class="switch-toggle">
+    <div [@posX]="pos" (@posX.done)="pos2=pos" class="switch-toggle-inner">{{pos2}}
+    </div>
+</div>

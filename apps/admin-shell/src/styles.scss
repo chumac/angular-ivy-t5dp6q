@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+// @import '~node_modules//froala-editor/css/themes';
+// @import '../../../node_modules/froala-editor/css/themes/gray.min.css';
+// @import '../../../node_modules/froala-editor/css/themes/red.min.css';
+
+
+@import 'hover.css/css/hover-min.css';
+
+@import 'colors';
+@import 'general';
+@import 'mixins';
+@import 'global-styles';
+@import 'form-styles';
+@import 'scrollbar.scss';
+
+@import 'mdbootstrap/main-mdbootstrap.scss';
+@import 'mdbootstrap/toast-mdbootstrap.scss';
+@import 'mdbootstrap/modal-mdbootstrap.scss';
+@import 'mdbootstrap/tables-mdbootstrap.scss';
+@import 'mdbootstrap/textarea-mdbootstrap.scss';
+@import 'mdbootstrap/checkbox-mdbootstrap.scss';
+
+@import 'igniteui/calendar-igniteui.scss';
+@import 'igniteui/grid-igniteui.scss';
+
+@import 'devextreme/date-picker-devextreme.scss';
+@import 'devextreme/input-devextreme.scss';
+@import 'devextreme/main-devextreme.scss';
+@import 'devextreme/popup-devextreme.scss';
+@import 'devextreme/lookup-devextreme.scss';
+@import 'devextreme/checkbox-devextreme.scss';
+@import 'devextreme/dx-list-devextreme.scss';
+
+@import 'spinkit/spinners/spinner';
+@import 'spinkit/spinners/9-cube-grid';
+
+@import 'others/owl-carousel.scss';
+
+@import '~animate.css/animate.min';
+
+
+
+.cdk-overlay-container {
+  z-index: 1301 !important;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+

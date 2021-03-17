@@ -1,0 +1,96 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="pageTitle || 'Ratings page editor'" [subTitle]="'Create/Edits new asset definition'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1" *ngIf="!inEditMode()">
+                    <div class="col-4">
+                        <label class="center-label">Ratings Page:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="widget_guid" [dataSource]="pageListFromSource$ | async" valueExpr="widget_guid" displayExpr='description' disabled="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Title:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="title" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="10" formControlName="description" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Allow self rating:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="allow_self_rating" type="checkbox" class="form-check-input" id="allow_self_rating">
+                            <label class="form-check-label" for="allow_self_rating"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Use Rating Stars:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="use_rating_stars" type="checkbox" class="form-check-input" id="use_rating_stars">
+                            <label class="form-check-label" for="use_rating_stars"></label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="pageType === ASSET_TYPE_CONSTANTS.RatingPage360">
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Use 360 Feedback:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <div class="form-check">
+                                <input formControlName="is_for_360" type="checkbox" class="form-check-input" id="is_for_360">
+                                <label class="form-check-label" for="is_for_360"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Role 360:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <mdb-select formControlName="role_360" [options]="role360Options" [filterEnabled]="true" class="form-font">
+                            </mdb-select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Use Anonymous Survey:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <div class="form-check">
+                                <input formControlName="role_360_anon_emp" type="checkbox" class="form-check-input" id="role_360_anon_emp">
+                                <label class="form-check-label" for="role_360_anon_emp"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

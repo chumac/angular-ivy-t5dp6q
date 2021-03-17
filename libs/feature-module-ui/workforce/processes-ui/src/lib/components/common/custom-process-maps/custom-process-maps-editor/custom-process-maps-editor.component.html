@@ -1,0 +1,83 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Process/Custom Form Map'" [subTitle]="'Add custom form to a process'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="sub-heading row mt-0 mb-1">
+            <div class="col-12 md-form mt-0">
+                <h5>Custom Form Selection</h5>
+                <hr class="mt-1">
+            </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Custom form:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="form_id" [dataSource]="customFormList$ | async" valueExpr="id" displayExpr='description' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Rank:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="rank" type="number" class="form-control form-font">
+          </div>
+        </div>
+        <div class="sub-heading row mt-0 mb-1">
+            <div class="col-12 md-form mt-0">
+                <h5>Process Information</h5>
+                <hr class="mt-1">
+            </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Section Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="section_title" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="description" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Role:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="role" [dataSource]="rolesList$ | async" valueExpr="id" displayExpr='description' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="fs.role.value !=  role.employee">
+          <div class="col-4">
+            <label class="center-label required">Permission:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="emp_role_perm" [dataSource]="permissionsList$ | async" valueExpr="id" displayExpr='description' searchEnabled=true paginate=true placeholder="" popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Business Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="business_rule" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

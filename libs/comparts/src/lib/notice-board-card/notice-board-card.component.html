@@ -1,0 +1,29 @@
+<div class="item-container">
+    <div class="item-container-top">
+        <div class="top-content-left">
+            <h5 class="font-weight-bold">Notice Board</h5>
+        </div>
+        <div class="top-content-right">
+        </div>
+    </div>
+    <div class="item-container-bottom" *ngIf="announcements.length;else alternative">
+        <ul>
+            <li *ngFor="let announcement of announcements">
+                <div>
+                    <span class="d-block heading-sm-1">{{ announcement.created_date | dateDisplay }}</span>
+                    <span class="d-block heading-sm-2"><a (click)="viewAnnouncement(announcement)">{{ announcement.subject | stringDisplay }}</a></span>
+                </div>
+                <div class="profile">
+                    <div class="profile-img">
+                        <!-- <x365-fm-talent-sl-timeline-avatar [data]="announcement.employee_id"></x365-fm-talent-sl-timeline-avatar> -->
+                        <a><img src="{{announcement.image_url}}" class="avatar box-size-2 border-3" alt="{{announcement.image_url}}" mdbWavesEffect></a>
+                    </div>
+                    <div class="profile-name heading-sm-2 font-weight-bold">{{ announcement.Username | stringDisplay }}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <ng-template #alternative>
+        No Notifications
+    </ng-template>
+</div>

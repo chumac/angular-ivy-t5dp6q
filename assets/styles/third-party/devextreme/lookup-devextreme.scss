@@ -1,0 +1,31 @@
+@import 'colors';
+
+.dx-lookup-field {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9em;
+}
+
+.dx-lookup.dx-editor-underlined .dx-lookup-field {
+  padding-top: 0;
+  padding-bottom: 16px;
+}
+
+.dx-lookup-arrow {
+  width: 30px;
+}
+
+.dx-lookup-arrow:before {
+  font-family: FontAwesome;
+  content: '\f107';
+  font-size: 0.85rem;
+  color: black;
+  left: 67%;
+  top: 29%;
+}
+
+.dx-texteditor.dx-state-focused::before,
+.dx-texteditor.dx-state-active::before {
+  box-shadow: none;
+  border-bottom:  1px solid $app_brand_color;
+}
+

@@ -1,0 +1,26 @@
+<article class="content-wrapper">
+  <div class="content">
+    <div class="content-header">
+      <div class="content-name">Re-route Appraisal to An Employee</div>
+    </div>
+
+    <div class="content-body">
+      <div class="content-body-item">
+        <form novalidate [formGroup]="this.fs.f" (ngSubmit)="onOkClick()">
+          <div class="md-form mt-5">
+            <div class="row">
+              <div class="col-12">
+                <dx-lookup formControlName="employee" [dataSource]="activePersonnel$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="Select employee to re-route to" showClearButton=true closeOnOutsideClick=false popupHeight="600px" class="form-font"></dx-lookup>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" size="sm" mdbWavesEffect (click)="onOkClick()">&nbsp;&nbsp;<span *ngIf="false"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning" (click)="onCancel()" mdbWavesEffect>&nbsp;Cancel&nbsp;</button>
+    </div>
+  </div>
+</article>

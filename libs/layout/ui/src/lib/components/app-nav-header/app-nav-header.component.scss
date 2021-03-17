@@ -1,0 +1,12 @@
+$logo_width: 7.7em;
+$logo_height: 1.8em;
+
+:host {
+  display: block;
+}
+
+.logo {
+  width: $logo_width;
+  height: $logo_height;
+  cursor: pointer;
+}

@@ -1,0 +1,27 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Cost Centre Editor'" [subTitle]="'Add cost centres'" [loading]='false'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="border-shadow">
+        <dx-list #list
+          [dataSource]="costCentreDataSource"
+          [height]="450"
+          [selectionMode]="'Multiple'"
+          [selectAllMode]="'page'"
+          [showSelectionControls]="true"
+          [selectedItemKeys]="[]"
+          [searchEnabled]="true"
+          itemTemplate="data">
+          <div *dxTemplate="let item of 'data'">
+            <div class="item-name">{{item.description}}</div>
+          </div>
+        </dx-list>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

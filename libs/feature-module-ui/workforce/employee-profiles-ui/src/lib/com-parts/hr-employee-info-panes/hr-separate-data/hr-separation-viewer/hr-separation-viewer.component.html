@@ -1,0 +1,127 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Separation Data'" [subTitle]="'Details of Employee Separation Data'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Reason For Exit:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.reason_for_exit | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Exit Note:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.exit_notes | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Sent Notice:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.sent_notice_meaning | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Notice Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.notice_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.effective_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Process Payroll:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.process_payroll_meaning | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Pay Lumpsum:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.pay_lumpsum_meaning | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Lumpsum Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.lumpsum_allowance_id_desc | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Lumpsum Amount:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.lumpsum_amount | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Currency:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.currency_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Lumpsum Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.lumpsum_allowance_id_desc | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Notice Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.notice_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Resignation Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.resignation_id_desc | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Replacement:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.replace_name | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

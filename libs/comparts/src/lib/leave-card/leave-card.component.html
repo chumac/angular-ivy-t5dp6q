@@ -1,0 +1,51 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">{{cardTitle}}</h5>
+    </div>
+    <div class="top-content-right">
+      <div class="btn-group mr-3" mdbDropdown>
+        <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+          mdbWavesEffect><span>Select Type</span> <i class="fa fa-angle-down"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item color-cyan" (click)="onEventSelection($event, 'Daily')"><span>Daily Leave</span></a>
+          <a class="dropdown-item" (click)="onEventSelection($event, 'Hourly')"><span>Hourly Leave</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-container-bottom">
+    <div class="grid-table-container">
+      <igx-grid *ngIf="showLeaveTimelineDailyTable" #gridLeaveTimeline id="gridLeaveTimeline" [data]="leaveTimeline" [autoGenerate]="false" width="100%" [showToolbar]="false" toolbarTitle="" displayDensity="cosy">
+        <igx-column field="employee_name_grp" header="Employee" width="30%"></igx-column>
+        <!-- <igx-column field="type" header="Type" width="25%"></igx-column> -->
+        <igx-column field="leave_details" header="Details" width="55%">
+          <ng-template igxCell let-val>
+            <div class="left-align-text"><small>{{val | stringDisplay}}</small></div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="no_of_days" header="Days" width="15%">
+          <ng-template igxCell let-val>
+            <div class="left-align-text"><small>{{val | stringDisplay}}</small></div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+
+      <igx-grid *ngIf="showLeaveTimelineHourlyTable" #gridLeaveTimeline id="gridLeaveTimeline" [data]="null" [autoGenerate]="false" width="100%" [showToolbar]="false" toolbarTitle="" displayDensity="cosy">
+        <igx-column field="employee_name_grp" header="Employee" width="30%"></igx-column>
+        <!-- <igx-column field="type" header="Type" width="25%"></igx-column> -->
+        <igx-column field="leave_details" header="Details" width="55%">
+          <ng-template igxCell let-val>
+            <div class="left-align-text"><small>{{val | stringDisplay}}</small></div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="no_of_days" header="Days" width="15%">
+          <ng-template igxCell let-val>
+            <div class="left-align-text"><small>{{val | stringDisplay}}</small></div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>

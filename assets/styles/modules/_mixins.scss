@@ -1,0 +1,17 @@
+@mixin boxShadow($hShadow, $vShadow, $blur, $spread, $color, $style) {
+  -webkit-box-shadow: $hShadow $vShadow $blur $spread $color $style;
+  -moz-box-shadow: $hShadow $vShadow $blur $spread $color $style;
+  box-shadow: $hShadow $vShadow $blur $spread $color $style;
+}
+
+@mixin borderRadius($topBorder, $rightBorder, $bottomBorder, $leftBorder) {
+  -webkit-border-radius: $topBorder $rightBorder $bottomBorder $leftBorder;
+  -moz-border-radius: $topBorder $rightBorder $bottomBorder $leftBorder;
+  border-radius: $topBorder $rightBorder $bottomBorder $leftBorder;
+}
+
+@mixin opacity($degree) {
+  opacity: $degree;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$degree*100});
+  filter: alpha(opacity=#{$degree * 100});
+}

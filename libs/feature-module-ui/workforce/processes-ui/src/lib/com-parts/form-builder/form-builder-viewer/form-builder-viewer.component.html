@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row"> 
+    <div class="col-12">
+      <div class="builder-container">
+        <div class="b-header">
+          <h5>Form Properties</h5>
+          <small class="text-muted">Displays the form structure.</small>
+        </div>
+        <div class="b-content">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Field Name</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data | keyvalue">
+                <td>{{item.key}}</td>
+                <td>{{item.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+     
+  </div>
+</div>

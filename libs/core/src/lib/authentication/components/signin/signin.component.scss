@@ -1,0 +1,104 @@
+// @import '/assets/styles/styles.scss';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/wallpaper_1310218_01214.png'); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.main {
+  width: 30em;
+  height: 13.5em;
+  border: 1px solid rgb(194, 194, 194);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-item {
+  align-self: center;
+}
+
+.logo {
+  padding: 0.9em;
+  cursor: pointer;
+
+  img {
+    width: 200px;
+    height: 3em;
+  }
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  height: 2em;
+  bottom: 0;
+  left: 0;
+  color: rgb(44, 44, 44);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.footer-container .copyright {
+  flex-grow: 1;
+}
+
+.footer-container .important-links {
+  flex-grow: 9;
+}
+
+ul {
+  font-size: 0.7em !important;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+ul > li {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+ul > li > a {
+  display: block;
+  padding: 0;
+  text-decoration: none;
+  color: rgb(44, 44, 44);
+  cursor: pointer;
+}
+
+ul > li > a:hover {
+  color: rgb(255, 149, 21);
+  background-color: transparent !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+ul > li > a:visited {
+  color: rgb(44, 44, 44);
+  background-color: transparent !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+ul > li > a.active {
+  color: rgb(255, 149, 21);
+  cursor: pointer;
+}

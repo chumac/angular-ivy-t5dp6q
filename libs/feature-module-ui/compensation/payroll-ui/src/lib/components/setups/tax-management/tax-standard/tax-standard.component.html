@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-4">
+      <div class="back-navigation d-flex align-items-center justify-content-start">
+        <button mdbBtn type="button" color="warning" rounded="true" outline="true" size="sm" mdbWavesEffect
+          (click)="goBack()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-5 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" (selected)="search()" [filterEnabled]="true"
+                    [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Step, Tax Value, % of tax value, Percent Of reminder, Ignore Reminder, Cumulative, Cumulative Taxable Value."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #taxStandardDataGrid [data]="taxStandardData$ | async" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true"
+              [perPage]="15" [height]="null" [paginationTemplate]="">
+              <igx-column field="step" header="Step" width="10%">
+              </igx-column>
+              <igx-column field="tax_value" header="Tax Value" width="10%">
+              </igx-column>
+              <igx-column field="percentage_of_tv" header="% of tax value" width="15%">
+              </igx-column>
+              <igx-column field="percentage_of_rm" header="% of remainder" width="10%">
+              </igx-column>
+              <igx-column field="ignore_rm" header="Ignore remainder" width="15%">
+              </igx-column>
+              <igx-column field="cumulative" header="Cumulative" width="15%">
+              </igx-column>
+              <igx-column field="cumulative_taxable_value" header="Cumulative taxable value" width="15%">
+              </igx-column>
+              <igx-column field="taxdetail_id" header="..." headerClasses="headerAlignSyle" class="text-center"
+                width="10%">
+                <ng-template igxCell let-val let-cell="cell">
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View Report"
+                          (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Tax Standard"
+                          (click)="onEditIconClicked(val,cell.row.rowData.taxpercentongross)">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash'" title="Remove"
+                          (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-payrl-tax-standard-editor #taxStndardEditor [width]="60" [show]="showTaxStandardEditor$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()" [payrollProfileID]="this.payrollProfileID"
+  [standardDefault]="this.taxStandardDefaultData$"></x365-fm-payrl-tax-standard-editor>
+
+<x365-fm-payrl-tax-standard-view #taxStndardView [width]="40" [show]="showTaxStandardView$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()" [payrollProfileID]="this.payrollProfileID"
+  [standardDefault]="this.taxStandardDefaultData$"></x365-fm-payrl-tax-standard-view>

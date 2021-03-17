@@ -1,0 +1,194 @@
+<!-- 
+<div class="card card-container">
+  <div class="item-left font-size">
+    <div class="sub-heading row mt-0 mb-0">
+      <div class="col-12  mt-2 mb-1">
+        <h5>Plan</h5>
+        <hr class="mt-1">
+      </div>
+    </div>
+
+    <div class="row mt-0">
+      <div class="col-12">
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Code</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{data?.PlanInfo?.code | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Description</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{data?.PlanInfo?.description | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Start Date</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{periodStartDate | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>End Date</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{periodEndDate | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-4 row-label">
+            <label>Employment Status</label>
+          </div>
+          <div class="col-8 row-text mt-0 font-weight-bold">
+            <label>{{data?.classification_key | stringDisplay}}</label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="item-left">
+    <div class="sub-heading row mt-0 mb-0">
+      <div class="col-12  mt-2 mb-1">
+        <h5>Supervisor</h5>
+        <hr class="mt-1">
+      </div>
+    </div>
+
+    <div class="data-row dr-avatar">
+      <x365-shared-ui-avatar [width]="'6.5em'" [height]="'6.5em'" [src]="reportsToEmployeePhoto" [showBorder]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+    </div>
+    <div class="data-row dr-name font-weight-bold mt-2">
+      <span *ngIf="true">{{getFullname() | stringDisplay}}</span>
+    </div>
+  </div>
+
+  <div class="item-right font-size"></div>
+</div> -->
+
+
+
+
+
+
+
+
+<div class="card card-container p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <!-- con -->
+
+                <div class="row mt-0">
+                    <div class="col-12 summary">
+                        <p class="my-3">Plan</p>
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Code</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{data?.PlanInfo?.code | stringDisplay}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Description</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{data?.PlanInfo?.description | stringDisplay}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Start Date</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{periodStartDate | dateDisplay}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>End Date</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{periodEndDate | dateDisplay}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Employment Status</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{data?.classification_key | stringDisplay}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <!-- con -->
+
+                <div class="row mt-0">
+                    <div class="col-12 summary">
+                        <p class="my-3">Supervisor</p>
+                        <div class="row mb-2">
+                            <div class="col-12 row-text mt-0 font-weight-bold d-flex flex-column justify-content-center align-items-center">
+                                <div class="data-row dr-avatar">
+                                    <x365-shared-ui-avatar [width]="'6.5em'" [height]="'6.5em'" [src]="reportsToEmployeePhoto" [showBorder]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+                                </div>
+                                <div class="data-row dr-name font-weight-bold mt-2">
+                                    <span *ngIf="true">{{getFullname() | stringDisplay}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <!-- con -->
+
+                <div class="row mt-0">
+                    <div class="col-12 summary">
+                        <p class="my-3">Your Session</p>
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Plan</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ data?.session_description | stringDisplay}}</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Review Note</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ data?.session_note | stringDisplay}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

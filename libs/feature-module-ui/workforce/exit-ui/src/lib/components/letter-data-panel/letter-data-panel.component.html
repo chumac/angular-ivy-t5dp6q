@@ -1,0 +1,338 @@
+<div class="card card-container font-size mb-3">
+  <div class="w-100 row" *ngIf="(letter && (comprehensiveData || activePersonnel))">
+    <div class="col-sm-12 col-md-6 col-lg-4 text-center">
+      <div class="data-row dr-avatar">
+        <x365-shared-ui-avatar [width]="'6.5em'" [height]="'6.5em'" [src]="employeePhoto" [showBorder]="false"
+          [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''"
+          [altText]="''" [centerAvatar]="true"></x365-shared-ui-avatar>
+      </div>
+      <div class="data-row dr-name font-weight-bold mt-2" *ngIf="activePersonnel">
+        <span *ngIf="fullname && fullname.titleFullName !==''">{{activePersonnel?.emp_fullname | stringDisplay}}</span>
+      </div>
+      <div *ngIf="comprehensiveData">
+        <div class="data-row dr-name font-weight-bold mt-2" [matMenuTriggerFor]="menu">
+          <span *ngIf="fullname && fullname.titleFullName !==''">{{fullname?.titleFullName | stringDisplay}}</span>
+        </div>
+        <mat-menu #menu="matMenu" class="employee-menu">
+          <div class="container">
+            <!-- <div class="row header">
+                                      Other information
+                                  </div> -->
+            <div class="row body">
+              <div class="col-12 inline">
+                <h6>Staff Number</h6>
+                <p>{{comprehensiveData?.employee_number | stringDisplay}}</p>
+              </div>
+              <div class="col-12 inline">
+                <h6>Reports to</h6>
+                <p>{{comprehensiveData?.reports_to_fullname | stringDisplay}}</p>
+              </div>
+              <div class="col-12 inline">
+                <h6>Location Type</h6>
+                <p>{{comprehensiveData?.current_location_type | stringDisplay}}</p>
+              </div>
+              <div class="col-12 inline">
+                <h6>Detail</h6>
+                <p>{{comprehensiveData?.current_location | stringDisplay}}</p>
+              </div>
+            </div>
+            <div class="row footer">
+              <div class="col-12 inline">
+                <small>System ID: {{comprehensiveData?.employee_id | stringDisplay}}</small>
+              </div>
+            </div>
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="comprehensiveData">
+      <div class="im-top">
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Phone Number</label>
+          </div>
+          <div class="col-7 row-text mt-0  font-weight-bold">
+            <label>{{phoneNumber | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Email</label>
+          </div>
+          <div class="col-7 row-text mt-0 wrap font-weight-bold">
+            <label>{{comprehensiveData?.email_personal | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Position</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{comprehensiveData?.position | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Grade</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{comprehensiveData?.grade | stringDisplay}}</label>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Employment Date</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{comprehensiveData?.employment_date | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Length of Service</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{comprehensiveData?.len_of_service | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="activePersonnel">
+      <div class="im-top">
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Email</label>
+          </div>
+          <div class="col-7 row-text mt-0 wrap font-weight-bold">
+            <label>{{activePersonnel?.logon_name | stringDisplay}}</label>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>DOB</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{activePersonnel?.date_of_birth | dateDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Gender</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{activePersonnel?.gender | stringDisplay}}</label>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Marital Status</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{activePersonnel?.marital_status | stringDisplay}}</label>
+          </div>
+        </div>
+
+        <div class="row mb-2">
+          <div class="col-5 row-label">
+            <label>Home Town</label>
+          </div>
+          <div class="col-7 row-text mt-0 font-weight-bold">
+            <label>{{activePersonnel?.homeplace | stringDisplay}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Resignation Status</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold d-flex justify-content-between">
+          <label><span class="badge mr-2"
+              [ngClass]="getClass(letter.status)">{{letter?.status_text | stringDisplay}}</span></label>
+              <a mdbBtn *ngIf="isHR" floating="true" size="sm" color="warning" class="waves-light btn-sm m-0" [ngClass]="reportButtonBackward ? '' : 'forward'"
+                title="View Process Report" mdbWavesEffect (click)="onViewReportClicked()">
+                <i class="fa fa fa-external-link"></i>
+              </a>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Effective Date</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label>{{letter?.effective_date | dateDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Separation Type</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label>{{letter?.separation_type_text | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Proxy Type</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label *ngIf="letter?.proxy_type === 0">HR</label>
+          <label *ngIf="letter?.proxy_type === 1">Line Manager</label>
+          <label *ngIf="letter?.proxy_type === null">---</label>
+        </div>
+      </div>
+      <hr class="horizontal-rule mb-2">
+      <div class="row mb-2" *ngIf="!isLM || allowViewLetter">
+        <div class="col-12 d-flex justify-content-end align-items-center row-text mt-0">
+          <div>
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc" [useIcon]="true"
+              [downloadIconTitle]="'Download Letter'"></x365-shared-ui-file-downloader>
+            <x365-shared-ui-file-downloader *ngIf="letter.resign_letter" [useIcon]="true" [htmlDoc]="letter.resign_letter"
+              [showText]="false" [htmlName]="'resignation_letter'" [downloadIconTitle]="'Download Letter As PDF'">
+            </x365-shared-ui-file-downloader>
+          </div>
+          <div>
+            <span *ngIf="!dataDoc && letter.resign_letter" class="view-icon" (click)="viewResignationLetter()" title='View Letter'><i class="fa fa-desktop"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row w-100" *ngIf="!(letter && (comprehensiveData || activePersonnel))">
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-shimmer-placeholder [photo]="true" [box]="false">
+      </x365-shared-ui-shimmer-placeholder>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+      </x365-shared-ui-shimmer-placeholder>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+      </x365-shared-ui-shimmer-placeholder>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <div class="card card-container">
+  <div class="row font-size w-100" *ngIf="data">
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-avatar [width]="'6.5em'" [height]="'6.5em'" [src]="employeePhoto" [showBorder]="false"
+        [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''">
+      </x365-shared-ui-avatar>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Number</label>
+        </div>
+        <div class="col-7 row-text mt-0  font-weight-bold">
+          <label>{{data?.EmployeeInfo.employee_number | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Fullname</label>
+        </div>
+        <div class="col-7 row-text mt-0 wrap font-weight-bold">
+          <label>{{data?.EmployeeInfo.employee_firstname | stringDisplay}}</label>
+          <label>{{' ' | stringDisplay}}</label>
+          <label>{{data?.EmployeeInfo?.employee_surname | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Username</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label>{{data?.EmployeeInfo.logon_name | stringDisplay}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngIf="data.email_sent">
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Is Email Sent</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label>{{data?.email_sent ? 'Yes' : 'No' | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2" *ngIf="data.email_advice_sent">
+        <div class="col-5 row-label">
+          <label>Is Email Advice Sent</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label>{{data?.email_advice_sent ? 'Yes' : 'No' | stringDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-5 row-label">
+          <label>Effective Date</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label>{{data?.effective_date | dateDisplay}}</label>
+        </div>
+      </div>
+
+      <div class="row mb-2" *ngIf="data.proxy_type">
+        <div class="col-5 row-label">
+          <label>Proxy Type</label>
+        </div>
+        <div class="col-7 row-text mt-0 font-weight-bold">
+          <label *ngIf="data?.proxy_type === 0">HR</label>
+          <label *ngIf="data?.proxy_type === 1">Line Manager</label>
+        </div>
+      </div>
+      <hr class="horizontal-rule">
+      <div class="row mb-2">
+        <div class="col-12 d-flex justify-content-end align-items-center row-text mt-0">
+          <div>
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc" [useIcon]="true" [downloadIconTitle]="'Download Letter'"></x365-shared-ui-file-downloader>
+            <x365-shared-ui-file-downloader *ngIf="data.resign_letter" [useIcon]="true" [htmlDoc]="data.resign_letter" [showText]="false"
+              [htmlName]="'resignation_letter'" [downloadIconTitle]="'Download Letter As PDF'">
+            </x365-shared-ui-file-downloader>
+          </div>
+          <div>
+            <span class="view-icon" (click)="viewResignationLetter()" title='View Letter'><i class="fa fa-desktop"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row w-100" *ngIf="!data">
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+      </x365-shared-ui-shimmer-placeholder>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-shimmer-placeholder [noOfLines]="4" [photo]="false" [box]="false">
+      </x365-shared-ui-shimmer-placeholder>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4">
+      <x365-shared-ui-shimmer-placeholder [noOfLines]="1" [photo]="false" [box]="false">
+      </x365-shared-ui-shimmer-placeholder>
+    </div>
+  </div>
+</div> -->

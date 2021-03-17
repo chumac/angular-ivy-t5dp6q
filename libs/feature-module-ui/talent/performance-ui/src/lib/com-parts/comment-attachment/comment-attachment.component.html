@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row" *ngIf="isImage">
+    <img src="{{ processImage() }}" alt="..." class="img-thumbnail">
+  </div>
+  <div class="row" *ngIf="!isImage">
+    <i class="fa fa-cloud-download fa-2x"></i>
+  </div>
+</div>

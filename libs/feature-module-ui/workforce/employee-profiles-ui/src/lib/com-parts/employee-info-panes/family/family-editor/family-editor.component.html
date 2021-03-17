@@ -1,0 +1,140 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Family'" [subTitle]="'Details of your Family'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Surname:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="surname" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">First Name:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="firstname" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Other Names:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="othernames" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Date of Birth:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="dobirth" [placeholder]="''"></dx-date-box>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Gender:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="gender" [options]="selectOptionData?.Gender" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required">Relationship:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="member_type" [options]="selectOptionData?.RequirementTypeFamilyRelationshipLevels" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">Address I:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="address_line1" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">Address II:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="address_line2" type="text" class="form-control form-font">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Country:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="country_id" [options]="countries$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onCountrySelected($event)" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">State:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="state_id" [options]="stateList$ | async" [allowClear] ="true" [filterEnabled]="true" (selected)="onStateSelected($event)" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">City:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="area_id" [options]="cityList$ | async" [allowClear] ="true" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">Industry:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="business_type" [options]="selectOptionData?.BusinessType" [allowClear] ="true" [filterEnabled]="true" class="form-font"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="">Phone:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="phone_no" type="text" class="form-control form-font" NumbersOnly [allowDecimals]="false">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class=" center-label">Email:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="email" type="email" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)"></x365-shared-ui-file-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" #imagePicker [caption]="'Select Photo'" [captionSubText]="'Select a photo from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Photo'" [cropperHeaderMessage]="'Upload Photo'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" (selected)="search()"
+                    placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Discription, Short name, Interest rate, Ranking."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #completedDataGrid [data]="completedData$ | async" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+              <igx-column field="description" header="Type" width="17%">
+              </igx-column>
+              <igx-column field="account_no" header="Acct Number" width="12%">
+              </igx-column>
+              <igx-column field="account_type" header="Acct Type" width="11%">
+              </igx-column>
+              <igx-column field="source_text" header="Source" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="left-align-text">{{val | stringDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="expiry_date" header="Expiry Date" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="left-align-text">{{val | dateDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="total_value" header="Total Amount" width="13%" dataType="number">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text">{{val | number: '1.2-5' }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="status_text" header="Status" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="text-center">
+                    <mdb-badge pill="true" success="true">{{val | stringDisplay }}</mdb-badge>
+                  </div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="9%" class="text-center">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-right"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                          (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-forward'" title="View Detail"
+                          (click)="onViewDetailIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-archive'" title="Abandon Process"
+                          (click)="onAbandonIconClicked(val)">
+                        </x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-cmp-payment-schedule-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()"></x365-fm-cmp-payment-schedule-viewer>

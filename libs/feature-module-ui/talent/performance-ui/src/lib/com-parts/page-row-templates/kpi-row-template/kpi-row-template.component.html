@@ -1,0 +1,149 @@
+<div class="base mb-5">
+    <div class="sn-pane text-right">{{index}}.</div>
+    <div class="content-pane">
+        <div class="top-line">
+            <div class="t-row">
+                <span class="label title">Objective</span>
+                <span class="icon">
+                    <div class="more-info" (click)="onRaveButtonClicked()" title="More information">
+                        <div class="more-info-icon">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </div>
+                        <div class="more-info-menu">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        </div>
+                    </div>
+                    <i class="fa fa-line-chart p-1 border ml-3" (click)="onProgressBtnClicked(data?.objectiveId)" title="Progress Report"></i>
+                </span>
+            </div>
+            <div class="tr">
+                <div class="tr-text1">{{data?.objective}}</div>
+            </div>
+            <div class="br">
+                <div class="br-l">
+                    <span class="label">Measure</span>
+                    <div class="tr-text">{{data?.measure}}</div>
+                </div>
+                <div class="br-r">
+                    <span class="label">Target</span>
+                    <div class="tr-text">{{data?.target}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="mid-line">
+            <div class="mid-line-f">
+                <div class="mid-line-f-w-label label">Weight</div>
+                <div class="mid-line-f-w-text">{{data?.weight}}</div>
+            </div>
+            <div class="mid-line-a"></div>
+            <div class="mid-line-s">
+                <div class="mid-line-s-d-label label">Due Date</div>
+                <div class="mid-line-s-d-text">{{data?.dueDate | dateDisplay}}</div>
+            </div>
+            <div class="mid-line-t">
+                <div class="mid-line-t-f label" *ngIf="!(data?.trendRate===null)">Trend</div>
+                <div class="mid-line-t-s" *ngIf="!(data?.trendRate===null)">
+                    <div class="trend-base trend-up" *ngIf="!data?.trendLowerIsBetter"></div>
+                    <div class="trend-base trend-down" *ngIf="data?.trendLowerIsBetter"></div>
+                </div>
+                <div class="mid-line-t-t">{{data?.trendRate | percent}}</div>
+            </div>
+        </div>
+        <div class="bottom-line mt-3">
+            <div *ngIf="employeeEditField" class="bottom-line-t">
+                <div class="md-form">
+                    <small *ngIf="!data?.allowSelfRating" class="text-danger"> <i class="fa fa-ban"></i> Self Rating is disabled for this objective</small>
+                    <div *ngIf="useInputTextForRating; else elseForEmpInput">
+                        <input [disabled]="!data?.allowSelfRating" type="number" min="0" onwheel="this.blur()" class="form-control pt-0" [(ngModel)]="data.ratingValue" placeholder="Rating">
+                    </div>
+
+                    <ng-template #elseForEmpInput>
+                        <div class="d-flex justify-content-center">
+                            <mdb-select [disabled]="!data?.allowSelfRating" [options]="valueLabelRatings" [filterEnabled]="true" [(ngModel)]="data.ratingId" (selected)="onRatingSelected($event)" placeholder="Rating"></mdb-select>
+                            <div *ngIf="data?.allowSelfRating" class="drop-down-info ml-2">
+                                <i class="fa fa-info-circle" (click)="onInfoButtonClicked(ratingEnumeration.EMP_EDIT)" title="More information"></i>
+                            </div>
+
+                        </div>
+                    </ng-template>
+
+                    <textarea type="text" [(ngModel)]="data.comment" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+                </div>
+            </div>
+
+            <div *ngIf="employeeReadField" class="bottom-line-t mb-1">
+                <div *ngIf="isEmployeeRatingAvailable">
+                    <span class="label">Employeee Rating</span>
+                    <div class="tr-text mb-2">{{data?.ratingText}}</div>
+                </div>
+                <div *ngIf="isEmployeeRatingCommentAvailable">
+                    <span class="label">Employeee Comment</span>
+                    <div class="tr-text wrap">{{data?.comment}}</div>
+                </div>
+            </div>
+
+            <div *ngIf="lineManagerEditField" class="bottom-line-b">
+                <div class="md-form">
+
+                    <div *ngIf="useInputTextForRating; else elseForLmInput">
+                        <input type="number" min="0" onwheel="this.blur()" class="form-control pt-0" [(ngModel)]="data.lmRatingValue" placeholder="Rating">
+                    </div>
+
+                    <ng-template #elseForLmInput>
+                        <div class="d-flex justify-content-center">
+                            <mdb-select [options]="valueLabelRatings" [filterEnabled]="true" [(ngModel)]="data.lmRatingId" (selected)="onLineManagerRatingSelected($event)" placeholder="Rating"></mdb-select>
+                            <div class="drop-down-info ml-2"><i class="fa fa-info-circle" (click)="onInfoButtonClicked(ratingEnumeration.LMGR_EDIT)" title="More information"></i></div>
+                        </div>
+                    </ng-template>
+                    <textarea type="text" id="lineManagerComment" [(ngModel)]="data.lmComment" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+                </div>
+            </div>
+
+            <div *ngIf="lineManagerReadField" class="bottom-line-b mt-3">
+                <div *ngIf="isLineManagerRatingAvailable">
+                    <span class="label">Supervisor Rating</span>
+                    <div class="tr-text mb-2">{{data?.lmRatingText}}</div>
+                </div>
+
+                <div *ngIf="isLineManagerRatingCommentAvailable">
+                    <span class="label">Supervisor Comment</span>
+                    <div class="tr-text wrap">{{data?.lmComment}}</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="data?.hasErrors" class="error-line">{{data?.errorText}}</div>
+    </div>
+</div>
+
+<!-- Objective drop down info modal -->
+<div mdbModal #objInfoModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <div class="modal-body bg-white">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered tbl">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rating</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">...</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of ratings">
+                                <td>{{ data?.description }}</td>
+                                <td>{{ data?.dictionary }}</td>
+                                <td><button mdbBtn type="button" color="warning" rounded="true" (click)="onUseInfoClicked(data)" mdbWavesEffect>Use</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>

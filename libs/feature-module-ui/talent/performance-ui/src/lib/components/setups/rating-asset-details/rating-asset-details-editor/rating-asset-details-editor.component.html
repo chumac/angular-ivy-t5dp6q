@@ -1,0 +1,111 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Rating Asset Detail'" [subTitle]="'Creates new rating asset detail'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Rating Table:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="rating_table_id" [dataSource]="ratingTableData$ | async" valueExpr="id" displayExpr='description' disabled="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Title:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="title" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Detail:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="detail" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Info:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="info" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Weight:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="weight" type="number" class="form-control form-font">
+                    </div>
+                </div>
+
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee rating list:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="emp_rating_list" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee Comment Req:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="emp_comment_rq" type="checkbox" class="form-check-input" id="emp_comment_rq">
+                            <label class="form-check-label" for="emp_comment_rq"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Manager Rating List:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="mgr_rating_list" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Manager Comment Req:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="mgr_comment_rq" type="checkbox" class="form-check-input" id="mgr_comment_rq">
+                            <label class="form-check-label" for="mgr_comment_rq"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Maximum Rating:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="max_rating" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Grouping Category:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="grouping_category" type="text" class="form-control form-font">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

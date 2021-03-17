@@ -1,0 +1,149 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onApplyBtnClicked()">&nbsp;&nbsp;Add</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefreshBtnClicked()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isProcessing$ | async" [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l">
+                            <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                        </div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-5"></div>
+                                <div class="col-7 md-form">
+                                    <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true" (selected)="search()" placeholder="Filter by ..."></mdb-select>
+                                    <!-- <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective #searchInput type="text" (keyup.enter)="search()" placeholder="Enter your search text and press the Enter key." class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="tab-a" *ngIf="!switch.value">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="grid-table-container">
+                                    <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [paging]="true" [perPage]="15" [height]="null" [autoGenerate]="false" width="100%" [showToolbar]="false">
+                                        <igx-column field="employee_name" header="Employee" width="30%">
+                                            <ng-template igxCell let-val>
+                                                <div>
+                                                    {{ val | stringDisplay }}
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="issued_by_name" header="Issued By" width="30%">
+                                            <ng-template igxCell let-val>
+                                                <div>
+                                                    {{ val | stringDisplay }}
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="role_type_text" header="Role" width="20%">
+                                            <ng-template igxCell let-val>
+                                                <div>
+                                                    {{ val | stringDisplay }}
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="event_date" header="Date" width="10%">
+                                            <ng-template igxCell let-val>
+                                                <div>
+                                                    {{ val | dateDisplay }}
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="commendation_id" header="..." width="10%">
+                                            <ng-template igxCell let-val>
+                                                <div class="hover-menu-container"><span class="text-center"></span>
+                                                    <div class="hover-menu">
+                                                        <span class="hover-ellipse-menu"></span>
+                                                        <div class="hover-icons">
+                                                            <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onApprovedEditIconClicked(val)"></x365-shared-ui-hover-icon> -->
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onApprovedViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onApprovedDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                    </igx-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-b" *ngIf="switch.value">
+                        <div class="grid-table-container">
+                            <igx-grid #awaitingApprovalDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [paging]="true" [perPage]="15" [height]="null" [autoGenerate]="false" width="100%" [showToolbar]="false">
+                                <igx-column field="employee_name" header="Employee" width="30%">
+                                    <ng-template igxCell let-val>
+                                        <div>
+                                            {{ val | stringDisplay }}
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="issued_by_name" header="Issued By" width="30%">
+                                    <ng-template igxCell let-val>
+                                        <div>
+                                            {{ val | stringDisplay }}
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="role_type_text" header="Role" width="20%">
+                                    <ng-template igxCell let-val>
+                                        <div>
+                                            {{ val | stringDisplay }}
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="event_date" header="Date" width="10%">
+                                    <ng-template igxCell let-val>
+                                        <div>
+                                            {{ val | dateDisplay }}
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="commendation_id" header="..." width="10%">
+                                    <ng-template igxCell let-val>
+                                        <div class="hover-menu-container"><span class="text-center"></span>
+                                            <div class="hover-menu">
+                                                <span class="hover-ellipse-menu"></span>
+                                                <div class="hover-icons">
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onAwaitingApprovalEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onAwaitingApprovalViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onAwaitingApprovalDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                            </igx-grid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-commendations-editor #editor [width]="28" [show]="showEditor$ | async" [data]="null" [activePersonnel]="activePersonnel$ | async" [roleTypes]="roleTypes$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-commendations-editor>
+<x365-fm-workforce-commendations-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()"></x365-fm-workforce-commendations-viewer>

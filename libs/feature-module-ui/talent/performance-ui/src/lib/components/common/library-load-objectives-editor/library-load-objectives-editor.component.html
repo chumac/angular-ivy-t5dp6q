@@ -1,0 +1,210 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Objective Library upload'" [subTitle]="'Creates new objective plan'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Visibility:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="visibility" [options]="visibilityOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Perspective:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="perspective_id" [options]="perspectiveList$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Code:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="code" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Description:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="description" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Additional Info:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <textarea rows="10" formControlName="legend_info" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Metric:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="metric" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Allow self rating:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="allow_self_rating" type="text" class="form-control form-font">
+          </div>
+        </div> -->
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Weight:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="weight" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Target Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="target_type" [options]="targetTypeOptions" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Target Type Other:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="target_type_other" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">is Strategic:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="is_strategic" type="checkbox" class="form-check-input" id="is_strategic">
+                            <label class="form-check-label" for="is_strategic"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Lower is better:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="lower_is_better" type="checkbox" class="form-check-input" id="lower_is_better">
+                            <label class="form-check-label" for="lower_is_better"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Eligibility Rule:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="eligibility_rule" [options]="eligibilityRuleOptions" (selected)="onEligibilityRuleSelected($event)" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Eligibility Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="eligibility_code" type="text" class="form-control form-font">
+          </div>
+        </div> -->
+                <div *ngIf="eligibiltyRule === ELIGIBILITY_CONSTANTS.analysis">
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Analysis:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <dx-lookup formControlName="analysis_id" [dataSource]="analysisList$ | async" valueExpr="analysis_id" displayExpr='description' (onValueChanged)="onAnalysisSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+                                popupHeight="400px" class="form-font"></dx-lookup>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Analysis Det:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <dx-lookup formControlName="analysis_det_id" [dataSource]="analysisDetList$ | async" valueExpr="analysis_det_id" displayExpr='description' (onValueChanged)="onAnalysisDetSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+                                closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1" *ngIf="eligibiltyRule === ELIGIBILITY_CONSTANTS.position">
+                    <div class="col-4">
+                        <label class="center-label">Position:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="position_id" [options]="positionList$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1" *ngIf="eligibiltyRule === ELIGIBILITY_CONSTANTS.designation">
+                    <div class="col-4">
+                        <label class="center-label">Designation:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="designation_id" [options]="designationList$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1" *ngIf="eligibiltyRule === ELIGIBILITY_CONSTANTS.grade">
+                    <div class="col-4">
+                        <label class="center-label">Grade:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="grade_id" [options]="gradeList$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Allow Self Rating:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <div class="form-check">
+                            <input formControlName="allow_self_rating" type="checkbox" class="form-check-input" id="allow_self_rating">
+                            <label class="form-check-label" for="allow_self_rating"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <!-- <mdb-select formControlName="employee_id" [options]="targetTypeOptions" [filterEnabled]="true" class="form-font"></mdb-select> -->
+                        <dx-lookup formControlName="employee_id" [dataSource]="employeeList$ | async" valueExpr="employee_id" displayExpr='emp_fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                </div>
+                <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Is active:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <div class="form-check">
+              <input formControlName="is_active" type="checkbox" class="form-check-input" id="is_active">
+              <label class="form-check-label" for="is_active"></label>
+            </div>
+          </div>
+        </div> -->
+
+
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

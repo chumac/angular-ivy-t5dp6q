@@ -1,0 +1,15 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">Team ({{ (approvedData$ | async)?.length || '  ' }})</h5>
+    </div>
+    <div class="top-content-right">
+      <div class="md-form d-none">
+        <input mdbInputDirective type="text" id="form1" placeholder="Search" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="item-container-bottom">
+    <x365-fm-workforce-hr-team-card class="body-cell" *ngFor="let member of (approvedData$ | async); let i=index" [data]="(approvedData$ | async)[i]"></x365-fm-workforce-hr-team-card>
+  </div>
+</div>

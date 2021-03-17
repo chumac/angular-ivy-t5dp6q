@@ -1,0 +1,132 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Add Work Step'" [subTitle]="'Edit Work Step'"
+        [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Step:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="wfstep" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Processing Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="sendto_type" [options]="processingRule$ | async" [filterEnabled]="true"
+              (selected)=Rule($event) class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Can Escalate:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No <label class="switch">
+              <input #escalate type="checkbox" (change)="onChange()" formControlName="can_escalate" unchecked>
+              <span class="slider round"></span>
+            </label>Yes<br><br>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="onChange()">
+          <div class="col-4">
+            <label class="center-label">Escalate Hours:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="escalate_hour" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Use Enterprised Structure:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No <label class="switch">
+              <input type="checkbox" formControlName="use_enterprise_structure" unchecked>
+              <span class="slider round"></span>
+            </label>Yes<br><br>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Allow Manual NextStep:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No <label class="switch">
+              <input type="checkbox" formControlName="allow_manual_nextStep" unchecked>
+              <span class="slider round"></span>
+            </label>Yes<br><br>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Specific Position Based on Sender:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            No <label class="switch">
+              <input type="checkbox" formControlName="spec_position_basedon_sender" (click)=onclick($event) unchecked>
+              <span class="slider round"></span>
+            </label>Yes<br><br>
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="specific_individual">
+          <div class="col-4">
+            <label class="center-label">Specific Individual:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="spec_individual" [options]="individualData$ | async" [filterEnabled]="true"
+              class="form-font"></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="specific_position">
+          <div class="col-4">
+            <label class="center-label">Specific Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="spec_position" [options]="positionData$ | async" [filterEnabled]="true"
+              class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="send_to_role">
+          <div class="col-4">
+            <label class="center-label">Send to role:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="send_to_role" [options]="roleData$ | async" [filterEnabled]="true"
+              class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Business Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="sys_rule" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Extended Business Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="w_sys_rule" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="(isProcessing$ | async) || (isProcessingDetails$ | async)" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>

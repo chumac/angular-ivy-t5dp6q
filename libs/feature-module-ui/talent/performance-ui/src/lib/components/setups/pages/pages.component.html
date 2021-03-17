@@ -1,0 +1,163 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onAddButtonClicked()">Add</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onRefreshButtonClicked()">Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="null " [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l">
+                            <x365-shared-ui-switch #switch [checkedText]="'UnCompleted'" [unCheckedText]="'Completed'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                        </div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-6 md-form">
+                                </div>
+                                <div class="col-1"></div>
+                                <div class="col-4 md-form">
+                                    <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1" placeholder="Enter your search text." class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="tab-a" *ngIf="switch.value">
+                        <div class="d-flex flex-wrap">
+                            <div *ngFor="let page of uncompletedPageData$ | async" class="page-container m-2 px-3 pb-3 d-flex flex-column justify-content-between">
+                                <div class="d-flex my-2 justify-content-end">
+                                    <a (click)="onUncompletedViewIconClicked(page?.id)" class="mr-2 text-muted"><i class="fa fa-desktop icn"></i></a>
+                                    <a (click)="onUncompletedEditIconClicked(page?.id)" class="mr-2 text-muted"><i class="fa fa-pencil-square-o icn"></i></a>
+                                    <a (click)="onUncompletedDeleteIconClicked(page?.id)" class="mr-2 text-muted"><i class="fa fa-trash-o icn"></i></a>
+                                </div>
+                                <div class="top h-100">
+                                    <p class="text-center font-weight-bold mb-1">{{ page?.asset_key }}</p>
+                                    <small class="">{{ page?.title }}</small>
+                                </div>
+                                <div class="bottom">
+                                    <p class="desc">{{ page?.description }}</p>
+                                    <p class="mb-1">Eligibility: {{ page?.eligibility | valueTransform:eligibilityRuleOptions | stringDisplay }}</p>
+                                    <div class="d-flex mb-2 justify-content-between">
+                                        <button (click)="onConfigureIconClicked(page)" class="butn">Configure</button>
+                                        <!-- <button class="butn">Details</button> -->
+                                    </div>
+                                    <p class="text-center">{{ page?.rank }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <igx-grid #uncompleted *ngIf="switch.value" [data]="uncompletedPageData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" width="100%" [showToolbar]="false">
+                            <igx-column field="asset_type" header="Asset Type" width="25%">
+                                <ng-template igxCell let-val>
+                                    <div class="right-align-text1">{{ val | valueTransform:assetOptions }}</div>
+                                </ng-template>
+                            </igx-column>
+                            <igx-column field="description" header="Description" width="50%"></igx-column>
+                            <igx-column field="rank" header="Rank" width="10%"></igx-column>
+                            <igx-column field="id" header="..." class="text-center" width="15%">
+                                <ng-template igxCell let-val let-cell="cell">
+                                    <div class="hover-menu-container"><span class="text-center"></span>
+                                        <div class="hover-menu">
+                                            <span class="hover-ellipse-menu"></span>
+                                            <div class="hover-icons">
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onUncompletedEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onUncompletedViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onUncompletedDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <span class="mx-2"></span>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-cog'" title="Configure Page" (click)="onConfigureIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View Page Configuration" (click)="onViewConfigurationIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-forward'" title="Goto page asset details" (click)="onPageDetailsIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </igx-column>
+                        </igx-grid> -->
+                    </div>
+                    <div class="tab-b" *ngIf="!switch.value">
+                        <div class="d-flex flex-wrap">
+                            <div *ngFor="let page of completedPageData$ | async" class="page-container m-2 px-3 pb-3 d-flex flex-column justify-content-between">
+                                <div class="d-flex my-2 justify-content-end">
+                                    <a (click)="onCompletedViewIconClicked(page?.id)" class="mr-2 text-muted"><i class="fa fa-desktop icn"></i></a>
+                                    <a (click)="onCompletedEditIconClicked(page?.id)" class="mr-2 text-muted"><i class="fa fa-pencil-square-o icn"></i></a>
+                                    <a (click)="onCompletedDeleteIconClicked(page?.id)" class="mr-2 text-muted"><i class="fa fa-trash-o icn"></i></a>
+                                </div>
+                                <div class="top h-100">
+                                    <p class="text-center font-weight-bold mb-1">{{ page?.asset_key }}</p>
+                                    <small class="">{{ page?.title }}</small>
+                                </div>
+                                <div class="bottom">
+                                    <p class="desc">{{ page?.description }}</p>
+                                    <p class="mb-1">Eligibility: {{ page?.eligibility | valueTransform:eligibilityRuleOptions | stringDisplay }}</p>
+                                    <div class="d-flex mb-2 justify-content-between">
+                                        <button (click)="onViewConfigurationIconClicked(page)" class="butn w-100">Configure</button>
+                                        <div class="btn-space">&nbsp;</div>
+                                        <button *ngIf="isRatingPage(page?.asset_type)" (click)="onPageDetailsIconClicked(page)" class="butn w-100">Details</button>
+                                    </div>
+                                    <p class="text-center">{{ page?.rank }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <igx-grid #completed *ngIf="!switch.value" [data]="completedPageData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" width="100%" [showToolbar]="false">
+                            <igx-column field="asset_type" header="Asset Type" width="25%">
+                                <ng-template igxCell let-val>
+                                    <div class="right-align-text1">{{ val | valueTransform:assetOptions }}</div>
+                                </ng-template>
+                            </igx-column>
+                            <igx-column field="description" header="Description" width="50%"></igx-column>
+                            <igx-column field="rank" header="Rank" width="10%"></igx-column>
+                            <igx-column field="id" header="..." class="text-center" width="15%">
+                                <ng-template igxCell let-val let-cell="cell">
+                                    <div class="hover-menu-container"><span class="text-center"></span>
+                                        <div class="hover-menu">
+                                            <span class="hover-ellipse-menu"></span>
+                                            <div class="hover-icons">
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onCompletedEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onCompletedViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onCompletedDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                <span class="mx-2"></span>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-cog'" title="Configure Page" (click)="onConfigureIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View Page Configuration" (click)="onViewConfigurationIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-forward'" title="Goto page asset details" (click)="onPageDetailsIconClicked(cell.cellID.rowID)"></x365-shared-ui-hover-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </igx-column>
+                        </igx-grid> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-pages-editor #editor [width]="28" [show]="showEditor$ | async" [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-talent-pages-editor>
+<x365-fm-talent-pages-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null" [dataDoc]="null"></x365-fm-talent-pages-viewer>
+
+<x365-fm-talent-rating-asset-definitions-editor #ratingsDefEditor [width]="28" [show]="showRatingsDefEditor$ | async" [pageType]="null" [data]="null" (cancelClick)="onCancelRatingsDefEditor()"></x365-fm-talent-rating-asset-definitions-editor>
+<x365-fm-talent-rating-asset-definitions-viewer #ratingsDefViewer [width]="28" [show]="showRatingsDefViewer$ | async" [data]="null" [dataDoc]="null"></x365-fm-talent-rating-asset-definitions-viewer>
+
+<x365-fm-talent-contract-page-definitions-editor #contractDefEditor [width]="28" [show]="showContractDefEditor$ | async" [data]="null" (cancelClick)="onCancelContractDefEditor()"></x365-fm-talent-contract-page-definitions-editor>
+<x365-fm-talent-contract-page-definitions-viewer #contractDefViewer [width]="28" [show]="showContractDefViewer$ | async" [data]="null" [dataDoc]="null"></x365-fm-talent-contract-page-definitions-viewer>
+
+<x365-fm-talent-subscription-definitions-editor #subscriptionDefEditor [width]="28" [show]="showSubscriptionDefEditor$ | async" [data]="null" (cancelClick)="onCancelSubscriptionDefEditor()"></x365-fm-talent-subscription-definitions-editor>
+<x365-fm-talent-subscription-definitions-viewer #subscriptionDefViewer [width]="28" [show]="showSubscriptionDefViewer$ | async" [data]="null" [dataDoc]="null"></x365-fm-talent-subscription-definitions-viewer>
+
+<x365-shared-ui-overlay-loader [show]="showOverlay"></x365-shared-ui-overlay-loader>

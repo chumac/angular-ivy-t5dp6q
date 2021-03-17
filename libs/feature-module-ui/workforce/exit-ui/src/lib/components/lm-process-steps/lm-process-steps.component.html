@@ -1,0 +1,117 @@
+<div class="container-fluid">
+  <x365-fm-workforce-exit-letter-data-panel [letter]="employeeLetter$ | async" [activePersonnel]="getEmployeeData$() | async" [employeePhoto]="employeePhoto$ | async" [dataDoc]="documentData$ | async" [isLM]="true" [allowViewLetter]="(allowViewLetter$ | async) === 'YES'">
+  </x365-fm-workforce-exit-letter-data-panel>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-4">
+          <div class="d-flex align-items-center justify-content-start middle">
+            <button mdbBtn type="button" color="dark" rounded="true" outline="true" size="sm" mdbWavesEffect
+              (click)="goBack()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Back</button>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="d-flex align-items-center justify-content-end middle">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+              (click)="onRefresh()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4 md-form">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #dataGrid [data]="processData$ | async" [paging]="false" [height]="null" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+              <igx-column field="process_id_text" header="Process" width="70%"></igx-column>
+
+              <igx-column field="status" header="Status" width="20%">
+                <ng-template igxCell let-val>
+                  <div class="left-align-text" *ngIf=val></div>
+                  <mdb-badge *ngIf="val === 0" pill="true" danger="true">NOT STARTED</mdb-badge>
+                  <mdb-badge *ngIf="val === 1" pill="true" warning="true">IN PROGRESS</mdb-badge>
+                  <mdb-badge *ngIf="val === 2" pill="true" success="true">COMPLETED</mdb-badge>
+                </ng-template>
+              </igx-column>
+
+              <igx-column field="id" header="..." class="text-center" width="10%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon *ngIf="(employeeLetter$ | async)?.resign_letter && (getProcessId(val) && getProcessId(val) === 1) && showViewIcon && (allowViewLetter$ | async) === 'YES'" [iconClass]="'fa fa-desktop'" (click)="onViewIconClicked(val)" title={{iconText}}>
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="(employeeLetter$ | async)?.doc_binary && (getProcessId(val) && getProcessId(val) === 1) && showViewIcon && (allowViewLetter$ | async) === 'YES'"
+                          [iconClass]="'fa fa-cloud-download'" title="Download Letter Document" (click)="onDownloadIconClicked(val)">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="(getProcessId(val) && getProcessId(val) === 4) && showClearanceIcon"
+                          [iconClass]="'fa fa-info-circle'" (click)="onPendingResponsesClicked(val)" title="View Pending Responses">
+                        </x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<x365-fm-workforce-exit-pending-responses-viewer #viewer [width]="25" [show]="showViewer$ | async" [data]="pendingResponses$ | async"
+  (doneClick)="onCancelViewer()"></x365-fm-workforce-exit-pending-responses-viewer>
+
+  <!--
+Justin Okafor
+Marketing Lead,
+ABC Group of Companies,
+12 Allen Avenue, Ikeja,
+Lagos.
+Dear Sir,
+                                                                       LETTER OF RESIGNATION
+
+I would like to notify you that I am resigning from my position as team lead for the marketing department in ABC Group of Companies, effective September 1st, 2019.
+I would like to thank you for the opportunities that you have given me to learn more about marketing and proper customer retention strategies over the past 4 years.
+I have enjoyed my time with ABC Group of Companies, ranging from the awesome work environment to my immense exposure to the world of marketing.I feel honored to have been a part of an amazing team.
+Please let me know if I can be of help during the transition process.I will be available to help onboard my replacement if need be.I will also ensure I give all the necessary details that will help with the transition.
+Thank you so much for the opportunity to work for ABC Group of Companies.I look forward to the success of this company.I promise to still keep in touch.
+Sincerely,
+Justin Okafor.
+ -->

@@ -1,0 +1,64 @@
+<div class="container-fluid">
+    <!-- <div class="row mb-3">
+        <div class="col-12">
+          <div class="top container-card">
+            <div class="row mb-3 mt-3">
+
+            </div>
+          </div>
+        </div>
+    </div> -->
+    <div class="row mb-3">
+      <div class="col-4"> </div> 
+      <div class="col-8">
+        <div class="d-flex align-items-center justify-content-end middle">
+            <div class="d-flex justify-content-end">
+              <button  mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onAddButtonClicked()">Add</button>
+              <button  mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onResetButtonClicked()">Reset</button>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="bottom container-card">
+          <div class="content-header">
+  
+          </div>
+          <div class="content-body">
+              <igx-grid #roleWeightDataGrid [data]="roleWeightData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                <igx-column field="EmployeeInfo" header="Tagged to" width="50%">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text">{{val?.employee_surname | stringDisplay}} {{val?.employee_firstname | stringDisplay}}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="eligibility_rule" header="Eligibility rule" width="40%">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text">{{val | eligibilityRuleOpt | stringDisplay}}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="id" header="..." class="text-center" width="10%">
+                  <ng-template igxCell let-val>
+                    <div class="hover-menu-container"><span class="text-center"></span>
+                      <div class="hover-menu">
+                        <div class="hover-icons">
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </igx-column>
+              </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<x365-fm-talent-role-weights-editor #editor [width]="28" [show]="showEditor$ | async" [data]="null"  (cancelClick)="onCancelEditor()"></x365-fm-talent-role-weights-editor>
+<x365-fm-talent-role-weights-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null" [dataDoc]="null" (cancelClick)="onCancelViewer()"></x365-fm-talent-role-weights-viewer>
+

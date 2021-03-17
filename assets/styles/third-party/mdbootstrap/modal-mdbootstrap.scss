@@ -1,0 +1,65 @@
+@import 'mixins';
+
+$roundedSize: 0.15em;
+$color-bg-dark: #181819;
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+}
+
+.modal {
+  .modal-body {
+    color: rgb(39, 39, 39);
+    background-color: $color-bg-dark;
+    display: flex;
+    align-items: center;
+
+    .warning-icon {
+      flex-basis: 8%;
+      margin-right: 0.2em;
+
+      i {
+        font-size: 2em;
+      }
+    }
+
+    .warning-text {
+      flex-grow: 1;
+    }
+  }
+
+  .modal-footer {
+    justify-content: center;
+  }
+}
+
+.modal-backdrop {
+  &.in {
+    opacity: 0.5;
+  }
+}
+
+.modal-dialog .modal-content {
+  @include borderRadius($roundedSize, $roundedSize, $roundedSize, $roundedSize);
+  overflow: hidden;
+}
+
+.modal .modal-footer {
+  justify-content: center;
+}
+
+// .modal{
+//   display: none !important;
+// }
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    min-height: calc(100% - (1.75rem * 2));
+  }
+}
+
+.modal {
+  z-index: 1550;
+}
+

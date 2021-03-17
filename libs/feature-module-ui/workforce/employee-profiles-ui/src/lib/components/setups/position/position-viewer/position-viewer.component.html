@@ -1,0 +1,104 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Position'" [subTitle]="'Details of your Position'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label>Code:</label>
+              </div>
+              <div class="col-8 text-value text-right md-form mt-0">
+                  {{data?.position_code | stringDisplay}}
+              </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Description:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>This enterprise structure position reports to:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.reportTo | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Position Category:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.PositionCategoryInfo?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Position Report To:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.positionReportsToInfo?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Position Indirect Report To:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.positionIndirectReportsToInfo?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Score Accountability:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.score_accountability | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Score Knowhow</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.score_knowhow | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Country">Score Problem Solve:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.score_probsolve | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="State">Score Work Conditions:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.score_workconditions | stringDisplay}}
+          </div>
+        </div>
+
+        <!-- <div class="row mt-4 mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+          </div>
+          <div class="col-1"></div>
+        </div> -->
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

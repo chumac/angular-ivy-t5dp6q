@@ -1,0 +1,51 @@
+@import 'colors';
+
+ul {
+  font-size: 0.75em !important;
+  font-weight: 600;
+  color: darken($app_form_label_color, 20%);
+  letter-spacing: 0.04em;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+ul > li {
+  display: block;
+  height: 2.6em;
+  padding-left: 0.6em;
+}
+
+ul > li.active {
+  color: white !important;
+  background: $app_brand_color !important;
+  text-decoration: none;
+  border-radius: 2em;
+  padding-top: 0.01em;
+}
+
+ul > li > a {
+  display: block;
+  padding: 0.6em;
+  text-decoration: none;
+}
+
+ul > li > a:hover {
+  color: $app_brand_color !important;
+}
+
+ul > li.active > a:hover {
+  color: white !important;
+}
+
+ul > li > a:visited {
+  color: darken($app_form_label_color, 20%);
+  background-color: transparent !important;
+  text-decoration: none;
+}
+
+ul > li > a:focus {
+  color: white;
+  background-color: transparent !important;
+  text-decoration: none;
+}

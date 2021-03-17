@@ -1,0 +1,126 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Payment Schedule Record'" [subTitle]="'Edit payment schedule record'"
+      [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Surname:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="surname" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Othernames:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="othername" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Email:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="email" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Mobile:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="mobile_number" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Account Number:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="account_no" type="text" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Account Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="accountTypeSelectOption" formControlName="account_type" valueExpr="code"
+            displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Currency:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="currencySelectOption" formControlName="currency_code" valueExpr="code"
+            displayExpr='currency_name' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="auto" class="form-font">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Amount:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input [disableControl]="inEditMode()" formControlName="actual_amount" type="number"
+            class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Amount Payable:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="payable_amount" type="number" class="form-control form-font">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Is Confidential?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="confidential" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label class="required center-label">Is Prepaid Load?</label>
+        </div>
+        <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="is_prepaidload" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Narration:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <textarea rows="4" formControlName="narration" type="text"
+            class="md-textarea md-textarea-auto form-control"></textarea>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

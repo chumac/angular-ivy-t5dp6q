@@ -1,0 +1,102 @@
+<div class="row mb-3">
+  <div class="col-xl-6 mb-4" *ngFor="let detail of selectedDetails">
+    <div class="item-container">
+      <div class="item-container-top my-4">
+        <div class="top-content-left">
+          <h5 #des class="font-weight-bold">{{detail.description}}</h5>
+          <p #val [hidden]="true">{{detail.analysis_det_id}}</p>
+        </div>
+
+        <div class="top-content-right">
+          <!-- <div class="btn-group mr-3" mdbDropdown>
+              <button mdbDropdownToggle mdbBtn size="xs" color="warning" rounded="true" class="dropdown-toggle waves-light" type="button"
+                mdbWavesEffect>
+                <span>Move</span> <i class="fa fa-angle-down"></i>
+              </button>
+            </div> -->
+
+
+        </div>
+      </div>
+
+      <div class="item-container-centre my-2">
+        <div class="centre-content-left">
+          <mdb-select #selec id="structure-type" [options]="entStrucTypeTransformed" placeholder="Change Structure Type"
+            (selected)="onStructureSelected($event, des)"></mdb-select>
+        </div>
+        <div class="centre-content-right">
+          <div class="btn-group" mdbDropdown>
+            <button mdbDropdownToggle mdbBtn color="warning" size="xs" rounded="true"
+              class="dropdown-toggle waves-light" type="button" mdbWavesEffect>
+              <span>Actions</span> <i class="fa fa-angle-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" (click)="onAddCostCentresSelected(val)">Add Cost Centres</a>
+              <a class="dropdown-item" (click)="onRemoveCostCentresSelected(val)">Remove Cost Centres</a>
+              <a class="dropdown-item" (click)="onReconnectDetailSelected(val)">Reconnect To</a>
+              <a class="dropdown-item" (click)="onReconnectChildrenSelected(val)">Reconnect Children</a>
+              <a class="dropdown-item" (click)="onRemoveAllEmployeesSelected(val)">Remove All Employees</a>
+              <a class="dropdown-item" (click)="onShareCodeSelected(val)">Update Shared Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item-container-bottom my-2">
+        <div class="bottom-content-right mb-2">
+          <ul>
+            <li>
+              <span class="d-block heading-sm-1 color-green">Link To</span>
+              <span class="d-block heading-sm-2">{{linkTo | stringDisplay}}</span>
+            </li>
+            <li>
+              <span class="d-block heading-sm-1 color-green">Headed By</span>
+              <span class="d-block heading-sm-2">{{headedBy | stringDisplay}}</span>
+            </li>
+            <li>
+              <span class="d-block heading-sm-1 color-green">city</span>
+              <span class="d-block heading-sm-2">{{detail.cityInfo.description | stringDisplay}}</span>
+            </li>
+            <li>
+              <span class="d-block heading-sm-1 color-green">State</span>
+              <span class="d-block heading-sm-2">{{detail.stateInfo.description | stringDisplay}}</span>
+            </li>
+            <li>
+              <span class="d-block heading-sm-1 color-green">Country</span>
+              <span class="d-block heading-sm-2">{{detail.nationalityInfo.description | stringDisplay}}</span>
+            </li>
+            <li>
+              <span class="d-block heading-sm-1 color-green">Phone</span>
+              <span class="d-block heading-sm-2">{{detail.phone_number | stringDisplay}}</span>
+            </li>
+            <li>
+              <span class="d-block heading-sm-1 color-green">Website</span>
+              <span class="d-block heading-sm-2">{{detail.website | stringDisplay}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-es-connect-editor #connectEditor [width]="28" [show]="showEditorConnect$ | async" [data]="null"
+  (cancelClick)="onCancelEditor()" [higherStructures]="higherStructures" [analysisDetailId]="analysisDetailId">
+</x365-fm-es-connect-editor>
+
+<x365-fm-es-connect-children-editor #connectChildrenEditor [width]="28" [show]="showEditorConnectChildren$ | async"
+  [data]="null" (cancelClick)="onCancelEditor()" [higherStructures]="higherStructures"
+  [analysisDetailId]="analysisDetailId"></x365-fm-es-connect-children-editor>
+
+<x365-fm-es-add-cost-centres-editor #costCentreManager [width]="28" [show]="showAddCostCentreEditor$ | async"
+  [data]="null" [sturctureId]="structureNameAndId.id" (cancelClick)="onCancelEditor()"
+  [costCentres]="costCentresData$ | async" [analysisDetailId]="analysisDetailId"></x365-fm-es-add-cost-centres-editor>
+
+<x365-fm-es-remove-cost-centres-editor #removeCostCentre [width]="28" [show]="showRemoveCostCentreEditor$ | async"
+  [data]="null" [sturctureId]="structureNameAndId.id" (cancelClick)="onCancelEditor()"
+  [costCentres]="costCentresByIdData$ | async" [analysisDetailId]="analysisDetailId">
+</x365-fm-es-remove-cost-centres-editor>
+
+<x365-fm-es-shared-code-editor #sharedCode [width]="28" [show]="showSharedCodeEditor$ | async"
+  [data]="structureDetailData" [id]="structureNameAndId.id" (cancelClick)="onCancelEditor()">
+</x365-fm-es-shared-code-editor>

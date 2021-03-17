@@ -1,0 +1,61 @@
+<mdb-navbar SideClass="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav bg-white" [containerInside]="false">
+  <navlinks class="navbar-container">
+    <!-- SideNav slide-out button -->
+    <div class="float-left">
+      <a (click)="toggleSideNav()" class="button-collapse"><i class="fa fa-bars"></i></a>
+    </div>
+    <!--/. SideNav slide-out button -->
+  </navlinks>
+
+  <mdb-navbar-brand>
+    <!-- Breadcrumb-->
+    <div class="breadcrumbs breadcrumb-dn mr-auto">
+      <div *ngIf="!!orgData"><a><div class="logo" [style.background-image]="'url(' + logo + ')'"></div></a></div>
+    </div>
+    <!--/. Breadcrumb-->
+    <!-- <div class="dark-font">    
+      <mdb-breadcrumb customClass="purple lighten-4">
+        <mdb-breadcrumb-item class="blue-text">Home</mdb-breadcrumb-item>
+        <mdb-breadcrumb-item class="blue-text">Library</mdb-breadcrumb-item>
+        <mdb-breadcrumb-item class="active">Data</mdb-breadcrumb-item>
+      </mdb-breadcrumb>
+    </div> -->
+  </mdb-navbar-brand>
+
+  <navlinks class="mt-2">
+    <div class="nav-main ml-auto">
+      <div class="nav-t">
+        <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
+          <li class="nav-item">
+            <x365-shared-ui-report-notification></x365-shared-ui-report-notification>
+          </li>
+          <li class="nav-item">
+            <x365-shared-ui-notification></x365-shared-ui-notification>
+          </li>
+          <li class="nav-item waves-light ml-3">
+            <x365-shared-ui-avatar [width]="'2.6em'" [height]="'2.6em'" [src]="employeePhoto" [showBorder]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.17em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-light" mdbWavesEffect><span class="clearfix d-none d-sm-inline-block font-weight-bold">{{employeeName?.firstName}}</span></a>
+          </li>
+
+          <li class="nav-item ml-5">
+            <a class="nav-link waves-light" mdbWavesEffect (click)="signoutClicked()">
+              <i class="fa fa-power-off icon-white mr-1"></i><span class="clearfix d-none d-sm-inline-block">Sign out</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <x365-shared-ui-beacon [style.visibility]="'hidden'"></x365-shared-ui-beacon>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-b mt-2">
+        <mdb-progress-bar *ngIf="loading" class="progress primary-color-dark" mode="indeterminate"></mdb-progress-bar>
+      </div>
+    </div>
+
+  </navlinks>
+</mdb-navbar>
+
+

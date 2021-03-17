@@ -1,0 +1,112 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Work History'" [subTitle]="'Details of your previous employment (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Tag:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.requirement_type_text | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Employer:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.employer | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Address:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.company_address | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Employment Date">Emp. Entry Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.employment_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Position on Entry:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.postheld_at_employment | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Entry Salary:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{ utilService.maskInput(data?.starting_salary) | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Exit Salary:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{ utilService.maskInput(data?.salary_before_exit) | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Reason for Exit:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.reason_4_exit | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Position Before Exit">Position at Exit:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.position_before_exit | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label title="Department on Exit">Department at Exit:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.department | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Exit Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.exit_date | dateDisplay}}
+          </div>
+        </div>
+        <!-- <div class="row mt-4 mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+          </div>
+          <div class="col-1"></div>
+        </div> -->
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

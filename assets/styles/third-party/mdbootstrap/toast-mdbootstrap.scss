@@ -1,0 +1,49 @@
+@import 'colors';
+
+.toast-body-success {
+  background-color: rgb(255, 255, 255);
+  border-top: 3px solid green !important;
+}
+
+.toast-body-info {
+  background-color: rgb(255, 255, 255);
+  border-top: 3px solid rgb(241, 238, 54);
+}
+
+.toast-body-warning {
+  background-color: rgb(255, 255, 255);
+  border-top: 3px solid rgb(253, 121, 88);
+}
+
+.toast-body-error {
+  background-color: rgb(255, 255, 255);
+  border-top: 3px solid red;
+}
+
+.md-toast-title {
+  color: rgb(7, 7, 7) !important;
+  text-transform: uppercase;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.toast-header {
+  color: rgb(71, 71, 71);
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.toast-bullet {
+  color: rgb(102, 102, 102);
+  font-size: 0.8em;
+  list-style: disc;
+}
+
+#toast-container > mdb-toast-component {
+  opacity: 1 !important;
+}
+
+.md-toast-message {
+  color: rgb(102, 102, 102);
+  font-size: 0.8em;
+}

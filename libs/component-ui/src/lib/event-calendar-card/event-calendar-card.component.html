@@ -1,0 +1,53 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">Calendar</h5>
+    </div>
+    <div class="top-content-right">
+
+      <div class="btn-group mr-3" mdbDropdown>
+        <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+          mdbWavesEffect>
+          <span>All Events</span> <i class="fa fa-angle-down"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" (click)="onEventSelection($event)"><span class="color-green">Birthday</span></a>
+          <a class="dropdown-item color-cyan" (click)="onEventSelection($event)"><span class="color-cyan">Corporate</span></a>
+          <a class="dropdown-item color-magenta" (click)="onEventSelection($event)"><span class="color-magenta">Wedding
+              Anniversaries</span></a>
+          <a class="dropdown-item color-purple" (click)="onEventSelection($event)"><span class="color-purple">Work
+              Event</span></a>
+        </div>
+      </div>
+
+      <div class="btn-group" mdbDropdown>
+        <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+          mdbWavesEffect>
+          <span>Team</span> <i class="fa fa-angle-down"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">My teams</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-container-bottom">
+    <div class="bottom-content-left">
+      <igx-calendar selection="single">
+        <ng-template igxCalendarSubheader let-parts>
+          <span class="date__el" (click)="parts.monthView()">{{ parts.month.combined }}</span>
+          <span class="date__el" (click)="parts.yearView()">{{ parts.year.combined }}</span>
+        </ng-template>
+      </igx-calendar>
+    </div>
+    <div class="bottom-content-right">
+      <div class="label">18th Thursday</div>
+      <ul>
+        <li *ngFor="let item of items">
+          <span class="d-block heading-sm-1 color-green">{{ item.type }}</span>
+          <span class="d-block heading-sm-2">{{ item.description }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

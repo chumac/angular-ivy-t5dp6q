@@ -1,0 +1,29 @@
+<div class="f-container">
+  <div class="top">
+    <x365-fm-talent-event-detail-data-panel [eventDetailData]="eventDetailData$ | async">
+    </x365-fm-talent-event-detail-data-panel>
+  </div>
+  <div class="bottom mt-3">
+    <div class="navigation">
+      <x365-fm-talent-event-detail-navigation-panel [isOpen]="isOpen" (navMenuItemSelected)="onNavMenuItemSelected($event)">
+      </x365-fm-talent-event-detail-navigation-panel>
+    </div>
+    <div class="content">
+      <div class="content-top mb-3">
+        <x365-shared-ui-hrz-command-bar [showBack]="showBack" (buttonClicked)="onBackButtonClicked($event)">
+        </x365-shared-ui-hrz-command-bar>
+
+        <div class="back-navigation">
+        </div>
+        <x365-shared-ui-hrz-command-bar *ngIf='isReview' [showAddButton]="addButtonStatus"
+          [showRefreshButton]="refreshButton" [showAddParticipantCriteria]="addParticipantCriteria"
+          (buttonClicked)="onButtonClicked($event)"></x365-shared-ui-hrz-command-bar>
+      </div>
+      <div class="content-bottom">
+        <x365-fm-talent-event-detail-root-pane [selectedModuleId]="selectedModuleId" [eventDetailId]="eventDetailId"
+         [isOpen]="isOpen" [isReview]="isReview">
+        </x365-fm-talent-event-detail-root-pane>
+      </div>
+    </div>
+  </div>
+</div>

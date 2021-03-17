@@ -1,0 +1,52 @@
+ <div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+ <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Notification'" [subTitle]="'Edit Notification'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mb-4 text-center">
+        <h5>{{describe}}</h5>
+      </div>
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Notification to:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="group_type" [options]="notificationTo$ | async" [filterEnabled]="true" (selected)=groupSelect($event)
+             class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Process:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="final_actiontype" [options]="process$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+       <div class="row mb-1" *ngIf="groupValue">
+          <div class="col-4">
+            <label class="required center-label">Specific To:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="group_value" [options]="roleData$ | async" [filterEnabled]="true" class="form-font">
+            </mdb-select>
+            <!-- <input formControlName="group_value" type="text" class="form-control form-font"> -->
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="specificPosition">
+          <div class="col-4">
+            <label class=" center-label">Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+       <mdb-select formControlName="position_id" [options]="position" [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>

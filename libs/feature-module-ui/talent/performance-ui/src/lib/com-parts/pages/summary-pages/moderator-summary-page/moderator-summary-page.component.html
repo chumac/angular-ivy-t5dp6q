@@ -1,0 +1,166 @@
+<div class="base" *ngIf="show">
+  <div class="top">
+    <h5>Summary Page: Moderator</h5>
+    <span>Moderator summary page</span>
+  </div>
+  <div class="content">
+    <div class="content-l">
+      <div class="mx-3">
+        <div class="row mb-3">
+          <div class="col-12 mt-0">
+            <h5>Page Completion Status</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <ul>
+          <li *ngFor="let item of fs.reviewForms; let i = index">
+            <x365-fm-talent-summary-page-status-row [data]="item" [completed]="item?.status===1"></x365-fm-talent-summary-page-status-row>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="content-r px-3 py-5">
+      <div class="content-r-s">
+        <div class="row mb-4">
+            <div class="col-5 score-label">
+              <label><a (click)="onEmployeeClick()">Employee Score:</a></label>
+            </div>
+            <div class="col-7 mt-0 text-right font-weight-bold score">
+              <span class="score">{{ getEmployeeScore }}</span>
+              <span class="score-desc">{{ getEmployeeScoreDesc }}</span>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-5 score-label">
+              <label title="Supervisor Score (Primary)"><a (click)="onSupervisorPrimaryClick()">Supervisor Score (Primary):</a></label>
+            </div>
+            <div class="col-7 mt-0 text-right font-weight-bold score">
+              <span class="score">{{ getSupervisorScore }}</span>
+              <span class="score-desc">{{ getSupervisorScoreDesc }}</span>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-5 score-label">
+              <label title="Supervisor Score (Secondary)"><a (click)="onSupervisorSecondaryClick()">Supervisor Score (Secondary):</a></label>
+            </div>
+            <div class="col-7 mt-0 text-right font-weight-bold score">
+              <span class="score">{{ getSecondarySupervisorScore }}</span>
+              <span class="score-desc">{{ getSecondarySupervisorScoreDesc }}</span>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-5 score-label">
+              <label title="Total Supervisor Score">Total Supervisor Score:</label>
+            </div>
+            <div class="col-7 mt-0 text-right font-weight-bold score">
+              <span class="score">{{ getTotalSupervisorScore }}</span>
+              <span class="score-desc">{{ getTotalSupervisorScoreDesc }}</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="content-r-b">
+        <ul>
+          <li class="mb-3" *ngFor="let item of fs.comments">
+            <x365-fm-talent-comment-box [data]="item"></x365-fm-talent-comment-box>
+          </li>
+        </ul>
+      </div>
+
+      <div class="content-r-t mt-0 mb-5">
+        <form novalidate [formGroup]="this.fs.f" (ngSubmit)="completeButtonClicked()">
+          <div class="md-form mt-5">
+            <div class="row mb-3 mt-5">
+              <div class="col-12 mt-0">
+                <input formControlName="moderateScore" type="number"  placeholder="Moderate Score">
+              </div>
+            </div>
+
+            <div class="row mb-3 mt-5">
+              <div class="col-12 mt-0">
+                <mdb-select formControlName="recommendation" [options]="fs?.recommendations" [filterEnabled]="true" placeholder="Recommendation"  showClearButton=true></mdb-select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-12 mt-0">
+                <textarea  formControlName="comment" type="text" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row mt-5 mb-3">
+          <div class="col-12 mt-0 text-right">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="completeButtonClicked()" [disabled]="isFormReviewCompleted"><span *ngIf="completeProcessingStatus"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;Complete&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="content-r px-3 pb-4">
+      <div class="content-r-t mt-5 mb-5">
+        <div class="row mb-3">
+          <div class="col-4 col-pad">
+            <label>Score:</label>
+          </div>
+          <div class="col-8 text-right font-weight-bold score">
+            {{ getScore | stringDisplay}}
+          </div>
+        </div>
+
+        <form novalidate [formGroup]="this.fs.f" (ngSubmit)="completeButtonClicked()">
+          <div class="md-form mt-5">
+            <div class="row mb-3 mt-5">
+              <div class="col-12 mt-0">
+                <input formControlName="moderateScore" type="number"  placeholder="Moderate Score">
+              </div>
+            </div>
+
+            <div class="row mb-3 mt-5">
+              <div class="col-12 mt-0">
+                <mdb-select formControlName="recommendation" [options]="fs?.recommendations" [filterEnabled]="true" placeholder="Recommendation"  showClearButton=true></mdb-select>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-12 mt-0">
+                <textarea  formControlName="comment" type="text" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row mt-5 mb-3">
+          <div class="col-12 mt-0 text-right">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="completeButtonClicked()" [disabled]="isFormReviewCompleted"><span *ngIf="completeProcessingStatus"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;Complete&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-r-b">
+        <ul>
+          <li class="mb-3" *ngFor="let item of fs.comments">
+            <x365-fm-talent-comment-box [data]="item"></x365-fm-talent-comment-box>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+  <div class="bottom"></div>
+</div>

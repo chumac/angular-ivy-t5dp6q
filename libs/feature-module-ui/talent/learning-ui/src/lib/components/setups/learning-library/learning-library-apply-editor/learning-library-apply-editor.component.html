@@ -1,0 +1,28 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Apply'" [loading]="false" [subTitle]="'Apply'"></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Schedule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="schedule_id" [dataSource]="eventScheduleData" valueExpr="id"
+              displayExpr='title' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+            <input formControlName="event_id" type="hidden" class="form-control form-font">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

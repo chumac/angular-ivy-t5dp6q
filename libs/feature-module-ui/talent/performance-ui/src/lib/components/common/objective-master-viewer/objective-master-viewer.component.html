@@ -1,0 +1,177 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header *ngIf="componentName===sharingComponents[0]" [title]="'Manage Objective Viewer'"
+        [subTitle]="'Manage Objective'" [loading]='!data'>
+      </x365-shared-ui-form-header>
+      <x365-shared-ui-form-header *ngIf="componentName===sharingComponents[2]" [title]="'Objective Approval Viewer'"
+        [subTitle]="'Objective Approval'" [loading]='!data'>
+      </x365-shared-ui-form-header>
+      <x365-shared-ui-form-header *ngIf="componentName===sharingComponents[1]" [title]="'Manage Review Viewer'"
+        [subTitle]="'Manage Review'" [loading]='!data'>
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <!-- <div class="row mb-1">
+          <div class="col-4">
+            <label>Plan Id:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.plan_id | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Plan Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.plan_code | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Staff Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.staff_number | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Perspective Id:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.perspective_id | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Perspective Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.perspective_code | stringDisplay}}
+          </div>
+        </div> -->
+        <div class="row mb-1" *ngIf="componentName===sharingComponents[0] || componentName===sharingComponents[2]">
+          <div class="col-4">
+            <label>Visibility:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.visibility | visibilityOpt | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="componentName===sharingComponents[1]">
+          <div class="col-3">
+            <label>Perspective:</label>
+          </div>
+          <div class="col-9 md-form mt-0 text-value text-right">
+            {{data?.PerspectivesInfo?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-3">
+            <label>Description:</label>
+          </div>
+          <div class="col-9 md-form mt-0 text-value">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-3">
+            <label>Additional Info:</label>
+          </div>
+          <div class="col-9 md-form mt-0 text-value">
+            {{data?.legend_info | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-3">
+            <label>Metric:</label>
+          </div>
+          <div class="col-9 md-form mt-0 text-value">
+            {{data?.metric | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Allow Self Rating:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.allow_self_rating | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Weight:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.weight | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Target:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.target | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Target Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.target_type | targetOpt | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Target Type Other:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.target_type_other | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.start_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Due Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.due_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Is Strategic:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.is_strategic | booleanDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Lower is better:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.lower_is_better | booleanDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()">
+      </x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

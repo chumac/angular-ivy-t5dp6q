@@ -1,0 +1,53 @@
+<div class="chat">
+    <div class="messages">
+        <div class="messages-content" #scrollMe [scrollTop]="scrollMe?.scrollHeight">
+            <div style="max-height: none;">
+                <div class="mCSB_container" style="position:relative; top:0; left:0;">
+                    <ng-container *ngFor="let comment of comments">
+                        <div [ngClass]="(employeeId === comment?.CommentByInfo?.employee_id)?'message-personal':'message-manager'" class="message new" (mouseenter)="mouseHover($event)" (mouseleave)="mouseHover($event)">
+                            <figure *ngIf="employeeId === comment?.CommentByInfo?.employee_id" class="mcontrol control-panel">
+                                <i (click)="deleteComment(comment, comment?.CommentByInfo?.employee_id)" class="fa fa-close"></i>
+                            </figure>
+
+                            <!-- <figure *ngIf="employeeId != comment?.CommentByInfo?.employee_id" class="avatar">
+                                <x365-fm-talent-sl-timeline-avatar [employeeId]="comment?.CommentByInfo?.employee_id"></x365-fm-talent-sl-timeline-avatar>
+                            </figure> -->
+
+                            <div (click)="downloadFile(comment)" *ngIf="comment?.doc_guid" class="doc-holder text-center text-warning pointer mb-2">
+                                <x365-fm-talent-comment-attachment [blob]="comment?.doc_binary" [mimeType]="comment?.doc_mime" [extension]="comment?.doc_extension"></x365-fm-talent-comment-attachment>
+                            </div>
+                            {{ comment?.comment }}
+                            <div class="timestamp">{{ comment?.created_date | dateDisplay }}</div>
+
+                            <div *ngIf="employeeId !== comment?.CommentByInfo?.employee_id" class="checkmark-sent-delivered">
+                                {{ comment?.CommentByInfo?.employee_firstname }} {{ comment?.CommentByInfo?.employee_surname }}
+                            </div>
+                            <!-- <div class="checkmark-sent-delivered">✓</div>
+                            <div class="checkmark-read">✓</div> -->
+                        </div>
+                    </ng-container>
+                    <div *ngIf="isSending" class="message message-personal loading new">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="mCSB_scrollTools " style="display: none;">
+                    <div class="">
+                        <div class="mCSB_dragger" style="position: absolute; min-height: 30px; top: 0px; height: 0px;" oncontextmenu="return false;">
+                            <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                        </div>
+                        <div class=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!readOnly" class="message-box"><input #employee type="hidden" value="{{ (employeeInfo$ | async)?.employee_id }}">
+        <form (keyup.enter)="addComment(data.id, employee.value)" novalidate [formGroup]="form" (ngSubmit)="addComment(data.id, employee.value)">
+            <div *ngIf="fileInput.value" class="has-file text-warning"><i class="fa fa-file">&nbsp; {{ fileInput.value }}</i></div>
+            <textarea [disabled]="readOnly" #comment formControlName="comment" type="text" class="message-input" placeholder="Type message..."></textarea>
+            <div class="message-submit">
+                <span class="btn message-area" (click)="fileInput.click()"><i class="fa fa-paperclip"></i></span><input #fileInput (change)="onFileChange($event)" type="file" [hidden]="true" />
+            </div>
+        </form>
+    </div>
+</div>

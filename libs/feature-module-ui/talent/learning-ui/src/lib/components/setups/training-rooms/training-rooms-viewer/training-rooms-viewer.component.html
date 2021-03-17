@@ -1,0 +1,72 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Training Rooms'" [subTitle]="'Training Rooms details'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.code | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Capacity:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.capacity | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Address:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.address | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.CountryInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">State:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.StateInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">City:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.CityInfo.description | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

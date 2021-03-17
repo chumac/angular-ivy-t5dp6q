@@ -1,0 +1,176 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Payment Schedule'" [subTitle]="'Details of payment schedule'"
+      [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Pay Desk:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.paydesk | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Reference Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.reference_no | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Batch Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.batch_no | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Description:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.description| stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Bank:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.bank_description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Account Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.account_no | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Account Type:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.account_type | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Status:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.status_text | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="isSubmitted">
+        <div class="col-4">
+          <label>Date Submitted:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.date_submitted | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Payment Source:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.source_text | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="hasPayrollProfile">
+        <div class="col-4">
+          <label>Payroll Profile:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.payroll_profile_text | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="hasPayrollProfile">
+        <div class="col-4">
+          <label>Payroll Period:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.payroll_period | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="hasPayrollProfile">
+        <div class="col-4">
+          <label>Payroll Source:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.payroll_source_text | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Value Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.value_date | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Expiry Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.expiry_date | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Transaction Fee:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          <span class="curr"
+            *ngIf="data?.currency_code===currencyCode">&#8358;</span>&nbsp;{{data?.trans_fee | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Log Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.log_date | dateDisplay}}
+        </div>
+      </div>
+      <!--
+      <div class="row mt-4 mb-1">
+        <div class="col-1"></div>
+        <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+        </div>
+        <div class="col-1"></div>
+      </div> -->
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()">
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

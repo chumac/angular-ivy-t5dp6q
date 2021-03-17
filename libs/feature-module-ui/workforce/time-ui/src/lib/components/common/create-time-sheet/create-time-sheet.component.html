@@ -1,0 +1,38 @@
+<article class="content-wrapper">
+  <div class="content">
+    <div class="content-header">
+      <div class="content-name">Create New Time Sheet</div>
+    </div>
+
+    <div class="content-body">
+      <div class="content-body-item">
+        <form novalidate [formGroup]="this.fs.f" (ngSubmit)="onOkClick()">
+          <div class="md-form mt-5">
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label info">End Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="end_date" [placeholder]="''"></dx-date-box>
+              </div>
+            </div>
+
+            <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label info">Description:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="description" type="text" class="form-control form-font">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" size="sm" mdbWavesEffect (click)="onOkClick()">&nbsp;&nbsp;<span *ngIf="false"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ok&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning" (click)="onCancel()" mdbWavesEffect>&nbsp;Cancel&nbsp;</button>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,45 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Template'" [subTitle]="'Details of Template'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.description | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12">
+            <label>Upload Template</label>
+          </div>
+          <!-- <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.upload_template | stringDisplay}}
+        </div> -->
+        </div>
+        <div class="row mt-1">
+          <div class="col-12 md-form mt-0 text-value text-left">
+            <textarea [disabled]="true" type="text" class="form-control"  rows="10"> {{data?.upload_template | stringDisplay}}</textarea>
+            <!-- {{data?.upload_template | stringDisplay}} -->
+        </div>
+        </div>
+        <!-- <div class="row mb-1">
+          <div class="col-12 md-form mt-0 text-value text-right">
+            <span *ngFor="let load of upload">
+              {{load | stringDisplay}}<br>
+            </span>
+        </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

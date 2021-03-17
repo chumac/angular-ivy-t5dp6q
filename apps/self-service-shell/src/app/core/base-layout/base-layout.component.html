@@ -1,0 +1,22 @@
+<header>
+  <mdb-side-nav #sidenav class="bg-side-nav fixed" [fixed]="true" >
+    <div class="bounds" fxLayoutAlign="start stretch" fxLayout="column">
+      <div class="nav-header-container" [fxFlex]="appBarHeight" fxLayout="column" fxLayoutAlign="center">
+        <x365-layout-ui-app-nav-header></x365-layout-ui-app-nav-header>
+      </div>
+
+      <div class="side-navigation-container" [fxFlex]="appNavigationHeight">
+        <x365-shared-nav-self-service-navigation></x365-shared-nav-self-service-navigation>
+      </div>
+    </div>
+  </mdb-side-nav>
+
+  <x365-layout-ui-app-info-bar [sidenav]="sidenav"></x365-layout-ui-app-info-bar>
+</header>
+
+<main>
+  <div class="container-fluid mt-1">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+

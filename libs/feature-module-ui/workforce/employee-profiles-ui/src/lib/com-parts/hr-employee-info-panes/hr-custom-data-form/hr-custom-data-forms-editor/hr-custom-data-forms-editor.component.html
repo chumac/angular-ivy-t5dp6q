@@ -1,0 +1,15 @@
+<x365-form-renderer 
+  #renderer 
+  [width]="34" 
+  [show]="show" 
+  [isBusy]="isProcessingAlt$ | async" 
+  [data]="data?.json_text" 
+  [title]="data?.title" 
+  [subTitle]="data?.description" 
+  [showSave]="true"
+  [showSubmit]="data?.id"
+  [isSecondaryBusy]="isProcessing$ | async" 
+  (formSubmit)="onRendererSubmit($event)" 
+  (formSave)="onRendererSave($event)" 
+  (cancelClick)="onCancel()">
+</x365-form-renderer>

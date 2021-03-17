@@ -1,0 +1,208 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+      <div class="header">
+          <x365-shared-ui-form-header [title]="transactionType?.code + ' Deployment'" [subTitle]="'Deploy ' + transactionType?.code" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+          <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+              <div class="row mb-1">
+                  <div class="col-4">
+                      <label class="required center-label">Employee:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                      <dx-lookup #teamMemberLookup [disabled]="!transactionType?.id" formControlName="employee_id" [dataSource]="teamList$ | async" (onValueChanged)="onEmployeeSelected()" valueExpr="employee_id" displayExpr='emp_fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                  </div>
+              </div>
+
+              <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label" title="Effective Date">Effective Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_date" [placeholder]="''"></dx-date-box>
+                </div>
+              </div>
+
+              <div class="row mb-1 pay-mt">
+                <div class="col-4">
+                    <label class="">Change Structure:</label>
+                </div>
+                <div class="col-8">
+                    <div class="switch">
+                        <label>
+                        No
+                        <input #changeStructureCheckBox formControlName="structure_change" value="false" type="checkbox">
+                        <span class="lever"></span>
+                        Yes
+                        </label>
+                    </div>
+                </div>
+              </div>
+
+              <div *ngIf="fs.changeStructure.value">
+                <div class="row mb-1">
+                  <div class="col-4">
+                    <label class=" center-label info">Source Location:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                    <dx-lookup #sourceCostCenterLookUp formControlName="s_local_detail_id" [value]="(myCostCenter$ | async)?.details_id" [dataSource]="costCenters$ | async" valueExpr="value" displayExpr='label' [disabled]="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    <!-- <span class="button btn-rounded" (click)="toggleSourceStructurTreeView()">Change</span> -->
+                  </div>
+                </div>
+                <div class="row mb-4" *ngIf="showSourceStructureTree">
+                  <div class="col-12">
+                    <div class="container-fluid struct-container">
+                        <x365-shared-ui-structure-tree-view (selectedStructure)="setSourceStructure($event)"></x365-shared-ui-structure-tree-view>
+                        <span class="button btn-rounded" (click)="toggleSourceStructurTreeView()">Close</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-1">
+                  <div class="col-4">
+                    <label class="required center-label info">Destination Location:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                    <dx-lookup #destinationCostCenterLookUp formControlName="d_local_detail_id" [dataSource]="costCenters$ | async" valueExpr="value" displayExpr='label' [disabled]="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    <span class="button btn-rounded" (click)="toggleDestinationStructurTreeView()">Change</span>
+                  </div>
+                </div>
+                <div class="row mb-4" *ngIf="showDestinationStructureTree">
+                  <div class="col-12">
+                    <div class="container-fluid struct-container">
+                        <x365-shared-ui-structure-tree-view (selectedStructure)="setDestinationStructure($event)"></x365-shared-ui-structure-tree-view>
+                        <span class="button btn-rounded" (click)="toggleDestinationStructurTreeView()">Close</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-1 pay-mt">
+                <div class="col-4">
+                    <label class="">Change Role:</label>
+                </div>
+                <div class="col-8">
+                    <div class="switch">
+                        <label>
+                        No
+                        <input #changeRoleCheckBox formControlName="role_change" value="false" type="checkbox">
+                        <span class="lever"></span>
+                        Yes
+                        </label>
+                    </div>
+                </div>
+              </div>
+
+              <div *ngIf="fs.changeRole.value">
+                <div class="row mb-1">
+                  <div class="col-4">
+                      <label class=" center-label">Current Position:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                      <dx-lookup formControlName="c_position_id" [dataSource]="positionList$ | async" valueExpr="position_id" displayExpr='description' [disabled]="true" searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                  </div>
+                </div>
+
+                <div class="row mb-1">
+                  <div class="col-4">
+                      <label class="required center-label">New Position:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+
+                    <dx-drop-down-box
+                    formControlName="n_position_id"
+                    [(value)]="gridBoxValue"
+                    valueExpr="position_id"
+                    displayExpr="description"
+                    placeholder=""
+                    [showClearButton]="false"
+                    [dataSource]="positionList$ | async">
+
+                      <div *dxTemplate="let data of 'content'">
+                          <dx-data-grid
+                                  [dataSource]="positionList$ | async"
+                                  [selection]="{ mode: 'multiple' }"
+                                  keyExpr="position_id"
+                                  [paging]="{ enabled: true, pageSize: 10 }"
+                                  [filterRow]="{ visible: true }"
+                                  [scrolling]="{ mode: 'infinite' }"
+                                  [height]="345"
+                                  [(selectedRowKeys)]="gridBoxValue"
+                          >
+                          <dxi-column dataField="description" [width]="'100%'" caption="Positions"></dxi-column>
+                          </dx-data-grid>
+                      </div>
+                  </dx-drop-down-box>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-1 pay-mt">
+                <div class="col-4">
+                    <label class="">Change Report-to Officer:</label>
+                </div>
+                <div class="col-8">
+                    <div class="switch">
+                        <label>
+                        No
+                        <input #changeReportToCheckBox formControlName="reports_to_change" value="false" type="checkbox">
+                        <span class="lever"></span>
+                        Yes
+                        </label>
+                    </div>
+                </div>
+              </div>
+
+              <div class="row mb-1" *ngIf="fs.changeReportTo.value">
+                <div class="col-4">
+                    <label class="required center-label">Report-to officer:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                  <dx-lookup formControlName="report_to_id" [dataSource]="employeeList$ | async" valueExpr="value" [value]="suggestedSupervisor$ | async" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                  <span class="button btn-rounded" (click)="onSuggestEmployeeButtonClicked(fs.employeeId.value, fs.newPosId.value, fs.destinationStrDetailId.value)"><i *ngIf="loadingSuggestion$ | async" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;Suggest</span>
+                </div>
+              </div>
+
+              <div class="row mb-1 pay-mt">
+                <div class="col-4">
+                    <label class="">Is Temporary:</label>
+                </div>
+                <div class="col-8">
+                    <div class="switch">
+                        <label>
+                        No
+                        <input #isTemporalCheckBox formControlName="is_temporary" value="false" type="checkbox">
+                        <span class="lever"></span>
+                        Yes
+                        </label>
+                    </div>
+                </div>
+              </div>
+
+              <div class="row mb-1" *ngIf="fs.isTemporary.value">
+                <div class="col-4">
+                    <label class="required center-label" title="Revert Date">Revert Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="revert_date" [placeholder]="''"></dx-date-box>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-4">
+                  <label class="center-label info">Reason:</label>
+                </div>
+                <div class="col-8 md-form mt-0 pd-0">
+                    <textarea rows="10" formControlName="reason_for_action" type="text" class="md-textarea md-textarea-auto form-control text-area-row-lg"></textarea>
+                </div>
+              </div>
+          </form>
+      </div>
+      <div class="footer">
+          <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+  </div>
+</div>

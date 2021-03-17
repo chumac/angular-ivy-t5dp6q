@@ -1,0 +1,76 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+ <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Uploads'" [subTitle]="'Edit Uploads'" [loading]='this.uploadService.show'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.uploadService.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Destination:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup #dest [dataSource]="destination$ | async" (onValueChanged)="onValueChanged($event)"  displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupWidth="400px" popupHeight="400px" class="form-font"></dx-lookup>
+            <!-- <mdb-select formControlName="destination" [options]="destination" [filterEnabled]="true" placeholder="Where do you want the data to go"></mdb-select> -->
+          <span style="color:rgb(243, 132, 43);">{{this.uploadService.destine}}</span>
+          </div>
+        </div>
+        <!-- <div class="row mb-1" *ngIf="this.uploadService.destine">
+          <div class="col-4">
+            <span>Destination Preview:</span>
+          </div>
+          <div class="col-8">
+            <span>{{this.uploadService.destine}}</span>
+          </div>
+        </div> -->
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Delimeter:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="delimeter"  [options]="delimeter" placeholder="What delimeter is used in the file"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10">
+              <div class="row files bg-color">
+                  <div class="col-md-12">
+                    <div class="mb-2">
+                      <span><i class="fa fa-cloud-upload fa-5x"></i></span>
+                    </div>
+                    <div>
+                      <div class="upload-btn-wrapper">
+                        <button mdbBtn rounded="true" outline="true" color="default" class="btn btn-sm waves-effect">Select a file</button>
+                        <input type="file" #file (change)="onFileChange($event)">
+                       <br> <span *ngIf="fileName" class="text-center">{{fileName}}</span>
+                      </div>
+                      <p *ngIf="this.uploadService.fileLength <= 0">
+                        <small>Select a file from your system to upload. To upload multiple files, zip all files into a file</small>
+                      </p>
+                    </div>
+                  </div>
+                  </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+        <!-- <div class="row mb-1 mt-4" *ngIf="fileName">
+          <div class="col-12">
+            <label class="text-center">{{fileName}}:</label>
+            <span class="text-center" style="margin-left:4rem">{{fileName}}</span>
+          </div>
+          <div class="col-8 md-form mt-0">
+         <textarea [disabled]="true" type="text"  class="md-textarea md-textarea-auto form-control" mdbInput>{{fileArray}}</textarea>
+         <textarea [disabled]="true" type="text" class="form-control"  rows="7">{{fileArray}}</textarea>
+          </div>
+        </div> -->
+        <div class="col-12 md-form mt-6" *ngIf="fileName">
+         <textarea [disabled]="true" type="text" class="form-control" rows="10">{{fileDetails}}</textarea>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>

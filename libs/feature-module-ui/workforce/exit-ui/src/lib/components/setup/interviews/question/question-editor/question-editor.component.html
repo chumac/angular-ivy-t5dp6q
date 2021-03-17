@@ -1,0 +1,106 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Interview Question'" [subTitle]="'Add/Edit Interview Question'"
+      [loading]='isProcessing$ | async'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="">Question Text:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <textarea rows="30" formControlName="question_text" type="text" class="md-textarea form-control"></textarea>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Response Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="response_type" [options]="responseTypeSelectOption" placeholder=""></mdb-select>
+        </div>
+      </div>
+      <!--
+      <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Headed By</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="headed_by" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Enterprise Structure:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="ent_struc" [disableControl]="true" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Link To:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="link_id" [options]="linkedStructureDetail" placeholder=""></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Cost Center:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="cost_center_code" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Shared Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="shared_code" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">MIS Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="mis_code" type="text" class="form-control pt-0">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Make this a virtual structure by linking it to a non-virtual structure:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="virtual_structure_link" [options]="analysisDetails" placeholder=""></mdb-select>
+          </div>
+        </div> -->
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,23 @@
+
+<div class="modal-content">
+  <div class="modal-body ripe-malinka-gradient">
+    <div class="row">
+      <div class="col-md-1">
+        <div class="warning-icon">
+          <i class="fa fa-exclamation-circle fa-3x" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="col-md-11">
+        <div class="warning-text">
+          {{message}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" *ngIf="true" (click)="onCommand1Click()" mdbWavesEffect>Yes</button>
+    <button type="button" class="btn btn-sm btn-outline-warning btn-rounded btn-min-width" *ngIf="true" (click)="onCommand2Click()" mdbWavesEffect>No</button>
+    <!-- <button type="button" class="btn btn-sm btn-warning btn-rounded btn-min-width" aria-label="Close" *ngIf="true" (click)="closeModal()" mdbWavesEffect>Cancel</button> -->
+  </div>
+</div>
+

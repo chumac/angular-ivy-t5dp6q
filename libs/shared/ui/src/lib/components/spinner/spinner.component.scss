@@ -1,0 +1,15 @@
+@import 'colors';
+
+.app-spinner {
+  height: 30px;
+  color: $app_spinner_color;
+  font-size: 1.59em;
+  vertical-align: -webkit-baseline-middle;
+  padding-top: 6px;
+  float: right;
+  outline: 0px solid gray;
+
+  .spinner div {
+      background-color: $app_spinner_color;
+  }
+}

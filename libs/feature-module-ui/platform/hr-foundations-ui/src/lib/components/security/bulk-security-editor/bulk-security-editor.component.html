@@ -1,0 +1,122 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+      <div class="header">
+        <x365-shared-ui-form-header [title]="'Bulk Security'" [subTitle]="'comments'" [loading]="isLoadingDropdown$ | async"></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Action:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="action_taken" [options]="bulkActions$ | async" [filterEnabled]="true" class="form-font"
+                  (selected)="onSecurityAction($event)" placeholder=""></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">User Display Type:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <mdb-select #displayType [options]="displayList" [filterEnabled]="true" class="form-font" (selected)="onSelect($event)"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <button type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm"
+                (click)=onTreeButtonClick() [disabled]="!(showType && showAction)">Select form Tree</button>
+            </div>
+          </div>
+          <div class="row mb-1"  *ngIf="showType && showAction">
+            <div class="col-4">
+              <label class="required center-label">Enterprise Structure Type:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <mdb-select #structureType [options]="specificType$ | async" [filterEnabled]="true" class="form-font"
+                  (selected)="onSpecificType($event)" placeholder="" [disabled]="true"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1"  *ngIf="showType && showAction">
+            <div class="col-4">
+              <label class="required center-label">Cost Center:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <mdb-select #structureDetail [options]="specificStructure$ | async" [filterEnabled]="true" class="form-font"
+                  (selected)="onSpecificStructure($event)" placeholder="" [disabled]="true"></mdb-select>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Users:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <dx-drop-down-box
+                 [(value)]="selectedEmployees"
+                 valueExpr="username"
+                 displayExpr="emp_fullname"
+                 placeholder=""
+                 [showClearButton]="true"
+                 [dataSource]="employeesData$ | async"
+                >
+                  <div *dxTemplate="let data of 'content'">
+                    <dx-data-grid
+                      [dataSource]="employeesData$ | async"
+                      keyExpr="username"
+                      [selection]="{ mode: 'multiple' }"
+                      [hoverStateEnabled]="true"
+                      [paging]="{ enabled: true, pageSize: 10 }"
+                      [filterRow]="{ visible: true }"
+                      [scrolling]="{ mode: 'infinite' }"
+                      [height]="300"
+                      [(selectedRowKeys)]="selectedEmployees"
+                    >
+                      <dxi-column dataField="emp_fullname" [width]="'100%'" caption="Employees"></dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </dx-drop-down-box>
+              </div>
+          </div>
+
+          <div class="row mb-1" *ngIf="showRoles">
+            <div class="col-4">
+              <label class="required center-label">Roles:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <dx-drop-down-box [(value)]="selectedRoles" valueExpr="sys_rolename" displayExpr="rolename" placeholder=""
+                  [showClearButton]="true" [dataSource]="rolesData$ | async">
+                  <div *dxTemplate="let data of 'content'">
+                    <dx-data-grid [dataSource]="rolesData$ | async" keyExpr="sys_rolename" [selection]="{ mode: 'multiple' }" [hoverStateEnabled]="true"
+                      [paging]="{ enabled: true, pageSize: 10 }" [filterRow]="{ visible: true }" [scrolling]="{ mode: 'infinite' }"
+                      [height]="300" [(selectedRowKeys)]="selectedRoles">
+                      <dxi-column dataField="rolename" [width]="'100%'" caption="Roles"></dxi-column>
+                    </dx-data-grid>
+                  </div>
+                </dx-drop-down-box>
+              </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Comments:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                <textarea type="text" formControlName="comments" class="md-textarea md-textarea-auto form-control" mdbInput></textarea>
+              </div>
+          </div>
+        </form>
+      </div>
+      <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+    </div>
+
+<x365-shared-ui-enterprise-structure-tree-view #treeView [width]="35" [show]="showTree$ | async" [data]="null"
+  (cancelClick)="onCancelStructurePicker()" (selectedStructure)="onStructureSelected($event)"
+  (doneClick)="onDoneButtonClicked()">
+</x365-shared-ui-enterprise-structure-tree-view>

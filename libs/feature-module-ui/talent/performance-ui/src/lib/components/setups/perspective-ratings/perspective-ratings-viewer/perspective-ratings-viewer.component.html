@@ -1,0 +1,88 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Perspective Ratings'" [subTitle]="'Perspective Ratings'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Perspective:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.PerspectivesInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Eligibility Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.eligibility_rule | eligibilityRuleOpt | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Analysis:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.AnalysisInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Analysis Detail:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.AnalysisDetailsInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.PositionInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Designation:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.DesignationInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.EmployeeInfo.employee_surname | stringDisplay}} {{data?.EmployeeInfo.employee_firstname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.GradeInfo.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Weight:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.weight | stringDisplay}}
+          </div>
+        </div>                      
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

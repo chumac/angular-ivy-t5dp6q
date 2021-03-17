@@ -1,0 +1,35 @@
+.content-wrapper {
+  min-height: 70vh;
+}
+.content {
+  .content-header {
+    background: #f8f8f8;
+    .content-image {
+      margin-left: 40%;
+      padding: 2em 0 1em;
+    }
+    .content-name {
+      padding: 1em 0;
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+  }
+
+  .content-body {
+    background: #fff;
+    .content-body-item {
+      margin: 1em 0;
+      border-bottom: 1px solid #e6e6e6;
+      .title {
+        font-size: 0.7em;
+      }
+      .info {
+        font-size: 0.8em;
+        font-weight: 600;
+      }
+    }
+    .content-body-item:last-child {
+      border: 0;
+    }
+  }
+}

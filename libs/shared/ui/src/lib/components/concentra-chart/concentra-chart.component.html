@@ -1,0 +1,36 @@
+<div class="card card-base">
+  <div class="card-header">
+    {{data.headerText}}
+  </div>
+  <div class="card-body peach-gradient">
+    <div class="ring1-container">
+      <h5>{{data.ring1Caption}}</h5>
+      <circle-progress
+        [title]=data.dataPoint1.value
+        [percent]=data.percent
+        [subtitle]=data.dataPoint1.unitText
+        [outerStrokeColor]="'#246686'">
+      </circle-progress>
+    </div>
+
+    <div class="ring2-container">
+      <h5>{{data.ring2Caption}}</h5>
+      <div class="circle">
+        <div class="display-pane">
+          <span class="value">{{data.dataPoint2.value}}</span>
+          <span class="value-unit-text">{{data.dataPoint2.unitText}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ring3-container">
+      <h5>{{data.ring3Caption}}</h5>
+      <div class="circle">
+        <div class="display-pane">
+          <span class="value">{{data.dataPoint3.value}}</span>
+          <span class="value-unit-text">{{data.dataPoint3.unitText}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,186 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onApplyBtnClicked()">&nbsp;&nbsp;Apply</button>
+                <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false" (click)="onRefreshBtnClicked()" class="ml-5"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex flex-column doc-container border-radius border-shadow">
+                <div class="d-flex flex-column doc-container-t">
+                    <div class="doc-container-t-sp">
+                        <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isProcessing$ | async" [show]="true"></x365-shared-ui-spinner>
+                    </div>
+                    <div class="doc-container-t-ct">
+                        <div class="doc-container-t-ct-l">
+                            <div class="row">
+                                <div class="col-6">
+                                    <x365-shared-ui-switch #switch [checkedText]="'Pending'" [unCheckedText]="'Submitted'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                                </div>
+                                <div class="col-6">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doc-container-t-ct-r">
+                            <div class="row">
+                                <div class="col-5"></div>
+                                <div class="col-7 md-form">
+                                    <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)" placeholder="Filter by ..."></mdb-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="doc-container-s">
+                    <div class="row">
+                        <div class="col-12 md-form mb-1">
+                            <input mdbInputDirective #searchInput type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" placeholder="Enter your search text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column doc-container-b">
+                    <div class="tab-a" *ngIf="!switch.value">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="grid-table-container">
+                                    <igx-grid #approvedDataGrid *ngIf="!switch.value" [data]="approvedData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" width="100%" [showToolbar]="false">
+                                        <igx-column field="leave_type" header="Type" width="10%">
+                                            <ng-template igxCell let-val>
+                                                <div>{{ val | stringDisplay }}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="leave_reason" header="Reason" width="15%">
+                                            <ng-template igxCell let-val>
+                                                <div>{{ val | stringDisplay }}</div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="approval_status" header="Status" width="15%">
+                                            <ng-template igxCell let-val>
+                                                <div class="text-left">
+                                                    <mdb-badge *ngIf="val === approvalStatus.processed" pill="true" success="true">Processed</mdb-badge>
+                                                    <mdb-badge *ngIf="val === approvalStatus.awaiting_processing" pill="true" info="true">Awaiting processing</mdb-badge>
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="mleave_trans_id" header="..." width="5%">
+                                            <ng-template igxCell let-val let-cell="cell">
+                                                <div class="hover-menu-container"><span class="text-center"></span>
+                                                    <div class="hover-menu">
+                                                        <span class="hover-ellipse-menu"></span>
+                                                        <div class="hover-icons">
+                                                            <x365-shared-ui-hover-icon *ngIf="cell.cellID.rowID.approval_status === approvalStatus.awaiting_processing" [iconClass]="'fa fa-window-close-o'" title="Cancel" (click)="onCancelRecordIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                            <x365-shared-ui-hover-icon *ngIf="cell.cellID.rowID.approval_status === approvalStatus.processed" [iconClass]="'fa fa-file-text-o'" title="Review" (click)="onReviewRecordIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </igx-column>
+                                        <igx-column field="DetailsList" header="Details" width="55%">
+                                            <ng-template igxCell let-val>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Start Date</th>
+                                                            <th scope="col">End Date</th>
+                                                            <th scope="col">No. of Days</th>
+                                                            <th scope="col">Backup Officer</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let detail of val">
+                                                            <td> {{ detail?.start_date | dateDisplay }}</td>
+                                                            <td> {{ detail?.end_date | dateDisplay }}</td>
+                                                            <td> {{ detail?.no_of_days | stringDisplay }}</td>
+                                                            <td> {{ detail?.AssignedBackupInfo?.employee_surname | stringDisplay }} {{ detail?.AssignedBackupInfo?.employee_firstname | stringDisplay }} {{ detail?.AssignedBackupInfo?.employee_midname | stringDisplay
+                                                                }}
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditDetailIconClicked(detail)"></x365-shared-ui-hover-icon>
+                                                                <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteDetailIconClicked(detail)"></x365-shared-ui-hover-icon> -->
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </ng-template>
+                                        </igx-column>
+                                    </igx-grid>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-b" *ngIf="switch.value">
+                        <div class="grid-table-container">
+                            <igx-grid #awaitingApprovalDataGrid *ngIf="switch.value" [data]="awaitingApprovalData$ | async" [autoGenerate]="false" width="100%" [showToolbar]="false" [height]="null">
+                                <igx-column field="leave_type" header="Type" width="15%">
+                                    <ng-template igxCell let-val>
+                                        <div>{{ val | stringDisplay }}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="leave_reason" header="Reason" width="25%">
+                                    <ng-template igxCell let-val>
+                                        <div>{{ val | stringDisplay }}</div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="mleave_trans_id" header="..." width="5%">
+                                    <ng-template igxCell let-val let-cell="cell">
+                                        <div class="hover-menu-container"><span class="text-center"></span>
+                                            <div class="hover-menu">
+                                                <span class="hover-ellipse-menu"></span>
+                                                <div class="hover-icons">
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-book'" title="Final Submit" (click)="onSubmitPlanIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-plus'" title="Add Detail" (click)="onAddDetailIconClicked(val, cell.cellID.rowID?.DetailsList[0]?.pay_allowance)"></x365-shared-ui-hover-icon>
+                                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" title="Delete" (click)="onDeletePlanIconClicked(val)"></x365-shared-ui-hover-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </igx-column>
+                                <igx-column field="DetailsList" header="Details" width="55%">
+                                    <ng-template igxCell let-val>
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Start Date</th>
+                                                    <th scope="col">End Date</th>
+                                                    <th scope="col">No. of Days</th>
+                                                    <th scope="col">Backup Officer</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let detail of val let tbh of tblH; let i=index" (mouseleave)="tbh.is_hover =!tbh.is_hover" (mouseenter)="tbh.is_hover =!tbh.is_hover">
+                                                    <td> {{ detail?.start_date | dateDisplay }}</td>
+                                                    <td> {{ detail?.end_date | dateDisplay }}</td>
+                                                    <td> {{ detail?.no_of_days | stringDisplay }}</td>
+                                                    <td> {{ detail?.AssignedBackupInfo?.employee_surname | stringDisplay }} {{ detail?.AssignedBackupInfo?.employee_firstname | stringDisplay }} {{ detail?.AssignedBackupInfo?.employee_midname | stringDisplay
+                                                        }}
+                                                    </td>
+                                                    <td class="text-right" [className]="tbh.is_hover ? 'hover-menu-show' : 'hover-menu'">
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditDetailIconClicked(detail)"></x365-shared-ui-hover-icon>
+                                                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteDetailIconClicked(detail)"></x365-shared-ui-hover-icon>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </ng-template>
+                                </igx-column>
+                            </igx-grid>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-leave-staggered-detail-editor #detail_editor [width]="28" [show]="showDetailEditor$ | async" [data]="null" [leaveStaggeredId]="null" (cancelClick)="onCancelDetailEditor()"></x365-fm-talent-leave-staggered-detail-editor>
+<x365-fm-workforce-leave-staggered-editor #editor [width]="34" [show]="showEditor$ | async" [data]="null" [comprehensiveData]="comprehensiveData$ | async" [leaveTypes]="leaveTypes$ | async" [contactInfo]="contactInfo$ | async" [activePersonnel]="activePersonnel$ | async"
+    [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-leave-staggered-editor>
+<!-- <x365-fm-workforce-leave-staggered-viewer #viewer [width]="40" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()"></x365-fm-workforce-leave-staggered-viewer> -->

@@ -1,0 +1,45 @@
+<div class="base" *ngIf="show">
+  <div class="content">
+    <div class="header mb-3 text-uppercase"><span>{{data?.role_type}}</span></div>
+
+    <div class="mb-4" *ngIf="data?.emp_accepts_show">
+      <div class="mb-2 font-weight-bold text-uppercase">{{data?.emp_accepts}}</div>
+    </div>
+
+    <div class="mb-4" *ngIf="data?.emp_one_on_one_completed_show">
+      <div class="mb-2 font-weight-bold text-uppercase">{{data?.emp_one_on_one_completed}}</div>
+    </div>
+
+    <div class="mb-4" *ngIf="data?.emp_one_on_one_comments_show">
+      <span class="font-weight-bold">One-on-One Comment</span>
+      <div class="mb-2">{{data?.emp_one_on_one_comments}}</div>
+    </div>
+
+    <div class="mb-4" *ngIf="data?.lm_one_on_one_completed_show">
+      <div class="mb-2 font-weight-bold text-uppercase">{{data?.lm_one_on_one_completed}}</div>
+    </div>
+
+    <div class="mb-4" *ngIf="data?.lm_one_on_one_comments_show">
+      <span class="font-weight-bold">One-on-One Comment</span>
+      <div class="mb-2">{{data?.lm_one_on_one_comments}}</div>
+    </div>
+
+
+    <div class="mb-4" *ngIf="isRecommendation">
+      <span class="font-weight-bold">Recommendation</span>
+      <div class="mb-2">{{data?.recommendation}}</div>
+    </div>
+
+    <div class="mb-4" *ngIf="isComment">
+      <span class="font-weight-bold">Comment</span>
+      <div>{{data?.Comment}}</div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-l"><span class="font-weight-bold">{{data?.staffName}}</span></div>
+    <div class="footer-r"><span class="font-weight-bold">{{data?.comment_date | dateTimeDisplay}}</span></div>
+  </div>
+</div>
+
+
+

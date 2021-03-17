@@ -1,0 +1,40 @@
+<li>
+  <ul class="collapsible collapsible-accordion">
+    <mdb-accordion [multiple]="false" aria-multiselectable="false">
+      <!-- <mdb-accordion-item class="no-collase">
+        <mdb-accordion-item-head mdbWavesEffect routerLink="/d/analytics/dashboard" routerLinkActive="active">
+          <svg><use xlink:href="/assets/images/sprite.svg#home"/></svg> <span>Dashboard</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body></mdb-accordion-item-body>
+      </mdb-accordion-item> -->
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Setups</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/platform/foundation/admin/options" routerLinkActive="active"><span>Options</span></a></li>
+            <li><a routerLink="/d/platform/foundation/admin/organizations" routerLinkActive="active"><span>Organizations</span></a></li>
+            <li><a routerLink="/d/platform/foundation/admin/notification-entities" routerLinkActive="active"><span>Notifications</span></a></li>
+            <li><a routerLink="/d/platform/foundation/admin/workflow-definitions" routerLinkActive="active"><span>Workflow Definitions</span></a></li>
+            <li><a routerLink="/d/platform/foundation/admin/workflow-maps" routerLinkActive="active"><span>Workflow Maps</span></a></li>
+            <li><a routerLink="/d/platform/foundation/admin/workflow-alternate-maps" routerLinkActive="active"><span>Workflow Alternate Map</span></a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Security</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/platform/foundation/admin/users" routerLinkActive="active"><span>Actions</span></a></li>
+            <li><a routerLink="/d/platform/foundation/admin/report-permissions" routerLinkActive="active"><span>Report Permissions</span></a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+    </mdb-accordion>
+  </ul>
+</li>

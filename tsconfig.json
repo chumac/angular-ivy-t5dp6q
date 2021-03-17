@@ -1,27 +1,212 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "esnext",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
+    "skipLibCheck": true,
     "lib": [
-      "es2018",
+      "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "jszip": [
+        "node_modules/jszip/dist/jszip.min.js"
+      ],
+      "@nutela/layout/ui": [
+        "libs/layout/ui/src/index.ts"
+      ],
+      "@nutela/models/workforce/leave": [
+        "libs/models/workforce/leave/src/index.ts"
+      ],
+      "@nutela/models/core/api": [
+        "libs/models/core/api/src/index.ts"
+      ],
+      "@nutela/models/workforce/personnel": [
+        "libs/models/workforce/personnel/src/index.ts"
+      ],
+      "@nutela/feature-modules/self-service": [
+        "libs/feature-modules/self-service/src/index.ts"
+      ],
+      "@nutela/feature-modules/workforce/leave-manager": [
+        "libs/feature-modules/workforce/leave-manager/src/index.ts"
+      ],
+      "@nutela/ui-components/workforce/personnel-ui": [
+        "libs/ui-components/workforce/personnel-ui/src/index.ts"
+      ],
+      "@nutela/ui-components/workforce/leave-ui": [
+        "libs/ui-components/workforce/leave-ui/src/index.ts"
+      ],
+      "@nutela/shared/auth": [
+        "libs/shared/auth/src/index.ts"
+      ],
+      "@nutela/shared/navigation": [
+        "libs/shared/navigation/src/index.ts"
+      ],
+      "@nutela/shared/app-global": [
+        "libs/shared/app-global/src/index.ts"
+      ],
+      "@nutela/shared/ui": [
+        "libs/shared/ui/src/index.ts"
+      ],
+      "@nutela/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@nutela/models/core-data": [
+        "libs/models/core-data/src/index.ts"
+      ],
+      "@nutela/shared/animations": [
+        "libs/shared/animations/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/talent/performance-ui": [
+        "libs/feature-module-ui/talent/performance-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/employee-profiles-ui": [
+        "libs/feature-module-ui/workforce/employee-profiles-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/absence-ui": [
+        "libs/feature-module-ui/workforce/absence-ui/src/index.ts"
+      ],
+      "@nutela/component-ui": [
+        "libs/component-ui/src/index.ts"
+      ],
+      "@nutela/store/app-state": [
+        "libs/store/app-state/src/index.ts"
+      ],
+      "@nutela/store/reducers": [
+        "libs/store/reducers/src/index.ts"
+      ],
+      "@nutela/store/modules/workforce/employee-profiles": [
+        "libs/store/modules/workforce/employee-profiles/src/index.ts"
+      ],
+      "@nutela/models/workforce/employee-profiles": [
+        "libs/models/workforce/employee-profiles/src/index.ts"
+      ],
+      "@nutela/models/common": [
+        "libs/models/common/src/index.ts"
+      ],
+      "@nutela/store/modules/foundation": [
+        "libs/store/modules/foundation/src/index.ts"
+      ],
+      "@nutela/models/foundation": [
+        "libs/models/foundation/src/index.ts"
+      ],
+      "@nutela/core-services": [
+        "libs/core-services/src/index.ts"
+      ],
+      "@nutela/store/shared": [
+        "libs/store/shared/src/index.ts"
+      ],
+      "@nutela/models/talent/learning": [
+        "libs/models/talent/learning/src/index.ts"
+      ],
+      "@nutela/store/modules/workforce/absence": [
+        "libs/store/modules/workforce/absence/src/index.ts"
+      ],
+      "@nutela/store/self-service": [
+        "libs/store/self-service/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/approvals-ui": [
+        "libs/feature-module-ui/approvals-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/reports-ui": [
+        "libs/feature-module-ui/platform/reports-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/analytics-ui": [
+        "libs/feature-module-ui/platform/analytics-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/hr-foundations-ui": [
+        "libs/feature-module-ui/platform/hr-foundations-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/provisioning-ui": [
+        "libs/feature-module-ui/platform/provisioning-ui/src/index.ts"
+      ],
+      "@nutela/comparts": [
+        "libs/comparts/src/index.ts"
+      ],
+      "@nutela/models/talent/performance": [
+        "libs/models/talent/performance/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/documents-ui": [
+        "libs/feature-module-ui/platform/documents-ui/src/index.ts"
+      ],
+      "@nutela/models/platform/report": [
+        "libs/models/platform/report/src/index.ts"
+      ],
+      "@nutela/models/platform/document": [
+        "libs/models/platform/document/src/index.ts"
+      ],
+      "@nutela/models/workforce/subscription": [
+        "libs/models/workforce/subscription/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/compensation/loans-ui": [
+        "libs/feature-module-ui/compensation/loans-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/compensation/payroll-ui": [
+        "libs/feature-module-ui/compensation/payroll-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/lookup-ui": [
+        "libs/feature-module-ui/platform/lookup-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/enterprise-planning/enterprise-structure-ui": [
+        "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/medical-ui": [
+        "libs/feature-module-ui/workforce/medical-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/subscription-ui": [
+        "libs/feature-module-ui/workforce/subscription-ui/src/index.ts"
+      ],
+      "@nutela/models/compensation/loans": [
+        "libs/models/compensation/loans/src/index.ts"
+      ],
+      "@nutela/models/platform/lookup": [
+        "libs/models/platform/lookup/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/platform/data-upload-ui": [
+        "libs/feature-module-ui/platform/data-upload-ui/src/index.ts"
+      ],
+      "@nutela/models/platform/data-upload": [
+        "libs/models/platform/data-upload/src/index.ts"
+      ],
+      "@nutela/models/compensation/payroll": [
+        "libs/models/compensation/payroll/src/index.ts"
+      ],
+      "@nutela/models/compensation/payment": [
+        "libs/models/compensation/payment/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/time-ui": [
+        "libs/feature-module-ui/workforce/time-ui/src/index.ts"
+      ],
+      "@nutela/models/workforce/time-sheet": [
+        "libs/models/workforce/time-sheet/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/exit-ui": [
+        "libs/feature-module-ui/workforce/exit-ui/src/index.ts"
+      ],
+      "@nutela/models/workforce/exit": [
+        "libs/models/workforce/exit/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/compensation/payment-ui": [
+        "libs/feature-module-ui/compensation/payment-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/workforce/processes-ui": [
+        "libs/feature-module-ui/workforce/processes-ui/src/index.ts"
+      ],
+      "@nutela/feature-module-ui/talent/learning-ui": [
+        "libs/feature-module-ui/talent/learning-ui/src/index.ts"
+      ]
+    }
   },
-  "angularCompilerOptions": {
-    "enableIvy": true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
-  }
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

@@ -1,0 +1,133 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Schedule Record'" [subTitle]="'Details of payment schedule record'"
+      [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Payment Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.number | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Reference:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.payment_ref | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Fullname:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.fullname | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Mobile Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.mobile_number | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Email:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.email | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Bank:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.bank_description | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>CBN Code:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.bank_cbn_code | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Account Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.account_no | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Account Type:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.account_type | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Amount:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          <span class="curr"
+            *ngIf="data?.currency_code===currencyCode">&#8358;</span>&nbsp;{{data?.actual_amount | number: '2.2-5'}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Amount Payable:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          <span class="curr"
+            *ngIf="data?.currency_code===currencyCode">&#8358;</span>&nbsp;{{data?.payable_amount | number: '2.2-5'}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Status:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.response_description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Narration:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.narration | stringDisplay}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()">
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,70 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show ? '0' : utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Multi-Job-Role Transaction'" [subTitle]="' '"
+        [loading]="inEditMode() && !data" ></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f"  (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="employee_id" [dataSource]="employeeList$ | async" valueExpr="value" 
+            displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true closeOnOutsideClick="false" 
+            popupHeight="400px" class="form-font" showClearButton="true" disabled="true"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <!-- <dx-lookup formControlName="position_id" [dataSource]="positionList$ | async" valueExpr="value" 
+            displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true closeOnOutsideClick="false" 
+            popupHeight="400px" class="form-font" showClearButton="true"></dx-lookup> -->
+            <mdb-select *ngIf="!this.inEditMode()" formControlName="position_id" [options]="positionList$ | async" [filterEnabled]="true" [multiple]="true"
+            [allowClear]="true"  class="form-font"></mdb-select>
+            
+            <mdb-select *ngIf="this.inEditMode()" formControlName="position_id" [options]="positionList$ | async" [filterEnabled]="true" [multiple]="false"
+            [allowClear]="true"  class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_from" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Is it Temporary?:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+                No <label class="switch">
+                    <input #staffNo type="checkbox" formControlName="is_temp" (change)="onClick()" unchecked>
+                  <span class="slider round"></span>
+                  </label>Yes<br><br>
+            </div>
+        </div>
+        <div class="row mb-1" *ngIf="fs.isTemporary.value">
+          <div class="col-4">
+            <label class="required center-label">End Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="end_date" [placeholder]="''"></dx-date-box>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="isProcessing$ | async"
+        (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

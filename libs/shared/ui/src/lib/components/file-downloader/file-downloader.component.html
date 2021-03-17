@@ -1,0 +1,40 @@
+<div class="row box bg-color">
+  <div class="col-md-12" *ngIf="data">
+    <div class="mb-2"  *ngIf="!useIcon">
+      <span><i class="fa fa-file-text-o fa-2x"></i></span>
+    </div>
+    <div *ngIf="!useIcon">
+      <div class="upload-btn-wrapper">
+        <button mdbBtn rounded="true" outline="true" color="default" class="btn btn-sm waves-effect"
+          (click)="download()">Download</button>
+      </div>
+      <p mt-3 *ngIf="showText">
+        <small>Click the download button to to view or download attached documents</small>
+      </p>
+    </div>
+    <div *ngIf="useIcon">
+      <div class="upload-btn-wrapper">
+        <span  class="download-icon" (click)="download()" [title]="downloadIconTitle"><i class="fa fa-download"></i></span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="htmlDoc">
+    <div class="mb-2"  *ngIf="!useIcon">
+      <span><i class="fa fa-file-text-o fa-2x"></i></span>
+    </div>
+    <div *ngIf="!useIcon">
+      <div class="upload-btn-wrapper">
+        <button mdbBtn rounded="true" outline="true" color="default" class="btn btn-sm waves-effect"
+          (click)="download()">Download</button>
+      </div>
+      <p mt-3 *ngIf="showText">
+        <small>Click the download button to to view or download attached documents</small>
+      </p>
+    </div>
+    <div *ngIf="useIcon">
+      <div class="upload-btn-wrapper">
+        <span  class="download-icon" (click)="download()" [title]="downloadIconTitle"><i class="fa fa-download"></i></span>
+      </div>
+    </div>
+  </div>
+</div>

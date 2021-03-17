@@ -1,0 +1,36 @@
+<div class="card card-container">
+    <div class="card-content font-size">
+        <!-- <div class="card-content-top mb-2">
+            <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+        </div> -->
+        <div class="card-content-bottom">
+            <igx-grid #dataGrid *ngIf="true" [data]="refereeData$ | async" [paging]="false" [autoGenerate]="false" [height]="null" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                <igx-column field="requirement_type_text" header="Tag" width="10%"></igx-column>
+                <igx-column field="title" header="Title" width="10%"></igx-column>
+                <igx-column field="ref_surname" header="Surname" width="20%"></igx-column>
+                <igx-column field="ref_firstname" header="First Name" width="10%"></igx-column>
+                <igx-column field="ref_othernames" header="Other Names" width="10%"></igx-column>
+                <igx-column field="gender" header="gender" width="10%"></igx-column>
+                <igx-column field="email" header="Email" width="20%"></igx-column>
+                <igx-column field="ref_id" header="..." class="text-center" width="10%">
+                    <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                            <div class="hover-menu">
+                                <span class="hover-ellipse-menu"></span>
+                                <div class="hover-icons">
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 2" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 2" [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-cloud-download'" title="Download" (click)="onDownloadIconClicked(val)" *ngIf="hasDocumentApproved(val)"></x365-shared-ui-hover-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </igx-column>
+            </igx-grid>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-reboard-referees-editor #editor [width]="34" [show]="showEditor$ | async" [data]="null" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()"></x365-fm-workforce-reboard-referees-editor>
+<x365-fm-workforce-reboard-referees-viewer #viewer [width]="34" [show]="showViewer$ | async" [data]="null" [imageData]="imageData$ | async" [dataDoc]="documentData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-reboard-referees-viewer>

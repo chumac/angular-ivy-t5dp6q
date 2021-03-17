@@ -1,0 +1,27 @@
+// @import "jquery-ui/themes/base/all.css";
+// @import "devextreme/dist/css/dx.common.css";
+// @import "devextreme/dist/css/dx.light.css";
+// @import "@devexpress/analytics-core/dist/css/dx-analytics.common.css";
+// @import "@devexpress/analytics-core/dist/css/dx-analytics.light.css";
+// @import "@devexpress/analytics-core/dist/css/dx-querybuilder.css";
+// @import "devexpress-dashboard/dist/css/dx-dashboard.light.css";
+
+
+.back-navigation {
+    float: left;
+    button {
+      transition: all .2s ease-in-out;
+      border-color: rgba(black, 0.7) !important;
+      color: rgba(black, 0.7) !important;
+    }
+    button {
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: rgba(black, 0.7) !important;
+        color: #fff !important;
+        outline: none !important;
+        border-color: transparent !important;
+      }
+    }
+  }

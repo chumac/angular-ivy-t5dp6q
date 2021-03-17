@@ -1,0 +1,30 @@
+export interface IPreviousEmployer {
+  prev_id: number;
+  employee_id: number;
+  employer: string;
+  employment_date: Date;
+  exit_date: Date;
+  postheld_at_employment: string;
+  reason_4_exit: string;
+  count_experience: number;
+  company_address: string;
+  remark: string;
+  business_type: string;
+  starting_salary: string;
+  salary_before_exit: string;
+  position_before_exit: string;
+  department: string;
+  verification_sent_date: Date;
+  verification_received_date: Date;
+  verification_status: number;
+  requirement_type: number;
+  requirement_type_text: string;
+  archive_status: boolean;
+  approval_status: number;
+  approval_status_text: string;
+  attach_document: string;
+  img_size: string;
+  img_extension: string;
+  img_guid: string;
+  img_url: string;
+}

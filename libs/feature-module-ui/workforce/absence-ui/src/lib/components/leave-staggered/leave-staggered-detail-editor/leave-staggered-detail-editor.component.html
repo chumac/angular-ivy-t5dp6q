@@ -1,0 +1,64 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Staggered Leave Details'" [subTitle]="'Add/Edit staggered leave details'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Start Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="start_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div  *ngIf="data?.pay_allowance || supportPayment">
+                    <div class="row mb-1 pay-mt">
+                        <div class="col-4">
+                            <label class="required">Pay Me:</label>
+                        </div>
+                        <div class="col-8">
+                            <div class="switch">
+                                <label>
+                                No
+                                <input #allowPay formControlName="pay_allowance" value="false" type="checkbox">
+                                <span class="lever"></span>
+                                Yes
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1" *ngIf="allowPay.value">
+                        <div class="col-4">
+                            <label class="required center-label">Currency:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <mdb-select formControlName="currency_id" [options]="currencyList$ | async" class="form-font"></mdb-select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label" title="Number of Days">No. of Days:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="no_of_days" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Backup Officer:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup formControlName="assigned_backup_id" [dataSource]="activePersonnel$ | async" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

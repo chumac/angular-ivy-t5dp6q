@@ -1,0 +1,663 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+ <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'WorkFlow Map Alternate'" [subTitle]="'Edit WorkFlow Map Alternate'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <!---first-->
+        <div *ngIf="ruleType==0">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Enterprise Structure:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+        <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+        class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label"> Operation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+      <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Workflow:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+        <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+          </div>
+        </div>
+      </div>
+
+        <!--second-->
+        <div *ngIf="ruleType==1">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Enterprise Structure:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+          (selected)="onStructure($event)" class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Specific Structure:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select  [options]="specificStructure"  [filterEnabled]="true"
+            (selected)="onStructureDetail($event)" class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Cost Center:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="analysis_det_id" [options]="costCenter"  [filterEnabled]="true"
+                    class="form-font"></mdb-select>
+                </div>
+              </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label"> Operation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div>
+
+        <!---third-->
+        <div *ngIf="ruleType==2">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Grade:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="grade_id" [options]="grade"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Operation:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div>
+
+        <!---fourth-->
+        <div *ngIf="ruleType==3">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Grade:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="grade_id" [options]="grade"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Enterprise Structure:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Operation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+          </div>
+
+        <!---fifth-->
+        <div *ngIf="ruleType==4">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Grade:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="grade_id" [options]="grade"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Enterprise Structure:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+            (selected)="onStructure($event)" class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Specific Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select  [options]="specificStructure"  [filterEnabled]="true"
+              (selected)="onStructureDetail($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                    <label class="required center-label">Cost Center:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="analysis_det_id" [options]="costCenter"  [filterEnabled]="true"
+                      class="form-font"></mdb-select>
+                  </div>
+                </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Operation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+          </div>
+
+        <!---sixth-->
+        <div *ngIf="ruleType==5">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Employee:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="for_employee_id" [options]="forEmployee"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---seventh custom group-->
+        <div *ngIf="ruleType==6">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Staff Group:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="staff_group_id" [options]="staffGroup"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---eighth Specific Staff Category-->
+        <div *ngIf="ruleType==7">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Staff Category:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="category_id" [options]="category"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---ninth Specific Designation-->
+        <div *ngIf="ruleType==8">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Designation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="designation_id" [options]="designation"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---tenth Specific Position-->
+        <div *ngIf="ruleType==9">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Position:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="position_id" [options]="position"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---eleventh Specific Designation in a structure type-->
+        <div *ngIf="ruleType==10">
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Destination:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="designation_id" [options]="designation"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Enterprise Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+              (selected)="onStructure($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---twelveth Specific Designation in a specific structure-->
+        <div *ngIf="ruleType==11">
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Designation:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="designation_id" [options]="designation"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Enterprise Structure:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+            (selected)="onStructure($event)" class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Specific Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select  [options]="specificStructure"  [filterEnabled]="true"
+              (selected)="onStructureDetail($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                    <label class="required center-label">Cost Center:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="analysis_det_id" [options]="costCenter"  [filterEnabled]="true"
+                      class="form-font"></mdb-select>
+                  </div>
+                </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---thirteenth Specific Position in a structure type-->
+        <div *ngIf="ruleType==12">
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Position:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_id" [options]="position"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Enterprise Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+              (selected)="onStructure($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---fourteenth Specific Position in a specific structure-->
+        <div *ngIf="ruleType==13">
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Position:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_id" [options]="position"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Enterprise Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+              (selected)="onStructure($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                    <label class="required center-label">Specific Structure:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                <mdb-select  [options]="specificStructure"  [filterEnabled]="true"
+                (selected)="onStructureDetail($event)" class="form-font"></mdb-select>
+                  </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                      <label class="required center-label">Cost Center:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                  <mdb-select formControlName="analysis_det_id" [options]="costCenter"  [filterEnabled]="true"
+                        class="form-font"></mdb-select>
+                    </div>
+                  </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---fifteenth Specific position category-->
+        <div *ngIf="ruleType==14">
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Position Category:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="position_category" [options]="positionCategory"  [filterEnabled]="true"
+                class="form-font"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---sixteenth Specific position category in a structure type-->
+        <div *ngIf="ruleType==15">
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Position Category:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_category" [options]="positionCategory"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Enterprise Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+              (selected)="onStructure($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div><!---seventeenth Specific position category in a specific structure-->
+        <div *ngIf="ruleType==16">
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Position Category:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_category" [options]="positionCategory"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">Enterprise Structure:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="analysis_id" [options]="specificType"  [filterEnabled]="true"
+            (selected)="onStructure($event)" class="form-font"></mdb-select>
+              </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                  <label class="required center-label">Specific Structure:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+              <mdb-select  [options]="specificStructure"  [filterEnabled]="true"
+              (selected)="onStructureDetail($event)" class="form-font"></mdb-select>
+                </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                    <label class="required center-label">Cost Center:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="analysis_det_id" [options]="costCenter"  [filterEnabled]="true"
+                      class="form-font"></mdb-select>
+                  </div>
+                </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                <label class="required center-label">System Entity:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="msg_source" [options]="sysOption"  [filterEnabled]="true"
+                  class="form-font"></mdb-select>
+              </div>
+            </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Workflow:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="w_flow_id" [options]="workOption" [filterEnabled]="true"  class="form-font"></mdb-select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>

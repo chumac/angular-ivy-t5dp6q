@@ -1,0 +1,16 @@
+<div [ngSwitch]="selectedModuleId">
+  <x365-fm-workforce-reboard-personal-info *ngSwitchCase="NavMenuItemTypes.PERSONAL_INFORMATION" [data]="data" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-personal-info>
+  <x365-fm-workforce-reboard-profile-picture *ngSwitchCase="NavMenuItemTypes.PROFILE_PICTURE" [data]="data" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-reboard-profile-picture>
+  <x365-fm-workforce-reboard-contact *ngSwitchCase="NavMenuItemTypes.CONTACT" [data]="data" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-contact>
+  <x365-fm-workforce-reboard-identification *ngSwitchCase="NavMenuItemTypes.IDENTIFICATION" [data]="data" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-identification>
+  <x365-fm-workforce-reboard-payment *ngSwitchCase="NavMenuItemTypes.PAYMENT" [data]="data" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-payment>
+  <x365-fm-workforce-reboard-work-history *ngSwitchCase="NavMenuItemTypes.WORK_HISTORY" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-work-history>
+  <x365-fm-workforce-reboard-edu-history *ngSwitchCase="NavMenuItemTypes.EDUCATIONAL_HISTORY" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-edu-history>
+  <x365-fm-workforce-reboard-pro-qualifications *ngSwitchCase="NavMenuItemTypes.PROFESSIONAL_QUALIFICATIONS" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-pro-qualifications>
+  <x365-fm-workforce-reboard-dependants *ngSwitchCase="NavMenuItemTypes.DEPENDANTS" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-dependants>
+  <x365-fm-workforce-reboard-beneficiaries *ngSwitchCase="NavMenuItemTypes.BENEFICIARIES" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-beneficiaries>
+  <x365-fm-workforce-reboard-referees *ngSwitchCase="NavMenuItemTypes.PERSONAL_REFEREES" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-referees>
+  <x365-fm-workforce-reboard-family *ngSwitchCase="NavMenuItemTypes.FAMILY" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-family>
+  <x365-fm-workforce-reboard-guarantors *ngSwitchCase="NavMenuItemTypes.GUARANTORS" [reboardMode]="reboardMode"></x365-fm-workforce-reboard-guarantors>
+  <x365-fm-workforce-reboard-personal-info *ngSwitchDefault [reboardMode]="reboardMode"></x365-fm-workforce-reboard-personal-info>
+</div>

@@ -1,0 +1,175 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="top container-card">
+                <div class="row mb-3 mt-3">
+                    <div class="col-10">
+                        <div class="file-field md-form">
+                            <div class="file-path-wrapper">
+                                <dx-lookup #employeesLookup [dataSource]="employeelist$ | async" valueExpr="employee_id" displayExpr='emp_fullname' (onValueChanged)="onEmployeeSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Employee" closeOnOutsideClick=false
+                                    popupHeight="400px" class="form-font"></dx-lookup>
+                            </div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div class="file-path-wrapper">
+                                <dx-lookup #plansLookup [dataSource]="planlist$ | async" valueExpr="id" displayExpr='description' [disabled]='plansLookupDisableStatus' (onValueChanged)="onPlanSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Plan"
+                                    closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                            </div>
+                            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                            <div mdbBtn color="warning" size="sm" class="waves-light disabled" [class.disabled]="!(enableSelectBtn$ | async)" mdbWavesEffect>
+                                <span>Select File</span>
+                                <input type="file" (change)="onFileChange($event)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="d-flex align-items-bottom justify-content-start">
+                            <i *ngIf="isProcessingSingleEmployeeDataGrid$ | async" class="select-plan-spinner fa fa-spinner fa-spin"></i>
+                            <i *ngIf="null" class="fa fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4"> </div>
+        <div class="col-8">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <div class="d-flex justify-content-end">
+                    <button [disabled]="!(enableValidationBtn$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onValidateButtonClicked()">&nbsp;<span *ngIf="isValidating$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Validate</button>
+                    <button [disabled]="!(enableImportBtn$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onImportButtonClicked()">&nbsp;<span *ngIf="isImporting$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Import</button>
+                    <button [disabled]="!(enableResetBtn$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onResetButtonClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="bottom container-card">
+                <div class="content-header">
+
+                </div>
+                <div class="content-body">
+                    <igx-grid #singleEmployeeObjectivesDataGrid [data]="singleEmployeeObjectivesData$ | async" [paging]="true" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+
+                        <igx-column field="plan_code" header="Plan Code">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="staff_number" header="Staff No.">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="perspective_code" header="Perspective Code">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="description" header="Description" width="35%">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="metric" header="Metric">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="allow_self_rating" header="Allow self Rating"></igx-column>
+
+                        <igx-column field="weight" header="Weight">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="target" header="Target">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="target_type" header="Target Type">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | targetOpt | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="target_type_other" header="Target type Other">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="start_date" header="Start Date">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="due_date" header="Due Date">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="is_strategic" header="Is Strategic">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <igx-column field="lower_is_better" header="Lower is better">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+
+                        <!-- <igx-column *ngIf="hasIssues$ | async" field="has_issues" header="Status">
+              <ng-template igxCell let-val>
+                <div class="right-align-text1">{{val | stringDisplay}}</div>
+              </ng-template>
+            </igx-column> -->
+
+                        <!-- <igx-column *ngIf="hasIssues$ | async"  field="error_comment" header="Error Comment">
+              <ng-template igxCell let-val>
+                  <a *ngIf="val" tabindex="0" 
+                  color="danger"
+                  mdbPopover="{{val | stringDisplay}}"
+                  placement="bottom"
+                  mdbPopoverHeader="Error Comment"
+                  triggers="focus" mdbWavesEffect>
+                  <i class="fa fa-question-circle-o text-danger"></i>
+                </a>
+              </ng-template>
+            </igx-column> -->
+
+                        <igx-column field="id" header="..." class="text-right">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-right"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                            <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Cancel" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-single-employee-load-objectives-editor #editor [width]="32" [show]="showSingleEmployeeEditor$ | async" [data]="null" (cancelClick)="onCancelSingleEmployeeEditor()"></x365-fm-talent-single-employee-load-objectives-editor>
+<x365-fm-talent-single-employee-load-objectives-viewer #viewer [width]="32" [show]="showSingleEmployeeViewer$ | async" [data]="null" (cancelClick)="onCancelSingleEmployeeViewer()"></x365-fm-talent-single-employee-load-objectives-viewer>

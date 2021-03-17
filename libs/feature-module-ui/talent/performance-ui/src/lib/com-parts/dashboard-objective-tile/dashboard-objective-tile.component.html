@@ -1,0 +1,40 @@
+<div class="card mb-2">
+    <div class="card-body">
+        <div class="container px-0">
+            <div class="row">
+                <div class="col-9 d-flex flex-column justify-content-center pr-0">
+                    <div class="mb-2">
+                        <div class="col-12 d-flex justify-content-start pl-0 px-0">
+                            <div class="bdge">
+                                <a (click)="canNavigate?gotoProgressReport(data?.objective_id, false):false">{{ data?.perspective }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 d-flex justify-content-between perspectives">
+                        <div class="pr-0 pl-0">
+                            <p class="value">{{ data?.weight }}</p>
+                            <p class="label text-danger">WEIGHT</p>
+                        </div>
+                        <div class="pr-0 pl-0">
+                            <p class="value">{{ data?.target }}</p>
+                            <p class="label text-primary">TARGET</p>
+                        </div>
+                        <div class="pr-0 pl-0">
+                            <p class="value">{{ data?.achieved }}</p>
+                            <p class="label text-success">ACHIEVED</p>
+                        </div>
+                    </div>
+                    <div class="mb-0">
+                        <div class="col-12 pr-0 pl-0">
+                            <p class="footer font-weight-bold">Total Score: {{ data?.score_text }}</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-3 pr-0 pl-0 d-flex justify-content-center align-items-center">
+                    <circle-progress [percent]="data?.perc_complete" [radius]="25" [outerStrokeWidth]="5" [innerStrokeWidth]="0" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'" [animation]="true" [animationDuration]="300"></circle-progress>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

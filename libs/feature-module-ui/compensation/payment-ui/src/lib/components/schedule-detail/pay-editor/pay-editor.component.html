@@ -1,0 +1,95 @@
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true" (closed)="onClosed($event)">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h4 class="modal-title w-100" id="myModalLabel">Payment Details</h4>
+
+        <button type="button" class="close ml-2" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="">&times;</span>
+        </button>
+        <div class="display-td">
+          <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+        </div>
+      </div>
+      <div class="modal-body bg-white">
+        <article class="">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="panel panel-default">
+                  <div class="panel-heading mb-3">
+                    <h3 class="panel-title"></h3>
+                  </div>
+                  <div class="panel-body mt-4">
+                    <form role="form" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                      <div class="row">
+                        <div class="col-10 pr-0">
+                          <div class="md-form">
+                            <input type="text" formControlName="cardNum" mdbCreditCard #card="mdbCreditCard"
+                              id="cardNumber" class="form-control" length="19" mdbCharCounter mdbInput>
+                            <label for="cardNumber">CARD NUMBER</label>
+                          </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center px-0">
+                          <div class="m-auto">
+                            <i class="fa fa-cc-{{card.cardName}} fa-2x" aria-hidden="true" *ngIf="card.cardName"></i>
+                            <i class="fa fa-credit-card fa-2x" aria-hidden="true" *ngIf="!card.cardName"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="form-row align-items-center">
+                            <div class="col-auto">
+                              <div class="md-form">
+                                <input mdbInput mdbDateFormat formControlName="expirydate" [format]="['mm', 'yy']"
+                                  type="text" class="form-control mb-2" id="expiryDate">
+                                <label class="text-uppercase" for="expiryDate">Expiry Date</label>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <div class="md-form">
+                                <input formControlName="cvvNumber" mdbInput mdbCvv type="password"
+                                  class="form-control mb-2" id="cvc" maxlength="3">
+                                <label class="text-uppercase" for="cvc">CV Code</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="md-form">
+
+                            <input mdbInput formControlName="currentpin" mdbCvv type="password"
+                              class="form-control mb-2" id="pin">
+                            <label class="text-uppercase" for="pin">Pin</label>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+                <ul class="nav nav-pills nav-stacked mb-3">
+                  <li class="active">
+                    <p><span class="badge pull-right"><span
+                          class="curr">&#8358;</span>&nbsp;{{amount | number: '2.2-5'}}</span>
+                      Total
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="modal-footer justify-content-center waves-effect px-4 bg-light" mdbWavesEffect>
+        <button mdbBtn type="button" color="warning" block="true" mdbWavesEffect [disabled]="false"
+          (click)="onSubmit()">&nbsp;<span *ngIf="isProcessing$ | async"><i
+              class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Authorize</button>
+      </div>
+    </div>
+  </div>
+</div>

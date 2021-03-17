@@ -1,0 +1,200 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Employee Summary'" [subTitle]="'Summary of employee data'" [loading]="!data"></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-12 row-text mt-0 mb-2 text-right">
+            <x365-shared-ui-avatar [centerAvatar]="true" [width]="'17em'" [height]="'17em'" [src]="imageData" [showBorder]="false" [isRounded]="true" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+            </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-12 text-center">
+            <h6 class="font-weight-bold"><span>{{ data?.employee_surname | titlecase }} </span><span>{{ data?.employee_firstname | titlecase }}</span></h6>
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+            <div class="col-12 md-form mt-2">
+              <h5>File Information</h5>
+              <hr class="mt-1">
+            </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Employee Number:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.employee_number}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>File Number:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.employee_fileno | stringDisplay}}
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Biographical Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Title:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.title}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Gender:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.gender}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Date of Birth:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.date_of_birth | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Age:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{'' | stringDisplay}}
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Marital Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Marital Status:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.marital_status}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Wedding Date.:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.wedding_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Maiden Name:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.maiden_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Home Place</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Home Town:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.homeplace | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Other Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Birth Country:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.birth_country?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Birth State:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+              {{data?.birthstate?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Birth City:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+              {{data?.area?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Nationality:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.nationality?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>State of Origin:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.state?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Local Govt.:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.lga?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label>Religion:</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-value text-right">
+            {{data?.religion?.description}}
+          </div>
+        </div>
+        <!-- <div class="row mt-4 mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="dataDoc" [data]="dataDoc"></x365-shared-ui-file-downloader>
+          </div>
+          <div class="col-1"></div>
+        </div> -->
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<button mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" *ngIf="showSecondaryButton" [disabled]="secondaryButtonDisabled" (click)="onSecondaryClick()">&nbsp;&nbsp;<span *ngIf="secondaryBusy"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;&nbsp;{{secondaryButtonText}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+<button mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-warning" *ngIf="showPrimaryButton" [disabled]="doneButtonDisabled" (click)="onDoneClick()">
+  &nbsp;&nbsp;
+  <span *ngIf="busy"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>
+  <span *ngIf="!busy && doneText.toLocaleLowerCase() === 'save'"><i class="fa fa-floppy-o"></i></span>
+  <span *ngIf="!busy && doneText.toLocaleLowerCase() === 'send letter'"><i class="fa fa-paper-plane-o"></i></span>
+  &nbsp;&nbsp;&nbsp;{{doneText}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</button>
+<button mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning " (click)="onCancelClick()" *ngIf="showCancelButton">Cancel</button>

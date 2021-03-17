@@ -1,0 +1,39 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Edit Request'" [subTitle]="subTitle" [loading]='!(leaveEditData$ | async)'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label" title="Number of Days">No. of Days:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="no_of_days" type="text" class="form-control form-font" [disableControl]="(leaveEditData$ | async)===null">
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Start Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="start_date" class="form-font" [disableControl]="(leaveEditData$ | async)===null"></dx-date-box>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Backup Officer:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup formControlName="assigned_backup_id" [dataSource]="activePersonnel" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupWidth="400px" popupHeight="400px" class="form-font" [disableControl]="(leaveEditData$ | async)===null"></dx-lookup>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" [doneButtonDisabled]="(leaveEditData$ | async)===null" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

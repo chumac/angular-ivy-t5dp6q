@@ -1,0 +1,33 @@
+<div class="notification-container">
+  <a [matMenuTriggerFor]="Notification">
+    <i class="fa fa fa-bell-o icon-white"></i>
+    <span *ngIf="(queueList$ | async).length > 0 && (queueList$ | async)[0].total_count" class="pulse">{{ ((((queueList$ | async).length > 0 )?(queueList$ | async)[0].total_count:null) > 29) ? '29+' : (((queueList$ | async).length > 0 )?(queueList$ | async)[0].total_count:null) }}</span>
+  </a>
+</div>
+
+<mat-menu #Notification="matMenu" class="notification">
+  <ng-template matMenuContent>
+    <div class="items">
+      <div class="items-head">
+        <p>NOTIFICATIONS</p>
+        <hr>
+      </div>
+      <div class="items-body">
+          <div *ngFor="let que of queueList$ | async" class="items-body-content" title="{{ que?.description }}" (click)="notificationAction(que.id)">
+            <span>{{ que?.description }} </span>
+            <i>
+              <!-- <span class="badge badge-pill badge-warning">{{ que?.item_count }}</span> -->
+              <ng-container [ngSwitch]="true">
+                <ng-container *ngSwitchCase="que?.id === 1"><span class="badge badge-pill badge-danger">{{ que?.item_count }}</span></ng-container>
+                <ng-container *ngSwitchCase="que?.id === 3"><span class="badge badge-pill badge-danger">{{ que?.item_count }}</span></ng-container>
+                <ng-container *ngSwitchCase="que?.id === 4"><span class="badge badge-pill badge-danger">{{ que?.item_count }}</span></ng-container>
+                <ng-container *ngSwitchDefault><span class="badge badge-pill badge-warning">{{ que?.item_count }}</span></ng-container>
+              </ng-container>
+            </i>
+          </div>
+      </div>
+    </div>
+  </ng-template>
+</mat-menu>
+
+

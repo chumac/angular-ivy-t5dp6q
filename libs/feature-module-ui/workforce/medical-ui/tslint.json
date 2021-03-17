@@ -1,0 +1,17 @@
+{
+  "extends": "../../../../tslint.json",
+  "rules": {
+    "directive-selector": [
+      true,
+      "attribute",
+      "x365-fm-workforce-medical",
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      "x365-fm-workforce-medical",
+      "kebab-case"
+    ]
+  }
+}

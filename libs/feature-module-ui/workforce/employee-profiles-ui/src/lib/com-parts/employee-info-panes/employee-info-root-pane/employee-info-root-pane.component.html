@@ -1,0 +1,17 @@
+<div [ngSwitch]="selectedModuleId">
+  <x365-fm-workforce-personal-information *ngSwitchCase="NavMenuItemTypes.PERSONAL_INFORMATION" [data]="data"></x365-fm-workforce-personal-information>
+  <x365-fm-workforce-profile-picture *ngSwitchCase="NavMenuItemTypes.PROFILE_PICTURE" [data]="data"></x365-fm-workforce-profile-picture>
+  <x365-fm-workforce-contact *ngSwitchCase="NavMenuItemTypes.CONTACT" [data]="data"></x365-fm-workforce-contact>
+  <x365-fm-workforce-identification *ngSwitchCase="NavMenuItemTypes.IDENTIFICATION" [data]="data"></x365-fm-workforce-identification>
+  <x365-fm-workforce-payment *ngSwitchCase="NavMenuItemTypes.PAYMENT" [data]="data"></x365-fm-workforce-payment>
+  <x365-fm-workforce-work-history *ngSwitchCase="NavMenuItemTypes.WORK_HISTORY"></x365-fm-workforce-work-history>
+  <x365-fm-workforce-educational-history *ngSwitchCase="NavMenuItemTypes.EDUCATIONAL_HISTORY"></x365-fm-workforce-educational-history>
+  <x365-fm-workforce-professional-qualifications *ngSwitchCase="NavMenuItemTypes.PROFESSIONAL_QUALIFICATIONS"></x365-fm-workforce-professional-qualifications>
+  <x365-fm-workforce-dependants *ngSwitchCase="NavMenuItemTypes.DEPENDANTS"></x365-fm-workforce-dependants>
+  <x365-fm-workforce-beneficiaries *ngSwitchCase="NavMenuItemTypes.BENEFICIARIES"></x365-fm-workforce-beneficiaries>
+  <x365-fm-workforce-personal-referees *ngSwitchCase="NavMenuItemTypes.PERSONAL_REFEREES"></x365-fm-workforce-personal-referees>
+  <x365-fm-workforce-family *ngSwitchCase="NavMenuItemTypes.FAMILY"></x365-fm-workforce-family>
+  <x365-fm-workforce-guarantors *ngSwitchCase="NavMenuItemTypes.GUARANTORS"></x365-fm-workforce-guarantors>
+  <x365-fm-workforce-custom-data-forms *ngSwitchCase="NavMenuItemTypes.CUSTOM_DATA_FORM"></x365-fm-workforce-custom-data-forms>
+  <x365-fm-workforce-personal-information *ngSwitchDefault></x365-fm-workforce-personal-information>
+</div>

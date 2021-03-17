@@ -1,0 +1,18 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Profile Photo'" [subTitle]="'Details of your profile photo (Awaiting appoval)'" [loading]='false'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="row mb-2">
+                <div class="col-12 row-text mt-0 mb-2 text-right">
+                    <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="imageBaseHeader + (awaitingApprovalProfilePicture$ | async)?.image_profile" [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false"
+                        [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

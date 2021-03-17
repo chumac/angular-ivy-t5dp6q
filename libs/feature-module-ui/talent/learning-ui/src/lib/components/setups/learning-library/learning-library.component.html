@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <div class="row projectsection">
+    <div *ngFor="let item of learningLibraryData$|async; let i = index"
+      class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 col16">
+      <div class="projects-box">
+        <div class="projects-image">
+          <img *ngIf='item.img_url == null' src="./../../../../../../../../../assets/images/imges1.png" alt="Image" />
+          <img *ngIf='item.img_url != null' src="{{item.img_url}}" alt="Image" />
+        </div>
+        <div class="projects-contents">
+          <div class="contentsh3">
+            <h3>{{item.title}}</h3>
+          </div>
+          <div class="contentsh4">
+            <h4>PJGMT101-2C</h4>
+          </div>
+          <div class="contentsh5">
+            <h5 *ngIf="item.action_type == 'ENROLL'"><span class="iconactive"><i class="fa fa-circle"
+                  aria-hidden="true"></i></span> Online</h5>
+          </div>
+          <div class="contentsp">
+            <p *ngIf="(item.details.length > 140) && !isMoreShow[i]">{{item.details.slice(0,140)}} <a class="a"
+                (click)="ClickMore('more', i)">more...</a></p>
+            <p *ngIf="(item.details.length > 140) && isMoreShow[i]">{{item.details}} <a class="a"
+                (click)="ClickMore('less', i)">less...</a></p>
+          </div>
+          <div class="projects-footer mt-2">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="like-section">
+                  <img src="./../../../../../../../../../assets/images/like.png" alt="" />
+                  <span>{{item.kudos_receipt}}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="enroll-btn">
+                  <a (click)="onClickType(item.action_type, item.event_id, item.course_id)" class="btn-rounded">{{item.action_type}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<x365-fm-talent-learning-library-apply-editor #applyEditor [eventScheduleData]="eventScheduleData$ | async"
+  [selectedEventId]="selectedEventId" [width]="28" [show]="showApplyEditor$ | async"
+  (cancelClick)="onCancelApplyEditor()">
+</x365-fm-talent-learning-library-apply-editor>
+
+<x365-fm-talent-learning-library-enroll-editor #enrollEditor [courseId]="courseId" [width]="28" [show]="showEnrollEditor$ | async"
+  [courseData]="courseData$ | async" (cancelClick)="onCancelEnrollEditor()">
+</x365-fm-talent-learning-library-enroll-editor>

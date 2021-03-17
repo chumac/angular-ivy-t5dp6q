@@ -1,0 +1,16 @@
+<div class="card mb-2">
+    <div class="card-body">
+        <x365-shared-ui-shimmer-placeholder *ngIf="isLoading" [perColumn]="1" [noOfLines]="2" [box]="false" [photo]="false"></x365-shared-ui-shimmer-placeholder>
+        <div *ngIf="!isLoading" class="d-flex justify-content-between x-yellow">
+            <div class="left">
+                <p class="font-weight-bold">{{ title || '--' }}</p>
+                <small class="text-uppercase" [ngStyle]="{'color': color}">{{ status }}</small>
+            </div>
+            <div class="right">
+                <div [ngStyle]="{'background': color}" class="icon-holder d-flex justify-content-center align-items-center">
+                    <i [class]="icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

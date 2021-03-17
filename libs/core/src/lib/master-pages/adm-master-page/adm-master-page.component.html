@@ -1,0 +1,39 @@
+<header>
+  <mdb-side-nav #sidenav class="bg-side-nav fixed" [fixed]="true" [sidenavBreakpoint]="800">
+    <div class="bounds" fxLayoutAlign="start stretch" fxLayout="column">
+      <div class="nav-header-container" [fxFlex]="appBarHeight" fxLayout="column" fxLayoutAlign="center">
+        <x365-layout-ui-app-nav-header-ninebox [isAdmin]="isAdmin$ | async" (nineBoxToggled)="nineBoxtoggle($event)"></x365-layout-ui-app-nav-header-ninebox>
+      </div>
+
+      <div class="side-navigation-container" [fxFlex]="appNavigationHeight">
+        <x365-shared-nav-root-navigation [selectedModuleId]="selectedModuleId"></x365-shared-nav-root-navigation>
+      </div>
+
+      <div class="app-version-container" [fxFlex]="appVersionContainerHeight" (click)="onClick()"><span *ngIf="!isSelfServiceMode">{{ apiService?.version }}</span></div>
+    </div>
+  </mdb-side-nav>
+
+  <x365-layout-ui-app-info-bar [sidenav]="sidenav" [orgData]="orgData$ | async" [employeeName]="employeeName$ | async" [employeePhoto]="employeePhoto$ | async" [notificationCount]="workflowMessageCount$ | async" [loading]="showLoadingBar$ | async" (signout)="onSignout()"></x365-layout-ui-app-info-bar>
+</header>
+
+<!-- <div class="container-fluid breadcrumb-container bg-light">
+  <xng-breadcrumb></xng-breadcrumb>
+</div> -->
+<main [@slideStaggerAnimation]="getState(o)">
+  <div class="container-fluid view-port mt-0">
+    <router-outlet #o="outlet"></router-outlet>
+
+    <!-- Chat Bot-->
+    <!-- <div  class="iframe-container" [hidden]="true">
+      <iframe [src]='getChatBotIframeUrl()' style="height: 100%;height: 100%;background: #f3f3f3;">
+         <p>Your browser does not support iframes.</p>
+      </iframe> 
+   </div> -->
+   <!-- /Chat Bot-->
+
+  </div>
+</main>
+<div class="bg-side-nav mega-menu" #megaMenu [style.pointer-events]="isOpen ? 'auto' : 'none'" [@openCloseAnimation]="isOpen ? 'open' : 'closed'">
+  <x365-shared-nav-mega-menu-content [securityRoles]="securityRoles$ | async" [securityRolesMap]="authService.getAppModuleToSecurityRoleMap()" (menuItemClick)="onMenuItemClicked($event)" (routerLinkClick)="closeMegamenuOnRouterLink()"></x365-shared-nav-mega-menu-content>
+</div>
+

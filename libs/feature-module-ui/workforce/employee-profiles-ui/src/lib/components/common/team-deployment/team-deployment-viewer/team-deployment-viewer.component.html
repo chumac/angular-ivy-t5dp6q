@@ -1,0 +1,167 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+      <div class="header">
+          <x365-shared-ui-form-header [title]="'Team Deployment'" [subTitle]="'View details of transactions'" [loading]='!data'></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+          <div class="mx-3">
+
+            <div *ngIf="type === 1">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Source Location:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.s_local_detail_id_text | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Destination Location:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{ data?.d_local_detail_id_text | stringDisplay }}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Effective Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.effective_date | dateDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                  <div class="col-4">
+                      <label>Revert Date:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0 text-value text-right">
+                      {{data?.revert_date | dateDisplay}}
+                  </div>
+              </div>
+                <div class="row mb-1">
+                  <div class="col-4">
+                      <label>Current Position:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0 text-value text-right">
+                      {{data?.c_position_text | stringDisplay}}
+                  </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                      <label class="">New Position(s):</label>
+                  </div>
+                  <div class="col-8 md-form mt-0 text-value text-right">
+                      {{ data?.n_position_text | stringDisplay }}  
+                  </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-4">
+                    <label class="">Report-to Officer:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-value text-right">
+                    {{ data?.report_to_text | stringDisplay }}  
+                </div>
+              </div>
+              <div class="row mb-1">
+                  <div class="col-4">
+                      <label>Reason for action:</label>
+                  </div>
+                  <div class="col-8 md-form mt-0 text-value text-right">
+                      {{data?.reason_for_action | stringDisplay}}
+                  </div>
+              </div>
+            </div>
+
+            <div *ngIf="type === 0">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Current Location:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.current_location_details_text | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">New Location:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{ data?.new_location_details_text | stringDisplay }}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Effective Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.effective_date | dateDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>End Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.end_date | dateDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Current Position:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.current_position_text | stringDisplay}}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">New Position(s):</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{ data?.new_position_text | stringDisplay }}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Is Temporary:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{ data?.is_temporary | booleanDisplay }}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Has Resumed:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{ data?.has_resumed | booleanDisplay }}
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="">Report-to Officer:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{ data?.report_to_text | stringDisplay }}  
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label>Narration:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0 text-value text-right">
+                        {{data?.narration | stringDisplay}}
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
+      </div>
+      <div class="footer">
+          <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+      </div>
+  </div>
+</div>

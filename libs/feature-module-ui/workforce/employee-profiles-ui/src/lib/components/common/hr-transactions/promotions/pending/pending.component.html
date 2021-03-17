@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onSubmitButtonClicked()" *ngIf="multipleSelected"><i
+            class="fa fa-check"></i>&nbsp;&nbsp;Submit</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onViewSubmitedClicked()"><i class="fa fa-desktop"></i>&nbsp;&nbsp;View Submitted</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" (selected)="search()"
+                    placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective #searchInput type="text" (Keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Employee, Current Grade, New Grade, Current Paygroup, New Paygroup, Effective Date."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #pendingPromotionDataGrid [data]="pendingPromotionsData$ | async" [rowSelectable]="true"
+              [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false"
+              (onRowSelectionChange)="onRowClickChange($event)" [height]="null">
+              <igx-column field="employee_name" header="Employee" width="25%">
+              </igx-column>
+              <igx-column field="current_grade" header="Current Grade" width="13%">
+              </igx-column>
+              <igx-column field="current_paygroup" header="Current Paygroup" width="13%">
+              </igx-column>
+              <igx-column field="new_grade" header="New Grade" width="12%">
+              </igx-column>
+              <igx-column field="new_paygroup" header="New Paygroup" width="12%">
+              </igx-column>
+              <igx-column field="effective_date" header="Effective Date" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="right-align-text1">{{ val | dateDisplay }}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="13%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                          (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-check'" title="Submit"
+                          (click)="onSubmitIconClicked(val)" *ngIf="!multipleSelected"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Remove"
+                          (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-workforce-promotions-promotion-editor #promotionEditor [width]="32" [show]="showEditor$ | async"
+  [activePersonnel]="activePersonnel$ | async" (cancelClick)="onCancelPromotionEditor()"
+  [paygroupSelectOption]="paygroupSelectOption$ | async" [paygradeSelectOption]="paygradeSelectOption$ | async"
+  [arrearsStatusSelectOption]="arrearsStatusSelectOption$ | async" [actionSelectOption]="actionSelectOption$ | async"
+  [currentPaygradeSelectOption]="paygradeSelectOption$ | async"
+  [currentPaygroupSelectOption]="currentPaygroupSelectOption$ | async"></x365-fm-workforce-promotions-promotion-editor>
+
+<x365-fm-workforce-promotions-submission-process-editor #sumissionProcessEditor [width]="32"
+  [show]="showSubmissionProcessEditor$ | async" (cancelClick)="onCancelSubmissionProcessEditor()"
+  (selectGridRows)="onFormAction($event)" [submissionProcess]="submissionProcess$ | async">
+</x365-fm-workforce-promotions-submission-process-editor>
+
+<x365-fm-workforce-promotion-viewer #viewer [width]="30" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()" [isPending]="true"></x365-fm-workforce-promotion-viewer>

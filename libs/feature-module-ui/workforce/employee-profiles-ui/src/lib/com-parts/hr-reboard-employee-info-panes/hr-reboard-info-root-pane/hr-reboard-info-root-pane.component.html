@@ -1,0 +1,16 @@
+<div [ngSwitch]="selectedModuleId">
+  <x365-fm-workforce-hr-reboard-personal-info *ngSwitchCase="NavMenuItemTypes.PERSONAL_INFORMATION" [data]="data" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-personal-info>
+  <x365-fm-workforce-hr-reboard-profile-picture *ngSwitchCase="NavMenuItemTypes.PROFILE_PICTURE" [data]="data" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-profile-picture>
+  <x365-fm-workforce-hr-reboard-contact *ngSwitchCase="NavMenuItemTypes.CONTACT" [data]="data" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-contact>
+  <x365-fm-workforce-hr-reboard-identification *ngSwitchCase="NavMenuItemTypes.IDENTIFICATION" [data]="data" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-identification>
+  <x365-fm-workforce-hr-reboard-payment *ngSwitchCase="NavMenuItemTypes.PAYMENT" [data]="data" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-payment>
+  <x365-fm-workforce-hr-reboard-work-history *ngSwitchCase="NavMenuItemTypes.WORK_HISTORY" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-work-history>
+  <x365-fm-workforce-hr-reboard-edu-history *ngSwitchCase="NavMenuItemTypes.EDUCATIONAL_HISTORY" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-edu-history>
+  <x365-fm-workforce-hr-reboard-pro-qualifications *ngSwitchCase="NavMenuItemTypes.PROFESSIONAL_QUALIFICATIONS" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-pro-qualifications>
+  <x365-fm-workforce-hr-reboard-dependants *ngSwitchCase="NavMenuItemTypes.DEPENDANTS" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-dependants>
+  <x365-fm-workforce-hr-reboard-beneficiaries *ngSwitchCase="NavMenuItemTypes.BENEFICIARIES" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-beneficiaries>
+  <x365-fm-workforce-hr-reboard-referees *ngSwitchCase="NavMenuItemTypes.PERSONAL_REFEREES" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-referees>
+  <x365-fm-workforce-hr-reboard-family *ngSwitchCase="NavMenuItemTypes.FAMILY" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-family>
+  <x365-fm-workforce-hr-reboard-guarantors *ngSwitchCase="NavMenuItemTypes.GUARANTORS" [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-guarantors>
+  <x365-fm-workforce-hr-reboard-personal-info *ngSwitchDefault [reboardMode]="reboardMode" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-personal-info>
+</div>

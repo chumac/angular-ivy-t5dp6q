@@ -1,0 +1,120 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Deduction'" [subTitle]="'Details of fixed allowance'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.code | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Short Name:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.shortname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Rank:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.ordering_rank | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="data?.formula_id_text">
+          <div class="col-4">
+            <label class="required center-label">Formula:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.formula_id_text | stringDisplay}}
+          </div>
+        </div>
+
+          <div class="row mb-1" *ngIf="data?.direct_amount">
+            <div class="col-4">
+              <label class="required center-label">Amount:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.direct_amount | number: '2.2-5' | stringDisplay }}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Use Global Rate:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.use_global_rate | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Ledger Account:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.ledger_account | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Currency:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+              {{data?.currency_id_text | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1" *ngIf="data?.groupname_id">
+            <div class="col-4">
+              <label class="required center-label">Group Name:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.groupname_id_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Must Apply For:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.must_apply_for | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Payroll Profile:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.payroll_profile_text | stringDisplay}}
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">System Rule:</label>
+            </div>
+            <div class="col-8 text-value text-right md-form mt-0">
+                {{data?.sys_rule | stringDisplay}}
+            </div>
+          </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

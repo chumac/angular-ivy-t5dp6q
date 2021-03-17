@@ -1,0 +1,151 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Disciplinary Action Viewer'" [subTitle]="'Details of disciplinary action'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Issued To:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.issue_to_employee | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Issued By (Role):</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.issued_by_role | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Issued By:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.issue_by_employee | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Event Details:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.issue_detail | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Event Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.event_date | dateDisplay}}
+        </div>
+      </div>
+
+
+      <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Points</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Previous Point:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{ data?.previous_points | number }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Added Point:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.points_added | number }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Total Point</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.points_total | number }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-5">
+          <label>System Recommendation</label>
+        </div>
+        <div class="col-7 text-value text-right md-form mt-0">
+          {{data?.sys_recommendation | stringDisplay}}
+        </div>
+      </div>
+
+
+      <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>HR</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+      <div class="row mb-1">
+        <div class="col-5">
+          <label>Action</label>
+        </div>
+        <div class="col-7 text-value text-right md-form mt-0">
+          {{data?.h_action | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-5">
+          <label>Recommendation:</label>
+        </div>
+        <div class="col-7 text-value text-right md-form mt-0">
+          {{ data?.hr_recommendation | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-5">
+          <label>Reason for difference</label>
+        </div>
+        <div class="col-7 text-value text-right md-form mt-0">
+          {{ data?.hr_reason_for_difference | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-5">
+          <label>Final Points Added</label>
+        </div>
+        <div class="col-7 text-value text-right md-form mt-0">
+          {{ data?.hr_final_points_added | number }}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-5">
+          <label>Line Manager Final Remarks:</label>
+        </div>
+        <div class="col-7 text-value text-right md-form mt-0">
+          {{ data?.lm_final_remarks | stringDisplay }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

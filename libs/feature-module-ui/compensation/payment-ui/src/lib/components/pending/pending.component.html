@@ -1,0 +1,185 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+            <mdb-progress-bar *ngIf="isSubmitting$ | async" class="progress primary-color-dark" mode="indeterminate">
+            </mdb-progress-bar>
+          </div>
+
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+              <x365-shared-ui-switch #switch [checkedText]="'Unsubmitted'" [unCheckedText]="'New'" [checkedColor]=""
+                [unCheckedColor]=""></x365-shared-ui-switch>
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-5"></div>
+                <div class="col-7 md-form">
+                  <dx-lookup [dataSource]="service.filterList" valueExpr="value" displayExpr='label' searchEnabled=true
+                    showPopupTitle=false paginate=true placeholder="Filter by ..." closeOnOutsideClick=false
+                    popupHeight="auto" class="form-font" (onItemClick)="search()">
+                  </dx-lookup>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Schedule Type, Account Number, Account Type, Source, etc."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a" *ngIf="!switch.value">
+            <div class="row">
+              <div class="col-12">
+                <div class="grid-table-container">
+                  <igx-grid #newDataGrid [data]="newScheduleData$ | async" [autoGenerate]="false"
+                    [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+                    <igx-column field="description" header="Type" width="17%">
+                    </igx-column>
+                    <igx-column field="account_no" header="Acct Number" width="12%">
+                    </igx-column>
+                    <igx-column field="account_type" header="Acct Type" width="11%">
+                    </igx-column>
+                    <igx-column field="source_text" header="Source" width="12%">
+                      <ng-template igxCell let-val>
+                        <div class="left-align-text">{{val | stringDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="expiry_date" header="Expiry Date" width="12%">
+                      <ng-template igxCell let-val>
+                        <div class="left-align-text">{{val | dateDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="total_value" header="Total Amount" width="13%" dataType="number">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text">{{val | number: '1.2-5' }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="status_text" header="Status" width="12%">
+                      <ng-template igxCell let-val>
+                        <div class="text-center">
+                          <mdb-badge pill="true" danger="true">{{val | stringDisplay }}
+                          </mdb-badge>
+                        </div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="9%" class="text-center">
+                      <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                          <div class="hover-menu">
+                            <div class="hover-icons">
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                                (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                                (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-forward'" title="View Detail"
+                                (click)="onViewDetailIconClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon *ngIf="isDeleteableAndUnploaded(val)"
+                                [iconClass]="'fa fa-trash-o'" title="Delete" (click)="onDeleteIconClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </igx-column>
+                  </igx-grid>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-b" *ngIf="switch.value">
+            <div class="grid-table-container">
+              <igx-grid #awatingSubmissionDataGrid [data]="awaitingSubmissionData$ | async" [autoGenerate]="false"
+                [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+                <igx-column field="description" header="Type" width="17%">
+                </igx-column>
+                <igx-column field="account_no" header="Acct Number" width="12%">
+                </igx-column>
+                <igx-column field="account_type" header="Acct Type" width="11%">
+                </igx-column>
+                <igx-column field="source_text" header="Source" width="12%">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text">{{val | stringDisplay }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="expiry_date" header="Expiry Date" width="12%">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text">{{val | dateDisplay }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="total_value" header="Total Amount" width="13%" dataType="number">
+                  <ng-template igxCell let-val>
+                    <div class="right-align-text">{{val | number: '1.2-5' }}</div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="status_text" header="Status" width="12%">
+                  <ng-template igxCell let-val>
+                    <div class="text-center">
+                      <mdb-badge pill="true" default="true">{{val | stringDisplay }}
+                      </mdb-badge>
+                    </div>
+                  </ng-template>
+                </igx-column>
+                <igx-column field="id" header="..." headerClasses="headerAlignSyle" width="9%" class="text-center">
+                  <ng-template igxCell let-val>
+                    <div class="hover-menu-container"><span class="text-center"></span>
+                      <div class="hover-menu">
+                        <div class="hover-icons">
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                            (click)="onViewAwaitingIconClicked(val)"></x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-mail-forward'" title="View Detail"
+                            (click)="onViewDetailIconClicked(val)"></x365-shared-ui-hover-icon>
+
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-archive'" title="Abandon Process"
+                            (click)="onAbandonIconClicked(val)">
+                          </x365-shared-ui-hover-icon>
+                          <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o'" title="Delete"
+                            (click)="onDeleteIconClicked(val)">
+                          </x365-shared-ui-hover-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </igx-column>
+              </igx-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-cmp-payment-pending-editor #scheduleEditor [width]="40" [show]="showEditor$ | async"
+  [payDeskSelectOption]="payDeskSelectOption$ | async" [paymentSourceSelectOption]="paymentSourceSelectOption$ | async"
+  [currencySelectOption]="currencySelectOption$ | async"
+  [payrollProfileSelectOption]="payrollProfileSelectOption$ | async"
+  [payrollSourceSelectOption]="payrollSourceSelectOption$ | async"
+  [accountTypeSelectOption]="accountTypeSelectOption$ | async" (cancelClick)="onCancelEditor()" [data]="null">
+</x365-fm-cmp-payment-pending-editor>
+
+<x365-fm-cmp-payment-schedule-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()"></x365-fm-cmp-payment-schedule-viewer>

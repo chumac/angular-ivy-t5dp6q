@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="top container-card">
+                <div class="doc-container-t-sp">
+                    <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isProcessing$ | async" [show]="true"></x365-shared-ui-spinner>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12">
+                        <div class="intro">
+                            <h6 class="article-heading text-left"><strong>OBJECTIVE</strong></h6>
+                            <p>{{ (singleProgressDefinition$ | async)?.description?(singleProgressDefinition$ | async)?.description:'---' }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <div class="intro">
+                            <h6 class="article-heading text-left">MEASURE</h6>
+                            <p>{{ (singleProgressDefinition$ | async)?.metric?(singleProgressDefinition$ | async)?.metric: '---' }}</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="intro">
+                            <h6 class="article-heading text-left">TARGET</h6>
+                            <p>{{ (singleProgressDefinition$ | async)?.target?(singleProgressDefinition$ | async)?.target: '---' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="d-flex align-items-center justify-content-start middle">
+                <div class="d-flex justify-content-start">
+                    <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onBackButtonClicked()"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="(progressDefinitionInfo$ | async);else alternative">
+        <div class="row mb-4">
+            <div *ngFor='let progressDef of progressDefinitionInfo$ | async' class="col-12">
+                <x365-fm-talent-progress-definition-widget [data]="progressDef" [definitionMasters]="singleProgressDefinition$ | async" (showTransactionEditor)="onAddTransactionButtonClicked($event)"></x365-fm-talent-progress-definition-widget>
+            </div>
+        </div>
+    </div>
+    <ng-template #alternative>
+        No Progress Definition
+    </ng-template>
+</div>
+
+
+
+<x365-fm-talent-progress-definition-editor #progressDefinitionEditor [width]="32" [show]="showProgressDefinitionEditor$ | async" [data]="null" [objectiveId]="objectiveId" (cancelClick)="onCancelProgressDefinitionEditor()"></x365-fm-talent-progress-definition-editor>
+<x365-fm-talent-progress-transaction-editor #progressTransactionEditor [width]="32" [definitionData]="null" [show]="showProgressTransactionEditor$ | async" [data]="null" (cancelClick)="onCancelProgressTransactionEditor()"></x365-fm-talent-progress-transaction-editor>

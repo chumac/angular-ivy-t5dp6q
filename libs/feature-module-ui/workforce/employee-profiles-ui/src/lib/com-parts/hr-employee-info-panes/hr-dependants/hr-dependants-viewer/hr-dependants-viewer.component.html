@@ -1,0 +1,133 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Dependant'" [subTitle]="'Details of dependant (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Surname:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.surname | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>First Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.firstname | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Other Names:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.othernames | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Date of Birth:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.dobirth | dateDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Gender:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.gender | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Relationship:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.dependent_type_text | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Phone Number:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.phone_no | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Email:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.email | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street I:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.address_line1 | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street II:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.address_line2 | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.country | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>State:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.state | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>City:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.area | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Industry:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+             {{data?.business_type | stringDisplay}}
+        </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-12 row-text mt-0 mb-2 text-right">
+            <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="imageData" [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

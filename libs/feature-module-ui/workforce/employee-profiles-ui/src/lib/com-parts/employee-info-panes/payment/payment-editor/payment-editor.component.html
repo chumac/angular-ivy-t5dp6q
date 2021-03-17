@@ -1,0 +1,134 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Payment'" [subTitle]="'This is payment information about staff'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Bank Identity</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">BVN:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="bvn" type="text" class="form-control pt-0" NumbersOnly [allowDecimals]="false" maxLength="11">
+                    <!-- onkeypress="if(this.value.length > 10) return false" -->
+                </div>
+            </div>
+
+            <div *ngIf="permOption01==='YES'">
+                <div class="sub-heading row mt-0 mb-1">
+                    <div class="col-12 md-form mt-0">
+                        <h5>Savings Account Details</h5>
+                        <hr class="mt-1">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Bank:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="savings_bank_id" [options]="selectOptionData?.Banks" [filterEnabled]="true" placeholder="" [allowClear]="true"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Branch:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="savings_bank_branch" type="text" class="form-control pt-0">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label" title="Account Number">Acct. Number:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="savings_account_no" type="text" class="form-control pt-0">
+                    </div>
+                </div>
+
+                <div class="sub-heading row mt-0 mb-1">
+                    <div class="col-12 md-form mt-0">
+                        <h5>Current Account Details</h5>
+                        <hr class="mt-1">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Bank:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="current_bank_id" [options]="selectOptionData?.Banks" [filterEnabled]="true" placeholder="" [allowClear]="true"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Branch:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="current_bank_branch" type="text" class="form-control pt-0">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label" title="Account Number">Acct. Number:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="current_account_no" type="text" class="form-control pt-0">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Pension, NHF & Tax</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">PFA:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select [mdbTooltip]="" formControlName="pfa_id" [options]="selectOptionData?.PFA" [filterEnabled]="true" placeholder="" [allowClear]="true" (selected)="onPFASelected($event)" (onOpened)="onSelectorOpened($event)"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label" title="Pension Account Number">Pens. Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="pension_account" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">NHF Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="nhf_number" type="text" class="form-control pt-0">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Tax ID Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="tax_id_number" type="text" class="form-control pt-0">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

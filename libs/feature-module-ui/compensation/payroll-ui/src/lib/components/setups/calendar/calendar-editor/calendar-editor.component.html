@@ -1,0 +1,163 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main"[style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)" >
+      <div class="header">
+        <x365-shared-ui-form-header [title]="'Calendar'" [subTitle]="'Edit Calendar'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+      </div>
+      <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1" *ngIf="activePersonnel">
+            <div class="col-4">
+              <label class="center-label" title="Month">Employee:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="activePersonnelDataSource" formControlName="employee_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="paygroupSelectOption">
+            <div class="col-4">
+              <label class="center-label" title="Month">Paygroup:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="paygroupSelectOption" formControlName="paygroup_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <h5>Weekdays</h5>
+          <hr />
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Month">Work start:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-date-box type="time" [acceptCustomValue]="false" [openOnFieldClick]="true" [showClearButton]="true" dateSerializationFormat="HH:mm:ss"
+                formControlName="weekday_work_start"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Month">Work end:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-date-box type="time" [acceptCustomValue]="false" [openOnFieldClick]="true" [showClearButton]="true" dateSerializationFormat="HH:mm:ss"
+                formControlName="weekday_work_end"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Select Allowance to manage over-time">Overtime Allowance:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="allowanceSelectOption$ | async" formControlName="weekday_allowance_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Select Deduction to manage over-time">Overtime Deduction:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="deductionSelectOption$ | async" formControlName="weekday_deduction_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <h5>Weekends</h5>
+          <hr />
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Weekend work start time">Work start:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-date-box type="time" [acceptCustomValue]="false" [openOnFieldClick]="true" [showClearButton]="true" dateSerializationFormat="HH:mm:ss"
+                formControlName="weekend_work_start"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Weekend work end time">Work end:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-date-box type="time" [acceptCustomValue]="false" [openOnFieldClick]="true" [showClearButton]="true" dateSerializationFormat="H:m:s"
+                formControlName="weekend_work_end"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Weekends rate chart allowance">Allowance Rate:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="allowanceSelectOption$ | async" formControlName="weekend_allowance_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Weekends rate chart allowance">DeductionRate:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="deductionSelectOption$ | async" formControlName="weekend_deduction_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <h5>Public Holidays</h5>
+          <hr />
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Public holiday work start time">Work start:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-date-box type="time" [acceptCustomValue]="false" [openOnFieldClick]="true" [showClearButton]="true" dateSerializationFormat="HH:mm:ss"
+                formControlName="public_holiday_work_start"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="Public holiday work end time">Work end:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-date-box type="time" [acceptCustomValue]="false" [openOnFieldClick]="true" [showClearButton]="true" dateSerializationFormat="HH:mm:ss"
+                formControlName="public_holiday_work_end"></dx-date-box>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="public holiday rate chart allowance">Allowance Rate:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="allowanceSelectOption$ | async" formControlName="pub_holiday_allowance_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label" title="public holiday rate chart allowance">DeductionRate:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup [dataSource]="deductionSelectOption$ | async" formControlName="pub_holiday_deduction_id" valueExpr="value"
+                displayExpr='label' searchEnabled="true" showPopupTitle="false" paginate=true placeholder=""
+                closeOnOutsideClick="true" popupHeight="auto" class="form-font">
+              </dx-lookup>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+    </div>
+    </div>

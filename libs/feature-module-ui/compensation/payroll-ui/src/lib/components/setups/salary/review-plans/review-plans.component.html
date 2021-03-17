@@ -1,0 +1,133 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <button (click)="goBack()" class="float-left" mdbBtn type="button" color="warning" rounded="true" size="sm"
+        outline="true" mdbWavesEffect>
+        <i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back
+      </button>
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+          (click)="onAdd()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+          (click)="onRefresh()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+            </x365-shared-ui-spinner>
+          </div>
+
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+              <div class="row">
+                <div class="col-7 md-form">
+                </div>
+                <div class="col-5 md-form">
+                </div>
+              </div>
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-5 md-form">
+                </div>
+                <div class="col-7 md-form">
+                  <mdb-select #filterBy [options]="service.filterList" [filterEnabled]="true" [allowClear]="true"
+                    (selected)="search()" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input #searchInput mdbInputDirective type="text" (keyup.enter)="search()" id="form1"
+                placeholder="Enter your search string i.e. Code, Description, Rank, Tax Rate etc." class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+            <div class="row">
+              <div class="col-12">
+                <div class="grid-table-container">
+                  <igx-grid #grid [data]="reviewPlans$ | async" [autoGenerate]="false"
+                    [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true" [perPage]="15" [height]="null">
+                    <igx-column field="code" header="Code" width="12%">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | stringDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="description" header="Description" width="22%">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | stringDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="effective_date" header="Effective Date" width="15%">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | dateDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="status_text" header="Status" width="15%">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | stringDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="all_affected_text" header="Allowance Affected" width="10%">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | stringDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="deduct_affected_text" header="Deductions Affected" width="15%">
+                      <ng-template igxCell let-val>
+                        <div class="right-align-text1">{{val | stringDisplay }}</div>
+                      </ng-template>
+                    </igx-column>
+                    <igx-column field="salary_review_id" header="..." headerClasses="headerAlignSyle" width="11%">
+                      <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span class="text-center"></span>
+                          <div class="hover-menu">
+                            <div class="hover-icons text-center">
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View"
+                                (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                                (click)="onEditIconClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon *ngIf="(getRowData$(val) | async)?.status === 1" [iconClass]="'fa fa-play'" title="Execute"
+                                (click)="onExecuteClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon *ngIf="(getRowData$(val) | async)?.status === 4" [iconClass]="'fa fa-reply'" title="Reverse"
+                                (click)="onReverseClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-external-link'" title="View Plan Details"
+                                (click)="onViewDetailsClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                              <x365-shared-ui-hover-icon [iconClass]="'fa fa-outdent fa-archive'" title="Archive"
+                                (click)="onArchiveIconClicked(val)">
+                              </x365-shared-ui-hover-icon>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </igx-column>
+                  </igx-grid>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-payrl-salary-review-plan-editor #editor [width]="45" [show]="showEditor$ | async" (cancelClick)="onCancelEditor()" [profileId]="profileId" [reviewGroupId]="groupId">
+</x365-fm-payrl-salary-review-plan-editor>
+<x365-fm-payrl-salary-review-plan-viewer  #viewer [width]="28" [show]="showViewer$ | async" [data]="null"
+  (cancelClick)="onCancelViewer()">
+</x365-fm-payrl-salary-review-plan-viewer>

@@ -1,0 +1,80 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Allowance Employee Rate'"
+      [subTitle]="'Details of fixed allowance employee rate'" [loading]='!data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Employee:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employeename | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Amount:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.pay_amount | number: '2.2-5'}}
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="data?.pay_formula_id">
+        <div class="col-4">
+          <label class="required center-label">Formula:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.pay_formula_type | stringDisplay }}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Eligibility:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.eligibility_text_type | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Allowance:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.fixedallow_text | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Currency:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.pay_currency_type | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Start Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.eff_period_from | dateDisplay | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">End Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.eff_period_to | dateDisplay | stringDisplay }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()">
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

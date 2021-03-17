@@ -1,0 +1,95 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Loan Repayment'" [subTitle]="'Details of your Loan Repayment'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="center-label">Employee</label>
+          </div>
+          <div class="col-6 md-form mt-0">
+              {{data?.EmployeeInfo.employee_firstname | stringDisplay}} {{data?.EmployeeInfo.employee_surname | stringDisplay}}, {{data?.EmployeeInfo.employee_number | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="center-label">Loan</label>
+          </div>
+          <div class="col-6 md-form mt-0">
+              {{data?.loanDefInfo.description | stringDisplay}}
+
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Amount to close this loan:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="full_amount" type="text" class="form-control form-font" [disableControl]="true">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+              <label class="required center-label" title="Effective Period">Effective Period:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_period" [placeholder]="''" (valueChangeEvent)="'click'" (valueChange)="onEffectivePeriodSelected($event)"></dx-date-box>
+          </div>
+        </div>
+
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Repayment Details</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Repayment Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="repayment_type" [options]="repaymentTypes$ | async" placeholder="" (selected)="onRepaymentTypeSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Amount:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <input formControlName="amount" type="text" class="form-control form-font" [disableControl]="disablePartialAmount">
+            </div>
+          </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payment Instrument:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payment_instrument" [options]="paymentInstruments$ | async" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Reference:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="reference" type="text" class="md-textarea md-textarea-auto form-control"
+              ></textarea>
+          </div>
+        </div>
+        <!-- <div class="row mb-1">
+          <div class="col-1"></div>
+          <div class="col-10">
+              <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved($event)"></x365-shared-ui-file-picker>
+          </div>
+          <div class="col-1"></div>
+        </div> -->
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

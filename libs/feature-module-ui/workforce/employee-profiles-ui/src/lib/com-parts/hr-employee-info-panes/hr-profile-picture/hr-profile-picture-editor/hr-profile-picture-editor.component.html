@@ -1,0 +1,45 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Profile Picture'" [subTitle]="'Details of employee profile photo'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-12">
+                      <label class="left-label" title="Select profile picture below">Profile Picture</label>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-1"></div>
+                    <div class="col-10 text-center">
+                        <x365-shared-ui-image-picker [defaultMode]="true" #imagePicker [caption]="'Select Image'"
+                        [captionSubText]="'Select an image from your system to upload'" [maxImageSize]="200"
+                        [imagePickerLabel]="'Upload Profile Picture'" [cropperHeaderMessage]="'Upload Image'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-image-picker>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+              <div class="row">
+                <div class="col-12">
+                  <label class="left-label" title="Select file picture below">File Picture</label>
+                </div>
+              </div>
+                <div class="row mb-1">
+                    <div class="col-1"></div>
+                    <div class="col-10 text-center">
+                        <x365-shared-ui-image-picker [defaultMode]="true" #fileImagePicker [caption]="'Select Image'"
+                        [captionSubText]="'Select an image from your system to upload'" [maxImageSize]="200"
+                        [imagePickerLabel]="'Upload File Picture'" [cropperHeaderMessage]="'Upload Image'"
+                        (imageSelected)="onFileImageSelected($event)" (fileRemoved)="onFileImageRemoved()"></x365-shared-ui-image-picker>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

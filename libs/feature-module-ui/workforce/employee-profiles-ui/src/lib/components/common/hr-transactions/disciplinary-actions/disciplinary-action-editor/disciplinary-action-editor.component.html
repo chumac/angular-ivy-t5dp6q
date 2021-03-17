@@ -1,0 +1,90 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Disciplinary Action Editor'" [subTitle]="'Add/Edit Disciplinary Action'" [loading]='isLoading$ | async'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Issue action to</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup #issuedTo formControlName="issued_to_employee_id" [dataSource]="activePersonnelDataSourceIssuedTo" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font" (onValueChanged)="onEmployeeSelected($event)"></dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Action issued by (Employee)</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="issued_by_employee_id" [dataSource]="activePersonnelDataSourceIssuedBy" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Action issued by (Role):</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="issued_by_role" [options]="actionRoleSelectOption" placeholder=""></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label" title="Event Date">Event Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="event_date" [placeholder]="''"></dx-date-box>
+              </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="">Event Details:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <textarea rows="4" formControlName="issue_detail" type="text" class="md-textarea md-textarea-auto form-control"
+                ></textarea>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="center-label">Recommendation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <mdb-select #sysRec formControlName="x_recommendation_id" [options]="xRecommendationSelectOption" placeholder="" [disableControl]="true"></mdb-select>
+              <button *ngIf="!sysRec.value"type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm" (click)="getRecommendation()">Get Recommendation</button>
+              <button mdbBtn type="button" class="btn btn-rounded btn-sm waves-effect btn-outline-warning " (click)="removeRecommendation()"
+                *ngIf="sysRec.value">Remove</button>
+              <!-- <button *ngIf="sysRec.value" type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm" (click)="removeRecommendation()">Remove Recommendation</button> -->
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Take Action:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="h_action" [options]="takeActionSelectOption" placeholder="" (selected)="onTakeActionSelected($event)"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="fs.showHrRecommendationInput">
+            <div class="col-4">
+              <label class="required center-label">Hr Recommendation:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <mdb-select formControlName="h_recommendation_id" [options]="hrRecommendationSelectOption" placeholder="" [disableControl]="fs.concurWithSystemRecommendation"></mdb-select>
+            </div>
+          </div>
+          <div class="row mb-1" *ngIf="fs.showReasonForDifference">
+            <div class="col-4">
+              <label class="">Reason for difference:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <textarea rows="4" formControlName="h_reason_for_difference" type="text" class="md-textarea md-textarea-auto form-control"
+                ></textarea>
+            </div>
+          </div>
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

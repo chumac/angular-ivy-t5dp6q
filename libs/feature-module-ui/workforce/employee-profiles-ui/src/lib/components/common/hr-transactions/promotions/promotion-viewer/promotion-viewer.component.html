@@ -1,0 +1,119 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Promotion Viewer'" [subTitle]="isPending? 'Details of promotion pending promotion': 'Details of submitted promotion'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Action:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.action | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Employee:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employee_name | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Current Grade:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.current_grade | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Current Paygroup:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.current_paygroup | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>New Grade:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.new_grade | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>New Paygroup:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.new_paygroup | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Effective Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.effective_date | dateDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Status:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.status | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Is effected?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.is_effected | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Is closed?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.is_closed_text | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Is payroll processed?</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.is_payroll_processed | stringDisplay }}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Notes:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.notes | stringDisplay }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

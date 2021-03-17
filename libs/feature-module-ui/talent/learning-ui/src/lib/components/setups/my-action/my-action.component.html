@@ -1,0 +1,101 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+          (click)="onRefreshButtonClicked()">Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4 md-form">
+                  <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)"
+                  [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1"
+                placeholder="Enter your search string i.e. action type, employee name, event, date created.."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #grid [data]="myActionData$ | async" [paging]="true" [height]="null" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+              <igx-column field="process_type_text" header="Action Type" width="20%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="employee_name" header="Form Employee" width="26%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="description" header="Event" width="20%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="created_date" header="Date Created" width="22%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | dateDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="event_id" header="..." class="text-center" width="12%">
+                <ng-template igxCell let-val let-cell="cell">
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.process_type === 2"
+                          [iconClass]="'fa fa-sign-out'" title="Faculty Nomination"
+                          (click)="onFacultyNominationClicked(val)">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.process_type === 0"
+                          [iconClass]="'fa fa-sign-out'" title="Opt Out" (click)="onOptOutClicked(val)">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.process_type === 1" [iconClass]="'fa fa-rss'"
+                          title="Feedback Form" (click)="onFeedbackFormClicked(cell.row.rowData.form_id)">
+                        </x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<x365-fm-talent-my-action-faculty-nomination #actionNomination [width]="35" [show]="showActionNomination$ | async"
+  [data]="null" [eventid]="eventid" [allEmployee]="allEmployee$ | async" (cancelClick)="onCancelEditor()">
+</x365-fm-talent-my-action-faculty-nomination>
+
+<x365-fm-talent-my-action-optout-editor #actionOptOutEditor [allEmployee]="allEmployee$ | async" [width]="40"
+  [show]="showActionOptOutEditor$ | async" [selectedEventId]="eventid" (cancelClick)="onCancelOptOutEditor()">
+</x365-fm-talent-my-action-optout-editor>
+
+<x365-fm-talent-my-action-feedback-form-editor #actionFeedbackFormEditor [show]="showActionFeedbackFormEditor$ | async"
+  [data]="myFormActionData$ | async" (cancelClick)="onFeedbackFormCancelEditor()">
+</x365-fm-talent-my-action-feedback-form-editor>

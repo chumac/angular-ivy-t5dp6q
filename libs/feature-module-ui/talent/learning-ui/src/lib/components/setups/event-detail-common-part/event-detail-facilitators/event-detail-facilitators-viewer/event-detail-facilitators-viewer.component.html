@@ -1,0 +1,64 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Facilitators'" [subTitle]="'Facilitators details'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Event:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.event_text | stringDisplay}} 
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Facilitators Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.fac_type_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Email Address:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.email_address | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Full Name :</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.fac_title | stringDisplay}} {{data?.fac_firstname | stringDisplay}} {{data?.fac_surname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Document :</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.doc_filename | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Image :</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.img_filename | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex align-items-center justify-content-end middle">
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+          (click)="onAddButtonClicked()">Add</button>
+        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+          (click)="onRefreshButtonClicked()">Refresh</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+
+        <div class="d-flex flex-column doc-container-t font-size">
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-1"></div>
+                <div class="col-6 md-form">
+                </div>
+                <div class="col-1"></div>
+                <div class="col-4 md-form">
+                  <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)"
+                  [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1"
+                placeholder="Enter your search string i.e. subject, course, start date, end date, class size, facilitators, status"
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #grid [data]="eventDetailData$ | async" [paging]="true" [height]="null" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+              <igx-column field="subject" header="Subject" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="course" header="Course" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="start" header="Start Date" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | dateDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="end_date" header="End Date" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | dateDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="max_class_size" header="Max Class Size" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="facilitator" header="Facilitator" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="status_text" header="Status" width="12%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+
+              <igx-column field="id" header="..." class="text-center" width="10%">
+                <ng-template igxCell let-val let-cell="cell">
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status_id == 0"
+                          [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status_id == 0" [iconClass]="'fa fa-address-card-o'"
+                          title="Detail" [routerLink]="['/d/talent/learning/admin/event-detail-data', val]">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status_id != 0" [iconClass]="'fa fa-clipboard'"
+                          title="Review" [routerLink]="['/d/talent/learning/admin/event-review-data', val]">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status_id == 0 && cell.row.rowData.is_publishable" [iconClass]="'fa fa-arrow-circle-up'"
+                          title="Publish Event" (click)="onPublishEvent(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.status_id == 1" [iconClass]="'fa fa-arrow-circle-down'"
+                          title="UnPublish Event" (click)="onUnPublishEvent(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-close'" title="Close"
+                          *ngIf="(cell.row.rowData.end_date == null || (cell.row.rowData.end_date | dateDisplay) < (currentDate | dateDisplay) || cell.row.rowData.status_id != 3) && (cell.row.rowData.status_id == 1)"
+                          (click)="onCloseIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-feed'" title="Request Nominations"
+                          (click)="onNominationIconClicked(val)"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Delete"
+                          (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-talent-event-detail-editor #editor [width]="35" [show]="showEditor$ | async" [data]="null"
+  [courseData]="courseData$ | async" [eventDetailType]="eventDetailType$ | async"
+  [eventDetailFaculty]="eventDetailFaculty$ | async" (cancelClick)="onCancelEditor()">
+</x365-fm-talent-event-detail-editor>
+<x365-fm-talent-event-detail-close #close [width]="50" [showClose]="showCloseEditor$ | async" [data]="null"
+  [allParticipants]="allParticipants$ | async" (cancelClick)="onCancelEditor()">
+</x365-fm-talent-event-detail-close>
+<x365-fm-talent-event-detail-nomination #nomination [width]="35" [showNomination]="showNominationEditor$ | async"
+  [data]="null" [allEmployee]="allEmployee$ | async" (cancelClick)="onCancelEditor()">
+</x365-fm-talent-event-detail-nomination>

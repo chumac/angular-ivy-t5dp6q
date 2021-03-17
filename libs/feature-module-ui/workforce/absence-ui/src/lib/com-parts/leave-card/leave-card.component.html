@@ -1,0 +1,29 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">Team Leave</h5>
+    </div>
+    <div class="top-content-right">
+      <div class="btn-group mr-3" mdbDropdown>
+        <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+          mdbWavesEffect><span>Daily Leave</span> <i class="fa fa-angle-down"></i>
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" (click)="onEventSelection($event)"><span>Hourly Leave</span></a>
+          <a class="dropdown-item color-cyan" (click)="onEventSelection($event)"><span>Daily Leave</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item-container-bottom">
+    <div class="grid-table-container">
+      <igx-grid #grid1 id="grid1" [data]="items" [autoGenerate]="false" width="100%" [showToolbar]="false" toolbarTitle="Grid Toolbar"
+        displayDensity="cosy" [height]="null">
+        <igx-column field="employee" header="Employee" width="35%"></igx-column>
+        <igx-column field="type" header="Type" width="25%"></igx-column>
+        <igx-column field="period" header="Period" width="25%"></igx-column>
+        <igx-column field="days" header="Days" width="15%"></igx-column>
+      </igx-grid>
+    </div>
+  </div>
+</div>

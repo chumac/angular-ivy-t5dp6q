@@ -1,0 +1,58 @@
+[
+  {
+    "id": "SalesOverview",
+    "name": "Sales Overview"
+  },
+  {
+    "id": "CustomerSupport",
+    "name": "Customer Support"
+  },
+  {
+    "id": "SalesPerformance",
+    "name": "Sales Performance"
+  },
+  {
+    "id": "Financial",
+    "name": "Financial Dashboard"
+  },
+  {
+    "id": "EnergyStatistics",
+    "name": "Energy Statistics"
+  },
+  {
+    "id": "HumanResources",
+    "name": "Human Resources"
+  },
+  {
+    "id": "ChampionsLeagueStatistics",
+    "name": "Champions League Statistics"
+  },
+  {
+    "id": "SalesDetails",
+    "name": "Sales Details"
+  },
+  {
+    "id": "RevenueAnalysis",
+    "name": "Revenue Analysis"
+  },
+  {
+    "id": "RevenueByIndustry",
+    "name": "Revenue by Industry"
+  },
+  {
+    "id": "EnergyConsumption",
+    "name": "Energy Consumption"
+  },
+  {
+    "id": "WebsiteStatistics",
+    "name": "Website Statistics"
+  },
+  {
+    "id": "EUTradeOverview",
+    "name": "EU Trade Overview 2015"
+  },
+  {
+    "id": "YTDPerformance",
+    "name": "YTD Performance"
+  }
+]

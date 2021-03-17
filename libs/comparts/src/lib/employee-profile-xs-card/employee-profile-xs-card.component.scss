@@ -1,0 +1,29 @@
+$avatar_box_size: 2.6em;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.avatar-size {
+  height: $avatar_box_size;
+  width: $avatar_box_size;
+}
+
+.profile-name {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.profile-title {
+  color: rgb(156, 156, 156);
+  font-size: 0.6rem;
+}

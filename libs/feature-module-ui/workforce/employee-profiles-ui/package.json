@@ -1,0 +1,8 @@
+{
+  "name": "@x365-fm-workforce/feature-module-ui-workforce-employee-profiles-ui",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  }
+}

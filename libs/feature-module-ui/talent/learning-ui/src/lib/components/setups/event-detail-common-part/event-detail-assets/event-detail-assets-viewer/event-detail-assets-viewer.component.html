@@ -1,0 +1,58 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'View Assets'" [subTitle]="'Assets details'" [loading]='!data'>
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Event:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.event_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Availability :</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.asset_availability_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.asset_type_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Filename:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.asset_filename | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mt-4 mb-1">
+          <div class="col-1"></div>
+          <div class="col-10 text-center">
+            <x365-shared-ui-file-downloader *ngIf="AssetsDocument" [data]="AssetsDocument">
+            </x365-shared-ui-file-downloader>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()">
+      </x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

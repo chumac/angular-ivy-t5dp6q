@@ -1,0 +1,177 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="header? header: 'Apply for Leave'" [subTitle]="'Details of your leave application'" [loading]='(isProcessingForm$ | async)'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="leave_id" [options]="leaveTypes" (selected)="onLeaveTypeSelected($event)" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Entitlement:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="entitlement" type="text" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label">Start Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="start_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="required center-label" title="Number of Days">No. of Days:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="no_of_days" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div id="full-form" *ngIf="showFullForm$ | async">
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">End Date:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="end_date" [readOnly]="true" class="form-font"></dx-date-box>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Resump. Date:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="resumption_date" [readOnly]="true" class="form-font"></dx-date-box>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Pay Me:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <mdb-checkbox formControlName="pay_allowance" [disabled]="!supportsAllowancePayment"></mdb-checkbox>
+                        </div>
+                    </div>
+                    <div class="row mb-1" *ngIf="allowSelectionOfBackupOfficer">
+                        <div class="col-4">
+                            <label class="center-label">Backup Officer:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <dx-lookup formControlName="assigned_backup_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Supervisor:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <dx-lookup formControlName="supervisor_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" [disabled]="!allowSelectionOfSupervisor"
+                                class="form-font">
+                            </dx-lookup>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="">Reason:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <textarea rows="4" formControlName="leave_reason" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="sub-heading row mt-4 mb-1">
+                        <div class="col-12 md-form mt-2">
+                            <h5>Contact Information</h5>
+                            <hr class="mt-1">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Phone:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <input formControlName="telephone_no" type="text" class="form-control form-font">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label" title="Emergency Phone">Emergency Phone:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <input formControlName="emergency_no" type="text" class="form-control form-font">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Address Line I:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <input formControlName="address1" type="text" class="form-control form-font">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Address Line II:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <input formControlName="address2" type="text" class="form-control form-font">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Country:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <mdb-select formControlName="country_id" [options]="countries$ | async" [filterEnabled]="true" (selected)="onCountrySelected($event)" class="form-font"></mdb-select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">State:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <mdb-select formControlName="state_id" [options]="stateList$ | async" [filterEnabled]="true" (selected)="onStateSelected($event)" class="form-font"></mdb-select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">City:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <mdb-select formControlName="city_id" [options]="cityList$ | async" [filterEnabled]="true" class="form-font"></mdb-select>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-4">
+                            <label class="center-label">Zip:</label>
+                        </div>
+                        <div class="col-8 md-form mt-0">
+                            <input formControlName="zip" type="text" class="form-control form-font">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-1"></div>
+                        <div class="col-10">
+                            <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)"></x365-shared-ui-file-picker>
+                        </div>
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="(showFullForm$ | async)?'Save':'Continue'" [showSecondaryButton]="showFullForm$ | async" [secondaryButtonText]="'Change Dates'" [doneButtonDisabled]="isProcessing$ | async" (doneClick)="onSubmit()" (secondaryClick)="onSubmitChangeDates()"
+                [busy]="isProcessing$ | async" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

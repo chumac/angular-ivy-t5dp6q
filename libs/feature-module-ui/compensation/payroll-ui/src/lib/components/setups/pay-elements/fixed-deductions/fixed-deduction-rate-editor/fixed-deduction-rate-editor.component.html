@@ -1,0 +1,153 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Fixed Deduction Rate for ' + titleFor" [subTitle]="'Set up rates for Fixed Deduction'"
+        [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Deduction Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-7">
+            <label class="required center-label">Use Direct Amount?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="use_direct_value" type="checkbox" (change)="fs.onUseDirectAmountChecked($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="!fs.showDirectAmount">
+          <div class="col-4">
+            <label class="required center-label">Formula:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="formula_id" [options]="deductFormulaList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="fs.showDirectAmount">
+          <div class="col-4">
+            <label class="center-label">Amount:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="direct_value" type="number" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label required">Currency:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="currency_id" [options]="currencyList$ | async" placeholder="" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-7">
+            <label class="required center-label">Is Temporary?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="is_temporary" type="checkbox" (change)="fs.onIsTemporaryChecked($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Start Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd"
+              formControlName="effective_from"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="fs.showEndDate">
+          <div class="col-4">
+            <label class="center-label">End date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd"
+              formControlName="effective_to"></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Employer Contribution</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-7">
+            <label class="required center-label">Apply Employer Contribution?</label>
+          </div>
+          <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+            No
+            <label class="switch">
+              <input formControlName="apply_emp_contribution" type="checkbox" (change)="fs.onApplyEmpContribution($event)">
+              <span class="slider round"></span>
+            </label>
+            Yes
+          </div>
+        </div>
+
+        <div class="row" *ngIf="fs.handleEmployeeContribution">
+          <div class="col-12">
+            <div class="row mb-1">
+              <div class="col-7">
+                <label class="required center-label">Use Direct Amount?</label>
+              </div>
+              <div class="col-5 md-form mt-0 custom-constrol custom-switch">
+                No
+                <label class="switch">
+                  <input formControlName="empcontribute_usedirect_amount" type="checkbox" (change)="fs.onUseContributeDirectAmountChecked($event)">
+                  <span class="slider round"></span>
+                </label>
+                Yes
+              </div>
+            </div>
+
+            <div class="row mb-1" *ngIf="!fs.showContributeDirectAmount">
+              <div class="col-4">
+                <label class="required center-label">Formula:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <mdb-select formControlName="emp_contribute_formula_id" [options]="deductFormulaList$ | async" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder=""></mdb-select>
+              </div>
+            </div>
+
+            <div class="row mb-1" *ngIf="fs.showContributeDirectAmount">
+              <div class="col-4">
+                <label class="center-label">Amount:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="emp_contribute_amount" type="number" class="form-control form-font">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div [ngSwitch]="selectedModuleId">
+  <x365-fm-workforce-hr-general-information *ngSwitchCase="NavMenuItemTypes.GENERAL_INFORMATION" [employeeId]="employeeId" [data]="data"></x365-fm-workforce-hr-general-information>
+
+  <x365-fm-workforce-hr-professional-qualification *ngSwitchCase="NavMenuItemTypes.PROFESSIONAL_QUALIFICATIONS" [employeeId]="employeeId"></x365-fm-workforce-hr-professional-qualification>
+
+  <x365-fm-workforce-hr-referee *ngSwitchCase="NavMenuItemTypes.PERSONAL_REFEREES" [employeeId]="employeeId"></x365-fm-workforce-hr-referee>
+
+  <x365-fm-workforce-hr-guarantors *ngSwitchCase="NavMenuItemTypes.GUARANTORS" [employeeId]="employeeId" ></x365-fm-workforce-hr-guarantors>
+
+  <x365-fm-workforce-hr-beneficiaries *ngSwitchCase="NavMenuItemTypes.BENEFICIARIES" [employeeId]="employeeId"></x365-fm-workforce-hr-beneficiaries>
+
+  <x365-fm-workforce-hr-dependants *ngSwitchCase="NavMenuItemTypes.DEPENDANTS" [employeeId]="employeeId" ></x365-fm-workforce-hr-dependants>
+
+  <x365-fm-workforce-hr-educational-history *ngSwitchCase="NavMenuItemTypes.EDUCATIONAL_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-educational-history>
+
+  <x365-fm-workforce-hr-family *ngSwitchCase="NavMenuItemTypes.FAMILY" [employeeId]="employeeId"></x365-fm-workforce-hr-family>
+
+  <x365-fm-workforce-hr-work-history *ngSwitchCase="NavMenuItemTypes.WORK_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-work-history>
+
+  <x365-fm-workforce-hr-contact *ngSwitchCase="NavMenuItemTypes.CONTACT" [data]="data" [employeeId]="employeeId"></x365-fm-workforce-hr-contact>
+
+  <x365-fm-workforce-hr-profile-picture *ngSwitchCase="NavMenuItemTypes.PROFILE_PICTURE" [data]="data" [employeeId]="employeeId"></x365-fm-workforce-hr-profile-picture>
+
+  <x365-fm-workforce-hr-identification *ngSwitchCase="NavMenuItemTypes.IDENTIFICATION" [employeeId]="employeeId" [data]="data"></x365-fm-workforce-hr-identification>
+
+  <x365-fm-workforce-hr-payments *ngSwitchCase="NavMenuItemTypes.PAYMENT" [employeeId]="employeeId" [data]="data"></x365-fm-workforce-hr-payments>
+
+
+  <x365-fm-workforce-hr-training-history *ngSwitchCase="NavMenuItemTypes.TRAINING_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-training-history>
+  <x365-fm-workforce-hr-competency-profile *ngSwitchCase="NavMenuItemTypes.COMPETENCY_PROFILE" [employeeId]="employeeId"></x365-fm-workforce-hr-competency-profile>
+  <x365-fm-workforce-hr-promotion-history *ngSwitchCase="NavMenuItemTypes.PROMOTION_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-promotion-history>
+  <x365-fm-workforce-hr-transfer-history *ngSwitchCase="NavMenuItemTypes.TRANSFER_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-transfer-history>
+  <x365-fm-workforce-hr-vacation-history *ngSwitchCase="NavMenuItemTypes.VACATION_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-vacation-history>
+  <x365-fm-workforce-hr-performance-history *ngSwitchCase="NavMenuItemTypes.PERFORMANCE_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-performance-history>
+  <x365-fm-workforce-hr-disciplinary-actions *ngSwitchCase="NavMenuItemTypes.DISCIPLINARY_ACTIONS" [employeeId]="employeeId"></x365-fm-workforce-hr-disciplinary-actions>
+  <x365-fm-workforce-hr-confirmation-information *ngSwitchCase="NavMenuItemTypes.CONFIRMATION_INFORMATION" [employeeId]="employeeId"></x365-fm-workforce-hr-confirmation-information>
+  <x365-fm-workforce-hr-payroll-payment-history *ngSwitchCase="NavMenuItemTypes.PAYROLL_PAYMENT_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-payroll-payment-history>
+  <x365-fm-workforce-hr-loan-history *ngSwitchCase="NavMenuItemTypes.LOAN_HISTORY" [employeeId]="employeeId"></x365-fm-workforce-hr-loan-history>
+  <x365-fm-workforce-hr-workflow-transaction *ngSwitchCase="NavMenuItemTypes.WORKFLOW_TRANSACTIONS" [employeeId]="employeeId"></x365-fm-workforce-hr-workflow-transaction>
+  <x365-fm-workforce-hr-team *ngSwitchCase="NavMenuItemTypes.TEAM" [employeeId]="employeeId"></x365-fm-workforce-hr-team>
+  <x365-fm-workforce-hr-separate-data *ngSwitchCase="NavMenuItemTypes.SEPARATION" [employeeId]="employeeId"></x365-fm-workforce-hr-separate-data>
+
+  <x365-fm-workforce-hr-custom-data-forms *ngSwitchCase="NavMenuItemTypes.HR_CUSTOM_DATA_FORMS" [employeeId]="employeeId" [data]="data"></x365-fm-workforce-hr-custom-data-forms>
+
+  <x365-fm-workforce-hr-general-information [data]="data" [employeeId]="employeeId" *ngSwitchDefault></x365-fm-workforce-hr-general-information>
+</div>

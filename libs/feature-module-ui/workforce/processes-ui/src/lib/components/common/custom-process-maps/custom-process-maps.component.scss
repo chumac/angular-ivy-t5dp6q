@@ -1,0 +1,65 @@
+@import 'my-personal-data-grid';
+.doc-container-t {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 7.7em;
+    background-color: rgb(251, 251, 251);
+    padding-left: 5px;
+    .doc-container-t-sp {
+        flex-basis: 2em;
+    }
+    .doc-container-t-ct {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        padding-top: 1.4em;
+        .doc-container-t-ct-l {
+            flex-basis: 50%;
+            padding-top: 1.5em;
+        }
+        .doc-container-t-ct-r {
+            flex-basis: 50%;
+            padding-right: 5px;
+        }
+    }
+}
+
+.doc-container-b {
+    flex-grow: 1;
+    padding-top: 0;
+    .tab-a {
+        flex-grow: 1;
+    }
+    .tab-b {
+        flex-grow: 1;
+    }
+}
+
+.md-form input[type='text'] {
+    font-size: 0.83rem;
+}
+
+.doc-title:hover {
+    font-weight: 700;
+    cursor: pointer;
+}
+
+a {
+    color: #0366d6;
+}
+
+.quick-info {
+    font-size: small;
+    border: solid #eee 1px;
+    margin-left: 0px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    background: #f4f4f4;
+
+    i {
+        text-align: center;
+        font-size: 2rem;
+        line-height: inherit;
+        color: blue;
+    }
+}

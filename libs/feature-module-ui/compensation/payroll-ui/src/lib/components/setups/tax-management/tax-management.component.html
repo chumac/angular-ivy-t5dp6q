@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+
+        <div class="d-flex flex-column doc-container-t">
+
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7"></div>
+                <div class="col-5 md-form">
+                  <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)"
+                    [filterEnabled]="true" [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1"
+                placeholder="Enter your search string i.e. Code, Discription, Current Period, Tax Rule, Payment."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #grid [data]="taxManagementData$ | async" [paging]="true" [perPage]="15" [height]="null" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+              <igx-column field="code" header="Code" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="description" header="Description" width="20%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="current_period" header="Current Period" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | dateDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="tax_rule_text" header="Tax Rule" width="20%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="payment_runday" header="Payment Runday" width="20%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+
+              <igx-column field="payroll_profile_id" header="..." class="text-center" width="5%">
+                <ng-template igxCell let-val let-cell="cell">
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon
+                          *ngIf="cell.row.rowData.tax_rule == 0 || cell.row.rowData.tax_rule == 4 || cell.row.rowData.tax_rule == 5 "
+                          [iconClass]="'fa fa-pencil-square-o'" title="Edit"
+                          (click)="onEditIconClicked(val,cell.row.rowData.tax_rule)">
+                        </x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon *ngIf="cell.row.rowData.tax_rule != 4 " [iconClass]="'fa fa-cog'"
+                          title="View Figures" (click)="onViewConfigIconClicked(val,cell.row.rowData.tax_rule)">
+                        </x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<x365-fm-payrl-fix-deduction #fixedDeduction [width]="30" [show]="showtaxFixedDeduction$ | async" [data]="null"
+  [taxFixedDeductionListData]="taxFixedDeductionData$| async" (cancelClick)="onCancelEditor()">
+</x365-fm-payrl-fix-deduction>
+
+<x365-fm-payrl-tax-management-profile-editor #taxManagementProfile [width]="30" [show]="showtaxProfile$ | async"
+  [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-payrl-tax-management-profile-editor>

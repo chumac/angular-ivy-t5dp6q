@@ -1,0 +1,394 @@
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="top">
+                <div class="row mb-3">
+                    <div class="col-5">
+                        <dx-lookup #plansLookup [dataSource]="planlist$ | async" valueExpr="id" displayExpr='description' (onValueChanged)="onPlanSelect($event)" searchEnabled=true showPopupTitle=false paginate=true placeholder="Select Plan" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font"></dx-lookup>
+                    </div>
+                    <div class="col-1 mt-1">
+                        &nbsp;<span *ngIf="isProcessingDataGrid$ | async"><i
+                                class="fa fa-spinner fa-spin fa-lg fa-fw fa-sm"></i></span>&nbsp;
+                    </div>
+                    <div class="col-6">
+                        <div class="float-right">
+                            <button [disabled]="!(canProvideFeedback$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="gotoProvideFeedback()">&nbsp;<span
+                                    *ngIf="isProcessingDataFeedback$ | async"><i
+                                        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Provide
+                                Feedback</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="row mb-3">
+        <div class="col-12">
+            <div class="top">
+                <div class="card card-container">
+                    <div class="item-left font-size">
+                        <div class="sub-heading row mt-0 mb-0">
+                            <div class="col-12  mt-2 mb-1">
+                                <h5>Plan</h5>
+                                <hr class="mt-1">
+                            </div>
+                        </div>
+
+                        <div class="row mt-0">
+                            <div class="col-12">
+
+                                <div class="row mb-2">
+                                    <div class="col-4 row-label">
+                                        <label>Code</label>
+                                    </div>
+                                    <div class="col-8 row-text mt-0 font-weight-bold">
+                                        <label>{{ (objectiveInfo$ | async)?.PlanInfo?.code | stringDisplay}}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-4 row-label">
+                                        <label>Description</label>
+                                    </div>
+                                    <div class="col-8 row-text mt-0 font-weight-bold">
+                                        <label>{{ (objectiveInfo$ | async)?.PlanInfo?.description |
+                                            stringDisplay}}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-4 row-label">
+                                        <label>Start Date</label>
+                                    </div>
+                                    <div class="col-8 row-text mt-0 font-weight-bold">
+                                        <label>{{ (objectiveInfo$ | async)?.PlanInfo?.period_start_date |
+                                            dateDisplay}}</label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-4 row-label">
+                                        <label>End Date</label>
+                                    </div>
+                                    <div class="col-8 row-text mt-0 font-weight-bold">
+                                        <label>{{ (objectiveInfo$ | async)?.PlanInfo?.period_end_date |
+                                            dateDisplay}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-left">
+                        <div class="sub-heading row mt-0 mb-0">
+                            <div class="col-12  mt-2 mb-1">
+                                <h5>Objective</h5>
+                                <hr class="mt-1">
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Status</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ (objectiveInfo$ | async)?.status | valueTransform:objectiveStatus |
+                                    stringDisplay}}</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Approval Status</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ (objectiveInfo$ | async)?.approval_status |
+                                    valueTransform:objectiveApprovalStatus | stringDisplay}}</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Employment Status</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ (objectiveInfo$ | async)?.classification_key | stringDisplay }}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-left">
+                        <div class="sub-heading row mt-0 mb-0">
+                            <div class="col-12  mt-2 mb-1">
+                                <h5>Your Session</h5>
+                                <hr class="mt-1">
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Plan</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ (objectiveInfo$ | async)?.description | stringDisplay}}</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 row-label">
+                                <label>Review Note</label>
+                            </div>
+                            <div class="col-8 row-text mt-0 font-weight-bold">
+                                <label>{{ (objectiveInfo$ | async)?.session_note | stringDisplay}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-right font-size"></div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card card-container p-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-4">
+                            <!-- con -->
+
+                            <div class="row mt-0">
+                                <div class="col-12 summary">
+                                    <p class="my-3">Plan</p>
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Code</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.PlanInfo?.code | stringDisplay}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Description</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.PlanInfo?.description |
+                                                stringDisplay}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Start Date</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.PlanInfo?.period_start_date |
+                                                dateDisplay}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>End Date</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.PlanInfo?.period_end_date |
+                                                dateDisplay}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <!-- con -->
+
+                            <div class="row mt-0">
+                                <div class="col-12 summary">
+                                    <p class="my-3">Objective</p>
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Status</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.status | valueTransform:objectiveStatus |
+                                                stringDisplay}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Approval Status</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.approval_status |
+                                                valueTransform:objectiveApprovalStatus | stringDisplay}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Employment Status</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.classification_key | stringDisplay }}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <!-- con -->
+
+                            <div class="row mt-0">
+                                <div class="col-12 summary">
+                                    <p class="my-3">Your Session</p>
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Plan</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.session_description | stringDisplay}}</label>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-4 row-label">
+                                            <label>Review Note</label>
+                                        </div>
+                                        <div class="col-8 row-text mt-0 font-weight-bold">
+                                            <label>{{ (objectiveInfo$ | async)?.session_note | stringDisplay}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-4"> </div>
+        <div class="col-8">
+            <div class="d-flex align-items-center justify-content-end middle">
+                <button [disabled]="!((objectiveInfo$ | async)?.status === 0 && (objectiveInfo$ | async)?.approval_status === 1)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onAddButtonClicked()">&nbsp;<span *ngIf="isAdding$ | async"><i
+                            class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;Add</button>
+                <button [disabled]="!(recallBtn$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onRecallButtonClicked()">Recall</button>
+                <button [disabled]="!(submitBtn$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onSubmitButtonClicked()">Submit</button>
+                <button [disabled]="!(resetBtn$ | async)" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onResetButtonClicked()">Reset</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="item-container bottom">
+                <div class="card-content-top mb-2">
+                    <x365-shared-ui-switch #switch [checkedText]="'Pre-Scored'" [unCheckedText]="'Standard'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+                </div>
+                <ng-container *ngIf="!switch.value">
+                    <igx-grid #objectivesDataGrid [data]="objectivesMasterData$ | async" [paging]="true" [autoGenerate]="false" [emptyGridMessage]="(isProcessingDataGrid$ | async)?'Fetching data.....':'No data available'" width="100%" [height]="null" [showToolbar]="false">
+                        <igx-column field="PerspectivesInfo" header="Perspective">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val?.description | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="description" header="Description">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="metric" header="Metric">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="weight" header="Weight">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="target" header="Target">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="due_date" header="Due Date">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="id" header="..." class="text-right">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-right"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon *ngIf="progressBtn$ | async" [iconClass]="'fa fa-line-chart'" title="Progress" (click)="onProgressIconClicked(val)"></x365-shared-ui-hover-icon>
+                                            <!-- <x365-shared-ui-hover-icon [iconClass]="'fa fa-line-chart'" title="Progress" (click)="onProgressIconClicked(val)"></x365-shared-ui-hover-icon> -->
+                                            <x365-shared-ui-hover-icon *ngIf="editBtn$ | async" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                            <x365-shared-ui-hover-icon *ngIf="viewBtn$ | async" [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)">
+                                            </x365-shared-ui-hover-icon>
+                                            <x365-shared-ui-hover-icon *ngIf="deleteBtn$ | async" [iconClass]="'fa fa-trash-o fa-icon'" title="Cancel" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </ng-container>
+
+                <ng-container *ngIf="switch.value">
+                    <igx-grid #preScoredObjectiveMaster [data]="preScoredobjectivesMasterData$ | async" [paging]="true" [autoGenerate]="false" [emptyGridMessage]="(isProcessingDataGrid$ | async)?'Fetching data.....':'No data available'" width="100%" [height]="null" [showToolbar]="false">
+                        <igx-column field="PerspectivesInfo" header="Perspective">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val?.description | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="description" header="Description">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="metric" header="Metric">
+                            <ng-template igxCell let-val>
+                                <div class="left-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="weight" header="Weight">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="target" header="Target">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | stringDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="due_date" header="Due Date">
+                            <ng-template igxCell let-val>
+                                <div class="right-align-text1">{{val | dateDisplay}}</div>
+                            </ng-template>
+                        </igx-column>
+                        <igx-column field="id" header="..." class="text-right">
+                            <ng-template igxCell let-val>
+                                <div class="hover-menu-container"><span class="text-right"></span>
+                                    <div class="hover-menu">
+                                        <div class="hover-icons">
+                                            <x365-shared-ui-hover-icon *ngIf="viewBtn$ | async" [iconClass]="'fa fa-desktop'" title="View" (click)="onViewPreScoredIconClicked(val)"></x365-shared-ui-hover-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </igx-column>
+                    </igx-grid>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+
+<x365-fm-talent-objective-master-editor #editor [width]="32" [planID]="null" [perspectiveList]="perspectivelist$ | async" [show]="showEditor$ | async" [data]="null" (cancelClick)="onCancelEditor()"></x365-fm-talent-objective-master-editor>
+<x365-fm-talent-objective-recall #recall [width]="32" [planID]="null" [perspectiveList]="perspectivelist$ | async" [show]="showRecall$ | async" [data]="null" (cancelClick)="onCancelRecall()"></x365-fm-talent-objective-recall>
+<x365-fm-talent-objective-master-viewer #viewer [width]="32" [show]="showViewer$ | async" [data]="null" (cancelClick)="onCancelViewer()" [componentName]="'manage-objectives'"></x365-fm-talent-objective-master-viewer>

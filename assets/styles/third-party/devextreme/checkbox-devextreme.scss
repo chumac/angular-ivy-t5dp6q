@@ -1,0 +1,19 @@
+
+.dx-checkbox-checked .dx-checkbox-icon {
+  &::before {
+    font-family: FontAwesome !important;
+  content: "\f00c" !important;
+  }
+}
+
+   .dx-checkbox-indeterminate .dx-checkbox-icon {
+     &::before {
+    font-family: FontAwesome !important;
+  content: "\f068" !important;
+  }
+   }
+
+.dx-checkbox-icon {
+  border: 0.1em solid rgb(216, 216, 216);
+}
+

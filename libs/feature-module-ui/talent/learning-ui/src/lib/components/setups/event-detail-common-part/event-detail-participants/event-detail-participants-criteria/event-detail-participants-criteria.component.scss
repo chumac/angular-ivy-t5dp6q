@@ -1,0 +1,128 @@
+:host {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 16px;
+}
+
+igx-checkbox {
+    margin-top: 16px;
+}
+:host {
+    display: block;
+    padding: 16px;
+}
+
+.list-sample {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+igx-icon {
+  cursor: pointer;
+}
+
+.list-container {
+  display: flex;
+}
+
+.list-container {
+  height: 500px;
+  margin: 10px 20px;
+}
+igx-list {
+    margin: 20px;
+}
+igx-list{
+  overflow: scroll;
+  padding:10px;
+  height: 95%;
+}
+.list-sample{
+  height: 500px;
+  width: 385px;
+  margin: 10px 20px;
+}
+igx-buttongroup{
+  display: inline-block;
+  max-width: 400px;
+  margin-top: 225px;
+}
+.sample-column{
+  margin-top:150px;
+}
+
+.material-icons.igx-icon{
+  background-color: transparent;
+}
+.igx-button--flat{
+  background: #c4c1c2;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(255, 149, 21);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(255, 149, 21);;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.editorWidth{
+  width: 60%;
+}
+
+.employeeGridMargin{
+  margin-top: 3%;
+}

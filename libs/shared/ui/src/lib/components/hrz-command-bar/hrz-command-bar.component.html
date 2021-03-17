@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-end">
+  <button *ngIf="showStartButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="startButtonClicked()"><span *ngIf="!isProcessingStart"><i class="fa fa-play"></i></span><span
+      *ngIf="isProcessingStart"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;{{startText}}</button>
+  <button *ngIf="showContinueButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="continueButtonClicked()"><span *ngIf="!isProcessingStart"><i
+        class="fa fa-chevron-circle-right"></i></span><span *ngIf="isProcessingStart"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;{{continueText}}</button>
+  <button *ngIf="showSubmitButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="submitButtonClicked()"><span *ngIf="!isProcessingSubmit"><i class="fa fa-file-o"></i></span><span
+      *ngIf="isProcessingSubmit"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;{{submitText}}</button>
+  <button *ngIf="showApproveButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="approveButtonClicked()"><span *ngIf="!isProcessingApprove"><i class="fa fa-thumbs-o-up"></i></span><span
+      *ngIf="isProcessingApprove"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;{{approveText}}</button>
+  <button *ngIf="showDeclineButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="declineButtonClicked()"><span *ngIf="!isProcessingDecline"><i class="fa fa-thumbs-o-down"></i></span><span
+      *ngIf="isProcessingDecline"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;{{declineText}}</button>
+  <button *ngIf="showRetrieveButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="retrieveButtonClicked()"><span *ngIf="!isProcessingRetrieve"><i class="fa fa-repeat"></i></span><span
+      *ngIf="isProcessingRetrieve"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;{{retrieveText}}</button>
+  <button *ngIf="showAddButton" [disabled]="disableAdd" mdbBtn type="button" color="warning" rounded="true" size="sm"
+    mdbWavesEffect (click)="addButtonClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add</button>
+  <button *ngIf="showEditButton" [disabled]="disableEdit" mdbBtn type="button" color="warning" rounded="true" size="sm"
+    mdbWavesEffect (click)="editButtonClicked()"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;Edit</button>
+  <button *ngIf="showAwaitingButton" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+    (click)="viewButtonClicked()"><i class="fa fa-desktop"></i>&nbsp;&nbsp; {{viewAwaitingText}}</button>
+  <button *ngIf="showDeleteButton" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+    (click)="deleteButtonClicked()"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete</button>
+
+  <button *ngIf="showApplyButton" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+    (click)="applyButtonClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Apply</button>
+  <button *ngIf="showRescheduleButton" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+    (click)="rescheduleButtonClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Reschedule</button>
+  <button *ngIf="showReturnButton" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+    (click)="returnButtonClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Return</button>
+  <button *ngIf="showRecallButton" mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+    (click)="recallButtonClicked()"><i class="fa fa-plus"></i>&nbsp;&nbsp;Recall</button>
+  <button *ngIf="showCancelButton" [disabled]="disableCancelButton" mdbBtn type="button" color="warning"
+    [rounded]="isRounded" size="sm" mdbWavesEffect (click)="cancelButtonClicked()"><span *ngIf="!isProcessingCancel"><i
+        class="fa fa-times-circle-o"></i></span><span *ngIf="isProcessingCancel"><i
+        class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span>&nbsp;&nbsp;Cancel</button>
+  <button *ngIf="showEnableEditButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm"
+    mdbWavesEffect (click)="enableEditButtonClicked()"><span><i class="fa fa-pencil"></i></span>&nbsp;&nbsp;Enable
+    Edit</button>
+  <button *ngIf="showAddParticipantCriteria" mdbBtn type="button" color="warning" rounded="true" size="sm"
+    mdbWavesEffect (click)="eventParticipantWithCriteriaClicked()">Add Participant with Criteria</button>
+    <button *ngIf="showBack" mdbBtn type="button" color="warning" rounded="true" size="sm"
+    mdbWavesEffect (click)="backBtnClicked()">Back</button>
+  <button *ngIf="showRefreshButton" mdbBtn type="button" color="warning" [rounded]="isRounded" size="sm" mdbWavesEffect
+    (click)="refreshButtonClicked()"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh</button>
+</div>

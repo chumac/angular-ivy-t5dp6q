@@ -1,0 +1,53 @@
+import { IState, ICity, ICountry } from "@nutela/models/core-data";
+import { ILeaveInfo } from "./leave-info.interface";
+import { IPersonal } from "@nutela/models/workforce/employee-profiles";
+import { ILeavePlanMaster } from "./leave-plan-master.interface";
+import { ILeavePlanDetail } from "./leave-plan-detail.interface";
+
+export interface ILeaveDailyData {
+  id?: number;
+  leave_id?: number;
+  leave_trans_id?: number;
+  start_date?: Date;
+  end_date?: Date;
+  resumption_date?: Date;
+  no_of_days?: number;
+  actual_return_date?: Date;
+  leave_description?: string;
+  entitlement?: string;
+  LeaveInfo?: ILeaveInfo;
+  EmployeeInfo?: IPersonal;
+  CityInfo?: ICity;
+  StateInfo?: IState;
+  NationalityInfo?: ICountry;
+  AssignedBackupInfo?: IPersonal;
+  SupervisorInfo?: IPersonal;
+  address1?: string;
+  address2?: string;
+  city_id?: number;
+  state_id?: number;
+  country_id?: number;
+  zip?: string;
+  telephone_no?: string;
+  emergency_no?: string;
+  assigned_backup_id?: number;
+  pay_allowance?: true;
+  currency_id?: number;
+  supervisor_id?: number;
+  leave_reason?: string;
+  supporting_document?: string;
+  doc_binary?: string;
+  doc_url?: string;
+  doc_guid?: string;
+  doc_size?: string;
+  doc_extension?: string;
+  EssHrLeaveplanDetails?: ILeavePlanDetail;
+  EssHrLeavePlansMaster?: ILeavePlanMaster;
+
+  employee_name?: string;
+  leave_type?: string;
+  number_of_days?: any;
+  backup_officer?: string;
+  reports_to?: string;
+  address?: string;
+}

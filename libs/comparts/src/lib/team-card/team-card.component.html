@@ -1,0 +1,24 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">My Team Members ({{ (filteredTeam)?.length || '0' }})</h5>
+    </div>
+    <div class="top-content-right">
+      <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+      </x365-shared-ui-spinner>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 md-form mb-1">
+      <input mdbInputDirective (keyup)="filter($event.target.value)" type="text" id="form1" placeholder="Input a search parameter" class="form-control">
+    </div>
+  </div>
+
+  <div class="item-container-bottom">
+    <x365-shared-ui-employee-team-card class="body-cell" *ngFor="let member of filteredTeam; let i=index"
+      [data]="(filteredTeam)[i]" [pictureData]="(filteredTeam)[i].profile_picture"
+      (selectedEmployeeId)="onSelectedEmployeeId($event)" [modeDrillDown]="false">
+    </x365-shared-ui-employee-team-card>
+  </div>
+</div>

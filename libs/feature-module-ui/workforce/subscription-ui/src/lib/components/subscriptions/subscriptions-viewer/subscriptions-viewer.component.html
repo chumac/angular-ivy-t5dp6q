@@ -1,0 +1,73 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Benefit'" [subTitle]="'Details of benefit'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Benefit Type:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.HrSubcriptionType?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Membership Details:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.HrSubcriptionTypeList?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Details:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.details | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Is Refund:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    <div class="text-right">
+                        <i class="fa fa-check text-success" *ngIf="data?.is_refund;else nonRefund"></i>
+                        <ng-template #nonRefund>
+                            <i class="fa fa-close text-danger"></i>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Transaction Date:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.created_date | dateDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Currency:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.currency | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Request/Refund:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.request_refund_amount | number: '1.2-2'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

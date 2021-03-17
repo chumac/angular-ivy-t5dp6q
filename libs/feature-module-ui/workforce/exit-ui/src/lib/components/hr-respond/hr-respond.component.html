@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <x365-fm-workforce-exit-letter-data-panel [letter]="employeeResignation$ | async" [comprehensiveData]="comprehensiveData$ | async" [employeePhoto]="employeePhoto$ | async" [isHR]="true">
+  </x365-fm-workforce-exit-letter-data-panel>
+
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-4">
+          <div class="d-flex align-items-center justify-content-start middle">
+            <button mdbBtn type="button" color="danger" rounded="true" outline="true" size="sm" mdbWavesEffect
+              (click)="onBackButtonClicked()"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Go Back</button>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="d-flex align-items-center justify-content-end middle">
+              <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="(!(checklistTransactions$ | async) || (checklistTransactions$ | async).length === 0 || !getValidationStatusFromBody())"
+                (click)="onSaveClicked()" class=""><span *ngIf="isProcessingSave$ | async"><i class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span><span *ngIf="!(isProcessingSave$ | async)"><i class="fa fa-floppy-o"></i></span>&nbsp;&nbsp;Save</button>
+              <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="(!(checklistTransactions$ | async) || (checklistTransactions$ | async).length === 0 || !getValidationStatusFromBody())"
+                (click)="onRedirectAll()" class=""><i class="fa fa-mail-forward"></i>&nbsp;&nbsp;Redirect All</button>
+              <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+                (click)="onRefresh()" class="ml-2"><i class="fa fa-refresh"></i>&nbsp;&nbsp;Refresh Checklist</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true">
+  </x365-shared-ui-spinner>
+  <div class="row my-2 checklist-form">
+    <div class="col-12 p-5" *ngIf="((checklistTransactions$ | async) && (checklistTransactions$ | async)?.length)">
+      <mdb-accordion *ngFor="let data of rowData; let index = index">
+        <x365-fm-workforce-exit-response-row-template [index]=index+1 [data]="data"
+          [selectedOption]="data?.selected_option" [optionValues]="data?.option_values"
+          [validatorComment]="data?.validator_comment" (validityCheck)="checkValidity()" (redirectItem)="onRedirectItem($event)">
+        </x365-fm-workforce-exit-response-row-template>
+      </mdb-accordion>
+      <!-- <table mdbTable table-borderless class="w-100 mh-100">
+          <tbody>
+            <tr mdbTableCol *ngFor="let data of rowData; let index = index">
+              <td *ngIf="data">
+                <x365-fm-workforce-exit-response-row-template [index]=index+1 [data]="data"
+                  [selectedOption]="data?.selected_option" [optionValues]="data?.option_values" [validatorComment]="data?.validator_comment" (validityCheck)="checkValidity($event)">
+                </x365-fm-workforce-exit-response-row-template>
+              </td>
+              <td *ngIf="!data">
+                <h5>No Checklist Data Available</h5>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+    </div>
+    <div class="col-12 d-flex justify-content-center align-items-center h-25" *ngIf="!((checklistTransactions$ | async) && (checklistTransactions$ | async)?.length)">
+      <h5>No Checklist Data Available</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 d-flex justify-content-end align-items-center">
+      <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect *ngIf="isAdmin$ | async"
+        [disabled]="(!(checklistTransactions$ | async) || (checklistTransactions$ | async).length === 0 || !getValidationStatusFromBody())"
+        (click)="onCloseAllButtonClicked()"><span *ngIf="isProcessingResignation$ | async"><i
+            class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span><span *ngIf="!(isProcessingResignation$ | async)"><i
+            class="fa fa-window-close-o"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;Close All</button>
+
+      <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+        [disabled]="(!(checklistTransactions$ | async) || (checklistTransactions$ | async).length === 0 || disableSubmit || !getValidationStatusFromBody())"
+        (click)="onSubmit()" class="mr-4"><span *ngIf="isProcessing$ | async"><i
+            class="fa fa-spinner fa-spin fa-lg fa-fw"></i></span><span *ngIf="!(isProcessing$ | async)"><i
+            class="fa fa-file-text-o"></i></span>&nbsp;&nbsp;Submit</button>
+    </div>
+  </div>
+</div>
+

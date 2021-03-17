@@ -1,0 +1,125 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Payroll Run'" [subTitle]="'Enter values to run payroll'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+        <div class="row mb-3" *ngIf="data?.has_last_run">
+          <div class="col-12 md-form mt-0 bg-danger p-2">
+            <p class="text-white">{{warningMessage }} </p>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label class="center-label">Payroll</label>
+          </div>
+          <div class="col-7 md-form mt-0 font-weight-bold text-left">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label class="center-label">Payroll Period</label>
+          </div>
+          <div class="col-7 md-form mt-0 text-left font-weight-bold">
+            {{data?.current_period | dateDisplay}}
+
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-5">
+            <label class="required center-label">Run Payroll For:</label>
+          </div>
+          <div class="col-7 md-form mt-0">
+            <mdb-select #payrollGroup formControlName="grouprun" [options]="payrollGroupSelect" placeholder=""
+              [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" (selected)="onPayrollGroupSelected($event)"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="selectedPayrollGroup == 1">
+          <div class="col-5">
+            <label class="required center-label">Employee:</label>
+          </div>
+          <div class="col-7 md-form mt-0">
+            <dx-lookup formControlName="grouprun_id" [dataSource]="activePersonnel" valueExpr="value"
+              displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+               popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="selectedPayrollGroup == 2">
+          <div class="col-5">
+            <label class="required center-label">Payment Group:</label>
+          </div>
+          <div class="col-7 md-form mt-0">
+            <dx-lookup formControlName="grouprun_id" [dataSource]="paymentGroupSelect" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+              popupWidth="auto" popupHeight="auto" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="selectedPayrollGroup == 3">
+          <div class="col-5">
+            <label class="required center-label">Payment Grade:</label>
+          </div>
+          <div class="col-7 md-form mt-0">
+            <dx-lookup formControlName="grouprun_id" [dataSource]="paymentGradeSelect" valueExpr="grade_id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+              popupWidth="auto" popupHeight="auto" class="form-font"></dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-5">
+            <label class="center-label">Use Payroll Acceleration? </label>
+          </div>
+          <div class="col-7 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="use_payroll_acceleration" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+
+        <div class="exchange-rate-container p-4"  *ngIf="data?.use_multi_currency">
+
+          <div class="row mb-1">
+            <div class="col-5">
+              <label class="center-label">Use Multi Currency?</label>
+            </div>
+            <div class="col-7 md-form mt-0 font-weight-bold text-left">
+              {{data?.use_multi_currency && 'YES' | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-5">
+              <label class="center-label">Default Currency</label>
+            </div>
+            <div class="col-7 md-form mt-0 font-weight-bold text-left">
+              {{data?.default_currency_text | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1" >
+            <div class="col-5">
+              <label class="center-label">Profile Currency</label>
+            </div>
+            <div class="col-7 md-form mt-0 font-weight-bold text-left">
+              {{data?.profile_currency_text | stringDisplay}}
+            </div>
+          </div>
+
+          <div class="row mb-1">
+            <div class="col-5">
+              <label class="center-label">Exchange Rate</label>
+            </div>
+            <div class="col-7 md-form mt-0 font-weight-bold text-left">
+              <input formControlName="exchange_rate" type="number" class="form-control form-font">
+            </div>
+          </div>
+        </div>
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

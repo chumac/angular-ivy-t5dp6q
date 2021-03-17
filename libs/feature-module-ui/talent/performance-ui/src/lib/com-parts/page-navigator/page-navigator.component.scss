@@ -1,0 +1,101 @@
+@import 'colors';
+
+$border_color: rgb(192, 192, 192);
+
+ul {
+  font-size: 0.9em !important;
+  font-weight: 600;
+  color: lighten(black, 40%);
+  letter-spacing: 0.04em;
+  margin: 0;
+  padding: 0;
+}
+
+ul > li {
+  display: flex;
+  width: 93%;
+  min-height: 3em;
+  padding-left: 1em;
+  border-right: 1px solid $border_color;
+  border-bottom: 1px solid $border_color;
+  cursor: pointer;
+}
+
+ul > li:first-child {
+  border-top: 1px solid $border_color;
+  border-radius: 0 5px 0 0;
+}
+
+ul > li:last-child {
+  border-radius: 0 0 5px 0;
+}
+
+ul > li:hover {
+  color: $app_brand_color !important;
+  background-color: rgb(223, 223, 223) !important;
+}
+
+ul > li.active {
+  width: 100%  !important;
+  height: 3.6em;
+  color: $app_brand_color;
+  background-color: white !important;
+  padding: 0.3em 0.7em 0.4em 0.7em;
+  font-weight: bold;
+  border-radius: 0 5px 5px 0;
+  // border-top: 1px solid $border_color;
+  border: none;
+}
+
+.title-pane {
+  flex-grow: 1;
+  padding: 0.7em;
+}
+
+.stub-pane {
+  visibility: visible;
+  flex-basis: 10%;
+  font-size: 1.0rem;
+  // background-color: red;
+  i {
+    margin-top: 0.5rem;
+    &:hover {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+
+
+
+
+
+ul > li > a {
+  display: block;
+  padding: 0.6em;
+  text-decoration: none;
+}
+
+ul > li > a:hover {
+  color: $app_brand_color !important;
+}
+
+ul > li.active > a:hover {
+  color: white !important;
+}
+
+ul > li > a:visited {
+  color: darken($app_form_label_color, 20%);
+  background-color: transparent !important;
+  text-decoration: none;
+}
+
+ul > li > a:focus {
+  color: white;
+  background-color: transparent !important;
+  text-decoration: none;
+}
+.open {
+  cursor: not-allowed;
+  color: gray;
+}

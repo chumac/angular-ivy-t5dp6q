@@ -1,0 +1,17 @@
+[
+  {
+    "id": "4",
+    "name": "Sample Dashboard 4",
+    "widgets": [
+      {
+        "id": "1",
+        "name": "Timeline",
+        "component": "timeline",
+        "cols": 8,
+        "rows": 6,
+        "y": 0,
+        "x": 0
+      }
+    ]
+  }
+]

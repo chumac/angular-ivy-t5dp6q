@@ -1,0 +1,476 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Provision Employee'" [subTitle]="'Add New Employee'"
+      [loading]='isLoading$ | async'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label" mdbTooltip="Tooltip on top" placement="left">Staff Category:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="staffCategoriesTransformed" valueExpr="value" formControlName="staff_category_id"
+            displayExpr='label' showPopupTitle=false placeholder="" searchEnabled=true closeOnOutsideClick=false
+            popupHeight="auto" class="form-font" (onItemClick)="onCategorySelected($event)"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Staff Number:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="employee_number" type="text" class="form-control pt-0" #num>
+          <button type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm"
+            (click)=generateStaffNumber()>Autogenerate</button>
+
+        </div>
+      </div>
+
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>General Information</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Title:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="selectOptionData?.Titles" valueExpr="value" formControlName="title"
+            displayExpr='label' showPopupTitle=false placeholder="" searchEnabled=true closeOnOutsideClick=false
+            popupHeight="auto" class="form-font" (onItemClick)="onEmployeeTitleSelected($event)"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Surname:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input #surname formControlName="employee_surname" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">First Name:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input #firstname formControlName="employee_firstname" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Middle Name:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input #middlename formControlName="employee_midname" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Gender:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="selectOptionData?.Gender" valueExpr="value" formControlName="gender"
+            displayExpr='label' showPopupTitle=false placeholder="" searchEnabled=true closeOnOutsideClick=false
+            popupHeight="auto" class="form-font"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Date of Birth:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="date_of_birth" [placeholder]=""></dx-date-box>
+        </div>
+      </div>
+
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>User Information</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Record Category:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="recordCategoriesSelect$ | async" valueExpr="value" formControlName="rec_category"
+            displayExpr='label' showPopupTitle=false placeholder="" searchEnabled=true closeOnOutsideClick=false
+            popupHeight="auto" class="form-font"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Create directory services user?</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="user_on_ad" type="checkbox" (change)=onUserOnActiveDirectoryChecked($event)>
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.showInput>
+        <div class="col-4">
+          <label class="center-label">Sync First Name:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="sync_firstname" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.showInput>
+        <div class="col-4">
+          <label class="center-label">Sync Surname:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="sync_surname" type="text" class="form-control pt-0">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">User Name:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="username" type="text" class="form-control pt-0">
+          <button type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm"
+            (click)="onAutogenerateClick()">Autogenerate</button>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Send email to:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="detailOptionsSelect$ | async" valueExpr="value"
+            formControlName="send_creation_email_to" displayExpr='label' showPopupTitle=false placeholder=""
+            searchEnabled=true closeOnOutsideClick=false popupHeight="auto" class="form-font"
+            (onItemClick)="getStatusValue($event)"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.showEmailType>
+        <div class="col-4">
+          <label class="required center-label">Enter Custom Email:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <div class="row">
+            <input formControlName="creation_email_custom" type="text" class="form-control pt-0" placeholder="">
+          </div>
+        </div>
+      </div>
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>Position/Designation</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Designation:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="designationData$ | async" valueExpr="value" formControlName="designation_id"
+            displayExpr='label' showPopupTitle=false placeholder="" searchEnabled=true closeOnOutsideClick=false
+            popupHeight="auto" class="form-font" (onItemClick)="onDesignationSelected($event)"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Position:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="positionData$ | async" valueExpr="value" formControlName="position_id"
+            displayExpr='label' showPopupTitle=false placeholder="" searchEnabled=true closeOnOutsideClick=false
+            popupHeight="auto" class="form-font"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Reports to:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup formControlName="reports_to" [dataSource]="activePersonnelDataSourceReportsTo" valueExpr="value"
+            displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=false popupHeight="auto" class="form-font"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Backup Officer:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup formControlName="backup_officer_id" [dataSource]="activePersonnelDataSourceBackupOfficer"
+            valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=false popupHeight="auto" class="form-font" (onContentReady)="showToolTip($event)">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Employment Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="employment_date" [placeholder]=""
+            (valueChange)="onEmploymentDatePicked($event)"></dx-date-box>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Confirmation Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="a_confirm_date" [placeholder]=""></dx-date-box>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Is Staff Permanent?</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="is_permanent_staff" type="checkbox" (change)=isPermanentStaff($event)>
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Start Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" [disableControl]="true" formControlName="emp_duration_from" [placeholder]=""></dx-date-box>
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=!(fs.permanentStaff)>
+        <div class="col-4">
+          <label class="required center-label">End Date:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-date-box dateSerializationFormat="yyyy-MM-dd" formControlName="emp_duration_to" [placeholder]=""></dx-date-box>
+        </div>
+      </div>
+
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>Payroll Information</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Grade:</label>
+        </div>
+        <div class="col-8 md-form mt-0" #lookupContainer>
+          <dx-lookup formControlName="grade_id" [dataSource]="paygradeData$ | async" valueExpr="value"
+            displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=false popupHeight="auto" class="form-font" (onItemClick)="onPaygradeSelected($event)">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Is User on Payroll?</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch" >
+          No <label class="switch">
+            <input formControlName="on_payroll" type="checkbox" (change)=isUserOnPayroll($event)>
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.userOnPayroll>
+        <div class="col-4">
+          <label class="required center-label">Payment Group:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup formControlName="paygroup_id" [dataSource]="paygroupsData$ | async" valueExpr="value"
+            displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=false popupHeight="auto" class="form-font"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.userOnPayroll>
+        <div class="col-4">
+          <label class="center-label">Pay New Staff Arrears?</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="pay_newstaff_arrears" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.userOnPayroll>
+        <div class="col-4">
+          <label class="center-label">Compute Pension:</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="compute_pension" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.userOnPayroll>
+        <div class="col-4">
+          <label class="center-label">Compute NHF:</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="compute_nhf" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf=fs.userOnPayroll>
+        <div class="col-4">
+          <label class="center-label">Compute Tax:</label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-constrol custom-switch">
+          No <label class="switch">
+            <input formControlName="compute_tax" type="checkbox">
+            <span class="slider round"></span>
+          </label> Yes
+        </div>
+      </div>
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>Initial Permission</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">User Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup formControlName="user_type" [dataSource]="userTypeOptionsSelect$ | async" valueExpr="value"
+            displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=false popupHeight="auto" class="form-font" (onItemClick)="onUserTypeSelected($event)">
+          </dx-lookup>
+        </div>
+      </div>
+
+      <div class="row mb-1 mx-1" [hidden]="fs.isAdmin">
+        <x365-fm-plf-prov-provisioning-roles-picker #rolesPicker [rolesData]="roles$ | async"
+          (rolesPicked)="onArrowButtonClick($event)"></x365-fm-plf-prov-provisioning-roles-picker>
+      </div>
+
+      <div class="sub-heading row mt-4 mb-1">
+        <div class="col-12 md-form mt-2">
+          <h5>Initial Deployment</h5>
+          <hr class="mt-1">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm"
+            (click)=onTreeButtonClick()>Select form Tree</button>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Enterprise Structure Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="ent_struc_type_id" [options]="entStrucTypeTransformed" placeholder=""
+            [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'"
+            (selected)="onEnterpriseStructureTypeSelected($event)"></mdb-select>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Enterprise Structure Detail:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="cost_centre_id" [options]="entStrucDetailTransformed" placeholder="" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'"
+            (selected)="onEnterpriseStructureSelected($event)"></mdb-select>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Cost Center:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <mdb-select formControlName="ent_struc_details_id" [options]="costCentersData$ | async" placeholder="" [filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'"></mdb-select>
+        </div>
+      </div>
+
+      <!-- <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label" title="Enterprise Structure Type">Enterprise Structure Type:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup
+            formControlName="ent_struc_type_id"
+            [dataSource]="entStrucTypeTransformed"
+            valueExpr="value"
+            displayExpr='label'
+            searchEnabled=true
+            showPopupTitle=false
+            paginate=true
+            placeholder=""
+            closeOnOutsideClick=false
+            popupHeight="auto"
+            usePopover=false
+            class="form-font"
+            (onItemClick)="onEnterpriseStructureTypeSelected($event)">
+          </dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label" title="Enterprise Structure Detail">Enterprise Structure Detail:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup
+            formControlName="cost_centre_id"
+            [dataSource]="enterpriseStructureDetailsData$ | async"
+            valueExpr="analysis_det_id"
+            displayExpr='description'
+            searchEnabled=true
+            popupHeight="auto"
+            closeOnOutsideClick=false
+            showPopupTitle=false
+            paginate=true
+            placeholder=""
+            class="form-font"
+            (onItemClick)="onEnterpriseStructureSelected($event)"></dx-lookup>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Cost Center:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup
+            formControlName="ent_struc_details_id"
+            [dataSource]="costCentersData$ | async"
+            valueExpr="value"
+            searchEnabled=true
+            displayExpr='label'
+            popupHeight="auto"
+            class="form-font"
+            closeOnOutsideClick=false
+            placeholder=""
+            paginate=true
+            showPopupTitle=false></dx-lookup>
+        </div>
+      </div> -->
+    </form>
+  </div>
+  <div class="footer" #containerOne>
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>
+<x365-shared-ui-enterprise-structure-tree-view #editor [width]="45" [show]="showStructurePicker$ | async" [data]="null"
+  (cancelClick)="onCancelStructurePicker()" (selectedStructure)="onStructureSelected($event)"
+  (doneClick)="onDoneButtonClicked()">
+</x365-shared-ui-enterprise-structure-tree-view>

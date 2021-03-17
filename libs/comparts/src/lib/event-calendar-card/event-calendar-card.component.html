@@ -1,0 +1,79 @@
+<div class="item-container">
+    <div class="item-container-top">
+      <div class="top-content-left">
+        <h5 class="font-weight-bold">Calendar ({{ cardTitle }})</h5>
+      </div>
+      <div class="top-content-right">
+        <div class="btn-group" mdbDropdown>
+          <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+            mdbWavesEffect><span>Select Type</span> <i class="fa fa-angle-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" (click)="onEventSelection($event, 'Birthday')">
+              <span class="color-green">Birthday</span>
+            </a>
+            <a class="dropdown-item color-cyan" (click)="onEventSelection($event, 'Work')">
+              <span class="color-cyan">Corporate Anniversaries</span>
+            </a>
+            <a class="dropdown-item color-magenta" (click)="onEventSelection($event, 'Wedding')">
+              <span class="color-magenta">Wedding Anniversaries</span>
+            </a>
+          </div>
+        </div>
+        <!-- <div class="btn-group" mdbDropdown>
+          <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+            mdbWavesEffect>
+            <span>Team</span> <i class="fa fa-angle-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">My teams</a>
+          </div>
+        </div> -->
+      </div>
+    </div>
+    <div class="item-container-bottom">
+      <div class="bottom-content-left">
+        <igx-calendar selection="single" (onSelection)="selectDate($event)">
+          <ng-template igxCalendarSubheader let-parts>
+            <span class="date__el" (click)="parts.monthView()">{{ parts.month.combined }}</span>
+            <span class="date__el" (click)="parts.yearView()">{{ parts.year.combined }}</span>
+          </ng-template>
+        </igx-calendar>
+      </div>
+      <div class="bottom-content-right">
+        <div class="label">{{ selectedDate | dateDisplay }}</div>
+        <ul *ngIf="showBirthDayData">
+          <p *ngIf="!birthDays">No Reminder Today</p>
+          <li *ngFor="let birthday of filteredBirthdays">
+            <span class="d-block heading-sm-2 mb-1">{{ birthday.employee_surname | stringDisplay }}
+              {{ birthday.employee_firstname | stringDisplay }}</span>
+            <span class="d-block heading-sm-1 mb-1" *ngIf="noLocation">{{ birthday.location_type | stringDisplay }}:
+              {{ birthday.location_name | stringDisplay }}
+            </span>
+          </li>
+        </ul>
+        <ul *ngIf="showWeddingAnniversaryData">
+          <p *ngIf="!weddingAnniversaries">No Reminder Today</p>
+          <li *ngFor="let wed of filteredWedAnniversaries">
+            <span class="d-block heading-sm-2 mb-1">{{ wed.employee_surname | stringDisplay }}
+              {{ wed.employee_firstname | stringDisplay }}</span>
+            <span class="d-block heading-sm-1 mb-1" *ngIf="noLocation">{{ wed.location_type | stringDisplay }}:
+              {{ wed.location_name | stringDisplay }}
+            </span>
+          </li>
+        </ul>
+        <ul *ngIf="showWorkAnniversaryData">
+          <p *ngIf="!workAnniversaries">No Reminder Today</p>
+          <li *ngFor="let work of filteredWorkAnniversaries">
+            <span class="d-block heading-sm-2 mb-1">{{ work.employee_surname | stringDisplay }}
+              {{ work.employee_firstname | stringDisplay }}</span>
+            <span class="d-block heading-sm-1 mb-1" *ngIf="noLocation">{{ work.location_type | stringDisplay }}:
+              {{ work.location_name | stringDisplay }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- <igx-calendar selection="single" (onSelection)="selectDate($event)" [formatOptions]="formatOptions"
+  [formatViews]="formatViews"> -->

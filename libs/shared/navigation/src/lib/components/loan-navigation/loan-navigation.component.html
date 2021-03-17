@@ -1,0 +1,39 @@
+<li>
+  <ul class="collapsible collapsible-accordion">
+    <mdb-accordion [multiple]="false" aria-multiselectable="false">
+      <!-- <mdb-accordion-item class="no-collase">
+        <mdb-accordion-item-head mdbWavesEffect routerLink="/d/analytics/dashboard" routerLinkActive="active">
+          <svg><use xlink:href="/assets/images/sprite.svg#home"/></svg> <span>Dashboard</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body></mdb-accordion-item-body>
+      </mdb-accordion-item> -->
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg><use xlink:href="/assets/images/sprite.svg#task"/></svg> <span>Transactions</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/loans/admin/repayments" routerLinkActive="active">Repayments</a></li>
+            <li><a routerLink="/d/compensation/loans/admin/proxy-applications" routerLinkActive="active">Proxy Applications</a></li>
+            <li><a routerLink="/d/compensation/loans/admin/transactions" routerLinkActive="active">Transactions</a></li>
+            <li><a routerLink="/d/compensation/loans/admin/disbursements" routerLinkActive="active">Disbursements</a></li>
+            <li><a routerLink="/d/compensation/loans/admin/closure" routerLinkActive="active">Closure</a></li>
+            <li><a routerLink="/d/compensation/loans/admin/closed" routerLinkActive="active">Closed</a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+
+      <mdb-accordion-item>
+        <mdb-accordion-item-head mdbWavesEffect>
+          <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Setups</span>
+        </mdb-accordion-item-head>
+        <mdb-accordion-item-body>
+          <ul>
+            <li><a routerLink="/d/compensation/loans/admin/definitions" routerLinkActive="active"><span>Definitions</span></a></li>
+          </ul>
+        </mdb-accordion-item-body>
+      </mdb-accordion-item>
+    </mdb-accordion>
+  </ul>
+</li>

@@ -1,0 +1,28 @@
+<!-- <div [style.height]="height">
+    <div *ngFor="let pc of _perColumn" class="shimmer-container">
+        <ng-template *ngIf="photo">
+            <div *ngFor="let np of _noOfPhotos" class="photo shine"></div>
+        </ng-template>
+        <br>
+        <ng-template *ngIf="box">
+            <div *ngFor="let nb of _noOfBox" class="box shine"></div>
+        </ng-template>
+        <br>
+        <ng-template *ngIf="line">
+            <div *ngFor="let nl of _noOfLines" class="line shine"></div>
+        </ng-template>
+    </div>
+</div> -->
+<div [style.height]="height">
+    <div *ngFor="let pc of _perColumn" class="shimmer-container">
+        <div *ngIf="photo">
+            <div *ngFor="let np of _noOfPhotos" class="photo shine"></div>
+        </div>
+        <div *ngIf="box">
+            <div *ngFor="let nb of _noOfBox" class="box shine"></div>
+        </div>
+        <div *ngIf="line">
+            <div *ngFor="let nl of _noOfLines" class="line shine"></div>
+        </div>
+    </div>
+</div>

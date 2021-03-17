@@ -1,0 +1,42 @@
+
+export interface IPromotion {
+  id: number;
+  effective_date: Date;
+  notes: string;
+  action: string;
+  action_i: number;
+  master_rec_id: number;
+  is_closed: boolean;
+  is_payroll_processed: string;
+  process_differential: string;
+  is_payroll_processed_b: boolean;
+  process_differential_b: boolean;
+  is_history: number;
+  batch_id: string;
+  rev_record: number;
+  p_diff_triquart: boolean;
+  update_last_promo_date: boolean;
+  employee_id: number;
+  employee_name: string;
+  current_grade: string;
+  new_grade: string;
+  new_grade_id: number;
+  new_paygroup_id: number;
+  current_grade_id: number;
+  current_paygroup_id: number;
+  current_paygroup: string;
+  new_paygroup: string;
+  is_closed_text: string;
+  status: string;
+  status_i: number;
+  process_differential_quarterly: string;
+  process_differential_halfyear: string;
+  process_differential_yearly: string;
+  process_differential_triquart: string;
+  process_differential_quarterly_b: boolean;
+  process_differential_halfyear_b: boolean;
+  process_differential_yearly_b: boolean;
+  process_differential_triquart_b: boolean;
+  approval_status: number;
+  is_effected: string;
+}

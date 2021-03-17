@@ -1,0 +1,247 @@
+.igx-grid-toolbar {
+    display: none;
+}
+
+// On igx grid row hover
+.igx-grid__tr:hover {
+    background-color: #f4f4f4;
+    color: inherit;
+}
+
+.igx-grid__tr--odd {
+    background: #fff;
+    color: inherit;
+}
+
+.igx-grid__td--selected {
+    color: inherit;
+}
+
+// end
+igx-grid-row.igx-grid__tr:last-child {
+    border-bottom: none;
+}
+
+// end
+.igx-grid__thead-title,
+.igx-grid__th {
+    font-size: 0.85em;
+}
+
+.igx-grid__tfoot .igx-grid__tfoot {
+    border-top: none;
+    background: transparent;
+}
+
+.igx-grid--cosy .igx-grid__td {
+    padding-left: 1rem;
+    padding-right: 0;
+}
+
+.igx-grid__thead-title,
+.igx-grid__th,
+.igx-grid__td {
+    padding-left: 1rem;
+    padding-right: 0;
+    border: none;
+}
+
+.igx-grid__td--selected {
+    background-color: transparent !important;
+}
+
+// PAGINATION
+.igx-paginator {
+    display: flex;
+}
+
+.igx-paginator>* {
+    margin: 0 0.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.igx-grid-paginator {
+    border-top: none;
+}
+// Paginator Position: Center (Default) =>
+.igx-paginator {
+    justify-content: center;
+}
+
+// Paginator Positions: Left =>
+.igx-paginator {
+    justify-content: flex-start;
+}
+
+// Paginator Positions: Right =>
+.igx-paginator {
+    justify-content: flex-end;
+}
+
+.toggle-button igx-icon.header-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+    margin-right: rem(4);
+}
+
+.toggle-button igx-icon.pin-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    font-size: 13px;
+    margin-right: rem(4);
+}
+
+.igx-grid__tbody {
+    igx-display-container.igx-display-container {
+        .hover-ellipse-menu {
+            visibility: visible;
+        }
+        .hover-icons {
+            visibility: hidden;
+        }
+        igx-grid-row.igx-grid__tr:hover {
+            .hover-ellipse-menu {
+                visibility: hidden;
+            }
+            .hover-icons {
+                visibility: visible;
+            }
+        }
+    }
+}
+
+.igx-vhelper--vertical {
+    width: 4px;
+}
+
+.igx-grid,
+.igx-grid--cosy,
+.igx-grid--compact {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+}
+
+.igx-grid__tbody-message {
+    min-height: 50px;
+}
+
+// Dashboard Grid Overwrite
+x365-fm-plf-analytics-dashboard {
+    .igx-grid__thead-title,
+    .igx-grid__th,
+    .igx-grid__td {
+        border: none;
+    }
+    .igx-grid__tfoot {
+        border-top: none;
+        background: transparent;
+    }
+    .igx-grid-paginator {
+        border-top: none;
+    }
+    .igx-grid__thead {
+        background-color: rgba(#f4f4f4, 0.5);
+        border-bottom: none;
+    }
+    .igx-grid__td--selected {
+        background-color: transparent !important;
+    }
+    .igx-grid__th {
+        border-right: none;
+    }
+    igx-grid-row.igx-grid__tr:last-child {
+        border-bottom: none;
+    }
+    .item-container {
+        .igx-grid,
+        .igx-grid--cosy,
+        .igx-grid--compact {
+            box-shadow: none;
+        }
+    }
+}
+
+x365-fm-loans-actual-schedule-viewer {
+    .igx-grid__th-title {
+        white-space: normal !important;
+        line-height: unset !important;
+        align-self: flex-end !important;
+        text-align: left;
+    }
+}
+
+x365-fm-workforce-leave-plan-editor,
+x365-fm-workforce-exit-response-viewer,
+x365-fm-workforce-exit-checklist-viewer {
+    .igx-grid__thead,
+    .igx-grid__tbody,
+    .igx-grid__tfoot {
+        width: 100% !important;
+    }
+    .wrapper {
+        position: relative;
+    }
+    .header-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 20px;
+        padding: 0.8rem 0.5rem;
+        z-index: +1;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+    .header-btn:hover {
+        transform: scale(1.2);
+    }
+}
+
+x365-fm-workforce-leave-plan,
+x365-fm-workforce-employee-profile {
+    .igx-grid__tbody {
+        height: 100% !important;
+    }
+}
+
+x365-fm-workforce-leave-staggered {
+    .igx-grid__tbody {
+        height: 100% !important;
+    }
+}
+
+x365-fm-workforce-transfer-tree {
+    .igx-grid__thead,
+    .igx-grid__tbody,
+    .igx-grid__tfoot {
+        width: 100% !important;
+    }
+}
+
+.my__class {
+    text-decoration: line-through !important;
+}
+
+.igx-display-container:nth-child(6) {
+    text-align: center !important;
+}
+
+.popover {
+    max-width: 500px;
+}
+
+x365-fm-payrl-calendar-global-work,
+x365-fm-payrl-calendar-group-work,
+x365-fm-payrl-calendar-personal-work {
+    .igx-grid__thead-title {
+        justify-content: center !important;
+    }
+    .igx-grid__thead-subgroup {
+        igx-grid-header {
+            text-align: center !important;
+        }
+    }
+}

@@ -1,0 +1,360 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Payroll Profile'" [subTitle]="'Edit Payroll Profile'"
+        [loading]='(inEditMode() && !data) || (isLoading$ | async)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class=" required center-label">Current Period:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" [acceptCustomValue]="false" formControlName="current_period" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Cut-off Day:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="cutoffDaySelectOption" formControlName="cut_off_day" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payment Run Day:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="paymentRundaySelectOption" formControlName="payment_runday" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Financial Year Start:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" [acceptCustomValue]="false" formControlName="finyear_start" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Financial Year End:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" [acceptCustomValue]="false" formControlName="finyear_end" [placeholder]=""></dx-date-box>
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Tax Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Tax Option:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup #taxOption [dataSource]="taxOptionSelectOption" formControlName="tax_option" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Tax Mode:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="taxModeSelectOption" formControlName="tax_mode" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font" [disableControl]="!(taxOption.value===0)">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Tax Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup #taxRule [dataSource]="taxRuleSelectOption" formControlName="tax_rule" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font" [disableControl]="!(taxOption.value===0)">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="taxRule.value===4">
+          <div class="col-4">
+            <label class="center-label">Fixed Deduction:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="fixedDeductionSelectOption" formControlName="deduction_id" valueExpr="deduction_id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Use Multi currency?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="use_multi_currency" type="checkbox" (change)="onUseMultiCurrencyChecked($event)">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+
+        <div class="row mb-1" *ngIf="showCurrencies">
+          <div class="col-4">
+            <label class="center-label">Scope all payments for this profile to this currency:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="currencySelectOption" formControlName="pay_currency_id" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Payment Period Covered:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="payPeriodSelectOption" formControlName="payment_period_covered" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="center-label">Include current period?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="include_current_period" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Scope Profile to Location</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="button" mdbBtn color="warning" rounded="true" mdbWavesEffect size="sm"
+              (click)=onTreeButtonClick()>Select form Tree</button>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Location Type:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="enterpriseStructureSelectOption" formControlName="location_type_id"
+              valueExpr="analysis_id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true
+              placeholder="" closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Scope to Location:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="costCenterSelectOption" formControlName="location_detail_id"
+              valueExpr="analysis_det_id" displayExpr='description' searchEnabled=true showPopupTitle=false
+              paginate=true placeholder="" closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Allow Negative Pay?</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="allowNegativePaySelectOption" formControlName="allow_neg_pay" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class=" required center-label">Coinage Rounding:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="coinageRoundingSelectOption" formControlName="coinage_rounding" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Upfront Treatment:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="upfrontTreatmentSelectOption" formControlName="upfront_treatment" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Periodic Proration:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="periodicProrationSelectOption" formControlName="periodic_proration"
+              valueExpr="id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-3">
+            <div class="">
+              <label class="center-label">Yearly:</label>
+            </div>
+            <div class="md-form mt-0">
+              <input formControlName="prorate_yearly" type="number" class="form-control form-font">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="">
+              <label class="center-label">Half-yearly:</label>
+            </div>
+            <div class="md-form mt-0">
+              <input formControlName="prorate_halfyear" type="number" class="form-control form-font">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="">
+              <label class="center-label">Quarterly:</label>
+            </div>
+            <div class="md-form mt-0">
+              <input formControlName="prorate_quarterly" type="number" class="form-control form-font">
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="">
+              <label class="center-label">Weekly:</label>
+            </div>
+            <div class="md-form mt-0">
+              <input formControlName="prorate_weekly" type="number" class="form-control form-font">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Is Profile Runnable?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="is_runnable" type="checkbox" (change)="onRunnableChanged($event)">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showRuncycle">
+          <div class="col-4">
+            <label class="center-label">Run Cycle:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="runCycleSelectOption" formControlName="run_cycle" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Use Security Group?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="use_security_group" type="checkbox" (change)="onSecurityGroupChanged($event)">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="showRoleSelect">
+          <div class="col-4">
+            <label class="center-label">Security Group:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup [dataSource]="securityRoleSelectOption" formControlName="security_group" valueExpr="rolename"
+              displayExpr='rolename' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=true
+              popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">System Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="12" formControlName="sys_rule" type="text"
+              class="md-textarea form-control"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>
+
+<x365-shared-ui-enterprise-structure-tree-view #treeView [width]="35" [show]="showTree$ | async" [data]="null"
+  (cancelClick)="onCancelStructurePicker()" (selectedStructure)="onStructureSelected($event)"
+  (doneClick)="onDoneButtonClicked()">
+</x365-shared-ui-enterprise-structure-tree-view>

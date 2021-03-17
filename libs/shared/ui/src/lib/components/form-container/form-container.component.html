@@ -1,0 +1,6 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="pWidth" [style.right]="nWidth">
+    <ng-content></ng-content>
+  </div>
+</div>

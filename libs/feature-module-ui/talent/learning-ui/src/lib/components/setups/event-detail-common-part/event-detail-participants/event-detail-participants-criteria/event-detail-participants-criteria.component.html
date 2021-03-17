@@ -1,0 +1,150 @@
+<!-- <x365-shared-ui-form-container [show]="showCriteria" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="showCriteria?'0': utilService.convertToNegativePercent(width)"> -->
+<div class="form-container" [class.form-overlay-active]="showCriteria">
+  <div class="form-overlay" [class.form-overlay-active]="showCriteria"></div>
+  <div class="form-main editorWidth" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="showCriteria?'0':utilService.convertToNegativePercent(width)">
+
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Event Participant Criteria'" [subTitle]="''"
+        [loading]='inEditMode() && !data'>
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f">
+        <div class="row mb-1">
+          <div class="col-3">
+            <label class="required center-label">Schedule:</label>
+          </div>
+          <div class="col-3 md-form mt-0">
+            <dx-lookup [dataSource]="eventParticipantSchedule | async" formControlName="schedule_id" valueExpr="id"
+              displayExpr='title' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font">
+            </dx-lookup>
+          </div>
+          <div class="col-6"></div>
+        </div>
+
+        <!-- <div class="row mb-1">
+          <div class="col-3">
+            <label class="required center-label">Source:</label>
+          </div>
+          <div class="col-3 md-form mt-0">
+            <dx-lookup [dataSource]="eventParticipantSource | async" formControlName="source" valueExpr="id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+              closeOnOutsideClick=true popupHeight="400px" class="form-font" [disabled]="true">
+            </dx-lookup>
+          </div>
+          <div class="col-6"></div>
+        </div> -->
+
+        <div class="row mb-1">
+          <div class="col-3">
+            <label class="center-label">This is Recommendation </label>
+          </div>
+          <div class="col-3 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="is_recommendation" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+          <div class="col-6"></div>
+        </div>
+
+        <div class="list-container">
+          <!-- <div class="list-sample">
+          <igx-list>
+            <igx-list-item [isHeader]="true">ALL PARTICIPANTS </igx-list-item>
+            <igx-checkbox *ngFor="let item of allParticipants" formControlName="checked"
+              (change)="storeSelectedProfile(item, $event)">
+              {{ item.employee_name }}
+            </igx-checkbox>
+          </igx-list>
+        </div> -->
+          <article>
+
+            <!-- <igx-grid-row *ngFor="let item of excludedProfile$" 
+                (change)="storeActiveProfile(item, $event)">
+                {{ item.description }}
+              </igx-grid-row> -->
+
+
+            <div *ngFor="let item of eventParticiantCriteriaKey">
+              <button igxButton [igxRipple]="'grey'" (click)="onKeyWord(item.keyword,item.id)">
+                {{item.description}}
+              </button>
+              <br />
+              <br />
+            </div>
+          </article>
+          <div class="list-sample">
+            <igx-list>
+              <igx-list-item [isHeader]="true">ALL ITEMS </igx-list-item>
+
+              <ng-container>
+                <igx-checkbox *ngFor="let item of eventParticiantCriteriaKeyItems$ | async"
+                [checked]="item.checked"
+                  (change)="storeSelectedItems(item, $event)">
+                  {{ item.description }}
+                </igx-checkbox>
+              </ng-container>
+
+            </igx-list>
+          </div>
+
+          <div class="list-sample">
+            <igx-list>
+              <igx-list-item [isHeader]="true">SELECTED ITEMS </igx-list-item>
+              <div>
+                <div *ngFor="let item of selectedKeyWordItems" (change)="storeActiveProfile(item, $event)">
+                  {{ item.keyname }} : {{item.description}}
+                  <!-- <div *ngFor="let description of (item.description.split(','))">
+                    {{ description }}
+                 </div> -->
+                </div>
+                
+              </div>
+              
+
+              <!-- <igx-checkbox *ngFor="let item of selectedItems" (change)="storeActiveProfile(item, $event)">
+                {{ item.description }}
+              </igx-checkbox> -->
+            </igx-list>
+          </div>
+        </div>
+      </form>
+
+      <!-- New Grid -->
+
+      <div class="card card-container container-fluid employeeGridMargin" *ngIf="isRun">
+        <div class="card-content font-size">
+          <div class="card-content-bottom">
+            <igx-grid #eventParticipantDataGrid [data]="ParticipantCriteriaEmployee$ | async" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false" [paging]="true"
+              [perPage]="15" [height]="null" [paginationTemplate]="">
+              <igx-column field="employee_id" header="Employee Id" width="10%">
+              </igx-column>
+              <igx-column field="staff_number" header="Staff Number" width="45%">
+              </igx-column>
+              <igx-column field="employee_name" header="Employee Name" width="45%">
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="col-12">
+          <div class="d-flex align-items-center justify-content-end middle">
+            <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="false"
+              (click)="onRun()">Run</button>
+          </div>
+        </div>
+        <x365-shared-ui-form-footer [doneButtonDisabled]="isSubmitDisable" [doneText]="'Submit'"
+          [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()">
+        </x365-shared-ui-form-footer>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- </x365-shared-ui-form-container> -->

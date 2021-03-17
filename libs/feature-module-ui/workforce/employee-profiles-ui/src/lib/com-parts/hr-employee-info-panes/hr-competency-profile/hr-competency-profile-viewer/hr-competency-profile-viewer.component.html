@@ -1,0 +1,153 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Competency Profile'" [subTitle]="'Details of Employee Competency Profile'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Skill:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.skill_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Skill Group:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.skill_group | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Domain:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.domain | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.grade | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.position | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Location:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.location_name | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Location Detail Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.location_detail_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Competency Level:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.competency_level | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Skill Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.skill_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Dictionary:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.dictionary | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Line Manager's Comment:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.lm_comment | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Supervisor's Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.supervisor_name | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Employer's Comment:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.emp_comment | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Employee's Score Text:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.emp_score_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Skill Choice List:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.skill_choice_list | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Score:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.score_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Score Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.score | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

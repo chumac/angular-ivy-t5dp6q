@@ -1,0 +1,11 @@
+<div class="profile">
+  <div class="profile-image mb-1">
+      <a><img [src]="(data?.profile_picture !== null ? getProfilePicture(data?.profile_picture) : defaultAvatar)" class="avatar avatar-size" alt="" mdbWavesEffect></a>
+    </div>
+    <div class="profile-name font-weight-bold mb-2">
+      <span>{{ (data?.employee_firstname | titlecase) + ' ' + (data?.employee_surname | titlecase) }}</span>
+    </div>
+    <div class="profile-position">
+      <span>{{ (data?.position !== null ? data?.position : '(no specified position)') }}</span>
+    </div>
+</div>

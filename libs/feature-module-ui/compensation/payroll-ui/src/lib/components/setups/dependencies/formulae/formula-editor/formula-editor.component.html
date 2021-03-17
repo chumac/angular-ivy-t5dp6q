@@ -1,0 +1,62 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Formula'" [subTitle]="'Edit Formula'" [loading]='inEditMode() && !data'>
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="formula_code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Formula:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="formula_text" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Link to Profile?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input #linkToProfile formControlName="link_to_profile" type="checkbox" (change)="onLinkToProfileChecked($event)" [checked]="!!selectedProfile">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="fs.isLinkedToPayrollProfile.value">
+          <div class="col-4">
+            <label class="required center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="payroll_profile_id" [options]="payrollProfileSelectOption"[filterEnabled]="true" [notFoundMsg]="'No Record Found'" [filterPlaceholder]="'search...'" placeholder="" value="selectedProfile">
+            </mdb-select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

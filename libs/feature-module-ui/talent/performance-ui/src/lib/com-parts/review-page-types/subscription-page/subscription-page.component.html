@@ -1,0 +1,38 @@
+
+<div class="base" *ngIf="show">
+  <div class="top">
+    <h5>{{pageTitle}}</h5>
+    <span>{{pageSubTitle}}</span>
+  </div>
+  <div class="content">
+    <div class="content-top">
+      <h6 class="mb-1">Employee Selected Courses</h6>
+      <igx-grid #myCoursesDataGrid [data]="service.courses" [paging]="true" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+        <igx-column field="description" header="Course" width="40%"></igx-column>
+        <igx-column field="comment" header="Comment" width="50%"></igx-column>
+        <igx-column field="course_id" header="..." class="text-center" width="10%">
+          <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-trash-o fa-icon'" title="Remove" (click)="onDeleteIconClicked($event, val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-reply-all'" title="Undo" (click)="onUndoIconClicked($event, val)"></x365-shared-ui-hover-icon>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+          <h6 class="mb-1">Select Courses</h6>
+          <x365-fm-talent-subscription-row-template #subscriptionRowTemplate [index]="" [data]="addedCourses" [courses]="service.courses" [mode]="" [disableButton]="disableButton"></x365-fm-talent-subscription-row-template>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="bottom grey lighten-5 w-100"></div>
+</div>

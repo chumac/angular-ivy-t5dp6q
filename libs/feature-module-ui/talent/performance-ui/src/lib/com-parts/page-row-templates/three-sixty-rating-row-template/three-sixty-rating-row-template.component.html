@@ -1,0 +1,54 @@
+
+<div class="base mb-5">
+  <div class="sn-pane text-right">{{index}}.</div>
+  <div class="content-pane">
+    <div class="top-line">
+      <div class="tr">
+        <span class="label">Title</span>
+        <div>{{data?.title}}</div>
+      </div>
+      <div class="br">
+        <div class="br-t">
+          <span class="label">Detail</span>
+          <div class="tr-text">{{data?.detail}}</div>
+        </div>
+        <div class="br-b">
+          <div class="more-info" (click)="onRaveButtonClicked()" title="More information">
+            <div class="more-info-icon">
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </div>
+            <div class="more-info-menu">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mid-line">
+      <div class="mid-line-s">
+        <div class="mid-line-s-w-label label">Weight</div>
+        <div class="mid-line-s-w-text">25</div>
+      </div>
+      <div class="mid-line-f"></div>
+    </div>
+
+    <div class="bottom-line">
+      <div *ngIf="employeeEditField" class="bottom-line-t">
+        <div class="md-form">
+          <mdb-select [options]="data.employeeRatings" [filterEnabled]="true" [(ngModel)]="data.empRatingValue" (selected)="onEmployeeRatingSelected($event)" placeholder="Rating"></mdb-select>
+          <textarea type="text" [(ngModel)]="data.emp_comment" class="md-textarea form-control" placeholder="Comment" mdbInput></textarea>
+        </div>
+      </div>
+
+      <div *ngIf="employeeReadField" class="bottom-line-t mb-1">
+        <span class="label">Employee Rating</span>
+        <div class="tr-text mb-2">{{data?.empRatingText}}</div>
+        <span class="label">Employee Comment</span>
+        <div class="tr-text">{{data?.emp_comment}}</div>
+      </div>
+    </div>
+    <div *ngIf="data?.hasErrors" class="error-line">{{data?.errorText}}</div>
+  </div>
+</div>

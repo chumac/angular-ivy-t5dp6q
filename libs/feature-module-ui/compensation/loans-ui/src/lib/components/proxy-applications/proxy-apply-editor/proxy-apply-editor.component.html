@@ -1,0 +1,106 @@
+
+
+
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Loan Application'" [subTitle]="'Details of your loan application'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="required center-label">Employee</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <dx-lookup formControlName="employee_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+            </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">Loan Type:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <dx-lookup formControlName="loan_id" [dataSource]="loanDefinitions$ | async" valueExpr="loan_id" displayExpr='description'
+                  searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=true popupHeight="auto"
+                  class="form-font" (valueChange)="onLoanTypeSelected($event)"></dx-lookup>
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">Currency:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <mdb-select  (selected)="onCurrencySelected($event)" formControlName="currency_id" [options]="currenciesData$ | async" placeholder=""></mdb-select>
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label">Amount:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                <input formControlName="loan_amount" type="text" class="form-control form-font" (blur)="onEnteredAmount($event)" (focus)="onFocus($event)">
+              </div>
+          </div>
+          <div class="row mb-1">
+              <div class="col-4">
+                  <label class="required center-label" title="Effective Date">Effective Date:</label>
+              </div>
+              <div class="col-8 md-form mt-0">
+                  <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="effective_date" [placeholder]="''" (onValueChanged)="onEffectiveDateSelected($event)"></dx-date-box>
+              </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label class="required center-label">Monthly Deduction:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <input formControlName="monthly_deduction" type="text" class="form-control form-font" [disableControl]="true">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label class="required center-label">Interest Rate:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <input [disableControl]="disableInput" formControlName="interest_rate" type="text" class="form-control form-font" (blur)="onInterestRateEdited($event)">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label class="required center-label">Tenor (Months):</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <input (blur)="onTenorEdited($event)" formControlName="tenor_months" type="text" class="form-control form-font" [disableControl]="disableInput">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+                <label class="required center-label">Moratorium:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+            <input [disableControl]="disableInput" formControlName="moratorium" type="text" class="form-control form-font">
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-4">
+              <label class="">Purpose of Loan:</label>
+            </div>
+            <div class="col-8 md-form mt-0">
+              <textarea rows="4" formControlName="narration" type="text"
+                class="md-textarea md-textarea-auto form-control"></textarea>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved()"></x365-shared-ui-file-picker>
+            </div>
+            <div class="col-1"></div>
+          </div>
+      </form>
+  </div>
+  <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" [showSecondaryButton]="showSecondaryButton" [secondaryButtonText]="'Schedule'" (secondaryClick)="onSecondaryButtonClicked()" [doneButtonDisabled]="!enableSubmit" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>
+<x365-fm-loans-generic-schedule-viewer #viewer [width]="60" [show]="showViewerGenericSchedule$ | async" [data]="null" [genericScheduleList]="genericSchedule$ | async"></x365-fm-loans-generic-schedule-viewer>

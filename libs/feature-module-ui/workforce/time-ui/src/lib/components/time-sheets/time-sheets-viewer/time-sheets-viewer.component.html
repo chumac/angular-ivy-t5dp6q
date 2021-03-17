@@ -1,0 +1,100 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Time Sheet'" [subTitle]="'Details of your time sheet'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Description:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.description | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Start Date:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.start_date | dateDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>End Date:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.end_date | dateDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Work Week:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.work_week | dateDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Total Hours:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.total_hours | hrMinDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Holiday:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.holiday | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Leave:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.leave | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Overtime:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.overtime | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Weekend:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.weekend | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Status:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.status_text | stringDisplay}}
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Unpaid Absence:</label>
+                </div>
+                <div class="col-8 text-value text-right md-form mt-0">
+                    {{data?.unpaid_absence | stringDisplay}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

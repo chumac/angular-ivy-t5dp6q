@@ -1,0 +1,160 @@
+<div class="card card-container">
+    <div class="item-left">
+        <div class="data-row dr-avatar">
+            <x365-shared-ui-avatar [width]="'6.5em'" [height]="'6.5em'" [src]="employeePhoto" [showBorder]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+        </div>
+        <div class="data-row dr-name font-weight-bold mt-2" [matMenuTriggerFor]="menu">
+            <span *ngIf="fullname && fullname.titleFullName !==''">{{fullname?.titleFullName | stringDisplay}}</span>
+        </div>
+        <mat-menu #menu="matMenu" class="employee-menu">
+            <div class="container">
+                <!-- <div class="row header">
+                    Other information
+                </div> -->
+                <div class="row body">
+                    <div class="col-12 inline">
+                        <h6>Staff Number</h6>
+                        <p>{{data?.employee_number | stringDisplay}}</p>
+                    </div>
+                    <div class="col-12 inline">
+                        <h6>Reports to</h6>
+                        <p>{{data?.reports_to_fullname | stringDisplay}}</p>
+                    </div>
+                    <div class="col-12 inline">
+                        <h6>Location Type</h6>
+                        <p>{{data?.current_location_type | stringDisplay}}</p>
+                    </div>                                        
+                    <div class="col-12 inline">
+                        <h6>Detail</h6>
+                        <p>{{data?.current_location | stringDisplay}}</p>
+                    </div> 
+                    <div class="col-12 inline">
+                        <h6>Employment Status</h6>
+                        <p>{{data?.confirmation_status | stringDisplay}}</p>
+                    </div>                     
+                </div>
+                <div class="row footer">
+                    <div class="col-12 inline">
+                        <small>System ID: {{data?.employee_id | stringDisplay}}</small>
+                    </div> 
+                </div>
+            </div>
+        </mat-menu>
+    </div>
+
+    <div class="item-middle font-size">
+        <div class="im-top">
+            <div class="row mb-2">
+                <div class="col-5 row-label">
+                    <label>Phone Number</label>
+                </div>
+                <div class="col-7 row-text mt-0  font-weight-bold">
+                    <label>{{phoneNumber | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-5 row-label">
+                    <label>Email</label>
+                </div>
+                <div class="col-7 row-text mt-0 wrap font-weight-bold">
+                    <label>{{data?.email_personal | stringDisplay}}</label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-5 row-label">
+                    <label>Office email</label>
+                </div>
+                <div class="col-7 row-text mt-0 wrap font-weight-bold">
+                    <label>{{data?.email}}</label>
+                </div>
+            </div>
+        </div>
+        <hr class="horizontal-rule">
+        <div class="im-bottom">
+            <ul>
+                <li class="hvr-grow">
+                    <span class="fa-stack fa-lg">
+            <a [attr.href]="data?.emp_linkedin" target="_blank">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-linkedin fa-stack-1x fa-inverse rounded-circle"></i>
+            </a>
+          </span>
+                </li>
+                <li class="hvr-grow">
+                    <span class="fa-stack fa-lg">
+            <a [attr.href]="data?.emp_twitterhandle" target="_blank">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-twitter fa-stack-1x fa-inverse rounded-circle"></i>
+            </a>
+          </span>
+                </li>
+                <li class="hvr-grow">
+                    <span class="fa-stack fa-lg">
+            <a [attr.href]="data?.emp_facebook" target="_blank">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-facebook fa-stack-1x fa-inverse rounded-circle"></i>
+            </a>
+          </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="item-right font-size">
+        <div class="row mb-2">
+            <div class="col-5 row-label">
+                <label>Position</label>
+            </div>
+            <div class="col-7 row-text mt-0 font-weight-bold">
+                <label>{{data?.position | stringDisplay}}</label>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5 row-label">
+                <label>Grade</label>
+            </div>
+            <div class="col-7 row-text mt-0 font-weight-bold">
+                <label>{{data?.grade | stringDisplay}}</label>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5 row-label">
+                <label>Place in Corp</label>
+            </div>
+            <div class="col-7 row-text mt-0 font-weight-bold">
+                <label>{{data?.place_in_corp | stringDisplay}}</label>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5 row-label">
+                <label>Total Kudos</label>
+            </div>
+            <div class="col-7 row-text mt-0 font-weight-bold">
+                <label>{{kudos}}</label>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5 row-label">
+                <label>Employment Date</label>
+            </div>
+            <div class="col-7 row-text mt-0 font-weight-bold">
+                <label>{{data?.employment_date | dateDisplay}}</label>
+            </div>
+        </div>
+
+        <div class="row mb-2">
+            <div class="col-5 row-label">
+                <label>Length of Service</label>
+            </div>
+            <div class="col-7 row-text mt-0 font-weight-bold">
+                <label>{{data?.len_of_service | stringDisplay}}</label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+<x365-shared-ui-form-container [show]="showClose" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="showClose?'0':utilService.convertToNegativePercent(width)">
+
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Event Close'" [subTitle]="''" [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f">
+      <div class="row mb-1">
+        <div class="col-8">
+          <label class="center-label">{{data?.event_title | stringDisplay}}</label>
+        </div>
+        <div class="col-4">
+          <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect
+            [disabled]="false">COMPLETED</button>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          {{data?.description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-12">
+          Start Date: {{data?.start_date | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-3">
+          <label class="required center-label">Completion Date:</label>
+        </div>
+        <div class="col-3 md-form mt-0">
+          <dx-date-box [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd"
+            formControlName="completion_date" class="form-font"></dx-date-box>
+        </div>
+      </div>
+
+      <div class="list-container">
+        <div class="list-sample">
+          <igx-list>
+            <igx-list-item [isHeader]="true">ALL PARTICIPANTS </igx-list-item>
+            <igx-checkbox *ngFor="let item of allParticipants" formControlName="checked"
+              (change)="storeSelectedProfile(item, $event)">
+              {{ item.employee_name }}
+            </igx-checkbox>
+          </igx-list>
+        </div>
+        <article class="sample-column">
+          <button igxButton [igxRipple]="'grey'" (click)="excludedAllProfile()">
+            <igx-icon>fast_forward</igx-icon>
+            <!-- >> -->
+          </button>
+          <br />
+          <br />
+          <button igxButton [igxRipple]="'grey'" (click)="excludedSelectedProfile()">
+            <igx-icon>keyboard_arrow_right</igx-icon>
+            <!-- > -->
+          </button>
+          <br />
+          <br />
+          <button igxButton [igxRipple]="'grey'" (click)="activeSelectedProfile()">
+            <igx-icon>keyboard_arrow_left</igx-icon>
+            <!-- < -->
+          </button>
+          <br />
+          <br />
+          <button igxButton (click)="activedAllProfile()">
+            <igx-icon>fast_rewind</igx-icon>
+            <!-- << -->
+          </button>
+          <br />
+          <br />
+
+        </article>
+        <div class="list-sample">
+          <igx-list>
+            <igx-list-item [isHeader]="true">ALL ATTENDEES </igx-list-item>
+            <igx-checkbox *ngFor="let item of excludedProfile$" formControlName="checked"
+              (change)="storeActiveProfile(item, $event)">
+              {{ item.employee_name }}
+            </igx-checkbox>
+          </igx-list>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+      (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+
+</x365-shared-ui-form-container>

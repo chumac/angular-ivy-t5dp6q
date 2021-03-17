@@ -1,0 +1,63 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.dx-texteditor.dx-editor-underlined:after {
+    border-bottom: 1px solid #949494;
+}
+  
+.dx-lookup.dx-editor-underlined {
+    height: 32px;
+    margin-bottom: 14px;
+}
+
+div.dx-lookup-field {
+    padding: 7px 0 0px !important;
+}
+
+.center {
+    position: absolute;
+    bottom: 20%;
+}
+
+.fbl-col {
+    font-size: smaller;
+    font-weight: bold;
+    color: #9E9E9E;
+}
+
+.form-main form label {
+    color: #9E9E9E;
+    font-weight: 600;
+}
+
+.sub-heading {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #a69494;
+  
+    label{
+      border-bottom: #a69494 solid 2px;
+      margin: 20px 0 10px 0;
+    }
+  }
+  
+.desc-label {
+    label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        margin: 5px 0 5px 0;
+        font-style: oblique;
+        color: #0c9ee8!important;
+    }
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin: 0 15px 0 15px;
+    font-size: 80%;
+    color: #dc3545;
+    top: -10px;
+    position: relative;
+}

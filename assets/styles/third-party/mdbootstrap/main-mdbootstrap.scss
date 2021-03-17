@@ -1,0 +1,198 @@
+@import 'colors';
+
+.fixed-sn main,
+.fixed-sn .page-footer .container-fluid {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.side-nav {
+  background-color: $color-bg-dark;
+}
+
+.side-nav .collapsible .card-body li a {
+  &:hover {
+    color: $color-hover;
+  }
+}
+
+.side-nav .collapsible .card .card-header a h5 {
+  display: flex;
+  align-items: center;
+  color: $color-white;
+  font-weight: 700;
+
+  i.fa-angle-down {
+    font-size: 1rem;
+  }
+
+  svg {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+
+  &:hover {
+    color: $color-hover;
+  }
+}
+
+.side-nav {
+  .collapsible {
+    .card-body {
+
+      li {
+        a {
+          font-size: 0.78em;
+          font-weight: normal !important;
+          padding-left: 65px;
+        }
+      }
+    }
+  }
+}
+
+mdb-accordion-item-head.active a h5 {
+  color: $app_brand_color !important;
+  font-weight: 600 !important;
+}
+
+// Change nested active links appearance
+mdb-accordion-item-body a.active {
+  color: $app_brand_color !important;
+  font-weight: 600 !important;
+}
+
+// Loaders
+
+.progress {
+  height: 2px;
+  margin-bottom: 0;
+}
+
+// Lighter
+.primary-color-dark .mat-progress-bar-buffer,
+.mat-progress-bar-buffer.mat-progress-bar-element
+.mat-progress-bar-primary.mat-progress-bar-fill.mat-progress-bar-element {
+  background-color: lighten($app_brand_color, 30%) !important;
+}
+
+// Darker
+.mat-progress-bar-secondary.mat-progress-bar-fill.mat-progress-bar-element,
+.primary-color-dark .mat-progress-bar-fill::after {
+  background-color: $app_brand_color !important;
+}
+
+mdb-select * {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em !important;
+}
+
+mdb-select mdb-select-dropdown * {
+  font-family: 'Montserrat', sans-serif;
+}
+
+mdb-select {
+  div {
+    .single {
+      .toggle {
+        visibility: hidden !important;
+      }
+
+      .toggle::after {
+        visibility: visible !important;
+        font-size: 0.9em;
+        line-height: 2.9em;
+        font-family: FontAwesome;
+        -webkit-font-smoothing: antialiased;
+        content: '\f107';
+      }
+
+      .placeholder {
+        color: $form_placeholder_text_color !important;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+mdb-select mdb-select-dropdown .dropdown-content li > a,
+mdb-select mdb-select-dropdown .dropdown-content li > span {
+  color: $form_text_color;
+  padding: 0.3em;
+  font-size: 0.9em !important;
+}
+
+mdb-select mdb-select-dropdown > div .options {
+  height: auto !important;
+}
+
+// Focused input
+.md-form input[type='text']:focus:not([readonly]),
+.md-form input[type='password']:focus:not([readonly]),
+.md-form input[type='email']:focus:not([readonly]),
+.md-form input[type='url']:focus:not([readonly]),
+.md-form input[type='time']:focus:not([readonly]),
+.md-form input[type='date']:focus:not([readonly]),
+.md-form input[type='datetime-local']:focus:not([readonly]),
+.md-form input[type='tel']:focus:not([readonly]),
+.md-form input[type='number']:focus:not([readonly]),
+.md-form input[type='search-md']:focus:not([readonly]),
+.md-form input[type='search']:focus:not([readonly]),
+.md-form textarea.md-textarea:focus:not([readonly]) {
+  box-shadow: 0 1px 0 0 $app_brand_color;
+  border-bottom: 1px solid $app_brand_color;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+mdb-navbar {
+  nav.navbar.fixed-top.navbar-toggleable-md.navbar-expand-lg.scrolling-navbar.double-nav.bg-white {
+    height: 70px;
+    z-index: 930;
+  }
+}
+
+.mdb-accordion-border-botton {
+  border-bottom: 1px solid rgb(37, 37, 37);
+}
+
+mdb-select > div > div.single > div.placeholder {
+  color: #7c7c7c !important;
+  font-size: 0.83rem !important;
+}
+
+mdb-select > div > div.single {
+	border-bottom: 1px solid rgb(241, 241, 241) !important;
+	// If you want to remove it totally ==> border-bottom: none;
+	// if you want make it transparent ==> border-bottom: 1px solid transparent;
+}
+
+x365-fm-approvals-approvals{
+  mdb-select > div > div.single {
+    border-bottom: 1px solid rgb(253, 196, 10) !important;
+    // If you want to remove it totally ==> border-bottom: none;
+    // if you want make it transparent ==> border-bottom: 1px solid transparent;
+  }
+}
+
+x365-fm-workforce-multi-job-roles-editor{
+.md-form mdb-select .form-control {
+  max-width: calc(2.25rem + 400px) !important;
+}
+}
+
+mdb-select mdb-select-dropdown .dropdown-content li > a, mdb-select mdb-select-dropdown .dropdown-content li > span {
+    white-space: normal !important;
+    height: auto !important;
+    line-height: 20px !important;
+}
+
+x365-fm-workforce-exit-response-row-template {
+  .card-body {
+    padding-bottom: 0 !important;
+  }
+}

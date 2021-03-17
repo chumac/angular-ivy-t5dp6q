@@ -1,0 +1,313 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Contact'" [subTitle]="'This is contact information about staff (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Residential Address</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street I:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.street1_r | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street II:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.street2_r | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.country_r_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">State:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.state_r_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">City:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.area_r_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Zip Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.zip_r | stringDisplay}}
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Permanent Address</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street I:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.street1_p | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street II:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.street2_p | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.country_p_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">State:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.state_p_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">City:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.area_p_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Zip Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.zip_p | stringDisplay}}
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Digital Contact Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Email (Office):</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.email | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Email (Personal):</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.email_personal | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Home Phone:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.phone | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Mobile Phone:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.mobile_phone | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Office Extension:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.office_ext | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Pager:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.pager | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Fax:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.fax | stringDisplay}}
+          </div>
+        </div>
+        <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Next-of-Kin Information</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.kin_title | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Relationship:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.kin_relationship | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Surname:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.kin_Surname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>First Name:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.kin_firstname | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Other Names:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.kin_otherNames | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Gender:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.kin_gender | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Email:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.email_kin | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Home Phone:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.tel1_kin | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Mobile Phone:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.tel2_kin | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street I:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.street1_kin | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Street II:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.street2_kin | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Country:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.country_kin_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">State:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.state_kin_description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">City:</label>
+          </div>
+          <!-- <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.area_kin?.description | stringDisplay}}
+          </div> -->
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Zip Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.zip_kin | stringDisplay}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

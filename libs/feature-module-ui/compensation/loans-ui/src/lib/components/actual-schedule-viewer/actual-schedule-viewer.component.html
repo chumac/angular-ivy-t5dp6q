@@ -1,0 +1,39 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'System Deduction'" [subTitle]="'Details of system deductions'" [loading]='!(actualScheduleList)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <igx-grid #paymentsScheduleGrid [data]="actualScheduleList" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [showToolbar]="false" [rowSelectable]="false" width="900px" *ngIf="show">
+          <igx-column field="payroll_period" header="Pay Period" width="14%"></igx-column>
+          <igx-column field="days_in_period" header="Total Days" width="13%" dataType="number"></igx-column>
+          <igx-column field="final_balance" header="Balance" width="17%" dataType="number">
+            <ng-template igxCell let-val>
+              <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+            </ng-template>
+          </igx-column>
+          <igx-column field="principal_ded_actual" header="Principal" width="14%" dataType="number">
+            <ng-template igxCell let-val>
+              <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+            </ng-template>
+          </igx-column>
+          <igx-column field="interest_ded_actual" header="Interest" width="11%" dataType="number">
+            <ng-template igxCell let-val>
+              <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+            </ng-template>
+          </igx-column>
+          <igx-column field="monthly_ded_actual" header="Monthly Deduction" width="15%" dataType="number">
+            <ng-template igxCell let-val>
+              <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+            </ng-template>
+          </igx-column>
+          <igx-column field="loan_balance_bf" header="Carried Forward" width="16%" dataType="number">
+            <ng-template igxCell let-val>
+              <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+            </ng-template>
+          </igx-column>
+      </igx-grid>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </x365-shared-ui-form-container>

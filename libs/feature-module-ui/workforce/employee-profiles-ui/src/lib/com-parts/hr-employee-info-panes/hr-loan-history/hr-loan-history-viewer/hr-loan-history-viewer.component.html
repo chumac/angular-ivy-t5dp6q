@@ -1,0 +1,168 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Loan History'" [subTitle]="'Details of Employee Loan History'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Loan:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.loan | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Currency:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.currency_name | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label>Initial Loan Amount:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.initial_loan_amount | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Payroll Period:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.payroll_period | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Period (Days):</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.days_in_period | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Monthly Deduction Due:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.monthly_ded_due | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Principical Deduction Due:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.principal_ded_due | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Monthly Deduction Actual:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.monthly_ded_actual | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Principal Deduction Actual:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.principal_ded_actual | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Interest Deduction Due:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.interest_ded_due | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Interest Deduction Actual:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.interest_ded_actual | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Loan Balance B/F:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.loan_balance_bf | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Final Balance:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.final_balance | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Overdue Monthly Deduction:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.overdue_monthly_interest | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Overdue Monthly Interest:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.overdue_monthly_interest | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Diburse Transaction Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.disburse_transaction_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Diburse Actual Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.disburse_actual_date | dateDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Disburse status:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.disburse_status | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Disburse Status Meaning:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.disburse_status_meaning | stringDisplay}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)"
+    [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Checklist'" [subTitle]="'Add/Edit Checklist'" [loading]="false">
+      </x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="code" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="description" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Instructions:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="6" formControlName="instructions" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+            <!-- <input formControlName="instructions" type="text" class="form-control form-font"> -->
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Summary:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="20" formControlName="summary" type="text"
+              class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Validation Role:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+              <dx-lookup #vRole formControlName="validation_role" [dataSource]="validationRoleSelectOption" valueExpr="id" displayExpr='description'
+                searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="vRole.value === 4">
+          <div class="col-4">
+            <label class="required center-label">Security Role</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="security_role" [dataSource]="securityRoleSelectOption" valueExpr="rolename"
+              displayExpr='rolename' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+              popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="vRole.value === 5">
+          <div class="col-4">
+            <label class="required center-label">Position</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="position_id" [dataSource]="positionSelectOption" valueExpr="position_id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+              popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="vRole.value === 6">
+          <div class="col-4">
+            <label class="required center-label">Workflow</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="workflow_id" [dataSource]="workflowSelectOption" valueExpr="wflow_id"
+              displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false
+              popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-12 my-2 px-2 bg-warning text-white">
+            <p>Please enter comma separated values of selectable options to validate this item</p>
+          </div>
+          <div class="col-4">
+            <label class="center-label">Option Values:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="option_values" type="text" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-6">
+            <label class="required center-label">Requires Comment</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="requires_comment" type="checkbox">
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="false">
+          <div class="col-6">
+            <label class="required center-label">Use Custom Form?</label>
+          </div>
+          <div class="col-6 md-form mt-0 custom-constrol custom-switch">
+            No <label class="switch">
+              <input formControlName="link_to_exit_interview" onchange="onCustomFormChecked($event)" type="checkbox" disabled>
+              <span class="slider round"></span>
+            </label> Yes
+          </div>
+        </div>
+        <div class="row mb-1" *ngIf="useCustomForm">
+          <div class="col-4">
+            <label class="required center-label">Form:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="form_id" [options]="customFormSelectOption" placeholder="">
+            </mdb-select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+        (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

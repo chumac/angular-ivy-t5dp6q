@@ -1,0 +1,37 @@
+<div class="bottom container-card">
+    <div class="doc-container-t-sp text-right">
+        <i (click)="onDefinitionDeleteIconClicked(data)" class="fa fa-close card-control"></i>
+    </div>
+    <div class="content-header">
+    </div>
+    <div class="content-body">
+        <div class="row">
+            <div class="col-8">
+                <div class="page-header mt-4">
+                    <h6 class="article-heading text-left d-inline-block">{{ data?.description }}</h6>
+                    <p><small class="text-muted"><i class="fa fa-calendar"></i> {{ data?.target_date | date:'medium' }}   <i class="fa fa-flag"> | {{ data?.progress_type | valueTransform:progressTypeConstants }} </i></small><b>&nbsp;&nbsp;</b></p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="page-header mt-4">
+                    <div class="d-flex justify-content-end">
+                        <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect (click)="onAddTransactionButtonClicked(data)">&nbsp;<i class="fa fa-plus"></i>&nbsp;Add Transaction</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <canvas mdbChart [chartType]="chartData.chartType" [datasets]="chartData.chartDatasets" [labels]="chartData.chartLabels" [colors]="chartData.chartColors" [options]="chartData.chartOptions" [legend]="true"></canvas>
+            </div>
+            <div class="col-2"></div>
+        </div><br><br>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <x365-fm-talent-si-timeline [data]="data"></x365-fm-talent-si-timeline>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Resume'" [subTitle]="'Resumption from leave'"
+      [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="alert alert-success" role="alert">
+          <h6 class="alert-heading"><strong>Note:</strong></h6>
+          <p>Please enter your correct resumption date as this has implications on your leave days..</p>
+          <hr>
+          <p class="mb-0">Your resumption date should be: <strong> {{ data?.resumption_date | dateDisplay }} </strong> .</p>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Actual Return Date:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="actual_return_date" class="form-font"></dx-date-box>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Comments:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <textarea rows="4" formControlName="recall_comments" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Submit'"  [busy]="isProcessing$ | async" (doneClick)="onSubmit()"
+       (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+      </div>
+  </div>
+</div>

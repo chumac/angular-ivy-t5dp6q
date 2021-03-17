@@ -1,0 +1,39 @@
+<div class="card card-container">
+    <div class="card-content font-size">
+        <!-- <div class="card-content-top mb-2">
+            <x365-shared-ui-switch #switch [checkedText]="'Awaiting'" [unCheckedText]="'Approved'" [checkedColor]="" [unCheckedColor]=""></x365-shared-ui-switch>
+        </div> -->
+        <div class="card-content-bottom">
+            <igx-grid #approvedDataGrid *ngIf="true" [data]="dependantData$ | async" [paging]="false" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+                <igx-column field="surname" header="Surname" width="17%"></igx-column>
+                <igx-column field="firstname" header="First Name" width="15%"></igx-column>
+                <igx-column field="othernames" header="Other Names" width="15%"></igx-column>
+                <!-- <igx-column field="dobirth" header="Date of birth" width="10%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | dateDisplay}}</div>
+          </ng-template>
+        </igx-column> -->
+                <igx-column field="gender" header="Gender" width="15%"></igx-column>
+                <igx-column field="dependent_type_text" header="Relationship" width="13%"></igx-column>
+                <igx-column field="phone_no" header="Phone Number" width="10%"></igx-column>
+                <!-- <igx-column field="email" header="Email" width="10%"></igx-column> -->
+                <igx-column field="dependent_id" header="..." width="15%">
+                    <ng-template igxCell let-val>
+                        <div class="hover-menu-container"><span></span>
+                            <div class="hover-menu">
+                                <div class="hover-icons">
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 3" [iconClass]="'fa fa-pencil-square-o'" title="Edit" (click)="onEditIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" title="View" (click)="onViewIconClicked(val)"></x365-shared-ui-hover-icon>
+                                    <x365-shared-ui-hover-icon *ngIf="reboardMode === 3" [iconClass]="'fa fa-trash-o fa-icon'" title="Delete" (click)="onDeleteIconClicked(val)"></x365-shared-ui-hover-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </igx-column>
+            </igx-grid>
+        </div>
+    </div>
+</div>
+
+<x365-fm-workforce-hr-reboard-dependants-editor #editor [width]="34" [show]="showEditor$ | async" [data]="null" [selectOptionData]="selectOptionData$ | async" (cancelClick)="onCancelEditor()" [employeeId]="employeeId"></x365-fm-workforce-hr-reboard-dependants-editor>
+<x365-fm-workforce-hr-reboard-dependants-viewer #viewer [width]="34" [show]="showViewer$ | async" [data]="null" [imageData]="imageData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-hr-reboard-dependants-viewer>

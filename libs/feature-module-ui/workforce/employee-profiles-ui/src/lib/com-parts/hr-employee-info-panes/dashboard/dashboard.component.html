@@ -1,0 +1,217 @@
+<div class="animation-container">
+  <div class="container-fluid" *ngIf="true">
+    <!--<div class="row mb-3">
+        <div class="col-12">
+          <div class="top container-card" [hidden]="false">
+            <div class="dashboard-header mb-1">
+              <h5 class="font-weight-bold">
+                <span>{{ employeeGroup }}</span>&nbsp;&nbsp;&nbsp;&nbsp;<i *ngIf="!dashboardData || loading" class="fa fa-spinner fa-spin fa-lg fa-fw"></i>
+              </h5>
+              <div class="btn-group" mdbDropdown>
+                <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light" type="button"
+                  mdbWavesEffect>
+                  <span>Employees</span> <i class="fa fa-angle-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)="selectEmployeeGroup(employeesGroupChart.workforce)">Workforce</a>
+                  <a class="dropdown-item" (click)="selectEmployeeGroup(employeesGroupChart.fulltime)">Full-Time</a>
+                  <a class="dropdown-item" (click)="selectEmployeeGroup(employeesGroupChart.contingent)">Contingent</a>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-body">
+
+
+              <div class="dashboard-item-circle" [class.transparent]="!dashboardData || loading">
+                <div *ngIf="!dashboardData || loading" class="chart-placeholder"></div>
+                <h5 *ngIf="dashboardData && !loading" class="item-value mb-1">{{ dashboardData?.TotalCount | stringDisplay }}</h5>
+                <p *ngIf="dashboardData && !loading" class="item-text">employees</p>
+              </div>
+
+
+              <div class="dashboard-item" [ngClass]="{'dashboard-item-circle': dashboardData?.GendersCount[0].male === 0 && dashboardData?.GendersCount[0].female === 0, 'transparent': !dashboardData || loading}">
+                  <div *ngIf="!dashboardData || loading" class="chart-placeholder"></div>
+                  <p class="no-data-text" *ngIf="dashboardData && !loading && dashboardData?.GendersCount[0].male === 0 && dashboardData?.GendersCount[0].female === 0; else genderCanvas;">
+                      No Data
+                  </p>
+                  <ng-template #genderCanvas>
+                      <canvas *ngIf="dashboardData && !loading" mdbChart
+                      [chartType]="chart.type"
+                      [datasets]="[{data: [ dashboardData?.GendersCount[0].male, dashboardData?.GendersCount[0].female ]}]"
+                      [labels]="[ 'Male', 'Female' ]"
+                      [colors]="[{backgroundColor: [ '#46BFBD', '#FDB45C' ], hoverBackgroundColor: [ '#5AD3D1', '#FFC870' ], borderWidth: 2}]"
+                      [options]="chart.options"
+                      [legend]="false"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </ng-template>
+              </div>
+
+
+              <div class="dashboard-item" [ngClass]="{'dashboard-item-circle': dashboardData?.AgeCount.length === 0, 'transparent': !dashboardData || loading}">
+                  <div *ngIf="!dashboardData || loading" class="chart-placeholder"></div>
+                  <p class="no-data-text" *ngIf="dashboardData && !loading && dashboardData?.AgeCount.length === 0; else ageCanvas;">
+                    No Data
+                  </p>
+                  <ng-template #ageCanvas>
+                      <canvas *ngIf="dashboardData && !loading && dashboardData?.AgeCount.length !== 0" mdbChart
+                      [chartType]="chart.type"
+                      [datasets]="[{data: [ dashboardData.AgeCount[0].AgeGrpCount, dashboardData.AgeCount[1].AgeGrpCount, dashboardData.AgeCount[2].AgeGrpCount ]}]"
+                      [labels]="[ dashboardData.AgeCount[0].AgeGroups, dashboardData.AgeCount[1].AgeGroups, dashboardData.AgeCount[2].AgeGroups ]"
+                      [colors]="[{backgroundColor: [ '#46BFBD', '#FDB45C', '#4D5360' ], hoverBackgroundColor: [ '#5AD3D1', '#FFC870', '#616774' ], borderWidth: 2}]"
+                      [options]="chart.options"
+                      [legend]="false"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </ng-template>
+              </div>
+
+
+              <div class="dashboard-item" [ngClass]="{'dashboard-item-circle': dashboardData?.ServiceLength.length === 0, 'transparent': !dashboardData || loading}">
+                  <div *ngIf="!dashboardData || loading" class="chart-placeholder"></div>
+                  <p class="no-data-text" *ngIf="dashboardData && !loading && dashboardData?.ServiceLength.length === 0; else serviceLengthCanvas;">
+                    No Data
+                  </p>
+                  <ng-template #serviceLengthCanvas>
+                      <canvas *ngIf="dashboardData && !loading" mdbChart
+                      [chartType]="chart.type"
+                      [datasets]="[{data: [ dashboardData.ServiceLength[0].LengthGrpCount, dashboardData.ServiceLength[1].LengthGrpCount, dashboardData.ServiceLength[2].LengthGrpCount ]}]"
+                      [labels]="[ dashboardData.ServiceLength[0].LengthServGroups, dashboardData.ServiceLength[1].LengthServGroups, dashboardData.ServiceLength[2].LengthServGroups ]"
+                      [colors]="[{backgroundColor: [ '#46BFBD', '#FDB45C', '#4D5360' ], hoverBackgroundColor: [ '#5AD3D1', '#FFC870', '#616774' ], borderWidth: 2}]"
+                      [options]="chart.options"
+                      [legend]="false"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </ng-template>
+              </div>
+
+
+              <div class="dashboard-item-circle" [class.transparent]="!dashboardData || loading">
+                <div *ngIf="!dashboardData || loading" class="chart-placeholder"></div>
+                <h5 *ngIf="dashboardData && !loading" class="item-value mb-1">{{ dashboardData?.JoinersCount | stringDisplay }}</h5>
+                <p *ngIf="dashboardData && !loading" class="item-text">joiners</p>
+              </div>
+
+
+              <div class="dashboard-item-circle" [class.transparent]="!dashboardData || loading">
+                <div *ngIf="!dashboardData || loading" class="chart-placeholder"></div>
+                <h5 *ngIf="dashboardData && !loading" class="item-value mb-1">{{ dashboardData?.LeaversCount | stringDisplay }}</h5>
+                <p *ngIf="dashboardData && !loading" class="item-text">leavers</p>
+              </div>
+
+
+            </div>
+          </div>
+        </div> -->
+    <!-- </div> -->
+    <div class="row">
+      <div class="col-12">
+        <div class="bottom container-card">
+          <div class="content-header">
+            <div class="switch">
+              <x365-shared-ui-switch #switch [checkedText]="'Inactive'" [unCheckedText]="'Active'" [checkedColor]=""
+                [unCheckedColor]=""></x365-shared-ui-switch>
+            </div>
+            <div class="search">
+              <div class="md-form">
+                <input mdbInputDirective type="text" (keyup)="filter($event.target.value)" id="form1"
+                  placeholder="Search Employee" class="form-control">
+              </div>
+              <div class="btn-group" mdbDropdown *ngIf="false">
+                <button mdbDropdownToggle mdbBtn size="xs" rounded="true" class="dropdown-toggle waves-light"
+                  type="button" mdbWavesEffect>
+                  <span>{{ searchOptionLabel }}</span> <i class="fa fa-angle-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" (click)="selectSearchOption(searchOptions.ALL_COLUMNS)">All Columns</a>
+                  <a class="dropdown-item" (click)="selectSearchOption(searchOptions.EMPLOYEE_NUMBER)">Employee
+                    Number</a>
+                  <a class="dropdown-item" (click)="selectSearchOption(searchOptions.SURNAME)">Surname</a>
+                  <a class="dropdown-item" (click)="selectSearchOption(searchOptions.FIRST_NAME)">First Name</a>
+                  <a class="dropdown-item" (click)="selectSearchOption(searchOptions.OTHER_NAME)">Other Name</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-body">
+            <igx-grid [data]="activeEmployeesData$ | async" #activeEmployees *ngIf="!switch.value" [paging]="false"
+              [perPage]="20" [paginationTemplate]="pager" [autoGenerate]="false" width="100%" [showToolbar]="false">
+              <igx-column field="employee_number" header="Employee Number" width="15%"></igx-column>
+              <igx-column field="title" header="Title" width="10%"></igx-column>
+              <igx-column field="employee_surname" header="Surname" width="20%"></igx-column>
+              <igx-column field="employee_midname" header="Middle Name" width="20%"></igx-column>
+              <igx-column field="employee_firstname" header="First Name" width="20%"></igx-column>
+              <igx-column field="employee_id" header="..." class="text-center" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <span class="hover-ellipse-menu"></span>
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" (click)="onSummaryInfoClicked(val)"
+                          title="Summary"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon (click)="onDetailedAreaClicked(val)"
+                          [iconClass]="'fa fa-external-link'" title="Open"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+
+            <igx-grid [data]="inactiveEmployeesData$ | async" #inactiveEmployees *ngIf="switch.value" [paging]="false"
+              [perPage]="10" [paginationTemplate]="pager" [autoGenerate]="false" width="100%" [showToolbar]="false">
+              <igx-column field="employee_number" header="Employee Number" width="15%"></igx-column>
+              <igx-column field="title" header="Title" width="10%"></igx-column>
+              <igx-column field="employee_surname" header="Surname" width="20%"></igx-column>
+              <igx-column field="employee_midname" header="Middle Name" width="20%"></igx-column>
+              <igx-column field="employee_firstname" header="First Name" width="20%"></igx-column>
+              <igx-column field="employee_id" header="..." class="text-center" width="15%">
+                <ng-template igxCell let-val>
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <span class="hover-ellipse-menu"></span>
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon [iconClass]="'fa fa-desktop'" (click)="onSummaryInfoClicked(val)"
+                          title="Summary"></x365-shared-ui-hover-icon>
+                        <x365-shared-ui-hover-icon (click)="onDetailedAreaClicked(val)"
+                          [iconClass]="'fa fa-external-link'" title="Open"></x365-shared-ui-hover-icon>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+
+            <ng-template #pager let-grid>
+              <div *ngIf="grid.paging && grid.totalPages > 0" class="igx-paginator">
+                <button [disabled]="grid.isFirstPage" (click)="grid.paginate(0)" igxButton="icon" igxRipple
+                  igxRippleCentered="true">
+                  <igx-icon>first_page</igx-icon>
+                </button>
+                <button [disabled]="grid.isFirstPage" (click)="grid.previousPage()" igxButton="icon" igxRipple
+                  igxRippleCentered="true">
+                  <igx-icon>chevron_left</igx-icon>
+                </button>
+                <span>{{ grid.page + 1 }} of {{ grid.totalPages }}</span>
+                <button [disabled]="grid.isLastPage" (click)="grid.nextPage()" igxRipple igxRippleCentered="true"
+                  igxButton="icon">
+                  <igx-icon>chevron_right</igx-icon>
+                </button>
+                <button [disabled]="grid.isLastPage" (click)="grid.paginate(grid.totalPages - 1)" igxButton="icon"
+                  igxRipple igxRippleCentered="true">
+                  <igx-icon>last_page</igx-icon>
+                </button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <x365-fm-workforce-summary-viewer #viewer [width]="28" [show]="showViewer$ | async" [data]="summaryData$ | async"
+    [imageData]="imageData$ | async" (cancelClick)="onCancelViewer()"></x365-fm-workforce-summary-viewer>
+  <!-- </div> -->

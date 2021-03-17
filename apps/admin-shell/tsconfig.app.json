@@ -1,0 +1,54 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/apps/admin-shell",
+    "types": [],
+    "downlevelIteration": true
+  },
+  "exclude": ["src/test.ts", "**/*.spec.ts"],
+  "include": [
+    "**/*.ts",
+
+    "../../libs/feature-modules/self-service/src/index.ts",
+
+    "../../libs/feature-modules/workforce/leave-manager/src/index.ts",
+
+    "../../libs/feature-module-ui/workforce/absence-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/talent/performance-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/talent/learning-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/analytics-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/approvals-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/reports-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/documents-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/compensation/loans-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/workforce/subscription-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/hr-foundations-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/provisioning-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/lookup-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/platform/data-upload-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/compensation/payroll-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/compensation/payment-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/workforce/time-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/workforce/exit-ui/src/index.ts",
+
+    "../../libs/feature-module-ui/workforce/processes-ui/src/index.ts"
+  ]
+}

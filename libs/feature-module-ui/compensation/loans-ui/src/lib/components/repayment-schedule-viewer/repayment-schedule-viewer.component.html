@@ -1,0 +1,31 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Manual Repayments'" [subTitle]="'Details of your manual repayments'" [loading]='!(repaymentsScheduleList)'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <igx-grid #repaymentsScheduleGrid [data]="repaymentsScheduleList" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [showToolbar]="false" [width]="'900px'" [rowSelectable]="false" *ngIf="show" [height]="null">
+        <igx-column field="effective_period" header="Value Date" width="20%">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{ val | dateDisplay }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="reference" header="Reference" width="20%" dataType="number"></igx-column>
+        <igx-column field="amount" header="Amount" width="20%" dataType="number"></igx-column>
+        <igx-column field="transaction_interest" header="Interest" width="10%" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{ val | number: '1.1-5' }}</div>
+          </ng-template>
+        </igx-column>
+        <igx-column field="repayment_type_text" header="Type" width="10%">
+        </igx-column>
+        <igx-column field="transaction_balance" header="Balance" width="20%" dataType="number" dataType="number">
+          <ng-template igxCell let-val>
+            <div class="right-align-text1">{{val | number: '1.2-5' }}</div>
+          </ng-template>
+        </igx-column>
+      </igx-grid>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </x365-shared-ui-form-container>

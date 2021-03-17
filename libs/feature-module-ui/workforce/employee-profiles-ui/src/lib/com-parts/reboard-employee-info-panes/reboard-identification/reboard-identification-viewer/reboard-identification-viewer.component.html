@@ -1,0 +1,185 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Identification Information'" [subTitle]="'This is identification information about staff (Awaiting appoval)'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <div class="mx-3">
+            <div class="row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Corporate ID</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.corporate_id_expires | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>National ID</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.national_id_number | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.national_id_issuedate | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.national_id_expires | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h4>Passport Information</h4>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.passport_no | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Authority:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.passport_authority | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.passport_date_issued | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.passport_expires | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h4>Local Driver's License</h4>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.license_no | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.license_issuedate | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.license_expires | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>International Driver's License</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Number:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.intl_license_no | stringDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Issue Date:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.intl_license_issuedate | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label>Expires:</label>
+                </div>
+                <div class="col-8 md-form mt-0 text-right">
+                    {{data?.intl_license_expires | dateDisplay}}
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-1">
+                <div class="col-12 md-form mt-2">
+                    <h5>Signature</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-12 row-text mt-0 mb-2 text-right">
+                    <x365-shared-ui-avatar [width]="'17em'" [height]="'17em'" [src]="awaitingApprovalsSignatureImage$ | async" [showBorder]="false" [isRounded]="false" [borderColor]="'rgb(233, 233, 233)'" [borderWidth]="'0.1em'" [makeAvatarALink]="false" [linkUrl]="''" [altText]="''"></x365-shared-ui-avatar>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>

@@ -1,0 +1,25 @@
+<div class="item-container">
+  <div class="item-container-top">
+    <div class="top-content-left">
+      <h5 class="font-weight-bold">Notice Board</h5>
+    </div>
+    <div class="top-content-right">
+    </div>
+  </div>
+  <div class="item-container-bottom">
+    <ul>
+      <li *ngFor="let item of items">
+        <div>
+          <span class="d-block heading-sm-1">{{ item.datePosted }}</span>
+          <span class="d-block heading-sm-2">{{ item.subject }}</span>
+        </div>
+        <div class="profile">
+          <div class="profile-img">
+            <a><img src="" class="avatar box-size-2 border-3" alt="" mdbWavesEffect></a>
+          </div>
+          <div class="profile-name heading-sm-2 font-weight-bold">{{ item.postedBy }}</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,170 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="d-flex flex-column doc-container border-radius border-shadow">
+
+        <div class="d-flex flex-column doc-container-t">
+          <div class="doc-container-t-sp">
+            <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="null " [show]="true"></x365-shared-ui-spinner>
+          </div>
+          <div class="doc-container-t-ct">
+            <div class="doc-container-t-ct-l">
+              <div class="row">
+                <div class="col-12">
+                  <dx-lookup [dataSource]="eventTypeOptions$" valueExpr="value" displayExpr='label'
+                    [(ngModel)]="selectedProfile" searchEnabled=true showPopupTitle=false paginate=true
+                    placeholder="Select Event type" closeOnOutsideClick=true popupHeight="400px" class="form-font"
+                    (onValueChanged)="onEventTypeSelect($event)">
+                  </dx-lookup>
+                </div>
+              </div>
+            </div>
+            <div class="doc-container-t-ct-r">
+              <div class="row">
+                <div class="col-7 md-form">
+                </div>
+                <div class="col-5 md-form">
+                  <mdb-select [options]="service.filterList" (selected)="onFilterListSelected($event)"
+                    [allowClear]="true" placeholder="Filter by ..."></mdb-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-container-s">
+          <div class="row">
+            <div class="col-12 md-form mb-1">
+              <input mdbInputDirective type="text" (keyup)="filter($event.target.value, dropDownFilterValue)" id="form1"
+                placeholder="Enter your search string i.e. course, start date, end date, type, status, subject.."
+                class="form-control">
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column doc-container-b">
+          <div class="tab-a">
+            <igx-grid #grid [data]="learningPlanData$ | async" [paging]="true" [height]="null" [autoGenerate]="false"
+              [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+              <igx-column field="course" header="Course" width="14%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="start_date" header="Start Date" width="14%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | dateDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="end_date" header="End Date" width="14%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | dateDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="type" header="Type" width="14%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="status" header="Status" width="14%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="subject" header="Subject" width="14%">
+                <ng-template igxCell let-val>
+                  <div class="">{{val | stringDisplay}}</div>
+                </ng-template>
+              </igx-column>
+              <igx-column field="id" header="..." class="text-center" width="16%">
+                <ng-template igxCell let-val let-cell="cell">
+                  <div class="hover-menu-container"><span class="text-center"></span>
+                    <div class="hover-menu">
+                      <div class="hover-icons">
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType !== 5 && cell.row.rowData.type != 'Online') || 
+                        (selectedType !== 7 && cell.row.rowData.type != 'Standard')" [iconClass]="'fa fa-desktop'"
+                          title="View" [routerLink]="['/d/talent/learning/event-view-data', val]">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 1 && cell.row.rowData.type == 'Online') ||
+                        (selectedType == 2 && cell.row.rowData.type == 'Online') ||
+                        (selectedType == 3 && cell.row.rowData.type == 'Online') ||
+                        (selectedType == 4 && cell.row.rowData.type == 'Online') ||
+                        (selectedType == 5 && cell.row.rowData.type == 'Standard') ||
+                        (selectedType == 6) ||
+                        (selectedType == 7 && cell.row.rowData.type == 'Online')" [iconClass]="'fa fa-trash-o'"
+                          title="Remove" (click)="onRemoveIconClicked(val)">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 6) ||
+                        (selectedType == 7 && cell.row.rowData.type == 'Online')" [iconClass]="'fa fa-trash-o fa-icon'"
+                          title="Delete" (click)="onDeleteIconClicked(val)">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 1 && cell.row.rowData.type == 'Standard') ||
+                        (selectedType == 2 && cell.row.rowData.type == 'Standard')" [iconClass]="'fa fa-sign-out'"
+                          title="Opt Out" (click)="onOptOutEditornClicked(val)">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 4 && cell.row.rowData.type == 'Online')" [iconClass]="'fa fa-user-plus'"
+                          title="Enroll" (click)="onEnrollClicked(val)">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 4 && cell.row.rowData.type == 'Standard')" [iconClass]="'fa fa-pencil'"
+                          title="Apply" (click)="onApplyClicked(val)">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 1) ||
+                        (selectedType == 7) ||
+                        (selectedType == 2 && cell.row.rowData.type == 'Online')" [iconClass]="'fa fa-share'"
+                          title="Go to" (click)="onGotoClicked(cell.row.rowData.course_code)">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 5 && cell.row.rowData.type == 'Standard') ||
+                        (selectedType == 6) ||
+                        (selectedType == 7 && cell.row.rowData.type == 'Online')" [iconClass]="'fa fa-desktop'"
+                          title="Open" [routerLink]="['/d/talent/learning/event-open-data', val]">
+                        </x365-shared-ui-hover-icon>
+
+                        <x365-shared-ui-hover-icon *ngIf="
+                        (selectedType == 7 && cell.row.rowData.type == 'Online')" [iconClass]="'fa fa-pencil'"
+                          title="Edit" (click)="onEditClicked(val)">
+                        </x365-shared-ui-hover-icon>
+
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </igx-column>
+            </igx-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<x365-fm-talent-learning-plan-optout-editor #optOutEditor [width]="28" [show]="showOptOutEditor$ | async" [data]="null"
+  [selectedEventId]="selectedEventId" [selectedType]="selectedType" (cancelClick)="onCancelOptOutEditor()">
+</x365-fm-talent-learning-plan-optout-editor>
+
+<x365-fm-talent-learning-plan-apply-editor #applyEditor [eventScheduleData]="eventScheduleData$ | async"
+  [selectedEventId]="selectedEventId" [width]="28" [show]="showApplyEditor$ | async"
+  (cancelClick)="onCancelApplyEditor()">
+</x365-fm-talent-learning-plan-apply-editor>
+
+<x365-fm-talent-learning-plan-enroll-editor #enrollEditor [width]="28" [show]="showEnrollEditor$ | async"
+  [courseData]="courseData$ | async" (cancelClick)="onCancelEnrollEditor()">
+</x365-fm-talent-learning-plan-enroll-editor>
+
+<x365-fm-talent-learning-plan-edit-editor #editEditor [width]="28" [show]="showEditEditor$ | async"
+  [selectedEventId]="selectedEventId" (cancelClick)="onCancelEditEditor()">
+</x365-fm-talent-learning-plan-edit-editor>

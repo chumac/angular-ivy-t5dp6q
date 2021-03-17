@@ -1,0 +1,11 @@
+
+.md-form textarea {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.8rem !important;
+}
+
+.md-form textarea ~ label:not(.active) {
+  color: #a7a7a7 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.8rem !important;
+}

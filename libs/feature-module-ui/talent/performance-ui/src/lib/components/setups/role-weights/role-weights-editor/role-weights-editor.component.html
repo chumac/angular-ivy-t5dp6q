@@ -1,0 +1,103 @@
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Role Weight'" [subTitle]="'Sets up role weight'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Tag to:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="tag_to"  [dataSource]="employeeList$ | async" valueExpr="employee_id" displayExpr='emp_fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Eligibility Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="eligibility_rule" [options]="eligibilityRuleOptions" (selected)="onEligibilityRuleSelected($event)"  [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" [class.ghost]="eligibiltyRule !== ELIGIBILITY_CONSTANTS.analysis">
+          <div class="col-4">
+            <label class="center-label">Analysis:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="analysis_id"  [dataSource]="analysisList$ | async" valueExpr="analysis_id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" [class.ghost]="eligibiltyRule !== ELIGIBILITY_CONSTANTS.analysis">
+          <div class="col-4">
+            <label class="center-label">Analysis Detail:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="analysis_det_id"  [dataSource]="analysisDetList$ | async" valueExpr="analysis_det_id" displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" [class.ghost]="eligibiltyRule !== ELIGIBILITY_CONSTANTS.position">
+          <div class="col-4">
+            <label class="center-label">Position:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="position_id" [options]="positionList$ | async"  [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" [class.ghost]="eligibiltyRule !== ELIGIBILITY_CONSTANTS.designation">
+          <div class="col-4">
+            <label class="center-label">Designation:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="designation_id" [options]="designationList$ | async"  [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1" [class.ghost]="eligibiltyRule !== ELIGIBILITY_CONSTANTS.employee">
+          <div class="col-4">
+            <label class="center-label">Employee:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <dx-lookup formControlName="employee_id"  [dataSource]="employeeList$ | async" valueExpr="employee_id" displayExpr='emp_fullname' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+          </div>
+        </div>
+        <div class="row mb-1" [class.ghost]="eligibiltyRule !== ELIGIBILITY_CONSTANTS.grade">
+          <div class="col-4">
+            <label class="center-label">Grade:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <mdb-select formControlName="grade_id" [options]="gradeList$ | async"  [filterEnabled]="true" class="form-font"></mdb-select>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Peer Weight:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="role_type_weight_peer" type="number" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Sub Weight:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="role_type_weight_sub" type="number" class="form-control form-font">
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">External Weight:</label>
+          </div>
+          <div class="col-8 md-form mt-0">
+            <input formControlName="role_type_weight_ext" type="number" class="form-control form-font">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

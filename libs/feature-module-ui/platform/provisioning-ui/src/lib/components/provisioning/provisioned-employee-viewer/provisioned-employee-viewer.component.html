@@ -1,0 +1,192 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Provisioned Employee'" [subTitle]="'Details of provisioned employee'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Staff Category:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.StaffcategoryInfo.description | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Staff Number:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employee_number | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Title:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.title | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>First Name:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employee_firstname | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Surname:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employee_surname | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Middle Name:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employee_midname | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Gender:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.gender | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Sync Firstname:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.sync_firstname | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Sync Surname:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.sync_surname | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Username:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.username | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Date of Birth">Date Of Birth:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.date_of_birth | dateDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Employement Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employment_date | dateDisplay}}
+        </div>
+      </div>
+      <!-- <div class="row mb-1">
+        <div class="col-4">
+          <label>Paygroup:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.PaygroupInfo.description | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Paygrade:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.PaygradeInfo.description | stringDisplay}}
+        </div>
+      </div> -->
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Position Before Exit">Position:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.PositionInfo.description | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Designation">Designation:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.DesignationInfo.description | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Supervisor">Supervisor:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.SupervisorInfo.employee_firstname | stringDisplay}} {{data?.SupervisorInfo.employee_surname | stringDisplay}}, {{data?.SupervisorInfo.employee_number | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Backup Officer">Backup Officer:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.BackUpOfficerInfo.employee_firstname | stringDisplay}} {{data?.BackUpOfficerInfo.employee_surname | stringDisplay}}, {{data?.BackUpOfficerInfo.employee_number | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Enterprise Structure Type">Enterprise Structure Type:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.AnalysisInfo.description | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="Cost Center">Cost Center:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.AnalysisDetailsInfo.description | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label title="System Information">Information:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.sys_message | stringDisplay}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

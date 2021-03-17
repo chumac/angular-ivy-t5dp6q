@@ -1,0 +1,74 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Tax Standard'" [subTitle]="''"
+      [loading]='inEditMode() && !data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Step:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.step | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Tax Value:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.tax_value | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">% of tax value:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.percentage_of_tv | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Cumulative:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <div>
+            {{data?.cumulative | stringDisplay}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="center-label">Ignore Remainder </label>
+        </div>
+        <div class="col-8 md-form mt-0 custom-control custom-switch">
+          <div *ngIf="data?.ignore_rm != null && data?.ignore_rm == true">
+            Yes
+          </div>
+          <div *ngIf="data?.ignore_rm == null || data?.ignore_rm == false">
+            No
+          </div>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">% of remainder:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          {{data?.percentage_of_rm | stringDisplay}}
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Done'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" [showCancelButton]="false" >
+    </x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

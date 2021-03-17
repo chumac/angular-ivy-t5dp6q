@@ -1,0 +1,17 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let transaction of data">
+        <mat-expansion-panel-header matTooltip="{{ transaction?.comment }}">
+            <div class="label">
+                <div id="transaction{{ transaction?.id }}">{{ (transaction?.comment.length > 40)? (transaction?.comment | slice:0:40)+'..':(transaction?.comment) }}</div>
+            </div>
+            <div class="sublabel"><b>{{ transaction?.perc_complete }} % </b>Complete on {{ transaction?.actual_complete_date | dateDisplay }} <i class="fa fa-flag"> | <mdb-badge pill="true" success="true">{{ transaction?.progress_type | valueTransform:progressTypeConstants }} </mdb-badge>
+            </i> <i *ngIf="hasDocument(transaction)" (click)="downloadDocument($event, transaction)" class="ml-2 trx fa fa-cloud-download"></i></div>
+        </mat-expansion-panel-header>
+        <div class="comment-container">
+            <span *ngIf="!(isLineManager$ | async)" (click)="readOnly?false:deleteTransaction(transaction)" class="delete-transaction-button" title="Delete Transaction"><i class="fa fa-trash-o"></i></span>
+            <section class="avenue-messenger">
+                <x365-fm-talent-progress-transaction-comment-widget [data]="transaction" [readOnly]="readOnly"></x365-fm-talent-progress-transaction-comment-widget>
+            </section>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

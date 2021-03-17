@@ -1,0 +1,66 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Approval'" [subTitle]="'Details of approval'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>From:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.msg_originalsender_name | stringDisplay}} - {{data?.msg_from | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>To:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.msg_to | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Date Sent:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.msg_entry_date | dateTimeDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-0">
+        <div class="col-4">
+          <label>Message:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-12 text-value md-form mt-0">
+          <table *ngIf="(labelValueMessages$ | async).length > 0; else placeholder">
+            <tr>
+              <th>Field(s)</th>
+              <th>Value(s)</th>
+            </tr>
+            <tr *ngFor="let message of labelValueMessages$ | async">
+              <td>{{ message.label | stringDisplay }}</td>
+              <td>{{ message.value | stringDisplay }}</td>
+            </tr>
+          </table>
+          <ng-template #placeholder>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; --- </p>
+          </ng-template>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

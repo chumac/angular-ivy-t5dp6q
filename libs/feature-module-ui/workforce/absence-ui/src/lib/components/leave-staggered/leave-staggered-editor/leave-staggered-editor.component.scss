@@ -1,0 +1,152 @@
+.add-detail-btn {
+    font-size: 0.5rem;
+    padding: 0.3rem 0.79rem;
+}
+
+.leave-detail-hrleave-detail-hr {
+    margin-bottom: 0rem !important;
+}
+
+.detail-form-layout {
+    padding-left: 0.45rem;
+    padding-right: 1.5rem;
+    margin-bottom: 9.5rem !important;
+}
+
+.detail-form {
+    background: #f7f7f7;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    /* box-shadow: 2px 5px 3px #888888; */
+}
+
+.detail-body {
+    font-size: 0.72rem;
+    padding: 2.5rem 2.5rem 0rem 2.5rem;
+}
+
+.add-detail-btn-xm {
+    font-size: 0.5rem;
+    padding: 0.3rem 0.79rem;
+    margin-bottom: 1.4rem;
+    margin-right: 1.4rem;
+}
+
+.card {
+    background: #f7f7f7;
+    box-shadow: 0 0px 0px rgba(83, 83, 83, 0.2);
+}
+
+.card:hover {
+    background: #f7f7f7;
+    box-shadow: 0px 0px 0px 0px rgba(46, 61, 73, 0.15);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.card-close {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background: #ff4444;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    /* padding: 15px 0 0 0; */
+}
+
+.card:hover {
+    background: #f7f7f7;
+    box-shadow: 2px 3px 5px 0px rgba(46, 61, 73, 0.15);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.card-body {
+    font-size: 0.72rem;
+    padding: 0.75rem;
+}
+
+.card-text {
+    font-size: 0.72rem;
+}
+
+.card-text:last-child {
+    font-size: 0.72rem;
+    margin-bottom: 0rem !important;
+}
+
+#dxlookup-label .dx-lookup-arrow {
+    display: none !important;
+}
+
+#dxlookup-label .dx-texteditor.dx-editor-underlined:after {
+    border-bottom: 0px solid #ffffff;
+}
+
+#dxlookup-label .dx-lookup.dx-editor-underlined {
+    height: 2px;
+}
+
+::ng-deep #dxlookup-label .dx-lookup-arrow:before {
+    position: absolute;
+    display: none !important;
+    width: 2px;
+    top: 50%;
+    margin-top: -12px;
+    left: 50%;
+    margin-left: -12px;
+}
+
+::ng-deep #dxlookup-label .dx-lookup-arrow {
+    position: absolute;
+    display: none !important;
+    width: 2px;
+    top: 50%;
+    margin-top: -12px;
+    left: 50%;
+    margin-left: -12px;
+}
+
+::ng-deep #dxlookup-label .dx-lookup-field-wrapper {
+    color: black;
+}
+
+::ng-deep #dxlookup-label .dx-state-disabled.dx-widget,
+.dx-state-disabled .dx-widget {
+    opacity: 0.6;
+    text-align: left;
+    font-size: 0.72rem !important;
+}
+
+::ng-deep .dx-lookup.dx-editor-underlined .dx-lookup-field {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+::ng-deep .dx-lookup.dx-editor-underlined .dx-lookup-field {
+    padding: 0px 0 0px !important;
+}
+
+.dxl-label {
+    display: inline-block;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #ffbb33;
+}
+
+.pay-mt {
+    margin-bottom: 2.65rem !important;
+}
+
+.hr-line {
+    margin-left: 20px;
+    margin-right: 20px;
+}

@@ -1,0 +1,38 @@
+<li>
+    <ul class="collapsible collapsible-accordion">
+        <mdb-accordion [multiple]="false" aria-multiselectable="false">
+            <!-- <mdb-accordion-item class="no-collase">
+                <mdb-accordion-item-head mdbWavesEffect routerLink="/d/analytics/dashboard" routerLinkActive="active">
+                    <svg><use xlink:href="/assets/images/sprite.svg#home"/></svg> <span>Dashboard</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item> -->
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Transactions</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul class="">
+                        <li><a routerLink="/d/workforce/absence/admin/leave/details" routerLinkActive="active"><span>Leave Detail</span></a></li>
+                        <li><a routerLink="/d/workforce/absence/admin/leave/time-attendances" routerLinkActive="active"><span>Time & Attendance</span></a></li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+            <mdb-accordion-item>
+                <mdb-accordion-item-head mdbWavesEffect>
+                    <svg><use xlink:href="/assets/images/sprite.svg#user"/></svg> <span>Setups</span>
+                </mdb-accordion-item-head>
+                <mdb-accordion-item-body>
+                    <ul class="mb-5">
+                      <li><a routerLink="/d/workforce/absence/admin/leave/limits" routerLinkActive="active"><span>Leave Limits</span></a></li>
+                      <li><a routerLink="/d/workforce/absence/admin/leave/definitions" routerLinkActive="active"><span>Leave Definitions</span></a></li>
+                      <li><a routerLink="/d/workforce/absence/admin/leave/days" routerLinkActive="active"><span>Leave Days</span></a></li>
+                      <li><a routerLink="/d/workforce/absence/admin/leave/proration" routerLinkActive="active"><span>Leave Proration</span></a></li>
+                      <li><a routerLink="/d/workforce/absence/admin/leave/holidays" routerLinkActive="active"><span>Holidays</span></a></li>
+                      <li><a routerLink="/d/workforce/absence/admin/leave/valid-locations" routerLinkActive="active"><span>Valid Locations</span></a></li>
+                    </ul>
+                </mdb-accordion-item-body>
+            </mdb-accordion-item>
+        </mdb-accordion>
+    </ul>
+</li>

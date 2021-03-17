@@ -1,0 +1,32 @@
+export interface IGuarantor {
+  guarantor_id: number;
+  employee_id: number;
+  title: string;
+  ref_surname: string;
+  ref_firstname: string;
+  ref_othernames: string;
+  gender: string;
+  fulladdress: string;
+  company_name: string;
+  company_address: string;
+  bvn: string;
+  phone1: string;
+  phone2: string;
+  requirement_type: number;
+  requirement_type_text: string;
+  remark: string;
+  verification_sent_date: Date;
+  verification_received_date: Date;
+  email: string;
+  verification_status: number;
+  attach_document?: string;
+  archive_status: boolean;
+  approval_status: number;
+  approval_status_text: string;
+  img_extension: string;
+  img_url: string;
+  img_guid: string;
+  img_size: string;
+  passport_picture: string;
+  img_extension_passport: string;
+}

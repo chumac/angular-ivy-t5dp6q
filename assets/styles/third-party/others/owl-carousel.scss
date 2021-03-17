@@ -1,0 +1,18 @@
+@import 'colors';
+
+div.owl-nav {
+  display: none;
+}
+
+.owl-dots {
+  margin-top: 10px;
+}
+
+.owl-theme .owl-dots .owl-dot:hover span {
+  background-color: lighten($app_brand_color, 25%);
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot.active:hover span {
+  background-color: lighten($app_brand_color, 5%);
+}

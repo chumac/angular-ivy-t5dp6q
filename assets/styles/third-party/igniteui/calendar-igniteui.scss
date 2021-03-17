@@ -1,0 +1,81 @@
+.igx-calendar__header {
+  display: none;
+}
+
+$color-white: #fff;
+$color-brand: #f27a2a;
+$color-bg-dark: #181819;
+$color-light-gray: #f5f5f5;
+$color-dark-gray: #818181;
+$color-brand-light: #f3842b;
+$color-brand-dark: #f06130;
+
+.igx-calendar__body {
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.igx-calendar__body-picker {
+  padding: 0;
+}
+
+.igx-calendar__body-row,
+.igx-calendar__body-row--wrap {
+  padding: 0;
+}
+
+.igx-calendar__date {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.igx-calendar__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+// // IGNITE CALENDAR STYLING
+// .igx-calendar__header {
+//   background-color: $color-white;
+//   text-align: center;
+//   display: none;
+// }
+
+.igx-calendar__date--inactive {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.igx-calendar__header-date {
+  text-align: center;
+  display: block;
+}
+
+.igx-calendar__month--current,
+.igx-calendar__month:hover,
+.igx-calendar__year--current,
+.igx-calendar__year:hover,
+.date__el:hover {
+  color: $color-brand;
+}
+
+// Next & Previous buttons
+.material-icons.igx-icon {
+  color: $color-dark-gray;
+  background-color: $color-light-gray;
+  border-radius: 50%;
+}
+
+// date selected & Current Date
+.igx-calendar__date.igx-calendar__date--selected,
+.igx-calendar__date--weekend.igx-calendar__date--selected,
+.igx-calendar__date--inactive.igx-calendar__date--selected,
+.igx-calendar__date.igx-calendar__date--current {
+  color: $color-white;
+  background-image: linear-gradient(
+    to right bottom,
+    $color-brand-light,
+    $color-brand-dark
+  );
+  background-color: transparent !important;
+}

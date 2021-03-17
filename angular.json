@@ -1,38 +1,57 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
-  "newProjectRoot": "projects",
+  "newProjectRoot": "",
   "projects": {
-    "demo": {
-      "root": "",
-      "sourceRoot": "src",
+    "self-service-shell": {
+      "root": "apps/self-service-shell/",
+      "sourceRoot": "apps/self-service-shell/src",
       "projectType": "application",
-      "prefix": "app",
-      "schematics": {},
+      "prefix": "x365-ss",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo",
-            "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.app.json",
+            "outputPath": "dist/apps/self-service-shell",
+            "index": "apps/self-service-shell/src/index.html",
+            "main": "apps/self-service-shell/src/main.ts",
+            "polyfills": "apps/self-service-shell/src/polyfills.ts",
+            "tsConfig": "apps/self-service-shell/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/self-service-shell/src/favicon.ico",
+              "apps/self-service-shell/src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/ng-uikit-pro-standard/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/ng-uikit-pro-standard/assets/scss/mdb.scss",
+              "node_modules/hover.css/css/hover-min.css",
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "node_modules/devextreme/dist/css/dx.material.orange.light.css",
+              "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "node_modules/froala-editor/css/froala_style.min.css",
+              "assets/styles/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/easy-pie-chart/dist/easypiechart.js",
+              "node_modules/screenfull/dist/screenfull.js",
+              "node_modules/hammerjs/hammer.min.js",
+              "node_modules/devextreme/dist/js/dx.all.js"
+            ]
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "apps/self-service-shell/src/environments/environment.ts",
+                  "with": "apps/self-service-shell/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -50,34 +69,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo:build"
+            "browserTarget": "self-service-shell:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "demo:build:production"
+              "browserTarget": "self-service-shell:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "demo:build"
+            "browserTarget": "self-service-shell:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
+            "main": "apps/self-service-shell/src/test.ts",
+            "polyfills": "apps/self-service-shell/src/polyfills.ts",
+            "tsConfig": "apps/self-service-shell/tsconfig.spec.json",
+            "karmaConfig": "apps/self-service-shell/karma.conf.js",
             "styles": [
-              "styles.css"
+              "apps/self-service-shell/src/styles.scss"
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "apps/self-service-shell/src/favicon.ico",
+              "apps/self-service-shell/src/assets"
             ]
           }
         },
@@ -85,8 +104,2530 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "apps/self-service-shell/tsconfig.app.json",
+              "apps/self-service-shell/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "self-service-shell-e2e": {
+      "root": "apps/self-service-shell-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/self-service-shell-e2e/protractor.conf.js",
+            "devServerTarget": "self-service-shell:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "self-service-shell:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/self-service-shell-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "admin-shell": {
+      "root": "apps/admin-shell/",
+      "sourceRoot": "apps/admin-shell/src",
+      "projectType": "application",
+      "prefix": "x365-admin",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/admin-shell",
+            "index": "apps/admin-shell/src/index.html",
+            "main": "apps/admin-shell/src/main.ts",
+            "polyfills": "apps/admin-shell/src/polyfills.ts",
+            "tsConfig": "apps/admin-shell/tsconfig.app.json",
+            "assets": [
+              "apps/admin-shell/src/favicon.ico",
+              "apps/admin-shell/src/assets"
+            ],
+            "styles": [
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "node_modules/animate.css/animate.min.css",
+              "node_modules/ng-uikit-pro-standard/assets/scss/bootstrap/bootstrap.scss",
+              "node_modules/ng-uikit-pro-standard/assets/scss/mdb.scss",
+              "node_modules/igniteui-angular/styles/igniteui-angular.css",
+              "node_modules/hover.css/css/hover-min.css",
+              "node_modules/devextreme/dist/css/dx.common.css",
+              "node_modules/devextreme/dist/css/dx.material.orange.light.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
+              "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "node_modules/froala-editor/css/froala_style.min.css",
+              "assets/styles/styles-app-loading.scss",
+              "apps/admin-shell/src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "assets/styles",
+                "assets/styles/declares",
+                "assets/styles/modules",
+                "assets/styles/components",
+                "assets/styles/third-party",
+                "assets/styles/node_modules"
+              ]
+            },
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/easy-pie-chart/dist/easypiechart.js",
+              "node_modules/screenfull/dist/screenfull.js",
+              "node_modules/hammerjs/hammer.min.js",
+              "node_modules/devextreme/dist/js/dx.all.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/froala-editor/js/froala_editor.pkgd.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/admin-shell/src/environments/environment.ts",
+                  "with": "apps/admin-shell/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "admin-shell:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "admin-shell:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "admin-shell:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/admin-shell/src/test.ts",
+            "polyfills": "apps/admin-shell/src/polyfills.ts",
+            "tsConfig": "apps/admin-shell/tsconfig.spec.json",
+            "karmaConfig": "apps/admin-shell/karma.conf.js",
+            "styles": [
+              "apps/admin-shell/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/easy-pie-chart/dist/easypiechart.js",
+              "node_modules/screenfull/dist/screenfull.js",
+              "node_modules/hammerjs/hammer.min.js"
+            ],
+            "assets": [
+              "apps/admin-shell/src/favicon.ico",
+              "apps/admin-shell/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/admin-shell/tsconfig.app.json",
+              "apps/admin-shell/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "admin-shell-e2e": {
+      "root": "apps/admin-shell-e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "apps/admin-shell-e2e/protractor.conf.js",
+            "devServerTarget": "admin-shell:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "admin-shell:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/admin-shell-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-workforce-leave": {
+      "root": "libs/models/workforce/leave",
+      "sourceRoot": "libs/models/workforce/leave/src",
+      "projectType": "library",
+      "prefix": "x365-models-leave",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/workforce/leave/src/test.ts",
+            "tsConfig": "libs/models/workforce/leave/tsconfig.spec.json",
+            "karmaConfig": "libs/models/workforce/leave/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/workforce/leave/tsconfig.lib.json",
+              "libs/models/workforce/leave/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-workforce-personnel": {
+      "root": "libs/models/workforce/personnel",
+      "sourceRoot": "libs/models/workforce/personnel/src",
+      "projectType": "library",
+      "prefix": "x365-models-personnel",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/workforce/personnel/src/test.ts",
+            "tsConfig": "libs/models/workforce/personnel/tsconfig.spec.json",
+            "karmaConfig": "libs/models/workforce/personnel/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/workforce/personnel/tsconfig.lib.json",
+              "libs/models/workforce/personnel/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "layout-ui": {
+      "root": "libs/layout/ui",
+      "sourceRoot": "libs/layout/ui/src",
+      "projectType": "library",
+      "prefix": "x365-libs/layout/ui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/layout/ui/tsconfig.lib.json",
+            "project": "libs/layout/ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/layout/ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/layout/ui/src/test.ts",
+            "tsConfig": "libs/layout/ui/tsconfig.spec.json",
+            "karmaConfig": "libs/layout/ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/layout/ui/tsconfig.lib.json",
+              "libs/layout/ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-modules-self-service": {
+      "root": "libs/feature-modules/self-service",
+      "sourceRoot": "libs/feature-modules/self-service/src",
+      "projectType": "library",
+      "prefix": "x365-fm-ss",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-modules/self-service/tsconfig.lib.json",
+            "project": "libs/feature-modules/self-service/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-modules/self-service/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-modules/self-service/src/test.ts",
+            "tsConfig": "libs/feature-modules/self-service/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-modules/self-service/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-modules/self-service/tsconfig.lib.json",
+              "libs/feature-modules/self-service/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-modules-workforce-leave-manager": {
+      "root": "libs/feature-modules/workforce/leave-manager",
+      "sourceRoot": "libs/feature-modules/workforce/leave-manager/src",
+      "projectType": "library",
+      "prefix": "x365-fm-lvmgr",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-modules/workforce/leave-manager/tsconfig.lib.json",
+            "project": "libs/feature-modules/workforce/leave-manager/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-modules/workforce/leave-manager/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-modules/workforce/leave-manager/src/test.ts",
+            "tsConfig": "libs/feature-modules/workforce/leave-manager/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-modules/workforce/leave-manager/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-modules/workforce/leave-manager/tsconfig.lib.json",
+              "libs/feature-modules/workforce/leave-manager/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ui-components-workforce-personnel-ui": {
+      "root": "libs/ui-components/workforce/personnel-ui",
+      "sourceRoot": "libs/ui-components/workforce/personnel-ui/src",
+      "projectType": "library",
+      "prefix": "x365-pu-psui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ui-components/workforce/personnel-ui/tsconfig.lib.json",
+            "project": "libs/ui-components/workforce/personnel-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/ui-components/workforce/personnel-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ui-components/workforce/personnel-ui/src/test.ts",
+            "tsConfig": "libs/ui-components/workforce/personnel-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/ui-components/workforce/personnel-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-components/workforce/personnel-ui/tsconfig.lib.json",
+              "libs/ui-components/workforce/personnel-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ui-components-workforce-leave-ui": {
+      "root": "libs/ui-components/workforce/leave-ui",
+      "sourceRoot": "libs/ui-components/workforce/leave-ui/src",
+      "projectType": "library",
+      "prefix": "x365-lu-lvui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/ui-components/workforce/leave-ui/tsconfig.lib.json",
+            "project": "libs/ui-components/workforce/leave-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/ui-components/workforce/leave-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/ui-components/workforce/leave-ui/src/test.ts",
+            "tsConfig": "libs/ui-components/workforce/leave-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/ui-components/workforce/leave-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui-components/workforce/leave-ui/tsconfig.lib.json",
+              "libs/ui-components/workforce/leave-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shared-auth": {
+      "root": "libs/shared/auth",
+      "sourceRoot": "libs/shared/auth/src",
+      "projectType": "library",
+      "prefix": "x365-libs/shared/auth",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/shared/auth/tsconfig.lib.json",
+            "project": "libs/shared/auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/shared/auth/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/auth/src/test.ts",
+            "tsConfig": "libs/shared/auth/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/auth/tsconfig.lib.json",
+              "libs/shared/auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shared-navigation": {
+      "root": "libs/shared/navigation",
+      "sourceRoot": "libs/shared/navigation/src",
+      "projectType": "library",
+      "prefix": "x365-shared-nav",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/shared/navigation/tsconfig.lib.json",
+            "project": "libs/shared/navigation/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/shared/navigation/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/navigation/src/test.ts",
+            "tsConfig": "libs/shared/navigation/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/navigation/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/navigation/tsconfig.lib.json",
+              "libs/shared/navigation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shared-app-global": {
+      "root": "libs/shared/app-global",
+      "sourceRoot": "libs/shared/app-global/src",
+      "projectType": "library",
+      "prefix": "x365-libs/shared/app-global",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/shared/app-global/tsconfig.lib.json",
+            "project": "libs/shared/app-global/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/shared/app-global/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/app-global/src/test.ts",
+            "tsConfig": "libs/shared/app-global/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/app-global/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/app-global/tsconfig.lib.json",
+              "libs/shared/app-global/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shared-ui": {
+      "root": "libs/shared/ui",
+      "sourceRoot": "libs/shared/ui/src",
+      "projectType": "library",
+      "prefix": "x365-libs/shared/ui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/shared/ui/tsconfig.lib.json",
+            "project": "libs/shared/ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/shared/ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/ui/src/test.ts",
+            "tsConfig": "libs/shared/ui/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/ui/tsconfig.lib.json",
+              "libs/shared/ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "prefix": "x365-libs/core",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/core/tsconfig.lib.json",
+            "project": "libs/core/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/core/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/test.ts",
+            "tsConfig": "libs/core/tsconfig.spec.json",
+            "karmaConfig": "libs/core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/tsconfig.lib.json",
+              "libs/core/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-core-data": {
+      "root": "libs/models/core-data",
+      "sourceRoot": "libs/models/core-data/src",
+      "projectType": "library",
+      "prefix": "x365-models-app-data",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/core-data/tsconfig.lib.json",
+            "project": "libs/models/core-data/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/core-data/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/core-data/src/test.ts",
+            "tsConfig": "libs/models/core-data/tsconfig.spec.json",
+            "karmaConfig": "libs/models/core-data/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/core-data/tsconfig.lib.json",
+              "libs/models/core-data/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "shared-animations": {
+      "root": "libs/shared/animations",
+      "sourceRoot": "libs/shared/animations/src",
+      "projectType": "library",
+      "prefix": "x365-libs/shared/animations",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/shared/animations/tsconfig.lib.json",
+            "project": "libs/shared/animations/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/shared/animations/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/shared/animations/src/test.ts",
+            "tsConfig": "libs/shared/animations/tsconfig.spec.json",
+            "karmaConfig": "libs/shared/animations/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared/animations/tsconfig.lib.json",
+              "libs/shared/animations/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-talent-performance-ui": {
+      "root": "libs/feature-module-ui/talent/performance-ui",
+      "sourceRoot": "libs/feature-module-ui/talent/performance-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-talent",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/talent/performance-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/talent/performance-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/talent/performance-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/talent/performance-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/talent/performance-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/talent/performance-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/talent/performance-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/talent/performance-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-employee-profiles-ui": {
+      "root": "libs/feature-module-ui/workforce/employee-profiles-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/employee-profiles-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-workforce",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/employee-profiles-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/employee-profiles-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/employee-profiles-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/employee-profiles-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/employee-profiles-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/employee-profiles-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/employee-profiles-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/employee-profiles-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-absence-ui": {
+      "root": "libs/feature-module-ui/workforce/absence-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/absence-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-workforce-absence",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/absence-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/absence-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/absence-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/absence-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/absence-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/absence-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/absence-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/absence-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "component-ui": {
+      "root": "libs/component-ui",
+      "sourceRoot": "libs/component-ui/src",
+      "projectType": "library",
+      "prefix": "x365-libs/component-ui",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/component-ui/tsconfig.lib.json",
+            "project": "libs/component-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/component-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/component-ui/src/test.ts",
+            "tsConfig": "libs/component-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/component-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/component-ui/tsconfig.lib.json",
+              "libs/component-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-app-state": {
+      "root": "libs/store/app-state",
+      "sourceRoot": "libs/store/app-state/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/app-state/tsconfig.lib.json",
+            "project": "libs/store/app-state/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/app-state/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/app-state/src/test.ts",
+            "tsConfig": "libs/store/app-state/tsconfig.spec.json",
+            "karmaConfig": "libs/store/app-state/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/app-state/tsconfig.lib.json",
+              "libs/store/app-state/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-reducers": {
+      "root": "libs/store/reducers",
+      "sourceRoot": "libs/store/reducers/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/reducers/tsconfig.lib.json",
+            "project": "libs/store/reducers/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/reducers/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/reducers/src/test.ts",
+            "tsConfig": "libs/store/reducers/tsconfig.spec.json",
+            "karmaConfig": "libs/store/reducers/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/reducers/tsconfig.lib.json",
+              "libs/store/reducers/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-modules-workforce-employee-profiles": {
+      "root": "libs/store/modules/workforce/employee-profiles",
+      "sourceRoot": "libs/store/modules/workforce/employee-profiles/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/modules/workforce/employee-profiles/tsconfig.lib.json",
+            "project": "libs/store/modules/workforce/employee-profiles/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/modules/workforce/employee-profiles/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/modules/workforce/employee-profiles/src/test.ts",
+            "tsConfig": "libs/store/modules/workforce/employee-profiles/tsconfig.spec.json",
+            "karmaConfig": "libs/store/modules/workforce/employee-profiles/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/modules/workforce/employee-profiles/tsconfig.lib.json",
+              "libs/store/modules/workforce/employee-profiles/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-workforce-employee-profiles": {
+      "root": "libs/models/workforce/employee-profiles",
+      "sourceRoot": "libs/models/workforce/employee-profiles/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/workforce/employee-profiles/tsconfig.lib.json",
+            "project": "libs/models/workforce/employee-profiles/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/workforce/employee-profiles/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/workforce/employee-profiles/src/test.ts",
+            "tsConfig": "libs/models/workforce/employee-profiles/tsconfig.spec.json",
+            "karmaConfig": "libs/models/workforce/employee-profiles/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/workforce/employee-profiles/tsconfig.lib.json",
+              "libs/models/workforce/employee-profiles/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-common": {
+      "root": "libs/models/common",
+      "sourceRoot": "libs/models/common/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/common/tsconfig.lib.json",
+            "project": "libs/models/common/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/common/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/common/src/test.ts",
+            "tsConfig": "libs/models/common/tsconfig.spec.json",
+            "karmaConfig": "libs/models/common/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/common/tsconfig.lib.json",
+              "libs/models/common/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-modules-foundation": {
+      "root": "libs/store/modules/foundation",
+      "sourceRoot": "libs/store/modules/foundation/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/modules/foundation/tsconfig.lib.json",
+            "project": "libs/store/modules/foundation/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/modules/foundation/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/modules/foundation/src/test.ts",
+            "tsConfig": "libs/store/modules/foundation/tsconfig.spec.json",
+            "karmaConfig": "libs/store/modules/foundation/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/modules/foundation/tsconfig.lib.json",
+              "libs/store/modules/foundation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-foundation": {
+      "root": "libs/models/foundation",
+      "sourceRoot": "libs/models/foundation/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/foundation/tsconfig.lib.json",
+            "project": "libs/models/foundation/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/foundation/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/foundation/src/test.ts",
+            "tsConfig": "libs/models/foundation/tsconfig.spec.json",
+            "karmaConfig": "libs/models/foundation/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/foundation/tsconfig.lib.json",
+              "libs/models/foundation/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "core-services": {
+      "root": "libs/core-services",
+      "sourceRoot": "libs/core-services/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/core-services/tsconfig.lib.json",
+            "project": "libs/core-services/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/core-services/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core-services/src/test.ts",
+            "tsConfig": "libs/core-services/tsconfig.spec.json",
+            "karmaConfig": "libs/core-services/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core-services/tsconfig.lib.json",
+              "libs/core-services/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-shared": {
+      "root": "libs/store/shared",
+      "sourceRoot": "libs/store/shared/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/shared/tsconfig.lib.json",
+            "project": "libs/store/shared/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/shared/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/shared/src/test.ts",
+            "tsConfig": "libs/store/shared/tsconfig.spec.json",
+            "karmaConfig": "libs/store/shared/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/shared/tsconfig.lib.json",
+              "libs/store/shared/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-talent-learning": {
+      "root": "libs/models/talent/learning",
+      "sourceRoot": "libs/models/talent/learning/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/talent/learning/tsconfig.lib.json",
+            "project": "libs/models/talent/learning/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/talent/learning/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/talent/learning/src/test.ts",
+            "tsConfig": "libs/models/talent/learning/tsconfig.spec.json",
+            "karmaConfig": "libs/models/talent/learning/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/talent/learning/tsconfig.lib.json",
+              "libs/models/talent/learning/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-modules-workforce-absence": {
+      "root": "libs/store/modules/workforce/absence",
+      "sourceRoot": "libs/store/modules/workforce/absence/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/modules/workforce/absence/tsconfig.lib.json",
+            "project": "libs/store/modules/workforce/absence/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/modules/workforce/absence/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/modules/workforce/absence/src/test.ts",
+            "tsConfig": "libs/store/modules/workforce/absence/tsconfig.spec.json",
+            "karmaConfig": "libs/store/modules/workforce/absence/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/modules/workforce/absence/tsconfig.lib.json",
+              "libs/store/modules/workforce/absence/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "store-self-service": {
+      "root": "libs/store/self-service",
+      "sourceRoot": "libs/store/self-service/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/store/self-service/tsconfig.lib.json",
+            "project": "libs/store/self-service/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/store/self-service/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/store/self-service/src/test.ts",
+            "tsConfig": "libs/store/self-service/tsconfig.spec.json",
+            "karmaConfig": "libs/store/self-service/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/store/self-service/tsconfig.lib.json",
+              "libs/store/self-service/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-approvals-ui": {
+      "root": "libs/feature-module-ui/approvals-ui",
+      "sourceRoot": "libs/feature-module-ui/approvals-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-approvals",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/approvals-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/approvals-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/approvals-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/approvals-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/approvals-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/approvals-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/approvals-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/approvals-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-reports-ui": {
+      "root": "libs/feature-module-ui/platform/reports-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/reports-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-reports",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/reports-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/reports-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/reports-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/reports-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/reports-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/reports-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/reports-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/reports-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-analytics-ui": {
+      "root": "libs/feature-module-ui/platform/analytics-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/analytics-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-analytics",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/analytics-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/analytics-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/analytics-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/analytics-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/analytics-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/analytics-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/analytics-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/analytics-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-hr-foundations-ui": {
+      "root": "libs/feature-module-ui/platform/hr-foundations-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/hr-foundations-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-hrf",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/hr-foundations-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/hr-foundations-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/hr-foundations-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/hr-foundations-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/hr-foundations-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/hr-foundations-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/hr-foundations-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/hr-foundations-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-provisioning-ui": {
+      "root": "libs/feature-module-ui/platform/provisioning-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/provisioning-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-prov",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/provisioning-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/provisioning-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/provisioning-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/provisioning-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/provisioning-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/provisioning-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/provisioning-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/provisioning-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "comparts": {
+      "root": "libs/comparts",
+      "sourceRoot": "libs/comparts/src",
+      "projectType": "library",
+      "prefix": "x365-libs/comparts",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/comparts/tsconfig.lib.json",
+            "project": "libs/comparts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/comparts/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/comparts/src/test.ts",
+            "tsConfig": "libs/comparts/tsconfig.spec.json",
+            "karmaConfig": "libs/comparts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/comparts/tsconfig.lib.json",
+              "libs/comparts/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-talent-performance": {
+      "root": "libs/models/talent/performance",
+      "sourceRoot": "libs/models/talent/performance/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/talent/performance/tsconfig.lib.json",
+            "project": "libs/models/talent/performance/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/talent/performance/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/talent/performance/src/test.ts",
+            "tsConfig": "libs/models/talent/performance/tsconfig.spec.json",
+            "karmaConfig": "libs/models/talent/performance/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/talent/performance/tsconfig.lib.json",
+              "libs/models/talent/performance/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-documents-ui": {
+      "root": "libs/feature-module-ui/platform/documents-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/documents-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-docs",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/documents-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/documents-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/documents-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/documents-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/documents-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/documents-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/documents-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/documents-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-platform-report": {
+      "root": "libs/models/platform/report",
+      "sourceRoot": "libs/models/platform/report/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/platform/report/tsconfig.lib.json",
+            "project": "libs/models/platform/report/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/platform/report/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/platform/report/src/test.ts",
+            "tsConfig": "libs/models/platform/report/tsconfig.spec.json",
+            "karmaConfig": "libs/models/platform/report/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/platform/report/tsconfig.lib.json",
+              "libs/models/platform/report/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-platform-document": {
+      "root": "libs/models/platform/document",
+      "sourceRoot": "libs/models/platform/document/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/platform/document/tsconfig.lib.json",
+            "project": "libs/models/platform/document/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/platform/document/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/platform/document/src/test.ts",
+            "tsConfig": "libs/models/platform/document/tsconfig.spec.json",
+            "karmaConfig": "libs/models/platform/document/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/platform/document/tsconfig.lib.json",
+              "libs/models/platform/document/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-compensation-loans-ui": {
+      "root": "libs/feature-module-ui/compensation/loans-ui",
+      "sourceRoot": "libs/feature-module-ui/compensation/loans-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-loans",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/compensation/loans-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/compensation/loans-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/compensation/loans-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/compensation/loans-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/compensation/loans-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/compensation/loans-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/compensation/loans-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/compensation/loans-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-compensation-payroll-ui": {
+      "root": "libs/feature-module-ui/compensation/payroll-ui",
+      "sourceRoot": "libs/feature-module-ui/compensation/payroll-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-payrl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/compensation/payroll-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/compensation/payroll-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/compensation/payroll-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/compensation/payroll-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/compensation/payroll-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/compensation/payroll-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/compensation/payroll-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/compensation/payroll-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-lookup-ui": {
+      "root": "libs/feature-module-ui/platform/lookup-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/lookup-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-lookup",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/lookup-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/lookup-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/lookup-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/lookup-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/lookup-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/lookup-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/lookup-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/lookup-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-enterprise-planning-enterprise-structure-ui": {
+      "root": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui",
+      "sourceRoot": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-estruct",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/enterprise-planning/enterprise-structure-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-medical-ui": {
+      "root": "libs/feature-module-ui/workforce/medical-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/medical-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-workforce-medical",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/medical-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/medical-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/medical-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/medical-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/medical-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/medical-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/medical-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/medical-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-subscription-ui": {
+      "root": "libs/feature-module-ui/workforce/subscription-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/subscription-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-workforce-subscription",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/subscription-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/subscription-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/subscription-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/subscription-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/subscription-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/subscription-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/subscription-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/subscription-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-compensation-loans": {
+      "root": "libs/models/compensation/loans",
+      "sourceRoot": "libs/models/compensation/loans/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/compensation/loans/tsconfig.lib.json",
+            "project": "libs/models/compensation/loans/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/compensation/loans/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/compensation/loans/src/test.ts",
+            "tsConfig": "libs/models/compensation/loans/tsconfig.spec.json",
+            "karmaConfig": "libs/models/compensation/loans/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/compensation/loans/tsconfig.lib.json",
+              "libs/models/compensation/loans/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-platform-lookup": {
+      "root": "libs/models/platform/lookup",
+      "sourceRoot": "libs/models/platform/lookup/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/platform/lookup/tsconfig.lib.json",
+            "project": "libs/models/platform/lookup/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/platform/lookup/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/platform/lookup/src/test.ts",
+            "tsConfig": "libs/models/platform/lookup/tsconfig.spec.json",
+            "karmaConfig": "libs/models/platform/lookup/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/platform/lookup/tsconfig.lib.json",
+              "libs/models/platform/lookup/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-platform-data-upload-ui": {
+      "root": "libs/feature-module-ui/platform/data-upload-ui",
+      "sourceRoot": "libs/feature-module-ui/platform/data-upload-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-plf-dataupload",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/platform/data-upload-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/platform/data-upload-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/platform/data-upload-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/platform/data-upload-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/platform/data-upload-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/platform/data-upload-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/platform/data-upload-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/platform/data-upload-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-platform-data-upload": {
+      "root": "libs/models/platform/data-upload",
+      "sourceRoot": "libs/models/platform/data-upload/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/platform/data-upload/tsconfig.lib.json",
+            "project": "libs/models/platform/data-upload/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/platform/data-upload/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/platform/data-upload/src/test.ts",
+            "tsConfig": "libs/models/platform/data-upload/tsconfig.spec.json",
+            "karmaConfig": "libs/models/platform/data-upload/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/platform/data-upload/tsconfig.lib.json",
+              "libs/models/platform/data-upload/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-compensation-payroll": {
+      "root": "libs/models/compensation/payroll",
+      "sourceRoot": "libs/models/compensation/payroll/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/compensation/payroll/tsconfig.lib.json",
+            "project": "libs/models/compensation/payroll/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/compensation/payroll/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/compensation/payroll/src/test.ts",
+            "tsConfig": "libs/models/compensation/payroll/tsconfig.spec.json",
+            "karmaConfig": "libs/models/compensation/payroll/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/compensation/payroll/tsconfig.lib.json",
+              "libs/models/compensation/payroll/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-compensation-payment": {
+      "root": "libs/models/compensation/payment",
+      "sourceRoot": "libs/models/compensation/payment/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/compensation/payment/tsconfig.lib.json",
+            "project": "libs/models/compensation/payment/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/compensation/payment/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/compensation/payment/src/test.ts",
+            "tsConfig": "libs/models/compensation/payment/tsconfig.spec.json",
+            "karmaConfig": "libs/models/compensation/payment/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/compensation/payment/tsconfig.lib.json",
+              "libs/models/compensation/payment/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-time-ui": {
+      "root": "libs/feature-module-ui/workforce/time-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/time-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-workforce-time",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/time-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/time-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/time-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/time-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/time-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/time-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/time-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/time-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-workforce-time-sheet": {
+      "root": "libs/models/workforce/time-sheet",
+      "sourceRoot": "libs/models/workforce/time-sheet/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/workforce/time-sheet/tsconfig.lib.json",
+            "project": "libs/models/workforce/time-sheet/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/workforce/time-sheet/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/workforce/time-sheet/src/test.ts",
+            "tsConfig": "libs/models/workforce/time-sheet/tsconfig.spec.json",
+            "karmaConfig": "libs/models/workforce/time-sheet/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/workforce/time-sheet/tsconfig.lib.json",
+              "libs/models/workforce/time-sheet/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-exit-ui": {
+      "root": "libs/feature-module-ui/workforce/exit-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/exit-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-workforce-exit",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/exit-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/exit-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/exit-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/exit-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/exit-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/exit-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/exit-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/exit-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "models-workforce-exit": {
+      "root": "libs/models/workforce/exit",
+      "sourceRoot": "libs/models/workforce/exit/src",
+      "projectType": "library",
+      "prefix": "nutela",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/models/workforce/exit/tsconfig.lib.json",
+            "project": "libs/models/workforce/exit/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/models/workforce/exit/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/models/workforce/exit/src/test.ts",
+            "tsConfig": "libs/models/workforce/exit/tsconfig.spec.json",
+            "karmaConfig": "libs/models/workforce/exit/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/models/workforce/exit/tsconfig.lib.json",
+              "libs/models/workforce/exit/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-compensation-payment-ui": {
+      "root": "libs/feature-module-ui/compensation/payment-ui",
+      "sourceRoot": "libs/feature-module-ui/compensation/payment-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-cmp-payment",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/compensation/payment-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/compensation/payment-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/compensation/payment-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/compensation/payment-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/compensation/payment-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/compensation/payment-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/compensation/payment-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/compensation/payment-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-workforce-processes-ui": {
+      "root": "libs/feature-module-ui/workforce/processes-ui",
+      "sourceRoot": "libs/feature-module-ui/workforce/processes-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-processes",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/workforce/processes-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/workforce/processes-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/workforce/processes-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/workforce/processes-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/workforce/processes-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/workforce/processes-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/workforce/processes-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/workforce/processes-ui/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "feature-module-ui-talent-learning-ui": {
+      "root": "libs/feature-module-ui/talent/learning-ui",
+      "sourceRoot": "libs/feature-module-ui/talent/learning-ui/src",
+      "projectType": "library",
+      "prefix": "x365-fm-talent",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/feature-module-ui/talent/learning-ui/tsconfig.lib.json",
+            "project": "libs/feature-module-ui/talent/learning-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "libs/feature-module-ui/talent/learning-ui/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/feature-module-ui/talent/learning-ui/src/test.ts",
+            "tsConfig": "libs/feature-module-ui/talent/learning-ui/tsconfig.spec.json",
+            "karmaConfig": "libs/feature-module-ui/talent/learning-ui/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/feature-module-ui/talent/learning-ui/tsconfig.lib.json",
+              "libs/feature-module-ui/talent/learning-ui/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -96,5 +2637,12 @@
       }
     }
   },
-  "defaultProject": "demo"
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/schematics"
+  },
+  "defaultProject": "self-service-shell"
 }

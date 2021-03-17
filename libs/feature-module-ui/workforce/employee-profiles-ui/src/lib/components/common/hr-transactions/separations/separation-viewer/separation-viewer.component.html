@@ -1,0 +1,150 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Separation Viewer'" [subTitle]="'Details of Separated Employee'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Employee:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.employee_fullname | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Exit Reason:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.reason_for_exit | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Effective Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.effective_date | dateDisplay | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Replace By:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.replace_name | dateDisplay | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Created By:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.created_by | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Date Created:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.created_date | dateDisplay | stringDisplay}}
+        </div>
+      </div>
+      <!-- <div class="row mb-1" *ngIf="data.status">
+        <div class="col-6">
+          <label>Status</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          <mdb-badge *ngIf="data.status && data.status == 0" pill="true" info="true">{{data?.status_meaning | stringDisplay }}</mdb-badge>
+          <mdb-badge *ngIf="data.status && data.status == 1" pill="true" success="true">{{data?.status_meaning | stringDisplay }}</mdb-badge>
+        </div>
+      </div> -->
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Sent Notice:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.sent_notice_meaning | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Notice Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.notice_date | dateDisplay | stringDisplay }}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label>Resignation Description:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{ data?.resignation_id_desc | stringDisplay }}
+        </div>
+      </div>
+
+
+      <div class="sub-heading row mt-4 mb-1">
+          <div class="col-12 md-form mt-2">
+            <h5>Compensation</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Process Payroll:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.process_payroll_meaning | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Pay Lumpsum:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.pay_lumpsum_meaning | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Lumpsum Description:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.lumpsum_allowance_id_desc | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Lumpsum Amount:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.lumpsum_amount | number: '1.2-5' | stringDisplay}}
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-6">
+          <label>Currency:</label>
+        </div>
+        <div class="col-6 text-value text-right md-form mt-0">
+          {{data?.currency_name | stringDisplay }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

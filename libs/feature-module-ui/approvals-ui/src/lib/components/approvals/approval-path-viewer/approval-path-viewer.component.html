@@ -1,0 +1,30 @@
+
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="'Approval Path'" [subTitle]="'This view shows actions taken during approval and by whom'" [loading]='!(workflowApprovalPath$ | async)'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <igx-grid *ngIf="show" #grid [data]="workflowApprovalPath$ | async" [paging]="false" [autoGenerate]="false" [emptyGridMessage]="'No data available'" [fixedHeaders]="true" [showToolbar]="false" width="850px" height="100%">
+      <igx-column field="employee" header="Employee" width="35%"></igx-column>
+
+      <igx-column field="entry_date" header="Entry Date" width="13%">
+        <ng-template igxCell let-val>
+          <div class="right-align-text1">{{val | dateTimeDisplay}}</div>
+        </ng-template>
+      </igx-column>
+
+      <igx-column field="msg_status_text" header="Action Status" dataType="date" width="15%"></igx-column>
+
+      <igx-column field="exit_comments" header="Exit Comments" dataType="date" width="20%"></igx-column>
+
+      <igx-column field="exit_date" header="Exit Date" width="13%">
+          <ng-template igxCell let-val>
+              <div class="right-align-text1">{{val | dateTimeDisplay}}</div>
+          </ng-template>
+      </igx-column>
+    </igx-grid>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

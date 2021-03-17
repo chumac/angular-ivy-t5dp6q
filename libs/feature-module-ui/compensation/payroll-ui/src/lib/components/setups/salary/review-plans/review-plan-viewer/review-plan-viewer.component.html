@@ -1,0 +1,157 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Review Plan'" [subTitle]="'Details of review plan'" [loading]='!data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Review Group:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.salary_review_group_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Payroll Profile:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.payroll_profile_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Code:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.code | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Description:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Effective Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.effective_date | dateDisplay | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Eligibility Rule:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.egibility_rule_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Status:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.status_text | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Execution Details</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Auto Execute:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{(data && data.auto_execute ? 'YES' : 'NO') | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="required center-label">Execution Date:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.execution_date | dateDisplay}}
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Allowance Reviews</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Allowances Affected:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.all_affected_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Allowance Rule:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.g_allow_rule_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Rule Value:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.rule_value_allowance | number | stringDisplay}}
+          </div>
+        </div>
+
+        <div class="sub-heading row mt-0 mb-1">
+          <div class="col-12 md-form mt-0">
+            <h5>Deduction Reviews</h5>
+            <hr class="mt-1">
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Deduction Affected:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.deduct_affected_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Deduction Rule:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.g_deduct_rule_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="center-label">Rule Value:</label>
+          </div>
+          <div class="col-8 text-value text-right md-form mt-0">
+            {{data?.rule_value_deduction | number | stringDisplay}}
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

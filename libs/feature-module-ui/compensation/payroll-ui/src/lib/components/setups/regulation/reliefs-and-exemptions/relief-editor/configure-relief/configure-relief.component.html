@@ -1,0 +1,55 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+      <x365-shared-ui-form-header [title]="this.title" [subTitle]="''" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Use Rule:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="useRuleData" formControlName="use_rule" valueExpr="id"
+            displayExpr='description' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+            closeOnOutsideClick=true popupHeight="400px" class="form-font" (onItemClick)="onChangeUseRule($event)">
+          </dx-lookup>
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="directValue">
+        <div class="col-4">
+          <label class="required center-label">Direct Value:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="direct_value" type="text" class="form-control form-font">
+        </div>
+      </div>
+
+      <div class="row mb-1" *ngIf="grossPercentage">
+        <div class="col-4">
+          <label class="required center-label">Gross Percentage:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <input formControlName="gross_percentage" type="text" class="form-control form-font">
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Currency:</label>
+        </div>
+        <div class="col-8 md-form mt-0">
+          <dx-lookup [dataSource]="reliefCurrencyData" formControlName="relief_currency" valueExpr="currency_id"
+          displayExpr='currency_name' searchEnabled=true showPopupTitle=false paginate=true placeholder=""
+          closeOnOutsideClick=true popupHeight="400px" class="form-font">
+        </dx-lookup>
+        </div>
+      </div>
+      </form>
+    </div>
+
+  <div class="footer">
+      <x365-shared-ui-form-footer  [doneText]="'Submit'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

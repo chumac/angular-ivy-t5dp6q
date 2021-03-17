@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="photo">
+    <i *ngIf="!imgBinary" class="fa fa-user-o img-placeholder"></i>
+    <img *ngIf="imgBinary" [src]="imgBinary" class="image-thumbnail rounded-circle align-middle" [width]="size" [height]="size">
+  </div>
+</div>
+
+<!-- <img src="https://www.sololearn.com/Icons/Avatars/4604247.jpg" width="32" height="32" alt="" class="img-thumbnail rounded-circle align-middle"> -->
+

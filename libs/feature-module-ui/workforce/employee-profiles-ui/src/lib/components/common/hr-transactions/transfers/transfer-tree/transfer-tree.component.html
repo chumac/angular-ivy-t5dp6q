@@ -1,0 +1,62 @@
+
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Enterprise Structure Tree'" [subTitle]="''"
+        [loading]="isLoading$ | async" ></x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+  <!-- <x365-shared-ui-spinner [type]="'FIVE_BARS'" *ngIf="isLoading$ | async" [show]="true"></x365-shared-ui-spinner> -->
+    <!-- <igx-grid #rootGrid *ngIf="!this.service.gridShow" [data]="treeRoot$ | async" [paging]="true" [emptyGridMessage]="'No data available'" [autoGenerate]="false" width="100%" [showToolbar]="false">
+      <igx-column field="description" header="Description" width="20%"></igx-column>
+      <igx-column field="structure_type" header="Structure Type" width="15%"></igx-column>
+      <igx-column field="structure_linked_to" header="Structure Linked To" width="20%"></igx-column>
+      <igx-column field="lineage" header="Lineage" width="35%">
+          <ng-template igxCell let-val>
+              {{val}}
+            </ng-template>
+      </igx-column>
+      <igx-column field="structure_id" header="..."  width="10%">
+        <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <span class="hover-ellipse-menu"></span>
+                <div class="hover-icons">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-expand'" title="Expand" (click)="onExpandClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-hand-pointer-o'" title="Select" (click)="onSelect(val)"></x365-shared-ui-hover-icon>
+                  </div>
+              </div>
+            </div>
+          </ng-template>
+      </igx-column>
+    </igx-grid> -->
+
+    <igx-grid #detailsGrid [data]="treeDetails$ | async" [paging]="true" [height]="null" [autoGenerate]="false" [emptyGridMessage]="'No data available'" width="100%" [showToolbar]="false">
+      <igx-column field="description" header="Description" width="20%"></igx-column>
+      <igx-column field="structure_type" header="Structure Type" width="15%"></igx-column>
+      <igx-column field="structure_linked_to" header="Structure Linked To" width="20%"></igx-column>
+      <igx-column field="lineage" header="Lineage" width="35%">
+        <ng-template igxCell let-val>
+          {{val}}
+        </ng-template>
+      </igx-column>
+        <igx-column field="structure_id" header="..."  width="10%">
+        <ng-template igxCell let-val>
+            <div class="hover-menu-container"><span class="text-center"></span>
+              <div class="hover-menu">
+                <span class="hover-ellipse-menu"></span>
+                <div class="">
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-expand'" title="Expand" (click)="onExpandClicked(val)"></x365-shared-ui-hover-icon>
+                  <x365-shared-ui-hover-icon [iconClass]="'fa fa-hand-pointer-o'" title="Select" (click)="onSelect(val)"></x365-shared-ui-hover-icon>
+                  </div>
+              </div>
+            </div>
+          </ng-template>
+      </igx-column>
+    </igx-grid>
+  </div>
+  <div class="footer foot">
+    <button mdbBtn type="button" color="warning" rounded="true" size="sm" mdbWavesEffect [disabled]="isLoading$ | async" (click)="onMoveUp()" ><i class="fa fa-level-up"></i>&nbsp;&nbsp;Move Up</button>
+    <button mdbBtn type="button" color="warning" rounded="true"outline="true" size="sm" mdbWavesEffect [disabled]="isLoading$ | async" (click)="onTopLevelClicked()" ><i class="fa fa-reply-all"></i>&nbsp;&nbsp;Go to top</button>
+    <button mdbBtn type="button" color="warning" rounded="true"outline="true" size="sm" mdbWavesEffect [disabled]="isLoading$ | async" (click)="onCancel()" class="ml-5"><i class="fa fa-ban"></i>&nbsp;&nbsp;Cancel</button>
+  </div>
+</x365-shared-ui-form-container>

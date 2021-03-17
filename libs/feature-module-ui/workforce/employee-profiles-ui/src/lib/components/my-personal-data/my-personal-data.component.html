@@ -1,0 +1,83 @@
+
+<div class="f-container">
+  <div class="top">
+    <x365-fm-workforce-employee-data-panel [data]="comprehensiveData$ | async" [employeePhoto]="employeePhoto$ | async"></x365-fm-workforce-employee-data-panel>
+  </div>
+  <div class="bottom mt-3">
+    <div class="navigation">
+      <x365-fm-workforce-navigation-panel (navMenuItemSelected)="onNavMenuItemSelected($event)"></x365-fm-workforce-navigation-panel>
+    </div>
+    <div class="content">
+      <div class="content-top mb-3">
+        <x365-shared-ui-hrz-command-bar [showAddButton]="addButtonStatus" [showEditButton]="editButtonStatus" [showAwaitingButton]="awaitingButtonStatus" [showDeleteButton]="deleteButtonStatus" [showRefreshButton]="refreshButton" [showEnableEditButton]="showEnableEditButtonStatus" (buttonClicked)="onButtonClicked($event)"></x365-shared-ui-hrz-command-bar>
+      </div>
+      <div class="content-bottom">
+        <x365-fm-workforce-employee-info-root-pane [selectedModuleId]="selectedModuleId" [data]="comprehensiveData$ | async"></x365-fm-workforce-employee-info-root-pane>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <dx-popup [width]="550" [height]="650" [(visible)]="showAgreement" [showTitle]="true" title="Data Policy"
+  [closeOnOutsideClick]="true">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view #scrollView width="100%" height="100%">
+      <div id="textBlock">
+        {{agreementTemplate$ | async}}
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+        The <b>ScrollView</b> allows users to scroll its content vertically. To enable horizontal and vertical
+        scrolling, set the <b>direction</b> option to <i>&quot;both&quot;</i>. Horizontal scrolling is available only if
+        the content is wider than the <b>ScrollView</b>. Otherwise, the content adapts to the widget&apos;s
+        width.<br /><br />The <b>ScrollView</b> uses native scrolling on most platforms, except desktops. To use it on
+        all platforms, assign <b>true</b> to the <b>useNative</b> option. If you assign <b>false</b>, scrolling is
+        simulated on all platforms.
+      </div>
+    </dx-scroll-view>
+    <div class="popout" id="popup" data-bind="dxPopup: {}">
+      <div class="footer">
+        <div class="d-flex justify-content-end">
+          <button mdbBtn type="button" color="primary" [rounded]="false" size="sm" mdbWavesEffect
+            (click)="agreeButtonClicked()">Agree and Continue</button>
+          <button mdbBtn type="button" color="default" outline="true" [rounded]="false" size="sm" mdbWavesEffect
+            (click)="disagreeButtonClicked()">I do not Agree</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</dx-popup> -->

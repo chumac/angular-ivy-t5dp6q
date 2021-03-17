@@ -1,0 +1,171 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+      <div class="col-12">
+          <!--Card-->
+          <mdb-card class="mb-3">
+            <!--Card content-->
+            <mdb-card-body>
+              <div class="row" *ngIf="isProcessingMaster$ | async">
+                <div class="col-2">
+                  <x365-shared-ui-shimmer-placeholder [photo]="false" [line]="false" [noOfBox]="1"></x365-shared-ui-shimmer-placeholder>
+                </div>
+                <div class="col-10">
+                  <x365-shared-ui-shimmer-placeholder [photo]="false" [box]="false" [noOfLines]="3"></x365-shared-ui-shimmer-placeholder>
+                </div>
+              </div>
+              <div class="row" *ngIf="!(isProcessingMaster$ | async) || (masterData$ | async)">
+                <div class="my-auto col-2">
+                  <x365-shared-ui-employee-passport-photo [employeeId]="(masterData$ | async)?.employee_id" [size]="50"></x365-shared-ui-employee-passport-photo>
+                  <p><small class="text-center">{{ (masterData$ | async)?.employee_name }}</small></p>
+                </div>
+                <div class="my-auto col-7">
+                  <h6 class="font-weight-bolder">{{ (masterData$ | async)?.process_id_text }}</h6>
+                  <small class="text-muted">Status: {{ (masterData$ | async)?.status_text | stringDisplay }}</small>
+                </div>
+                <div class="my-auto col-3">
+                  <div class="float-right">
+                    <button (click)="goBack()" class="float-left" mdbBtn type="button" color="warning" rounded="true" size="sm" outline="true" mdbWavesEffect>
+                      <i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;Back
+                    </button>
+                    <input #masterRec type="hidden" [value]="(masterData$ | async)?.id || (masterData$ | async)?.master_id">
+                    <!-- <button mdbBtn type="button" color="warning" rounded="true" size="sm" [disabled]="(masterData$ | async)?.status" mdbWavesEffect (click)="onSubmitMastersButtonClicked(masterRec.value)"> <i *ngIf class="fa fa-spinner fa-spin">&nbsp;&nbsp;</i> Submit</button> -->
+                  </div>
+                </div>
+              </div>
+            </mdb-card-body>
+            <!--/.Card content-->
+          </mdb-card>
+          <!--/.Card-->
+      </div>
+  </div>
+
+  <!-- <div class="row mb-3" style="height:80vh">
+    <div class="col-3">
+      <div class="process-list r-border-shadow">
+
+        <mdb-card id="process-id" class="m-2 process" *ngFor="let detail of detailData$ | async; let i=index" (click)="onShowRenderer(detail, i)">
+          <div class="process-container" [class.active]="i === currentDetailRowIndex" >
+            <div class="process-status">
+              Completed:
+              <span *ngIf="(detail?.is_complete === 'YES'); else status_icon">
+                <i class="fa fa-check text-success"></i>
+              </span>
+              
+              <ng-template #status_icon>
+                <span>
+                  <i class="fa fa-close text-danger"></i>
+                </span>
+              </ng-template>
+            </div>
+            <div class="waves-light text-center" mdbWavesEffect>
+              <i class="fa fa-file-o fa-4x mt-3"></i>
+            </div>
+            <mdb-card-body>
+              <mdb-card-title>
+                <p class="text-center px-1 font-weight-bolder">{{ detail?.form_title }}</p>
+              </mdb-card-title>
+                <small class="px-2 d-block">{{ detail?.form_description }}</small> 
+            </mdb-card-body>
+          </div>
+        </mdb-card>
+
+      </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-7 r-border-shadow">
+      <div class="row" *ngIf="false">
+        <div class="col-3">
+          <x365-shared-ui-shimmer-placeholder style="height:100%" [photo]="false" [box]="false" [noOfLines]="8"></x365-shared-ui-shimmer-placeholder>
+        </div>
+        <div class="col-9">
+          <x365-shared-ui-shimmer-placeholder style="height:100%" [photo]="false" [box]="false" [noOfLines]="8"></x365-shared-ui-shimmer-placeholder>
+        </div>
+        <div class="col-12">
+          <x365-shared-ui-shimmer-placeholder style="height:100%" [photo]="false" [box]="true" [noOfBox]="1"></x365-shared-ui-shimmer-placeholder>
+        </div>
+      </div>
+      <x365-form-renderer *ngIf="true" class="" 
+        #renderer 
+        [width]="34" 
+        [show]="showRenderer" 
+        [data]="rendererJson" 
+        
+        [showSave]="true"
+        [isSecondaryBusy]="isSaving$ | async"
+        (formSave)="onRendererSave($event)" 
+
+        [showSubmit]="true"
+        [submitText]="'Complete'"
+        [isBusy]="isCompleting$ | async"
+        (formSubmit)="onRendererComplete()" 
+
+        (cancelClick)="onRendererCancel()"
+        >
+      </x365-form-renderer>
+    </div>
+    <div class="col-1"></div>
+  </div> -->
+  <div class="row mb-3">
+      <div class="col-12">
+          <div class="d-flex flex-column doc-container border-radius border-shadow h6 h-100">
+            <div class="row">
+              <div class="col-3">
+                <div class="process-list bg-light mt-2">
+
+                  <mdb-card id="process-id" class="m-2 process" *ngFor="let detail of detailData$ | async; let i=index" (click)="onShowRenderer(detail, i)">
+                    <div class="process-container" [class.active]="i === currentDetailRowIndex" >
+                      <div class="process-status">
+                        Completed:
+                        <span *ngIf="(detail?.is_complete === 'YES'); else status_icon">
+                          <i class="fa fa-check text-success"></i>
+                        </span>
+                        
+                        <ng-template #status_icon>
+                          <span>
+                            <i class="fa fa-close text-danger"></i>
+                          </span>
+                        </ng-template>
+                      </div>
+                      <div class="waves-light text-center" mdbWavesEffect>
+                        <i class="fa fa-file-o fa-5x mt-3"></i>
+                      </div>
+                      <mdb-card-body>
+                        <div class="detail-card-info m-2">
+                          <p class="mb-1 text-center">{{ detail?.username_fullname }}</p>
+                          <small *ngIf="detail?.is_owner" class="mb-1 text-success">Eligible to complete</small>
+                          <p class="mb-1 font-weight-bolder">{{ detail?.form_title }}</p>
+                          <small class="mb-1 text-muted">{{ detail?.form_description }}</small> 
+                        </div>
+                      </mdb-card-body>
+                    </div>
+                  </mdb-card>
+
+                </div>
+              </div>
+              <div class="col-1"></div>
+              <div class="col-7">
+                <x365-form-renderer 
+                  #renderer 
+                  [width]="34" 
+                  [show]="showRenderer" 
+                  [data]="rendererJson" 
+                  
+                  [showSave]="true"
+                  [isSecondaryBusy]="isSaving$ | async"
+                  (formSave)="onRendererSave($event)" 
+
+                  [showSubmit]="true"
+                  [submitText]="'Complete'"
+                  [isBusy]="isCompleting$ | async"
+                  (formSubmit)="onRendererComplete($event)" 
+
+                  (cancelClick)="onRendererCancel()"
+                  >
+                </x365-form-renderer>
+              </div>
+              <div class="col-1"></div>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>

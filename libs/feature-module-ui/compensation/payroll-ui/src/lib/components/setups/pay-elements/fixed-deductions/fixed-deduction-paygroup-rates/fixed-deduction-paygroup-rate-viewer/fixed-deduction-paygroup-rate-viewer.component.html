@@ -1,0 +1,86 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)"
+  [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+  <div class="header">
+    <x365-shared-ui-form-header [title]="'Fixed Deduction Paygroup Rate'" [subTitle]="'Details of fixed deduction paygroup rate'" [loading]='!data'>
+    </x365-shared-ui-form-header>
+  </div>
+  <div class="body">
+    <div class="mx-3">
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Paygroup:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.paygroup_text | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Amount:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.direct_amount | number: '2.2-5' | stringDisplay }}
+        </div>
+      </div>
+      <div class="row mb-1" *ngIf="data?.deduct_formula_id">
+        <div class="col-4">
+          <label class="required center-label">Formula:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.deduct_formula_type | stringDisplay }}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Eligibility:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.eligibility_text_type | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Deduction:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.fixeddeduct_text | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Currency:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.currency_text | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Grade:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.grade_text | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">Start Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.eff_period_from | dateDisplay | stringDisplay}}
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col-4">
+          <label class="required center-label">End Date:</label>
+        </div>
+        <div class="col-8 text-value text-right md-form mt-0">
+          {{data?.eff_period_to | dateDisplay | stringDisplay}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+  </div>
+</x365-shared-ui-form-container>

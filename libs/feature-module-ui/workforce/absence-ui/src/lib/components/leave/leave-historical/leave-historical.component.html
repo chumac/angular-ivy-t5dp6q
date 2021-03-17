@@ -1,0 +1,81 @@
+<div class="form-container" [class.form-overlay-active]="show">
+    <div class="form-overlay" [class.form-overlay-active]="show"></div>
+    <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+        <div class="header">
+            <x365-shared-ui-form-header [title]="'Apply for Historical Leave'" [subTitle]="'Details of employee historical leave application'" [loading]='null'></x365-shared-ui-form-header>
+        </div>
+        <div class="body">
+            <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Employee:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-lookup #employeeLookup formControlName="employee_id" [dataSource]="activePersonnelDataSource" valueExpr="value" displayExpr='label' searchEnabled=true showPopupTitle=false paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px"
+                            class="form-font">
+                        </dx-lookup>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Type:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="leave_id" [options]="leaveTypes" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label" title="Number of Days">No. of Days:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="no_of_days" type="number" class="form-control form-font">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Start Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="start_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">End Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="end_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Resump. Date:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <dx-date-box  [acceptCustomValue]="false" [openOnFieldClick]="true" dateSerializationFormat="yyyy-MM-dd" formControlName="resumption_date" class="form-font"></dx-date-box>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Return Reason:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <mdb-select formControlName="return_reason" [options]="reasonOptions" class="form-font"></mdb-select>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-4">
+                        <label class="center-label">Comment:</label>
+                    </div>
+                    <div class="col-8 md-form mt-0">
+                        <input formControlName="leave_reason" type="text" class="form-control form-font">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="footer">
+            <x365-shared-ui-form-footer [doneText]="'Submit'" [doneButtonDisabled]="isProcessing$ | async" (doneClick)="onSubmit()" [busy]="isProcessing$ | async" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+        </div>
+    </div>
+</div>

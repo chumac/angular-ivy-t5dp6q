@@ -1,0 +1,72 @@
+
+<div class="form-container" [class.form-overlay-active]="show">
+  <div class="form-overlay" [class.form-overlay-active]="show"></div>
+  <div class="form-main" [style.flex-basis]="utilService.convertToPercent(width)" [style.right]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+      <x365-shared-ui-form-header [title]="'Custom Process Definition'" [subTitle]="'View Process definitions'" [loading]='!data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+      <div class="mx-3">
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Code:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.code | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Title:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+              {{data?.title | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Description:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.description | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Area:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.area_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Business Rule:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.business_rule | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Workflow:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            {{data?.workflow_text | stringDisplay}}
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col-4">
+            <label class="">Title Art:</label>
+          </div>
+          <div class="col-8 md-form mt-0 text-value text-right">
+            <img *ngIf="data?.title_art" width="100%" [src]="'data:image/png;base64,' + data?.title_art | bypassSanitizer:'url'">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <x365-shared-ui-form-footer [doneText]="'Ok'" [showCancelButton]="false" (doneClick)="onDoneClicked()"></x365-shared-ui-form-footer>
+    </div>
+  </div>
+</div>

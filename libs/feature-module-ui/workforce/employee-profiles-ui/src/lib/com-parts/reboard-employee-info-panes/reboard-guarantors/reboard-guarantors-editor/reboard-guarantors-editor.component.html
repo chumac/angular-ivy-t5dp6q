@@ -1,0 +1,165 @@
+<x365-shared-ui-form-container [show]="show" [pWidth]="utilService.convertToPercent(width)" [nWidth]="show?'0':utilService.convertToNegativePercent(width)">
+    <div class="header">
+        <x365-shared-ui-form-header [title]="'Employment Guarantors'" [subTitle]="'Details of your employment guarantors'" [loading]='inEditMode() && !data'></x365-shared-ui-form-header>
+    </div>
+    <div class="body">
+        <form class="mx-3" novalidate [formGroup]="this.fs.f" (ngSubmit)="onSubmit()">
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Contact Information</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Tag:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="requirement_type" [options]="selectOptionData?.RequirementTypeGuarantorLevels"></mdb-select>
+                </div>
+            </div>
+
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Title:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="title" [options]="selectOptionData?.Titles" (selected)="onTitleSelected($event)"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Surname:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="ref_surname" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">First Name:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="ref_firstname" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Other Names:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="ref_othernames" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Gender:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <mdb-select formControlName="gender" [options]="selectOptionData?.Gender"></mdb-select>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="required center-label">Address:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea formControlName="fulladdress" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">BVN:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="bvn" type="text" class="form-control form-font" NumbersOnly [allowDecimals]="false" maxlength="11">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Phone (P):</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="phone1" type="text" class="form-control form-font" NumbersOnly [allowDecimals]="false">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Phone (S):</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="phone2" type="text" class="form-control form-font" NumbersOnly [allowDecimals]="false">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-4">
+                    <label class="center-label">Email:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="email" type="text" class="form-control form-font">
+                </div>
+            </div>
+
+
+            <div class="sub-heading row mt-0 mb-1">
+                <div class="col-12 md-form mt-0">
+                    <h5>Organisation</h5>
+                    <hr class="mt-1">
+                </div>
+            </div>
+
+            <!-- Organisation text-->
+            <div class="row mb-1" *ngIf="useApprovedOrgs==='NO'">
+                <div class="col-4">
+                    <label class="center-label">Name:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <input formControlName="company_name" type="text" class="form-control form-font">
+                </div>
+            </div>
+            <div class="row mb-1" *ngIf="useApprovedOrgs==='NO'">
+                <div class="col-4">
+                    <label class="center-label">Address:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea formControlName="company_address" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                </div>
+            </div>
+            <!-- Organisation Choicelist-->
+            <div class="row mb-1" *ngIf="useApprovedOrgs==='YES'">
+                <div class="col-4">
+                    <label class="center-label">Name:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <dx-lookup #orgLookup [dataSource]="organisations" valueExpr="code" displayExpr='description' (onValueChanged)="loadAddress($event)" searchEnabled=true showClearButton="true" paginate=true placeholder="" closeOnOutsideClick=false popupHeight="400px" class="form-font"></dx-lookup>
+                </div>
+            </div>
+            <div class="row mb-1" *ngIf="useApprovedOrgs==='YES'">
+                <div class="col-4">
+                    <label class="center-label">Address:</label>
+                </div>
+                <div class="col-8 md-form mt-0">
+                    <textarea readonly formControlName="company_address" type="text" class="md-textarea md-textarea-auto form-control"></textarea>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10 text-center">
+                    <x365-shared-ui-image-picker #imagePicker [defaultMode]="true" #imagePicker [caption]="'Select Photo'" [captionSubText]="'Select a photo from your system to upload'" [maxImageSize]="200" [imagePickerLabel]="'Upload Photo'" [cropperHeaderMessage]="'Upload Photo'"
+                        (imageSelected)="onImageSelected($event)" (fileRemoved)="onImageRemoved()"></x365-shared-ui-image-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <x365-shared-ui-file-picker #filePicker (fileSelected)="onFileSelected($event)" (fileRemoved)="onFileRemoved($event)"></x365-shared-ui-file-picker>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <x365-shared-ui-form-footer [doneText]="'Save'" [busy]="isProcessing$ | async" (doneClick)="onSubmit()" (cancelClick)="onCancel()"></x365-shared-ui-form-footer>
+    </div>
+</x365-shared-ui-form-container>
